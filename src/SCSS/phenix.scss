@@ -1,0 +1,51 @@
+/*===================================
+=                                   =
+=  - Phenix Design System           =
+=  - User-interface Framework       =
+=  - by Abdullah Ramadan            =
+=  - http://phenixthemes.com/ui-sys =
+=  - Open Source Framework          =
+=                                   =
+===================================*/
+
+/*==== Direction Options ====*/
+$page-dir: ltr;
+$page-dir-reverse: rtl;
+$direction: left;
+$directionReverse: right;
+
+/*==== Font Options ====*/
+:root {
+    //==== Font Families ====//
+    --primary-font: 'Roboto';
+    --secondary-font: 'Roboto';
+    --icons-font: "Font Awesome 5 Pro";
+
+    //==== Font Weight ====//
+    --normal-weight: 400;
+    --medium-weight: 500;
+    --strong-weight: 600;
+
+    //==== Font Sizes ====//
+    --base-l-size: 16px; // Base Font Size For Large Screens
+    --base-m-size: 15px; // Base Font Size For Medium Screens
+    --base-s-size: 14px; // Base Font Size For Small Screens
+
+    //==== Standard Line-Height ====//
+    --line-height: 1.625;
+}
+
+/*==== Importing Modules ====*/
+@import 'assets/selectors';    //===> SASS Selectors
+@import 'assets/mixins';       //===> SASS Functions
+@import 'assets/reset';        //===> CSS RESET
+@import 'assets/animations';   //===> CSS Keyframes
+@import 'assets/utilities';    //===> CSS Helpers
+@import 'assets/coloring';     //===> CSS Coloring System
+@import 'grid/grid-system';    //===> Layout Grid System
+
+/*==== Integration ====*/
+@import 'integration/wordpress';    //===> WordPress Integration
+
+/*==== Customizer ====*/
+@import 'customize';
