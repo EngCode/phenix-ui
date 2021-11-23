@@ -1,0 +1,134 @@
+/*==== SASS Selectors ====*/
+%reset {
+    all: unset;
+    list-style: none;
+    /*==== if (All: unset) not Supported ====*/
+    @supports not (all: unset) {
+        padding:0;
+        margin:0;
+    }
+}
+
+/*==== Design Options ====*/
+:root {
+    /*==== Body Background ====*/
+    --body-bg : #f1f1f1;
+
+    /*==== Primary Color ====*/
+    --primary-color   : #4166d6;
+    --primary-hover   : #2e4dc9;
+    --primary-reverse : #FFF;
+
+    /*==== Secondary Color ====*/
+    --secondary-color   : #dd9a35;
+    --secondary-hover   : #e99415;
+    --secondary-reverse : #1c1c1c;
+
+    //=== Assets text colors ====//
+    --links-color   :#4166d6;
+
+    /*==== Typography Colors ====*/
+    --headlines-color  : #1c1c1c;
+    --typography-color : #555;
+    --light-reverse    : #000;
+    --dark-reverse     : #FFF;
+}
+
+/*==== Page Options ====*/
+html {
+    line-height: var(--line-height);
+}
+
+/*==== Header ====*/
+.main-header {
+    /*==== Component Options ====*/
+    border-bottom: 1px solid rgba(#000, 0.1);
+    background-image: linear-gradient(#FFF, #F7F7F7);
+    box-shadow: 5px 0 15px rgba(0,0,0, 0.10);
+    
+    /*==== Block Size ====*/
+    > .container, > .container-xl { min-height: 65px; }
+
+    /*==== Menu Style ====*/
+    .header-menu {
+        font-size: 15px;
+        line-height: 36px;
+        text-transform: uppercase;
+        li {
+            padding: 0 10px;
+            font-weight: var(--medium-weight);
+            /*==== Links ====*/
+            a {
+                color: inherit;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            /*==== Icon ====*/
+            &::before {
+                font-size: 1em;
+                margin:0 5px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+/*==== Navigator ====*/
+.navigator-menu {
+    max-width: 225px;
+    padding: 30px 15px;
+    /*==== Submenus ====*/
+    ul {
+        @extend %reset;
+        display: block;
+        padding: 0 10px;
+        line-height: 28px;
+        font-size: 15px;
+        color: var(--gray-color);
+        a { color: inherit; }
+        li {margin-bottom: 5px;}
+    }
+}
+
+/*==== Page Secitons ====*/
+.on-page-menu {
+    max-width: 190px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
+    &[class*="col-"] { padding: 0 20px; }
+    /*==== Title ====*/
+    h3 {
+        font-weight: var(--medium-weight);
+        font-size: 1rem;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+    /*==== Submenus ====*/
+    ul {
+        @extend %reset;
+        padding-left: 10px;
+        font-size: 1rem;
+    }
+}
+
+/*==== Content Side ====*/
+.content-side {
+    border-right: 1px solid rgba(#000, 0.1);
+    border-left: 1px solid rgba(#000, 0.1);
+    &.col-12 {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
+/*==== RTL ====*/
+body.rtl {
+    /*==== Page Secitons ====*/
+    .on-page-menu {
+        border-right: 1px solid rgba(#000, 0.1);
+        border-left: 0 none;
+    }
+}
+

@@ -1,0 +1,456 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Colored Borders
+ * ===> 02 - Text Colors
+ * ===> 03 - Backgrounds Colors
+*/
+
+/*==== Colors Variables ====*/
+:root {
+    //==== Brands Colors ====//
+    --facebook-color  :#505cd6;
+    --twitter-color   :#1da1f2;
+    --youtube-color   :#e43e3c;
+    --instagram-color :#d43f8d;
+    --android-color   :#a4c639;
+    --snapchat-color  :#e2e62c;
+    --whatsapp-color  :#10d058;
+    --pinterest-color :#bd081c;
+    --linkedin-color  :#0077b5;
+    --behance-color   :#1769ff;
+    --apple-color     :#dbebfa;
+    --dribbble-color  :#ea4c89;
+    --flicker-color   :#0063dc;
+    --github-color    :#f5f5f5;
+    --google-red      :#ea4335;
+}
+
+/*======== Colored Borders ========*/
+.success-border {border-color: var(--success-color);}
+
+.danger-border {border-color: var(--danger-color);}
+
+.warning-border {border-color: var(--warning-color);}
+
+.primary-border {border-color: var(--primary-color);}
+
+.secondary-border {border-color: var(--secondary-color);}
+
+.light-border {border-color: var(--dark-reverse);}
+
+.info-border {border-color: var(--info-color);}
+
+.gray-border {border-color: var(--gray-color);}
+
+.dark-border {border-color: var(--dark-color);}
+
+.facebook-border {border-color: var(--facebook-color);}
+
+.twitter-border {border-color: var(--twitter-color);}
+
+.google-red-border {border-color: var(--google-red);}
+
+.youtube-border {border-color: var(--youtube-color);}
+
+.tumblr-border {border-color: var(--tumblr-color);}
+
+.instagram-border {border-color: var(--instagram-color);}
+
+.android-border {border-color: var(--android-color);}
+
+.snapchat-border {
+    border-color: var(--snapchat-color);
+}
+
+.whatsapp-border {
+    border-color: var(--whatsapp-color);
+}
+
+.pinterest-border {
+    border-color: var(--pinterest-color);
+}
+
+.linkedin-border {
+    border-color: var(--linkedin-color);
+}
+
+.behance-border {
+    border-color: var(--behance-color);
+}
+
+.apple-border {
+    border-color: var(--apple-color);
+}
+
+.cloudflare-border {
+    border-color: var(--cloudflare-color);
+}
+
+.dribbble-border {
+    border-color: var(--dribbble-color);
+}
+
+.envato-border {
+    border-color: var(--envato-color);
+}
+
+.flicker-border {
+    border-color: var(--flicker-color);
+}
+
+.github-border {
+    border-color: var(--github-color);
+}
+
+.white-border {
+    border-color:#FFF;
+}
+/*======== Text Colors ========*/
+.success-color {
+    color: var(--success-color);
+}
+
+.danger-color {
+    color: var(--danger-color);
+}
+
+.warning-color {
+    color: var(--warning-color);
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+.light-color {
+    color: var(--dark-reverse);
+}
+
+.info-color {
+    color: var(--info-color);
+}
+
+.gray-color {
+    color: var(--gray-color);
+}
+
+.dark-color {
+    color: var(--dark-color);
+}
+
+.facebook-color {
+    color: var(--facebook-color);
+}
+
+.twitter-color {
+    color: var(--twitter-color);
+}
+
+.google-red-color {
+    color: var(--google-red);
+}
+
+.youtube-color {
+    color: var(--youtube-color);
+}
+
+.tumblr-color {
+    color: var(--tumblr-color);
+}
+
+.instagram-color {
+    color: var(--instagram-color);
+}
+
+.android-color {
+    color: var(--android-color);
+}
+
+.snapchat-color {
+    color: var(--snapchat-color);
+}
+
+.whatsapp-color {
+    color: var(--whatsapp-color);
+}
+
+.pinterest-color {
+    color: var(--pinterest-color);
+}
+
+.linkedin-color {
+    color: var(--linkedin-color);
+}
+
+.behance-color {
+    color: var(--behance-color);
+}
+
+.apple-color {
+    color: var(--apple-color);
+}
+
+.cloudflare-color {
+    color: var(--cloudflare-color);
+}
+
+.dribbble-color {
+    color: var(--dribbble-color);
+}
+
+.envato-color {
+    color: var(--envato-color);
+}
+
+.flicker-color {
+    color: var(--flicker-color);
+}
+
+.github-color {
+    color: var(--github-color);
+}
+
+.white-color {
+    color:#FFF;
+}
+
+/*======== Backgrounds Colors ========*/
+.success-bg {
+    background-color: var(--success-color);
+    color: var(--dark-reverse);
+}
+
+.danger-bg {
+    background-color: var(--danger-color);
+    color: var(--dark-reverse);
+}
+
+.warning-bg {
+    background-color: var(--warning-color);
+    color: var(--dark-reverse);
+}
+
+.primary-bg {
+    background-color: var(--primary-color);
+    color: var(--dark-reverse);
+}
+
+.secondary-bg {
+    background-color: var(--secondary-color);
+    color: var(--dark-reverse);
+}
+
+.light-bg {
+    background-color: var(--dark-reverse);
+    color: var(--dark-color);
+}
+
+.info-bg {
+    background-color: var(--info-color);
+    color: var(--dark-reverse);
+}
+
+.gray-bg {
+    background-color: var(--gray-color);
+    color: var(--dark-reverse);
+}
+
+.dark-bg {
+    background-color: var(--dark-color);
+    color: var(--dark-reverse);
+}
+
+.facebook-bg {
+    background-color: var(--facebook-color);
+    color: var(--dark-reverse);
+}
+
+.twitter-bg {
+    background-color: var(--twitter-color);
+    color: var(--dark-reverse);
+}
+
+.google-red-bg {
+    background-color: var(--google-red);
+    color: var(--dark-reverse);
+}
+
+.youtube-bg {
+    background-color: var(--youtube-color);
+    color: var(--dark-reverse);
+}
+
+.tumblr-bg {
+    background-color: var(--tumblr-color);
+    color: var(--dark-reverse);
+}
+
+.instagram-bg {
+    background-color: var(--instagram-color);
+    color: var(--dark-reverse);
+}
+
+.android-bg {
+    background-color: var(--android-color);
+    color: var(--dark-reverse);
+}
+
+.snapchat-bg {
+    background-color: var(--snapchat-color);
+    color: var(--dark-reverse);
+}
+
+.whatsapp-bg {
+    background-color: var(--whatsapp-color);
+    color: var(--dark-reverse);
+}
+
+.pinterest-bg {
+    background-color: var(--pinterest-color);
+    color: var(--dark-reverse);
+}
+
+.linkedin-bg {
+    background-color: var(--linkedin-color);
+    color: var(--dark-reverse);
+}
+
+.behance-bg {
+    background-color: var(--behance-color);
+    color: var(--dark-reverse);
+}
+
+.apple-bg {
+    background-color: var(--apple-color);
+    color: var(--dark-color);
+}
+
+.cloudflare-bg {
+    background-color: var(--cloudflare-color);
+    color: var(--dark-reverse);
+}
+
+.dribbble-bg {
+    background-color: var(--dribbble-color);
+    color: var(--dark-reverse);
+}
+
+.envato-bg {
+    background-color: var(--envato-color);
+    color: var(--dark-reverse);
+}
+
+.flicker-bg {
+    background-color: var(--flicker-color);
+    color: var(--dark-reverse);
+}
+
+.github-bg {
+    background-color: var(--github-color);
+    color: var(--dark-color);
+}
+
+.offwhite-smoke-bg {
+    background-color: #F5F5F5;
+    color: var(--dark-color);
+}
+
+.offwhite-snow-bg {
+    background-color: #FFFAFA;
+    color: var(--dark-color);
+}
+
+.offwhite-honeydew-bg {
+    background-color: #F0FFF0;
+    color: var(--dark-color);
+}
+
+.offwhite-mintcream-bg {
+    background-color: #F5FFFA;
+    color: var(--dark-color);
+}
+
+.offwhite-azure-bg {
+    background-color: #F0FFFF;
+    color: var(--dark-color);
+}
+
+.offwhite-aliceblue-bg {
+    background-color: #F0F8FF;
+    color: var(--dark-color);
+}
+
+.offwhite-ghost-bg {
+    background-color: #F8F8FF;
+    color: var(--dark-color);
+}
+
+.offwhite-seashell-bg {
+    background-color: #FFF5EE;
+    color: var(--dark-color);
+}
+
+.offwhite-beige-bg {
+    background-color: #F5F5DC;
+    color: var(--dark-color);
+}
+
+.offwhite-oldlace-bg {
+    background-color: #FDF5E6;
+    color: var(--dark-color);
+}
+
+.offwhite-floral-bg {
+    background-color: #FFFAF0;
+    color: var(--dark-color);
+}
+
+.offwhite-ivory-bg {
+    background-color: #FFFFF0;
+    color: var(--dark-color);
+}
+
+.offwhite-antique-bg {
+    background-color: #FAEBD7;
+    color: var(--dark-color);
+}
+
+.offwhite-linen-bg {
+    background-color: #FAF0E6;
+    color: var(--dark-color);
+}
+
+.offwhite-lavenderblush-bg {
+    background-color: #FFF0F5;
+    color: var(--dark-color);
+}
+
+.success-bg-light {
+    background-color: var(--success-light);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.danger-bg-light {
+    background-color: var(--danger-light);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.warning-bg-light {
+    background-color: var(--warning-light);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.info-bg-light {
+    background-color: var(--info-light);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.white-bg {
+    background-color:#FFF;
+    color:var(--dark-color);
+}
+
+.transparent {background-color: transparent;}

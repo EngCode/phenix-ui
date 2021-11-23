@@ -1,0 +1,61 @@
+/*===================================
+=                                   =
+=  - !Hello There                   =
+=  - this is Your working space     =
+=  - here you can customize phenix  =
+=  - to your app ui design needs    =
+=  - Good Luck :)                   =
+=                                   =
+===================================*/
+
+/*======== Design Options ========*/
+:root {
+    /*==== Body Background ====*/
+    --body-bg : #fcfcfc;
+
+    /*==== Primary Color ====*/
+    --primary-color   : #4166d6;
+    --primary-hover   : #2e4dc9;
+    --primary-reverse : #FFF;
+
+    /*==== Secondary Color ====*/
+    --secondary-color   : #dd9a35;
+    --secondary-hover   : #e99415;
+    --secondary-reverse : #1c1c1c;
+
+    /*=== Assets text colors ====*/
+    --links-color   :#4166d6;
+    --info-color    :#17c0db;
+    --gray-color    :#868e96;
+    --dark-color    :#343a40;
+    --success-color :#22b544;
+    --danger-color  :#de3131;
+    --warning-color :#f4bb0e;
+    --disable-color :#ebebeb;
+
+    /*=== Assets backgrounds ====*/
+    --info-light    :#a6eaf5;
+    --gray-light    :#d9dde1;
+    --dark-light    :#343a40;
+    --success-light :#c1eecc;
+    --danger-light  :#fbbbbb;
+    --warning-light :#ffdd75;
+
+    /*==== Typography Colors ====*/
+    --headlines-color  : #1c1c1c;
+    --typography-color : #555;
+    --light-reverse    : #000;
+    --dark-reverse     : #FFF;
+
+    /*==== Responsive REM:Base ====*/
+    --rem-base-xl  : 16px;
+    --rem-base-lg  : 15px;
+    --rem-base-md  : 14px;
+    --rem-base-sm  : 13px;
+
+    /*==== Directions [do not edit] ====*/
+    --direction: #{$direction};
+    --direction-reverse: #{$direction-reverse};
+    --direction-start: #{$direction-start};
+    --direction-end: #{$direction-end};
+}

@@ -1,0 +1,86 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Custom Resets
+ * ===> 02 - Hidden Overflow
+ * ===> 03 - Scrollable Overflow
+ * ===> 04 - Float Elements
+ * ===> 05 - Overlay
+ * ===> 05 - 
+ * ===> 06 - 
+ * ===> 07 - 
+ * ===> 08 - 
+ * ===> 09 - 
+ * ===> 10 - 
+ * ===> 11 - View-Port Detector [JS Assets]
+*/
+
+/*==== SASS Selectors ====*/
+@import './../assets/selectors';
+
+/*======== Custom Resets ========*/
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    direction: $direction;
+    background: var(--body-bg);
+    font-family: var(--primary-font);
+}
+
+iframe {
+    max-width: 100%;
+    border: 0 none;
+}
+
+.reset-block, .reset { @extend %reset; }
+
+/*==== Hidden Overflow ====*/
+.overflow-hidden   { overflow:   hidden; }
+.overflow-y-hidden { overflow-y: hidden; }
+.overflow-x-hidden { overflow-x: hidden; }
+
+/*==== Scrollable Overflow ====*/
+.overflow-auto   { overflow:   auto; }
+.overflow-y-auto { overflow-y: auto; }
+.overflow-x-auto { overflow-x: auto; }
+
+/*======== Float Elements ========*/
+.float-start { float: $direction-start; }
+
+.float-end { float: $direction-end; }
+
+.clear-after::after,.clear-fix { @extend %clear-after,:after; }
+
+/*==== Overlay ====*/
+%overlay {
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+.overlay-dark {
+    @extend %overlay;
+    &::before {background-color: #000;}
+}
+
+.overlay-light {
+    @extend %overlay;
+    &::before {background-color: #FFF;}
+}
+
+/*======== View-Port Detector ========*/
+.view-status {
+    visibility: hidden;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    &.view-active { visibility: visible; }
+}

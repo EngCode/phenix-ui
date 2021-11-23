@@ -1,0 +1,165 @@
+/**======> Referance <======
+ * ===> 01 - CSS Elements Reset
+ * ===> 02 - Standard Form Reset
+ * ===> 03 - Select Reset
+ * ===> 04 - Checkboxs and Radio Buttons Reset
+*/
+
+/*======== CSS Elements Reset ========*/
+@-ms-viewport {width: device-width;}
+
+/*==== Box Resize for All Elements ====*/
+*,*:before,*:after {box-sizing: border-box;}
+
+/*==== Display Resets ====*/
+article,aside,footer,header,nav,section,figcaption,figure,main,details,menu  {display: block;}
+audio, video, canvas {display: inline-block;}
+summary {display: list-item;}
+template, [hidden], audio:not([controls]) {display: none;}
+
+/*==== Margins ====*/
+figure {margin:0;}
+
+/*==== Font ====*/
+b,strong {font-weight: var(--strong-weight);}
+small {font-size: 0.8rem;}
+dfn {font-style: italic;}
+
+pre,code,kbd,samp {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/*==== Links Reset ====*/
+a {
+    -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+    color: var(--links-color);
+}
+
+a,a:hover,a:focus,a:active,button,button:hover,button:focus,button:active {outline: unset;}
+
+/*==== Others ====*/
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+}
+
+mark {
+    background-color: var(--warning-light);
+    color: var(--light-reverse);
+}
+
+/*==== Sub-Text ====*/
+sub,sup {
+    font-size: 0.75rem;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {bottom: -0.25rem;}
+sup {top: -0.5rem;}
+
+/*==== Media ====*/
+img {
+    max-width: 100%;
+    border-style: none;
+    height: auto;
+    @extend %inline-block;
+}
+
+svg:not(:root) {overflow: hidden;}
+
+/*==== Form Elements ====*/
+button,input {overflow: visible;}
+button,select {text-transform: none;}
+
+button,[type="button"],[type="reset"],[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {outline: 0 dotted ButtonText;}
+
+fieldset {padding: 0.35rem 0.75rem 0.625rem;}
+
+legend {
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+textarea {overflow: auto;}
+[type="checkbox"],[type="radio"] {padding: 0;}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {height: auto;}
+
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+/*==== Standard Form Reset ====*/
+button,input,optgroup,select,textarea {
+    font-family: var(--secondary-font);
+    font-size: 0.875rem;
+    line-height: 1;
+    margin: 0;
+}
+
+//==== Select Reset ====//
+select,keygen{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background-repeat:no-repeat;
+    option { padding: 0 0.9375rem; }
+
+    optgroup {
+        font-style: normal;
+        padding: 0.9375rem;
+        option {
+            margin: 0 -0.9375rem;
+            padding: 0 0.9375rem;
+        }
+    }
+}
+
+/*==== Checkboxs and Radio Buttons Reset ====*/
+input {
+    &[type="radio"],&[type="checkbox"],&[type="range"],&[type="color"] {
+        display:inline-block;
+        width:auto;
+        margin:auto;
+        padding:0;
+        border:0 none;
+    }
+}

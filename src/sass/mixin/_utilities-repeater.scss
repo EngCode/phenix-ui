@@ -1,0 +1,11 @@
+/*==== Utlites Repeaters ====*/
+@mixin UtilitiesRepeater ($index, $cond, $name ,$prop, $unite, $increase) {
+    /*==== Padding All ====*/
+    @while $index <= $cond {
+        .#{$name}-#{$index} {
+            #{$prop} : #{$index+$unite};
+        }
+        /*==== Increase ====*/
+        $index : ($index + $increase);
+    }
+}

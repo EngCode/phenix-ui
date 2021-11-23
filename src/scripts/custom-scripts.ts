@@ -1,0 +1,22 @@
+/*===================================
+=                                   =
+=  - !Hello There                   =
+=  - this is Your working space     =
+=  - here you can customize phenix  =
+=  - to your app ui design needs    =
+=  - Good Luck :)                   =
+=                                   =
+===================================*/
+
+/*====> Import Phenix <====*/
+import Phenix from '.';
+
+//======> D.O.M is Ready [for you] <=======//
+Phenix(document).ready((event:any) => {
+    //====> !Here Goes Your Code <====//
+    Phenix('.test-btn').on('click', event => {
+        //====> ... <====//
+        let testing = Phenix('#counter-test').counter({countDown: true});
+        console.log(testing);
+    });
+});

@@ -1,0 +1,80 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Containers
+ * ===> 02 - Rows and Flexbox
+ * ===> 03 - Masonry Grid
+ * ===> 04 - Masonry Columns
+*/
+
+/*==== Layout Options ====*/
+:root {
+    /*==== Layout Option ====*/
+    --gutter-size  : 1rem;
+    --gutter-math  : calc(1rem / 2);
+}
+
+/*==== Containers ====*/
+%container{
+    margin-#{$direction-start}: auto;
+    margin-#{$direction-end}: auto;
+    position: relative;
+}
+
+.container {
+    @extend %container;
+    padding-#{$direction-start}: var(--gutter-math);
+    padding-#{$direction-end}: var(--gutter-math);
+    max-width: 1200px;
+}
+
+.container-fluid {
+    @extend %container;
+    padding-#{$direction-start}: var(--gutter-math);
+    padding-#{$direction-end}: var(--gutter-math);
+    width:100%;
+}
+
+.container-xl {
+    @extend %container;
+    padding-#{$direction-start}: var(--gutter-size);
+    padding-#{$direction-end}: var(--gutter-size);
+    max-width: 1400px;
+}
+
+/*==== Rows and Flexbox ====*/
+.row {
+    margin-#{$direction-start}:calc(var(--gutter-math) * -1);
+    margin-#{$direction-end}:calc(var(--gutter-math) * -1);
+    @extend %flexbox;
+    /* Reverse row Dircetion */
+    &.row-reverse {flex-direction: row-reverse;}
+
+    /* set gutters space for all columns */
+    > [class*="col-"],> [class*="box-"] {
+        padding-#{$direction-start}:var(--gutter-math);
+        padding-#{$direction-end}:var(--gutter-math);
+    }
+}
+
+.flexbox,.flex-box {
+    @extend %flexbox;
+    &.container{@extend %flexbox;}
+}
+
+/*======== Masonry Grid ========*/
+[class*="masonry-"] {
+    margin: 0 calc(var(--gutter-math) * -1);
+    word-spacing: -5px;
+    -moz-column-gap: 0;
+         column-gap: 0;
+    /*======== Masonry Columns ========*/
+    > .column{
+        display: inline-block;
+        padding-#{$direction-start}:var(--gutter-math);
+        padding-#{$direction-end}:var(--gutter-math);
+        word-spacing: normal;
+        width:100%;
+    }
+}
+
+@import 'grid-columns'; // Columns Sizes and Responsive
+@import 'grid-utilities'; // Grid System Assets and Featuresa
