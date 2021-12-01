@@ -5,7 +5,7 @@
  * ===> 04 - Checkboxs and Radio Buttons Reset
 */
 
-/*======== CSS Elements Reset ========*/
+/*==== Vieport for IE+ ====*/
 @-ms-viewport {width: device-width;}
 
 /*==== Box Resize for All Elements ====*/
@@ -18,7 +18,7 @@ summary {display: list-item;}
 template, [hidden], audio:not([controls]) {display: none;}
 
 /*==== Margins ====*/
-figure {margin:0;}
+figure,h1,h2,h3,h4,h5,h6,p {margin: 0;}
 
 /*==== Font ====*/
 b,strong {font-weight: var(--strong-weight);}
@@ -137,10 +137,6 @@ button,input,optgroup,select,textarea {
 
 //==== Select Reset ====//
 select,keygen{
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    background-repeat:no-repeat;
     option { padding: 0 0.9375rem; }
 
     optgroup {

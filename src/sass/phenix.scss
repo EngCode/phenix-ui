@@ -17,8 +17,8 @@ $direction-end: right;
 /*==== Font Options ====*/
 :root {
     //==== Font Families ====//
-    --primary-font: 'Work Sans';
-    --secondary-font: 'Work Sans';
+    --primary-font: 'Roboto';
+    --secondary-font: 'Roboto';
     --icons-font: "Font Awesome 5 Pro";
 
     //==== Font Weight ====//
@@ -52,7 +52,7 @@ $direction-end: right;
 @import 'utilities/padding';  //===> Padding Utilites
 @import 'utilities/margin';   //===> Margin Utilites
 @import 'utilities/colors';   //===> CSS Coloring System
-@import 'utilities/force';    //===> CSS Coloring System
+@import 'utilities/force';    //===> CSS Forced Assets
 
 /*==== Customizer ====*/
 @import 'customize';

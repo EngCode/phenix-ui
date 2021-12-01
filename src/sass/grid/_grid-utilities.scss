@@ -7,12 +7,10 @@
 */
 
 /*=== Auto Width Column ===*/
-.col-auto{
-    flex-grow: 1;
-}
+.col-auto {flex-grow: 1;}
 
 /*=== Grid Alignments ===*/
-.align-center-z{
+.align-center-z {
     align-items: center;
     justify-content: center;
 } /* Align Columns Centered Vertical and Horizontal */
@@ -57,7 +55,7 @@
     align-self: center;
 } /* Vertical Align item to the Center */
 
-.align-self-end{
+.align-self-end {
     align-self: flex-end;
 } /* Vertical Align item to the bottom */
 
@@ -145,4 +143,8 @@
 .gutter-large{
     margin-#{$direction-start}:-20px;
     margin-#{$direction-end}:-20px;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
 }

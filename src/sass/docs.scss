@@ -1,3 +1,26 @@
+/*==== Media Queries ====*/
+@import './assets/mixin/breakpoints';
+
+/*========== Loading Fonts ==========*/
+@font-face {
+    font-family: 'BioSans';
+    src: url('../webfonts/biosans-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BioSans';
+    src: url('../webfonts/biosans-semibold.woff2') format('woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'BioSans';
+    src: url('../webfonts/biosans-bold.woff2') format('woff2');
+    font-weight: 700;
+}
+
 /*==== SASS Selectors ====*/
 %reset {
     all: unset;
@@ -9,10 +32,29 @@
     }
 }
 
-/*==== Design Options ====*/
+%inline-block {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+%select-theme {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background-repeat:no-repeat;
+    background-image: url('../img/select.svg');
+    background-size: 9px;
+    background-position: var(--direction-end) 10px center;
+}
+
+/*==== Colors Options ====*/
 :root {
+    //==== Font Families ====//
+    --primary-font: 'BioSans';
+    --secondary-font: 'BioSans';
+
     /*==== Body Background ====*/
-    --body-bg : #f1f1f1;
+    --body-bg : #F1F1F1;
 
     /*==== Primary Color ====*/
     --primary-color   : #4166d6;
@@ -35,42 +77,33 @@
 }
 
 /*==== Page Options ====*/
-html {
-    line-height: var(--line-height);
-}
+html {line-height: var(--line-height);}
 
 /*==== Header ====*/
 .main-header {
     /*==== Component Options ====*/
-    border-bottom: 1px solid rgba(#000, 0.1);
-    background-image: linear-gradient(#FFF, #F7F7F7);
-    box-shadow: 5px 0 15px rgba(0,0,0, 0.10);
-    
-    /*==== Block Size ====*/
-    > .container, > .container-xl { min-height: 65px; }
-
-    /*==== Menu Style ====*/
-    .header-menu {
-        font-size: 15px;
-        line-height: 36px;
-        text-transform: uppercase;
-        li {
-            padding: 0 10px;
-            font-weight: var(--medium-weight);
-            /*==== Links ====*/
-            a {
-                color: inherit;
-                display: inline-block;
-                vertical-align: middle;
-            }
-            /*==== Icon ====*/
-            &::before {
-                font-size: 1em;
-                margin:0 5px;
-                display: inline-block;
-                vertical-align: middle;
-            }
-        }
+    border-bottom: 1px solid #F1F1F1;
+    min-height: 60px;
+    padding: 0 30px;
+    @include small(false) {padding: 0 15px};
+    /*==== Select ====*/
+    select {
+        @extend %inline-block;
+        @extend %select-theme;
+        height: 32px;
+        background-color: #fcfcfc;
+        border: 1px solid rgba(#000, 0.1);
+        margin: 0 10px;
+        border-radius: 5px;
+        width: 70px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+    /*==== Action Buttons ====*/
+    .icon-btn {
+        @extend %inline-block;
+        color: #D9DDE1;
+        font-size: 25px;
     }
 }
 
@@ -88,6 +121,9 @@ html {
         color: var(--gray-color);
         a { color: inherit; }
         li {margin-bottom: 5px;}
+
+        /*==== Current Item ====*/
+        .phenix-active > a {color: var(--primary-color);}
     }
 }
 
@@ -97,19 +133,23 @@ html {
     position: -webkit-sticky;
     position: sticky;
     top: 80px;
-    &[class*="col-"] { padding: 0 20px; }
+    &[class*="col-"] { padding: 0; }
     /*==== Title ====*/
     h3 {
         font-weight: var(--medium-weight);
         font-size: 1rem;
         line-height: 1;
-        text-transform: uppercase;
     }
     /*==== Submenus ====*/
     ul {
         @extend %reset;
         padding-left: 10px;
         font-size: 1rem;
+        color: var(--gray-color);
+        /*==== Links ====*/
+        a {color: inherit;}
+        /*==== Current Item ====*/
+        .phenix-active > a {color: var(--dark-color);}
     }
 }
 
@@ -117,10 +157,14 @@ html {
 .content-side {
     border-right: 1px solid rgba(#000, 0.1);
     border-left: 1px solid rgba(#000, 0.1);
+    //====> Space Fix <====//
     &.col-12 {
         padding-right: 30px;
         padding-left: 30px;
     }
+    /*==== Typography ====*/
+    h2 {margin-bottom: 15px;}
+    h3 {margin-bottom: 10px;}
 }
 
 /*==== RTL ====*/

@@ -4,14 +4,15 @@
  * ===> 03 - Add Class
  * ===> 04 - Remove Class
  * ===> 05 - Toggle Class
- * ===> 07 - Event Handler
- * ===> 08 - Get Ancestor [Parent, Parents Until]
- * ===> 09 - Get Siblings
- * ===> 10 - Get Next Siblings
- * ===> 11 - Get Previous Siblings
- * ===> 12 - CSS Styling
- * ===> 16 - Set Mutliple Attributes
- * ===> 17 - Insert Elements
+ * ===> 06 - Get Ancestor [Parent, Parents Until]
+ * ===> 07 - Get Siblings
+ * ===> 08 - Get Next Siblings
+ * ===> 09 - Get Previous Siblings
+ * ===> 10 - CSS Styling
+ * ===> 11 - Set Multiple Attributes
+ * ===> 12 - Insert Elements
+ * ===> 13 - Event Handler
+ * ===> 14 - Multimedia Lazy-Loader
  * ===> .. - 
  * ===> .. - Define Info Grapers
  * ===> .. - Define UI Effects
@@ -64,32 +65,6 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this;
     }
 
-    /*====> Event Handler [Live Error] <====*/
-    on(event, callback, live?, timer?) {
-        //====> Attache a Normal Event <====//
-        if (!live) {
-            //====> Event for Each Element <====//
-            this.forEach((element:HTMLElement) => element.addEventListener(event, callback));
-
-            //====> Return Phenix Elements <====//
-            return this;
-
-        //====> Live Event [Wrong :: Error] <====//
-        } else {
-            //====> Create Time Loop <====//
-            let timerLoop = setInterval(() => {
-                //====> Attach Event for Each Time <====//
-                this.forEach((element:HTMLElement) => element.addEventListener(event, callback));
-            }, timer|1000);
-
-            //====> Return the Elements & Time Loop <====//
-            return {
-                elements: this,
-                timeLoop: timerLoop
-            };
-        }
-    }
-
     /*====> Get Ancestor [Parent, Parents Until] <====*/
     ancestor(target?) {
         //====> Define Ancestor Arrays <====//
@@ -101,14 +76,11 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             let parent:any = element.parentNode;
             
             //====> if has a Target <===//
-            if (target) {
+            if (target && !element.matches('html')) {
                 //====> Loop Over The Ancestors <====//
                 while (parent) {
                     //====> When the Target has been Found Return it <====//
-                    if (!element.matches('html') && parent.matches(target)) {
-                        ancestors.push(parent);
-                        break;
-                    }
+                    if (parent.matches(target)) { ancestors.push(parent); break; }
                     //====> Otherwise get the Next Ancestor <====//
                     else parent = parent.parentNode;
                 }
@@ -119,32 +91,25 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         });
 
         //====> Return Ancestors <====//
-        if (ancestors.length > 1) return ancestors;
+        if (ancestors.length > 0) return ancestors;
         else if (ancestors.length === 1) return ancestors[0];
     }
 
     /*====> Get Siblings <====*/
     siblings(target?) {
-        //====> Sibling Define <====//
+        //====> Siblings Define <====//
         let siblings = [];
-        
+
         //====> Loop Through Phenix Elements <====//
         this.forEach((element:any) => {
-            //====> if No target [Return All Sibling] <====//
-            if (!target) {
-                //====> Filter and Exclude the Current Element <====//
-                Array.from(element.parentNode.children).forEach((child:HTMLElement) => {
-                    if (child !== element) siblings.push(child);
-                });
-            }
+            //====> Get This Element Parent Childs <====//
+            let childs = element.parentNode.children;
 
-            //====> if have Target <====//
-            else {
-                //====> Filter and Catch only the matched targets <====//
-                Array.from(element.parentNode.children).forEach((child:HTMLElement) => {
-                    if (child !== element && child.matches(target)) siblings.push(child);
-                });
-            }
+            //====> if has No target [Return All Sibling] <====//
+            if (!target) Array.from(childs).forEach((child:HTMLElement) => child !== element ? siblings.push(child) : null);
+
+            //====> Otherwise Return the matched targets <====//
+            else Array.from(childs).forEach((child:HTMLElement) => child !== element && child.matches(target) ? siblings.push(child) : null);
         });
 
         //====> Return Siblings <====//
@@ -186,12 +151,10 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
                     //====> While there is a Next Unit <====//
                     while (nextUnit) {
                         //====> Check for the Target & Return it <====//
-                        if (nextUnit.matches(target)) {
-                            siblings.push(nextUnit);
-                            break;
-                        } else {
-                            nextUnit = nextUnit.nextElementSibling;
-                        }
+                        if (nextUnit.matches(target)) { siblings.push(nextUnit); break; } 
+                        
+                        //====> Otherwise Get the Next Unit <====//
+                        else nextUnit = nextUnit.nextElementSibling;
                     }
                 }
             }
@@ -271,7 +234,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this
     }
 
-    /*====> Set Mutliple Attributes <====*/
+    /*====> Set Multiple Attributes <====*/
     setAttributes(attributes:{}) {
         //====> Loop Through Phenix Elements <====//
         this.forEach((element:HTMLElement) => {
@@ -331,6 +294,76 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         else if (new_package.length === 1) return new_package[0];
     }
 
+    /*====> Event Handler <====*/
+    on(event, callback, live?, timer?) {
+        //====> Attache a Normal Event <====//
+        if (!live) {
+            //====> Event for Each Element <====//
+            this.forEach((element:HTMLElement) => {
+                element.addEventListener(event, callback);
+            });
+
+            //====> Return Phenix Elements <====//
+            return this;
+
+        //====> Live Event <====//
+        } else if (live && this.length > 0) {
+            //====> Create Time Loop & Attach Event <====//
+            let timerLoop = setInterval(() => this.forEach((element:HTMLElement) => element.addEventListener(event, callback)), timer | 1000);
+
+            //====> Return the Elements & Time Loop <====//
+            return {
+                elements: this,
+                timeLoop: timerLoop
+            };
+        }
+    }
+
+    /*====> Multimedia Lazy-Loader [un-tested] <====*/
+    lazyLoading() {
+        //====> Element Data <====//
+        let spiner = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
+        
+        //====> Loop Through Media Elements <====//
+        Phenix('img, video, audio, iframe').forEach((element:HTMLElement) => {
+            //====> Set Loading Mode <====//
+            if (!Phenix(element).inView()) {
+                //====> Get Data <====//
+                let playable = element.matches('video' || 'audio'),
+                    source = !playable ? element.getAttribute('data-lazyload' || 'src') : null,
+                    preloaded = element.getAttribute('preload' || 'loading');
+
+                //===> for [images, iframe] <===//
+                if (element.matches('img'||'iframe')) {
+                    element.setAttribute('src', spiner);
+                    element.classList.add('phenix-loading')
+                }
+
+                //===> for [video, audio] <===//
+                else if (playable && !preloaded) element.setAttribute('preload', 'none');
+
+                //====> Keep Watching Element While Scrolling <====//
+                document.addEventListener('scroll', event => {
+                    //====> if its in view-point set the original source <====//
+                    if (element.matches('img'||'iframe') && Phenix(element).inView() && !element.matches('.phenix-loaded')) {
+                        element.setAttribute('src', source);
+                        element.classList.remove('phenix-loading');
+                        element.classList.add('phenix-loaded');
+                    };
+                });
+            }
+
+            //====> First View [workout] <====//
+            else if (Phenix(element).inView() && element.matches('img') && element.getAttribute('data-lazyload')) {
+                element.setAttribute('src', element.getAttribute('data-lazyload'));
+                element.classList.add('phenix-loaded');
+            }
+        });
+
+        //====> Return Phenix Elements <====//
+        return this;
+    }
+
     /*====> Define Info Grapers <====*/
     height; getCSS; direction;
     inView; viewport;
@@ -340,32 +373,33 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     fadeOut; fadeIn; fadeToggle;
 
     /*====> Define Other Features <====*/
-    counter;
+    counter; multimedia;
+    sticky; smothScroll; scrollSpy;
 }
 
 /*====> Include Features <====*/
-import './features/get-info'; //==> Info Grapers
-import './features/effects';  //==> UI Effects
-import './features/counter';  //==> Animated Counter
+import './features/get-info';  //==> Info Grapers
+import './features/effects';   //==> UI Effects
+import './features/counter';   //==> Animated Counter
+import './features/media';     //==> Media Setter
 
 /*====> Phenix Selecting Method <====*/
-const Phenix = (selector:any) => {
+const Phenix = (selector?:any) => {
     /*====> Get Elements <====*/
     if (typeof(selector) === 'string') {
         //====> Select for Phenix Elements <====//
-        return new PhenixElements(...document.querySelectorAll<HTMLElement>(selector));
+        let selected = document.querySelectorAll(selector);
 
+        //====> Create Elements Query <====//
+        if (selector.length > 0) return new PhenixElements(...selected);
     /*====> if its Elements Passed it <====*/
     } else if (selector !== null && typeof(selector) !== 'undefined' || 'number') {
         //====> if Not Array Make it one <====//
         if (!Array.isArray(selector) || typeof(selector) !== 'object') selector = [selector];
 
-        //====> and Created as Phenix Elements <====//
+        //====> and Create Elements Query <====//
         return new PhenixElements(...selector);
-
     /*====> Selecting Error <====*/
-    } else {
-        console.error('!Oobs somthing went wrong make sure your passing valid selector to Phenix.')
     }
 }
 

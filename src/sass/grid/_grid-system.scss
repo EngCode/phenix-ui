@@ -7,9 +7,7 @@
 
 /*==== Layout Options ====*/
 :root {
-    /*==== Layout Option ====*/
-    --gutter-size  : 1rem;
-    --gutter-math  : calc(1rem / 2);
+    --gutter-size  : 1rem; //===> Spacing Size Between Columns
 }
 
 /*==== Containers ====*/
@@ -21,15 +19,15 @@
 
 .container {
     @extend %container;
-    padding-#{$direction-start}: var(--gutter-math);
-    padding-#{$direction-end}: var(--gutter-math);
+    padding-#{$direction-start}: calc(--gutter-size / 2);
+    padding-#{$direction-end}: calc(--gutter-size / 2);
     max-width: 1200px;
 }
 
 .container-fluid {
     @extend %container;
-    padding-#{$direction-start}: var(--gutter-math);
-    padding-#{$direction-end}: var(--gutter-math);
+    padding-#{$direction-start}: calc(--gutter-size / 2);
+    padding-#{$direction-end}: calc(--gutter-size / 2);
     width:100%;
 }
 
@@ -41,40 +39,28 @@
 }
 
 /*==== Rows and Flexbox ====*/
-.row {
-    margin-#{$direction-start}:calc(var(--gutter-math) * -1);
-    margin-#{$direction-end}:calc(var(--gutter-math) * -1);
-    @extend %flexbox;
-    /* Reverse row Dircetion */
-    &.row-reverse {flex-direction: row-reverse;}
-
-    /* set gutters space for all columns */
-    > [class*="col-"],> [class*="box-"] {
-        padding-#{$direction-start}:var(--gutter-math);
-        padding-#{$direction-end}:var(--gutter-math);
-    }
-}
-
-.flexbox,.flex-box {
+.flexbox, .flex-box, .row {
     @extend %flexbox;
     &.container{@extend %flexbox;}
 }
 
+.row {gap: var(--gutter-size);}
+
 /*======== Masonry Grid ========*/
 [class*="masonry-"] {
-    margin: 0 calc(var(--gutter-math) * -1);
     word-spacing: -5px;
-    -moz-column-gap: 0;
-         column-gap: 0;
+    -moz-column-gap: var(--gutter-size);
+         column-gap: var(--gutter-size );
     /*======== Masonry Columns ========*/
-    > .column{
+    > .column, > [class*="col-"] {
         display: inline-block;
-        padding-#{$direction-start}:var(--gutter-math);
-        padding-#{$direction-end}:var(--gutter-math);
         word-spacing: normal;
         width:100%;
     }
 }
 
-@import 'grid-columns'; // Columns Sizes and Responsive
-@import 'grid-utilities'; // Grid System Assets and Featuresa
+/*==== Responsive Columns ====*/
+@import 'grid-columns';
+
+/*==== Assets and Featuresa ====*/
+@import 'grid-utilities';

@@ -1,0 +1,89 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Extra Small Screen Mixin 0 ==> 420px
+ * ===> 02 - Small Screen Mixin 576px ==> 640px
+ * ===> 03 - Medium Screen Mixin 768px ==> 920px
+ * ===> 04 - Large Screen Mixin 1024px ==> 1366px
+ * ===> 05 - Extra Large Screen Mixin 1366px ==> 1600px
+*/
+
+//==== Responsive [Small] Screens ====//
+$small-screen-end   : 640px;
+$small-screen-start : 576px;
+$xsmall-screen-end  : 480px;
+
+//==== Responsive [Medium] Screens ====//
+$medium-screen-start : 768px;
+$medium-screen-end : 1100px;
+
+//==== Responsive [Large] Screens ====//
+$large-screen-start  : 1200px;
+$large-screen-end  : 1600px;
+
+//==== Responsive [xLarge] Screens ====//
+$xlarge-screen-start : 1400px;
+$xlarge-screen-end : 2500px;
+
+/*=====> Extra Small Screen Mixin 0 ==> 420px <========*/
+@mixin xSmall($reverse) {
+    @if ($reverse) {
+        @media (min-width: 0) {
+            @content;
+        }
+    } @else {
+        @media (max-width: --xsmall-screen-end) {
+            @content;
+        }
+    };
+}
+
+/*=====> Small Screen Mixin 576px ==> 640px <========*/
+@mixin small($reverse) {
+    @if ($reverse) {
+        @media (min-width: $small-screen-start) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $small-screen-end) {
+            @content;
+        }
+    };
+}
+
+/*=====> Medium Screen Mixin 768px ==> 920px <========*/
+@mixin medium($reverse) {
+    @if ($reverse) {
+        @media (min-width: $medium-screen-start) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $medium-screen-end) {
+            @content;
+        }
+    };
+}
+
+/*=====> Large Screen Mixin 1024px ==> 1366px <========*/
+@mixin large($reverse) {
+    @if ($reverse) {
+        @media (min-width: $large-screen-start) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $large-screen-end) {
+            @content;
+        }
+    };
+}
+
+/*=====> Extra Large Screen Mixin 1366px ==> 1600px <========*/
+@mixin xlarge($reverse) {
+    @if ($reverse) {
+        @media (min-width: $xlarge-screen-start) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $xlarge-screen-end) {
+            @content;
+        }
+    };
+}

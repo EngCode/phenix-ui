@@ -14,7 +14,17 @@ import Phenix from "..";
 
 /*====> D.O.M is Ready ? <====*/
 Phenix(document).ready(ready => {
-    /*====> Activated Items Detect <====*/
-    Phenix('.current-menu-parent, .current-menu-item').addClass('active');
-});
+    /*====> for Front-End <====*/
+    if (!document.body.classList.contains('wp-admin')) {        
+        /*====> Activated Items Detect <====*/
+        Phenix('.current-menu-parent, .current-menu-item').addClass('phenix-active');
 
+        /*===== Contact 7 Fixs =====*/
+        Phenix('.wpcf7-form br').forEach((space:HTMLElement) => space.remove());
+        Phenix('.wpcf7-form[dir],.wpcf7-form [dir]').forEach((element:HTMLElement) => element.removeAttribute('dir'));
+    }
+    /*====> for Admin Panel <====*/
+    else {
+        console.log('!Hello There Greeting from Phenix Themes.');
+    }
+});

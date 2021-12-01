@@ -5,10 +5,6 @@ DesignTemplates/
 dist/optimized-index.html
 
 # Fonts
-dist/fonts/DINNextLTW23-Bold.woff
-dist/fonts/DINNextLTW23-Medium.woff
-dist/fonts/DINNextLTW23-Regular.woff
+dist/webfonts/DINNextLTW23-Bold.woff
 
 # SASS
-src/SCSS/assets/_wordpress.scss
-src/SCSS/ui-kit/

@@ -18,7 +18,7 @@ PhenixElements.prototype.counter = function (options?:{
         decimal?:number,
         symbol?:string,
         steps?:number,
-        countDown?:boolean
+        reverse?:boolean
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
@@ -28,7 +28,8 @@ PhenixElements.prototype.counter = function (options?:{
             value    = options?.value    || parseInt(element.getAttribute('data-counter') || element.innerText) ||  0,
             symbol   = options?.symbol || element.getAttribute('data-symbol') ||  '',
             delay    = options?.delay  || parseInt(element.getAttribute('data-delay')) ||  0,
-            steps    = options?.steps  || parseInt(element.getAttribute('data-steps')) ||  10;
+            steps    = options?.steps  || parseInt(element.getAttribute('data-steps')) ||  10,
+            reverse_count   = options?.reverse || element.getAttribute('data-reverse') || false;
 
         //====> Counter Data <===//
         let input = (element.nodeName.toLowerCase() === 'input') ? true : false,
@@ -38,12 +39,12 @@ PhenixElements.prototype.counter = function (options?:{
             regex = /\B(?=(\d{3})+(?!\d))/g;
 
         //====> Switch Count for Counting Down <====//
-        if (options?.countDown) count = value;
+        if (reverse_count) count = value;
     
         //====> Count Runer <===//
         const runCounter = () => {
             //===> if [Count Down] is Activated => Decrease the Count <===//
-            if (options?.countDown) count -= increment;
+            if (reverse_count) count -= increment;
             //===> Otherwise Increase the Count <===//
             else count += increment;
 
@@ -56,10 +57,10 @@ PhenixElements.prototype.counter = function (options?:{
             else element.innerHTML = current;
 
             //===> Clear When Count Up Reaches The Target <===//
-            if (!options?.countDown && count === value) clearInterval(interval);
+            if (!reverse_count && count === value) clearInterval(interval);
 
             //===> Clear When Count Down Reaches Zero <===//
-            else if (options?.countDown && count === 0) clearInterval(interval);
+            else if (reverse_count && count === 0) clearInterval(interval);
         };
     
         //====> Start Counting <===//
@@ -67,7 +68,7 @@ PhenixElements.prototype.counter = function (options?:{
             interval = setInterval(runCounter.bind(this), steps);
         }.bind(this), delay);
     });
-    
+
     //====> Return Phenix Elements <====//
     return this;
 }

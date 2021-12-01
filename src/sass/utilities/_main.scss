@@ -84,3 +84,18 @@ iframe {
             animation-duration: 1s;
     &.view-active { visibility: visible; }
 }
+
+/*==== Screen Reader Only ====*/
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+

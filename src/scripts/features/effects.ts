@@ -6,7 +6,7 @@
  * ===> 05 - Effects : FadeOut
  * ===> 06 - Effects : FadeIn
  * ===> 07 - Effects : FadeToggle
- * ===> 00 - ....
+ * ===> 08 - Effects : (Smoth-Scroll, Sticky Elements, Scroll-Spy)
  * ===> 00 - ....
 */
 
@@ -26,7 +26,6 @@ PhenixElements.prototype.slideUp = function (duration?, delay?) {
             let height = Phenix(element).height(),
                 timespeed = duration || 300,
                 keyframes = [
-                    //====> From <====//
                     {height: `${height}px`},
                     //====> To <====//
                     {height : 0, padding: 0, margin : 0}
@@ -64,12 +63,7 @@ PhenixElements.prototype.slideDown = function (duration?, delay?, display?) {
             //====> Animation Data <====//
             let height = Phenix(element).height(),
                 timespeed = duration || 300,
-                keyframes = [
-                    //====> From <====//
-                    {height : 0},
-                    //====> To <====//
-                    {height: `${height}px`},
-                ];
+                keyframes = [{height : 0}, {height: `${height}px`}];
 
             //====> Slide-Up the Element <====//
             element.animate(keyframes, {
@@ -176,3 +170,6 @@ PhenixElements.prototype.fadeToggle = function (duration?, delay?, display?) {
     //====> Return Phenix Elements <====//
     return this;
 }
+
+/*====> Effects : (Smoth-Scroll, Sticky, Scroll-Spy) <====*/
+import './effects-scroll';
