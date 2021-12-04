@@ -17,7 +17,7 @@ $medium-screen-end : 1100px;
 
 //==== Responsive [Large] Screens ====//
 $large-screen-start  : 1200px;
-$large-screen-end  : 1600px;
+$large-screen-end  : 1399px;
 
 //==== Responsive [xLarge] Screens ====//
 $xlarge-screen-start : 1400px;
@@ -30,7 +30,7 @@ $xlarge-screen-end : 2500px;
             @content;
         }
     } @else {
-        @media (max-width: --xsmall-screen-end) {
+        @media (max-width: $xsmall-screen-end) {
             @content;
         }
     };

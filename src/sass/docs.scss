@@ -1,6 +1,9 @@
 /*==== Media Queries ====*/
 @import './assets/mixin/breakpoints';
 
+/*==== Defines Sizes ====*/
+$header-height: 60px;
+
 /*========== Loading Fonts ==========*/
 @font-face {
     font-family: 'BioSans';
@@ -24,12 +27,25 @@
 /*==== SASS Selectors ====*/
 %reset {
     all: unset;
-    list-style: none;
     /*==== if (All: unset) not Supported ====*/
     @supports not (all: unset) {
+        list-style: none;
         padding:0;
         margin:0;
     }
+}
+
+%reset-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+%reset-control {
+    border: 0 none;
+    padding: 0;
+    transition: outline 0.3s linear;
+    &:focus{outline: 1px solid rgba(#000, 0.15);}
 }
 
 %inline-block {
@@ -47,27 +63,40 @@
     background-position: var(--direction-end) 10px center;
 }
 
+%sticky-element {
+    position: -webkit-sticky;
+    position: sticky;
+    top: $header-height;
+}
+
 /*==== Colors Options ====*/
 :root {
     //==== Font Families ====//
     --primary-font: 'BioSans';
     --secondary-font: 'BioSans';
 
+    //==== Font Weight ====//
+    --normal-weight: 400;
+    --medium-weight: 600;
+    --strong-weight: 700;
+
     /*==== Body Background ====*/
-    --body-bg : #F1F1F1;
+    --body-bg : #F5F5F5;
 
     /*==== Primary Color ====*/
-    --primary-color   : #4166d6;
-    --primary-hover   : #2e4dc9;
-    --primary-reverse : #FFF;
+    --primary-color   : #0C97F9;
+    --primary-hover   : #1A69F4;
+    --primary-reverse : #FFFFFF;
 
     /*==== Secondary Color ====*/
-    --secondary-color   : #dd9a35;
-    --secondary-hover   : #e99415;
-    --secondary-reverse : #1c1c1c;
+    --secondary-color   : #F9AF5B;
+    --secondary-hover   : #F8C35B;
+    --secondary-reverse : #FFFFFF;
+
+    --wp-color : #8772F7;
 
     //=== Assets text colors ====//
-    --links-color   :#4166d6;
+    --links-color   :#0C97F9;
 
     /*==== Typography Colors ====*/
     --headlines-color  : #1c1c1c;
@@ -79,11 +108,23 @@
 /*==== Page Options ====*/
 html {line-height: var(--line-height);}
 
+/*==== Assets [Large Screens] ====*/
+@include large(up) {
+    .mxw-lg-235 {max-width: 235px;}
+    .mxw-lg-200 {max-width: 200px;}
+};
+
+@include xlarge(up) {
+    .mxw-xl-275 {max-width: 275px;}
+};
+
+.wp-color {color: var(--wp-color);}
+
 /*==== Header ====*/
 .main-header {
     /*==== Component Options ====*/
     border-bottom: 1px solid #F1F1F1;
-    min-height: 60px;
+    min-height: $header-height;
     padding: 0 30px;
     @include small(false) {padding: 0 15px};
     /*==== Select ====*/
@@ -105,74 +146,321 @@ html {line-height: var(--line-height);}
         color: #D9DDE1;
         font-size: 25px;
     }
+
+    &.is-sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
 }
 
 /*==== Navigator ====*/
 .navigator-menu {
-    max-width: 225px;
-    padding: 30px 15px;
-    /*==== Submenus ====*/
-    ul {
-        @extend %reset;
-        display: block;
-        padding: 0 10px;
-        line-height: 28px;
-        font-size: 15px;
-        color: var(--gray-color);
-        a { color: inherit; }
-        li {margin-bottom: 5px;}
+    background-color: #fff;
+    overflow-y: auto;
+    @extend %sticky-element;
+    /*==== Size ====*/
+    @include large(up) {height: calc(100vh - #{$header-height})};
 
-        /*==== Current Item ====*/
-        .phenix-active > a {color: var(--primary-color);}
+    /*==== Links ====*/
+    a {
+        color: inherit;
+        display: block;
+    }
+
+    /*==== Search ====*/
+    .search-form {
+        padding: 15px;
+        @include large(up) {padding: 15px 20px};
+    }
+    
+    /*==== Control Wraper ====*/
+    .control-wraper {
+        position: relative;
+        width: calc(100% - 51px);
+        @include large(up) {width: 100%;}
+        /*==== Controler ====*/
+        input {
+            @extend %reset-control;
+            width: 100%;
+            padding-left: 35px;
+            padding-right: 15px;
+            border-radius: 5px;
+            background-color: #F6F6F6;
+            height: 36px;
+            font-size: 13px;
+            @include large(up) {
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+        /*==== Icon ====*/
+        &::before {
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            font-size: 12px;
+            @include large(up) {font-size: 14px;}
+        }
+    }
+
+    /*==== Reset Menus ====*/
+    ul { @extend %reset-list; }
+
+    /*==== Main Menu ====*/
+    .main-menu {
+        font-size: 15px;
+        font-weight: var(--medium-weight);
+        line-height: 30px;
+        border-bottom: 1px solid rgba(#000, 0.1);
+        transition: all 0.3s;
+        
+        /*==== Icons ====*/
+        img {
+            @extend %inline-block;
+            max-height: 25px;
+            margin-right: 3px;
+        }
+
+        /*==== Items ====*/
+        li {
+            margin: 0;
+            padding: 3px 20px;
+            &.phenix-active {
+                background: linear-gradient(rgba(#00c4ff, 0.1) 0%, rgba(#1a69f4, 0.1) 100%);
+                line-height: 38px;
+            }
+            &:last-child:not(.phenix-active) { margin-bottom: 5px; }
+        }
+    }
+
+    /*==== Docs Menu ====*/
+    .docs-menu {
+        padding: 15px;
+        /*==== Direct Items ====*/
+        > li {
+            font-size: 14px;
+            line-height: 28px;
+            font-weight: var(--medium-weight);
+            padding: 0 10px;
+            /*==== Links ====*/
+            > a::before {
+                content: '\f07b';
+                font-family: var(--icons-font);
+                margin-right: 7px;
+                font-weight: 400;
+                font-size: 1.1em;
+            }
+            /*==== Submenus ====*/
+            ul {
+                font-size: 14px;
+                line-height: 25px;
+                color: var(--gray-color);
+                font-weight: normal;
+                margin-left: 30px;
+                margin-bottom: 5px;
+                .phenix-active {color: var(--headlines-color);}
+                @include xlarge(up) {margin-left: 35px;}
+            }
+            /*==== Active ====*/
+            &.phenix-active {
+                color: var(--primary-color);
+                > a::before {
+                    content: '\f07c';
+                    font-weight: 600;
+                }
+            }
+        }
     }
 }
 
 /*==== Page Secitons ====*/
 .on-page-menu {
-    max-width: 190px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 80px;
-    &[class*="col-"] { padding: 0; }
+    background-color: #fcfcfc;
+    padding: 15px 20px;
+    overflow-y: auto;
+    @extend %sticky-element;
+    /*==== Size ====*/
+    @include large(up) {height: calc(100vh - #{$header-height})};
+
     /*==== Title ====*/
     h3 {
         font-weight: var(--medium-weight);
-        font-size: 1rem;
+        font-size: 14px;
         line-height: 1;
+        margin-bottom: 5px;
     }
     /*==== Submenus ====*/
+    
     ul {
-        @extend %reset;
+        @extend %reset-list;
+        display: block;
         padding-left: 10px;
-        font-size: 1rem;
+        font-size: 14px;
+        line-height: 26px;
         color: var(--gray-color);
+        margin-bottom: 5px;
+        &.scrollspy-menu {margin-left: 5px;}
         /*==== Links ====*/
         a {color: inherit;}
         /*==== Current Item ====*/
-        .phenix-active > a {color: var(--dark-color);}
+        .phenix-active > a, li:hover > a {
+            font-weight: var(--medium-weight);
+            color: var(--dark-color);
+        }
     }
 }
 
 /*==== Content Side ====*/
 .content-side {
-    border-right: 1px solid rgba(#000, 0.1);
-    border-left: 1px solid rgba(#000, 0.1);
     //====> Space Fix <====//
-    &.col-12 {
-        padding-right: 30px;
-        padding-left: 30px;
-    }
+    padding: 15px;
+    @include large(up) {padding: 30px};
+
     /*==== Typography ====*/
-    h2 {margin-bottom: 15px;}
-    h3 {margin-bottom: 10px;}
+    h1,h2,h3,h4,h5 {
+        &:not(.strong-weight) {font-weight: var(--medium-weight);}
+    }
+
+    h1, .h1 {font-size: 2rem;}
+
+    h2, .h2 {
+        margin-bottom: 10px;
+        font-size: 1.75rem;
+    }
+
+    h3, .h3 {
+        margin-bottom: 5px;
+        font-size: 1.5rem;
+    }
+
+    h4, .h4 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+    }
+
+    /*==== Images ====*/
+    img {max-width: 100%;}
+
+    /*==== Fix Code Space for h4s ====*/
+    .fix-y-m {margin-top: -10px;}
+}
+
+//====> Code Highlighter <====//
+.enlighter-default.enlighter-t-wpcustom {
+    background-color: #101325;
+
+    //====> Line Background <====//
+    div.enlighter > div {
+        background-color: inherit;
+        &.enlighter-special{background-color: #191D40;}
+    }
+
+    div.enlighter > div > div {padding-left: 0;}
+
+    /*==== Toolbar ====*/
+    .enlighter-toolbar {
+        /*==== Buttons ====*/
+        .enlighter-btn {
+            padding: 0;
+            border: 0 none;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #181A2C;
+        }
+
+        /*==== Icons Font ====*/
+        %icons-base {
+            font-family: var(--icons-font);
+            font-weight: 500;
+        }
+
+        /*==== Copy Button ====*/
+        .enlighter-btn-copy::after {
+            content: '\f0c5'!important;
+            @extend %icons-base;
+        }
+        
+        /*==== Raw Button ====*/
+        .enlighter-btn-raw::after {
+            content: '\f06e'!important;
+            @extend %icons-base;
+        }
+
+        /*==== External Button ====*/
+        .enlighter-btn-window::after {
+            content: '\f14c'!important;
+            @extend %icons-base;
+        }
+
+        /*==== Hide ====*/
+        .enlighter-btn-website {display: none;}
+    }
+    
+    //====> Block Mode <====//
+    &.enlighter-v-standard {
+        padding-top: 15px!important;
+        padding-bottom: 15px!important;
+        border-radius: 8px;
+    }
+    
+    //====> Inline Mode <====//
+    &.enlighter-v-inline {
+        border-radius: 5px;
+        vertical-align: middle;
+        font-size: 12px;
+
+        .enlighter span {
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        span.enlighter {padding: 2px 3px;}
+    }
+
+    &:not(.enlighter-v-inline) {margin-bottom: 40px;}
+
+    /*==== Colors ====*/
+    .enlighter-x1 {color: var(--primary-color);font-weight: normal;}
+    .enlighter-x2 {color: var(--secondary-color);}
+}
+
+/*==== Footer ====*/
+.content-footer {
+    display: block;
+    text-align: center;
+    background-color: #fcfcfc;
+    margin: -15px;
+    margin-top: auto;
+    font-size: 15px;
+    padding: 8px 15px;
+    @include large(up) {
+        margin: -30px -46px;
+        margin-top: auto;
+    }
 }
 
 /*==== RTL ====*/
 body.rtl {
-    /*==== Page Secitons ====*/
-    .on-page-menu {
-        border-right: 1px solid rgba(#000, 0.1);
-        border-left: 0 none;
+    /*==== Navigator ====*/
+    .navigator-menu .control-wraper {
+        /*==== Controler ====*/
+        input {
+            padding-left: 15px;
+            padding-right: 50px;
+        }
+        /*==== Icon ====*/
+        &::before {
+            left: auto;
+            right: 12px;
+        }
     }
 }
 

@@ -54,13 +54,13 @@ PhenixElements.prototype.multimedia = function (options?:{
     //====> Loop Through Phenix Elements <====//
     this.forEach(element => {
         //====> Get Options Data <====//
-        let type = options?.type || element.getAttribute('data-type') || 'background',
-            lazy = options?.lazy || element.getAttribute('data-lazy') || false,
-            src  = options?.src  || element.getAttribute('data-src'),
-            alt  = options?.alt  || element.getAttribute('data-alt') || '',
-            title  = options?.title || element.getAttribute('data-title'),
-            cover  = options?.cover || element.getAttribute('data-cover'),
-            ratio  = options?.ratio || element.getAttribute('data-ratio' || 'data-size');
+        let type = element.getAttribute('data-type') || options?.type || 'background',
+            lazy = element.getAttribute('data-lazy') || options?.lazy || false,
+            src  = element.getAttribute('data-src') || options?.src,
+            alt  = element.getAttribute('data-alt') || options?.alt  || '',
+            title  = element.getAttribute('data-title') || options?.title,
+            cover  = element.getAttribute('data-cover') || options?.cover,
+            ratio  = element.getAttribute('data-ratio' || 'data-size') || options?.ratio;
 
         //====> Set Media Size <====//
         if (ratio) element.classList.add(`ratio-${ratio}`);

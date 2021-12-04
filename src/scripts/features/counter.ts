@@ -12,44 +12,44 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Animated Counter <====*/
 PhenixElements.prototype.counter = function (options?:{
-        value?:number,
-        duration?:number,
-        delay?:number,
-        decimal?:number,
-        symbol?:string,
-        steps?:number,
-        reverse?:boolean
+        value?:number,    //===> Number to Count
+        duration?:number, //===> Animation Duration
+        delay?:number,    //===> Animation Delay
+        decimal?:number,  //===> Decimal Numbers Support
+        symbol?:string,   //===> Symbol After the Number
+        steps?:number,    //===> Steps ber Count
+        reverse?:boolean  //===> Count Down instead of Up
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
         //====> Get Options Data <====//
-        let duration = options?.duration || element.getAttribute('data-duration') ||  2000,
-            decimal  = options?.decimal  || parseInt(element.getAttribute('data-decimal')) ||  0,
-            value    = options?.value    || parseInt(element.getAttribute('data-counter') || element.innerText) ||  0,
-            symbol   = options?.symbol || element.getAttribute('data-symbol') ||  '',
-            delay    = options?.delay  || parseInt(element.getAttribute('data-delay')) ||  0,
-            steps    = options?.steps  || parseInt(element.getAttribute('data-steps')) ||  10,
-            reverse_count   = options?.reverse || element.getAttribute('data-reverse') || false;
+        let duration = element.getAttribute('data-duration') || options?.duration || 2000,
+            decimal  = parseInt(element.getAttribute('data-decimal')) || options?.decimal || 0,
+            value    = parseInt(element.getAttribute('data-counter') || options?.value || element.innerText) || 0,
+            symbol   = element.getAttribute('data-symbol') || options?.symbol || '',
+            delay    = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
+            steps    = parseInt(element.getAttribute('data-steps')) || options?.steps  || 10,
+            reverse  = element.getAttribute('data-reverse') || options?.reverse || false;
 
         //====> Counter Data <===//
         let input = (element.nodeName.toLowerCase() === 'input') ? true : false,
             count = 0,
             increment = value / (duration / steps),
             interval = null,
-            regex = /\B(?=(\d{3})+(?!\d))/g;
+            decimal_regex = /\B(?=(\d{3})+(?!\d))/g;
 
         //====> Switch Count for Counting Down <====//
-        if (reverse_count) count = value;
+        if (reverse) count = value;
     
         //====> Count Runer <===//
         const runCounter = () => {
             //===> if [Count Down] is Activated => Decrease the Count <===//
-            if (reverse_count) count -= increment;
+            if (reverse) count -= increment;
             //===> Otherwise Increase the Count <===//
             else count += increment;
 
             //===> Current Value <===//
-            let current = `${(count).toFixed(decimal).toString().replace(regex, ',')+symbol}`;
+            let current = `${(count).toFixed(decimal).toString().replace(decimal_regex, ',')+symbol}`;
 
             //===> if the Element is Input Control <===//
             if (input) element.value = current;
@@ -57,10 +57,10 @@ PhenixElements.prototype.counter = function (options?:{
             else element.innerHTML = current;
 
             //===> Clear When Count Up Reaches The Target <===//
-            if (!reverse_count && count === value) clearInterval(interval);
+            if (!reverse && count === value) clearInterval(interval);
 
             //===> Clear When Count Down Reaches Zero <===//
-            else if (reverse_count && count === 0) clearInterval(interval);
+            else if (reverse && count === 0) clearInterval(interval);
         };
     
         //====> Start Counting <===//

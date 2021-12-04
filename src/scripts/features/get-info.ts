@@ -77,29 +77,48 @@ PhenixElements.prototype.getCSS = function(property?:string, pseudo?:string) {
 }
 
 /*====> ViewPort Detactor <====*/
-PhenixElements.prototype.inView = function () {
-    //====> Define Target Data <====//
+PhenixElements.prototype.inView = function (options?:{
+    flow:string,    //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
+    into:number,    //====> Increase Target Position By [number]
+    offset:number,  //====> Decrease Target Position By [number]
+}, flowOn?:string) {
+    //====> Define Data <====//
     let element:any = this[0],
-        //===> Scroll Position <====//
+        flow:string = flowOn || options?.flow,
         scrollPosition = window.scrollY || window.pageYOffset,
-        //===> Element Position <====//
-        elementPostion = element.getBoundingClientRect().top + scrollPosition,
+        targetPostion = element.getBoundingClientRect().top + scrollPosition,
+
         //===> ViewPoint Position <====//
         viewport = {
             top: scrollPosition,
             bottom: scrollPosition + window.innerHeight
-        },
-        //===> Element Position <====//
-        elementBounds = {
-            top: elementPostion,
-            bottom: elementPostion + element.clientHeight
-        },
-        //===> Check for Position Match <====//
-        fromTop = elementBounds.bottom >= viewport.top && elementBounds.bottom <= viewport.bottom ? true : false,
-        fromBottom = elementBounds.top <= viewport.bottom && elementBounds.top >= viewport.top ? true : false;
+        };
 
-    //====> if its visible return [true] <====//
-    return fromTop || fromBottom ? true : false;
+        //====> Into Calc <====//
+        if (options?.into && options?.into > 0) targetPostion = targetPostion + options?.into;
+
+        //====> Offset Calc <====//
+        else if (options?.offset && options?.offset > 0) targetPostion = targetPostion - options?.offset;
+
+        //===> Target Data <====//
+        let target = {
+            top: targetPostion,
+            bottom: targetPostion + element.clientHeight
+        },
+
+        //===> inBetween Odds <====//
+        topIn = viewport.bottom >= target.top && target.top >= viewport.top ? true : false,
+        bottomIn = viewport.top <= target.bottom && target.bottom <= viewport.bottom ? true : false,
+        inBetween = topIn || bottomIn ? true : false;
+
+    //====> if Visible from Top to Bottom <====//
+    if(flow === 'start') return viewport.bottom >= target.top ? true : false;
+
+    //====> if Visible from Bottom to Top <====//
+    else if (flow === 'end') return bottomIn;
+
+    //====> if Visible from Any of Both Directions <====//
+    else return inBetween;
 }
 
 //=====> Get Viewport Dimensions <=====//

@@ -7,7 +7,7 @@ module.exports = {
     entry: path.join(__dirname, '/src/scripts/index.ts'),
     devtool: "source-map",
     output: {
-        filename: 'phenix.min.js',
+        filename: 'phenix.js',
         path: path.join(__dirname, '/dist/js/'),
         library: 'Phenix'
     },

@@ -8,12 +8,24 @@
 //========== Assets Selectors ==========//
 %reset {
     all: unset;
-    list-style: none;
     /*==== if (All: unset) not Supported ====*/
     @supports not (all: unset) {
-        padding:0;
-        margin:0;
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
+}
+
+%reset-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+%reset-control {
+    border: 0 none;
+    padding: 0;
+    &:focus{outline-width: 0;}
 }
 
 %nowrap {
