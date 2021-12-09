@@ -19,7 +19,7 @@ Phenix(document).ready((event:any) => {
     /*===> Table of contents Menu <===*/
     let content_menu = Phenix('.on-page-menu').insert('append', '<ul class="reset scrollspy-menu"></ul>'),
         last_title;
-    
+
     /*===> Loop Throgh Titles <===*/
     Phenix('.content-side h1,.content-side h2,.content-side h3').forEach((element:HTMLElement, index:number) => {
         //====> Element Data <====//

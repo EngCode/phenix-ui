@@ -48,11 +48,11 @@
     --dark-reverse     : #FFF;
 
     /*==== Responsive REM:Base ====*/
-    --rem-lg : 15px;
+    --rem-xl : 17px;
+    --rem-lg : 16px;
     --rem-md : 14px;
-    --rem-sm : 13px;
-    --rem-xs : 12px;
-    --rem-base : 16px;
+    --rem-sm : var(--rem-base);
+    --rem-base : 13px;
 
     /*==== Directions [do not edit] ====*/
     --direction: #{$direction};

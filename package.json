@@ -1,12 +1,12 @@
 {
   "name": "phenix-ui",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Phenix Design System User Interface / Front-End Framework - Extended From 'Tornado UI v2'.",
-  "author": "Abdullah.Ramadan <elampratorabdallah14@gmail.com>",
+  "author": "Abdullah.Ramadan <elampratorabdallah14@gmail.com> (https://phenixthemes.com)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EngCode/phenix-ui"
+    "url": "git+https://github.com/EngCode/phenix-ui.git"
   },
   "bugs": {
     "url": "https://github.com/EngCode/phenix-ui/issues"
@@ -38,20 +38,27 @@
     "phenix-css": "./dist/css/",
     "phenix-js": "./dist/js/"
   },
+  "size-limit": [
+    {
+      "limit": "35 kB",
+      "path": "dist/js/phenix.js"
+    }
+  ],
   "scripts": {
     "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
     "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts\""
+    "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\""
   },
-  "devDependencies": {},
-  "dependencies": {
-    "@splidejs/splide": "^3.5.0",
+  "devDependencies": {
     "concurrently": "^6.4.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.7",
-    "webpack": "^5.64.1",
+    "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.5.0"
+    "webpack-dev-server": "^4.6.0"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^3.5.0"
   }
 }

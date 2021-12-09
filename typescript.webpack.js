@@ -9,7 +9,11 @@ module.exports = {
     output: {
         filename: 'phenix.js',
         path: path.join(__dirname, '/dist/js/'),
-        library: 'Phenix'
+        library: {
+            type: 'umd',
+            name: 'Phenix',
+        },
+        globalObject: 'this'
     },
     module: {
         rules: [

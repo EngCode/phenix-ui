@@ -119,6 +119,7 @@ html {line-height: var(--line-height);}
 };
 
 .wp-color {color: var(--wp-color);}
+.tx-align-center {text-align: center;}
 
 /*==== Header ====*/
 .main-header {
@@ -168,6 +169,7 @@ html {line-height: var(--line-height);}
     a {
         color: inherit;
         display: block;
+        transition: all 0.4s linear;
     }
 
     /*==== Search ====*/
@@ -261,10 +263,10 @@ html {line-height: var(--line-height);}
                 line-height: 25px;
                 color: var(--gray-color);
                 font-weight: normal;
-                margin-left: 30px;
+                margin-left: 25px;
                 margin-bottom: 5px;
-                .phenix-active {color: var(--headlines-color);}
-                @include xlarge(up) {margin-left: 35px;}
+                .phenix-active,li:hover {color: var(--headlines-color);}
+                @include xlarge(up) {margin-left: 30px;}
             }
             /*==== Active ====*/
             &.phenix-active {
@@ -295,18 +297,25 @@ html {line-height: var(--line-height);}
         margin-bottom: 5px;
     }
     /*==== Submenus ====*/
-    
     ul {
         @extend %reset-list;
         display: block;
         padding-left: 10px;
         font-size: 14px;
-        line-height: 26px;
+        line-height: 1.3;
         color: var(--gray-color);
-        margin-bottom: 5px;
         &.scrollspy-menu {margin-left: 5px;}
         /*==== Links ====*/
-        a {color: inherit;}
+        a {
+            color: inherit;
+            transition: all 0.5s;
+        }
+        /*==== Items ====*/
+        li {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            ul {margin-bottom: -5px;}
+        }
         /*==== Current Item ====*/
         .phenix-active > a, li:hover > a {
             font-weight: var(--medium-weight);
@@ -334,7 +343,7 @@ html {line-height: var(--line-height);}
     }
 
     h3, .h3 {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         font-size: 1.5rem;
     }
 
@@ -346,11 +355,39 @@ html {line-height: var(--line-height);}
     /*==== Images ====*/
     img {max-width: 100%;}
 
+    /*==== KBD ====*/
+    kbd {
+        padding: 3px 5px;
+        line-height: 1;
+        font-size: 12px;
+        border-radius: 3px;
+        background-color: var(--dark-color);
+        color: #FFFFFF;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    .wp-block-separator {border-bottom: 0;}
+
     /*==== Fix Code Space for h4s ====*/
     .fix-y-m {margin-top: -10px;}
 }
 
-//====> Code Highlighter <====//
+/*==== Table ====*/
+.docs-table {
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    /*==== Table Columns ====*/
+    td {
+        padding: 5px;
+        border: 1px solid #f2f2f2;
+        img {margin: 8px auto;}
+    }
+}
+
+//====> Enlighter Plugin <====//
 .enlighter-default.enlighter-t-wpcustom {
     background-color: #101325;
 
@@ -416,6 +453,7 @@ html {line-height: var(--line-height);}
         border-radius: 5px;
         vertical-align: middle;
         font-size: 12px;
+        top: -2px;
 
         .enlighter span {
             font-size: inherit;
@@ -428,8 +466,17 @@ html {line-height: var(--line-height);}
     &:not(.enlighter-v-inline) {margin-bottom: 40px;}
 
     /*==== Colors ====*/
-    .enlighter-x1 {color: var(--primary-color);font-weight: normal;}
     .enlighter-x2 {color: var(--secondary-color);}
+
+    .enlighter-x1 {
+        color: var(--primary-color);
+        font-weight: normal;
+    }
+
+    .enlighter-k9,.enlighter-k0 {
+        color: #c156fd;
+        font-weight: var(--medium-weight);
+    }
 }
 
 /*==== Footer ====*/

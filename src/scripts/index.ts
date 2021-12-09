@@ -373,15 +373,24 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     fadeOut; fadeIn; fadeToggle;
 
     /*====> Define Other Features <====*/
-    counter; multimedia;
+    counter; multimedia; timer;
     sticky; smothScroll; scrollSpy;
+    
+    /*====> Define Components <====*/
+    dropdown; tabs; accordion;
+    popup; lightbox; design;
+    themes;
 }
 
-/*====> Include Features <====*/
+/*====> Import Features <====*/
 import './features/get-info';  //==> Info Grapers
 import './features/effects';   //==> UI Effects
 import './features/counter';   //==> Animated Counter
 import './features/media';     //==> Media Setter
+
+/*====> Import Components <====*/
+import './components/timer';    //==> Time Counter
+import './components/dropdown'; //==> Dropddown
 
 /*====> Phenix Selecting Method <====*/
 const Phenix = (selector?:any) => {
@@ -403,6 +412,7 @@ const Phenix = (selector?:any) => {
     }
 }
 
+//====> Export Phenix <====//
 export default Phenix;
 
 /*====> Integration <====*/
@@ -410,3 +420,6 @@ import './integration/wordpress';
 
 /*====> Custom Script <====*/
 import './custom-scripts';
+
+//====> Export Global Phenix <====//
+module.exports = Phenix;
