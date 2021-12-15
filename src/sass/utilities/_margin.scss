@@ -1,23 +1,21 @@
 
 /*==== Tools ====*/
-@import '../assets/mixin/tools';
-@import '../assets/mixin/breakpoints';
-
+@import '../assets/mixin';
 
 /*==== Margin All ====*/
-@include UtilitiesRepeater (0, 100, 'margin' ,'margin', 'px', 5);
+@include Repeater (0, 100, 'margin' ,'margin', 'px', 5);
 
 /*==== Margin Top ====*/
-@include UtilitiesRepeater (0, 100, 'mt', 'margin-top', 'px', 5);
+@include Repeater (0, 100, 'mt', 'margin-top', 'px', 5);
 
 /*==== Margin Bottom ====*/
-@include UtilitiesRepeater (0, 100, 'mb', 'margin-bottom', 'px', 5);
+@include Repeater (0, 100, 'mb', 'margin-bottom', 'px', 5);
 
 /*==== Margin Start ====*/
-@include UtilitiesRepeater (0, 100, 'ms', 'margin-#{$direction-start}', 'px', 5);
+@include Repeater (0, 100, 'ms', 'margin-#{$direction-start}', 'px', 5);
 
 /*==== Margin End ====*/
-@include UtilitiesRepeater (0, 100, 'me', 'margin-#{$direction-end}', 'px', 5);
+@include Repeater (0, 100, 'me', 'margin-#{$direction-end}', 'px', 5);
 
 /*==== Auto Margins ====*/
 .mx-auto {

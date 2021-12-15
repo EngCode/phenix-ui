@@ -9,12 +9,16 @@
 @-ms-viewport {width: device-width;}
 
 /*==== Box Resize for All Elements ====*/
-*,*:before,*:after {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: border-box;}
 
 /*==== Display Resets ====*/
-article,aside,footer,header,nav,section,figcaption,figure,main,details,menu  {display: block;}
+article,aside,footer,header,nav,
+section,figcaption,figure,main,details,menu {display: block;}
+
 audio, video, canvas {display: inline-block;}
+
 summary {display: list-item;}
+
 template, [hidden], audio:not([controls]) {display: none;}
 
 /*==== Margins ====*/
@@ -33,11 +37,9 @@ pre,code,kbd,samp {
 /*==== Links Reset ====*/
 a {
     -webkit-text-decoration-skip: objects;
-    text-decoration: none;
+        text-decoration: none;
     color: var(--links-color);
 }
-
-a,a:hover,a:focus,a:active,button,button:hover,button:focus,button:active {outline: unset;}
 
 /*==== Others ====*/
 abbr[title] {
@@ -71,29 +73,30 @@ img {
 
 svg:not(:root) {overflow: hidden;}
 
+/*==== Focused Elements ====*/
+a:focus, a:active, button:active, button:focus,
+button:-moz-focusring, [type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring {
+    outline: 1px dashed var(--primary-color);
+}
+
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
 /*==== Form Elements ====*/
 button,input {overflow: visible;}
 button,select {text-transform: none;}
+fieldset {padding: 0.35rem 0.75rem 0.625rem;}
+textarea {overflow: auto;}
+[type="checkbox"],[type="radio"] {padding: 0;}
 
 button,[type="button"],[type="reset"],[type="submit"] {
     -webkit-appearance: button;
     cursor: pointer;
 }
-
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-    border-style: none;
-    padding: 0;
-}
-
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {outline: 0 dotted ButtonText;}
-
-fieldset {padding: 0.35rem 0.75rem 0.625rem;}
 
 legend {
     color: inherit;
@@ -108,19 +111,15 @@ progress {
     vertical-align: baseline;
 }
 
-textarea {overflow: auto;}
-[type="checkbox"],[type="radio"] {padding: 0;}
-
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {height: auto;}
 
 [type="search"] {
     -webkit-appearance: textfield;
     outline-offset: -2px;
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {-webkit-appearance: none;}
 }
-
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}
 
 ::-webkit-file-upload-button {
     -webkit-appearance: button;
@@ -128,7 +127,7 @@ textarea {overflow: auto;}
 }
 
 /*==== Standard Form Reset ====*/
-button,input,optgroup,select,textarea {
+button,input,optgroup, select,textarea {
     font-family: var(--secondary-font);
     font-size: 0.875rem;
     line-height: 1;

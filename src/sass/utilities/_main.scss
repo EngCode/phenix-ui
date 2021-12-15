@@ -31,7 +31,7 @@ iframe {
     border: 0 none;
 }
 
-.reset-block, .reset { @extend %reset; }
+.reset-block, .reset { @extend %reset-space; }
 
 /*==== Hidden Overflow ====*/
 .overflow-hidden   { overflow:   hidden; }
@@ -51,20 +51,6 @@ iframe {
 .clear-after::after,.clear-fix { @extend %clear-after,:after; }
 
 /*==== Overlay ====*/
-%overlay {
-    position: relative;
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 0;
-    }
-}
-
 .overlay-dark {
     @extend %overlay;
     &::before {background-color: #000;}

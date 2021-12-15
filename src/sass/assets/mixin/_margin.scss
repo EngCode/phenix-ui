@@ -1,0 +1,86 @@
+/**======> Referance <======
+ * ===> 01 - Margin Block
+ * ===> 02 - Margin Inline
+*/
+
+//====> Margin Block <====//
+@mixin margin_block($size, $flow) {
+    //====> Modern Browsers <====//
+    @supports ((-webkit-margin-before: auto) or (margin-block-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            -webkit-margin-before: $size;
+                    margin-block-start: $size;
+            -webkit-margin-after: $size;
+                    margin-block-end: $size;
+        }
+    
+        //====> Start <====//
+        @else if ($flow == 'start') {
+            -webkit-margin-before: $size;
+                 margin-block-start: $size;
+        }
+    
+        //====> End <====//
+        @else if ($flow == 'end') {
+            -webkit-margin-after: $size;
+                margin-block-end: $size;
+        }
+    }
+
+    //====> Logical Properties Polyfill <====///
+    @supports not ((-webkit-margin-before: auto) or (margin-block-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            margin-top: $size;
+            margin-bottom: $size;
+        }
+
+        //====> Start <====//
+        @else if ($flow == 'start') {margin-top: $size;}
+
+        //====> End <====//
+        @else if ($flow == 'end') {margin-bottom: $size;}
+    }
+}
+
+//====> Margin Inline <====//
+@mixin margin_inline($size, $flow) {
+    //====> Modern Browsers <====//
+    @supports ((-webkit-margin-start: auto) or (margin-inline-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            -webkit-margin-start: $size;
+                margin-inline-start: $size;
+            -webkit-margin-end: $size;
+                margin-inline-end: $size;
+        }
+    
+        //====> Start <====//
+        @else if ($flow == 'start') {
+            -webkit-margin-start: $size;
+                margin-inline-start: $size;
+        }
+    
+        //====> End <====//
+        @else if ($flow == 'end') {
+            -webkit-margin-end: $size;
+                margin-inline-end: $size;
+        }
+    }
+
+    //====> Logical Properties Polyfill <====//
+    @supports not ((-webkit-margin-start: auto) or (margin-inline-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            margin-#{$direction_start}: $size;
+            margin-#{$direction_end}: $size;
+        }
+
+        //====> Start <====//
+        @else if ($flow == 'start') {margin-#{$direction_start}: $size;}
+
+        //====> End <====//
+        @else if ($flow == 'end') {margin-#{$direction_end}: $size;}
+    }
+}

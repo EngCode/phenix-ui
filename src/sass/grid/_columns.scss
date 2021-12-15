@@ -26,7 +26,7 @@ $grid-columns : 12;
 }
 
 /*=== Small Screen ===*/
-@include small(true) {
+@include small() {
     @for $i from 1 through $grid-columns {
         .col-s-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
         // Masonry Grid
@@ -44,7 +44,7 @@ $grid-columns : 12;
 } 
 
 /*=== Medium Screen ===*/
-@include medium(true) {
+@include medium() {
     @for $i from 1 through $grid-columns {
         .col-m-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
         // Masonry Grid
@@ -62,7 +62,7 @@ $grid-columns : 12;
 }
 
 /*=== Large Screen ===*/
-@include large(true) {
+@include large() {
     @for $i from 1 through $grid-columns {
         .col-l-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
         .box-#{$i}x1 {width: 100%/$i;} // Dynamic Grid Loop
@@ -77,7 +77,7 @@ $grid-columns : 12;
 }
 
 /*=== Extra Large Screen ===*/
-@include xlarge(true) {
+@include xlarge() {
     @for $i from 1 through $grid-columns {
         .col-xl-#{$i} { width: percentage($i / $grid-columns);} // Normal Grid Loop
         // Masonry Grid

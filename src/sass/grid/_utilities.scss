@@ -63,44 +63,44 @@
 .hidden{display: none;}
 
 /*=== Small Screen ===*/
-@include small(true) { 
+@include small() { 
     .hidden-s-up{display: none!important;} 
     .show-s-up{display: block!important;} 
 }
 
-@include small(false) { 
+@include small('down') { 
     .hidden-s-down{display: none!important;} 
     .show-s-down{display: block!important;} 
 }
 
 /*=== Medium Screen ===*/
-@include medium(true) { 
+@include medium() { 
     .hidden-m-up{display: none!important;} 
     .show-m-up{display: block!important;} 
 }
 
-@include medium(false) { 
+@include medium('down') { 
     .hidden-m-down{display: none!important;}
     .show-m-down{display: block!important;}
 }
 /*=== Large Screen ===*/
-@include large(true) { 
+@include large() { 
     .hidden-l-up{display: none!important;} 
     .show-l-up{display: block!important;} 
 }
 
-@include large(false) { 
+@include large('down') { 
     .hidden-l-down{display: none!important;}
     .show-l-down{display: block!important;}
 }
 
 /*=== Extra Large Screen ===*/
-@include xlarge(true) { 
+@include xlarge() { 
     .hidden-xl-up{display: none!important;} 
     .show-xl-up{display: block!important;} 
 }
 
-@include xlarge(false) { 
+@include xlarge('down') { 
     .hidden-xl-down{display: none!important;} 
     .show-xl-down{display: block!important;} 
 }

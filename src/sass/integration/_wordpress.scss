@@ -28,7 +28,7 @@
         
         /*==== Tabs Menu ====*/
         .tabs-menu {
-            @extend %reset;
+            @extend %reset-space;
             background-color: #0F161C;
             color:#e0e0e0;
             width:230px;
@@ -108,7 +108,7 @@
             
             /*==== Floating Button ====*/
             .floating-submit .submit {
-                @extend %reset;
+                @extend %reset-space;
                 position: absolute;
                 top:20px;
                 right:25px;
@@ -148,7 +148,7 @@
     
             /*==== Description ====*/
             p {
-                @extend %reset;
+                @extend %reset-space;
                 font-size:14px;
             }
             
@@ -270,7 +270,7 @@
     
             /*==== Panel Title ====*/
             .panel-title {
-                @extend %reset;
+                @extend %reset-space;
                 @extend %flexbox;
                 @extend .align-between;
                 @extend .align-center-y;
@@ -763,7 +763,7 @@ html{margin: 0!important;}
 	word-wrap: normal !important;
 }
 
-.bypostauthor {@extend %reset;}
+.bypostauthor {@extend %reset-space;}
 
 .alignleft {
 	float: $direction;

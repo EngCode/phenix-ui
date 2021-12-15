@@ -1,89 +1,89 @@
-/**======> Referance By Comment <======
- * ===> 01 - Extra Small Screen Mixin 0 ==> 420px
- * ===> 02 - Small Screen Mixin 576px ==> 640px
- * ===> 03 - Medium Screen Mixin 768px ==> 920px
- * ===> 04 - Large Screen Mixin 1024px ==> 1366px
- * ===> 05 - Extra Large Screen Mixin 1366px ==> 1600px
+/**=====> Referance By Comment <=====
+ * ===> 01 - Extra Small Screens
+ * ===> 02 - Small Screens
+ * ===> 03 - Medium Screens
+ * ===> 04 - Large Screens
+ * ===> 05 - Extra Large Screens
 */
 
-//==== Responsive [Small] Screens ====//
-$small-screen-end   : 640px;
-$small-screen-start : 576px;
-$xsmall-screen-end  : 480px;
+/*==== Small Points ====*/
+$xs-end   : 480px; /*===> Max xSmall Screen Width */
+$sm-start : 576px; /*===> Min Small Screen Width */
+$sm-end   : 700px; /*===> Max Small Screen Width */
 
-//==== Responsive [Medium] Screens ====//
-$medium-screen-start : 768px;
-$medium-screen-end : 1100px;
+/*==== Medium Points ====*/
+$md-start : 768px;  /*===> Min Medium Screen Width */
+$md-end   : 1100px; /*===> Max Medium Screen Width */
 
-//==== Responsive [Large] Screens ====//
-$large-screen-start  : 1200px;
-$large-screen-end  : 1399px;
+/*==== Large Points ====*/
+$lg-start : 1200px; /*===> Min Large Screen Width */
+$lg-end   : 1366px; /*===> Max Large Screen Width */
 
-//==== Responsive [xLarge] Screens ====//
-$xlarge-screen-start : 1400px;
-$xlarge-screen-end : 2500px;
+/*==== xLarge Points ====*/
+$xl-start : 1400px; /*===> Min xLarge Screen Width */
+$xl-end   : 2560px; /*===> Max xLarge Screen Width */
 
-/*=====> Extra Small Screen Mixin 0 ==> 420px <========*/
-@mixin xSmall($reverse) {
-    @if ($reverse) {
-        @media (min-width: 0) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $xsmall-screen-end) {
-            @content;
-        }
+/*====> Extra Small Screens <====*/
+@mixin xSmall($flow:'') {
+    //====> From End to Start <====//
+    @if ($flow == 'down') {
+        @media (max-width: $xs-end) { @content; }
+    } 
+
+    //====> From Start to End <====//
+    @else {
+        @media (min-width: 0) { @content; }
     };
 }
 
-/*=====> Small Screen Mixin 576px ==> 640px <========*/
-@mixin small($reverse) {
-    @if ($reverse) {
-        @media (min-width: $small-screen-start) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $small-screen-end) {
-            @content;
-        }
+/*====> Small Screens <====*/
+@mixin small($flow:'') {
+    //====> From End to Start <====//
+    @if ($flow == 'down') {
+        @media (max-width: $sm-end) { @content; }
+    } 
+
+    //====> From Start to End <====//
+    @else {
+        @media (min-width: $sm-start) { @content; }
     };
 }
 
-/*=====> Medium Screen Mixin 768px ==> 920px <========*/
-@mixin medium($reverse) {
-    @if ($reverse) {
-        @media (min-width: $medium-screen-start) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $medium-screen-end) {
-            @content;
-        }
+/*====> Medium Screens <====*/
+@mixin medium($flow:'') {
+    //====> From End to Start <====//
+    @if ($flow == 'down') {
+        @media (max-width: $md-end) { @content; }
+    }
+
+    //====> From Start to End <====//
+    @else {
+        @media (min-width: $md-start) { @content; }
     };
 }
 
-/*=====> Large Screen Mixin 1024px ==> 1366px <========*/
-@mixin large($reverse) {
-    @if ($reverse) {
-        @media (min-width: $large-screen-start) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $large-screen-end) {
-            @content;
-        }
+/*====> Large Screens <====*/
+@mixin large($flow:'') {
+    //====> From End to Start <====//
+    @if ($flow == 'down') {
+        @media (max-width: $lg-end) { @content; }
+    }
+
+    //====> From Start to End <====//
+    @else {
+        @media (min-width: $lg-start) { @content; }
     };
 }
 
-/*=====> Extra Large Screen Mixin 1366px ==> 1600px <========*/
-@mixin xlarge($reverse) {
-    @if ($reverse) {
-        @media (min-width: $xlarge-screen-start) {
-            @content;
-        }
-    } @else {
-        @media (max-width: $xlarge-screen-end) {
-            @content;
-        }
+/*====> Extra Large Screens <====*/
+@mixin xlarge($flow:'') {
+    //====> From End to Start <====//
+    @if ($flow == 'down') {
+        @media (max-width: $xl-end) { @content; }
+    }
+
+    //====> From Start to End <====//
+    @else {
+        @media (min-width: $xl-start) { @content; }
     };
 }

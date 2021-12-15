@@ -1,0 +1,71 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Containers
+ * ===> 02 - Breakpoints Container
+ * ===> 03 - Rows and Flexbox
+ * ===> 04 - Masonry Grid
+ * ===> 05 - Responsive Columns
+ * ===> 06 - Assets and Utilities
+*/
+
+/*==== Assets ====*/
+@import '../assets/selectors';
+@import '../assets/mixin';
+
+%container {
+    --container-padding: 15px;
+    position: relative;
+    @include margin_inline(auto, 'both');
+}
+
+/*==== Containers ====*/
+.container, .container-fluid, .container-xs,
+.container-sm, .container-md, .container-xl {
+    @extend %container;
+    @include padding_inline(var(--container-padding), 'both');
+}
+
+/*==== Containers ====*/
+.container {max-width: 1200px;}
+
+.container-fluid {
+    width:100%;
+    max-width: 100%;
+}
+
+/*==== Breakpoints Container ====*/
+.container-xs {
+    max-width: 360px;
+    @include small() { max-width: 480px; }
+}
+
+.container-sm {
+    max-width: 567px;
+    @include medium() { max-width: 640px; }
+}
+
+.container-md {
+    max-width: 768px;
+    @include large() { max-width: 1024px; }
+}
+
+.container-xl { max-width: 1400px; }
+
+/*==== Rows and Flexbox ====*/
+.flexbox, .flex-box, .row { @extend %flexbox; }
+
+/*==== Masonry Grid ====*/
+[class*="masonry-"] {
+    word-spacing: -5px;
+    /*==== Columns ====*/
+    > .column, > [class*="col-"] {
+        display: inline-block;
+        word-spacing: normal;
+        width:100%;
+    }
+}
+
+/*==== Responsive Columns ====*/
+@import 'columns';
+
+/*==== Assets and Features ====*/
+@import 'utilities';

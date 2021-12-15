@@ -74,7 +74,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         this.forEach((element:HTMLElement) => {
             //====> Define The First Parent <====//
             let parent:any = element.parentNode;
-            
+
             //====> if has a Target <===//
             if (target && !element.matches('html')) {
                 //====> Loop Over The Ancestors <====//
@@ -396,7 +396,7 @@ import './components/dropdown'; //==> Dropddown
 const Phenix = (selector?:any) => {
     /*====> Get Elements <====*/
     if (typeof(selector) === 'string') {
-        //====> Select for Phenix Elements <====//
+        //====> Select as Phenix Elements <====//
         let selected = document.querySelectorAll(selector);
 
         //====> Create Elements Query <====//

@@ -1,17 +1,17 @@
 /*==== Utlites Repeaters ====*/
-@import '../assets/mixin/_tools';
+@import '../assets/mixin';
 
 /*==== Padding All ====*/
-@include UtilitiesRepeater (0, 100, 'pd', 'padding', 'px', 5);
+@include Repeater (0, 100, 'pd', 'padding', 'px', 5);
 
 /*==== Padding Top ====*/
-@include UtilitiesRepeater (0, 100, 'pdt', 'padding-top', 'px', 5);
+@include Repeater (0, 100, 'pdt', 'padding-top', 'px', 5);
 
 /*==== Padding Bottom ====*/
-@include UtilitiesRepeater (0, 100, 'pdb', 'padding-bottom', 'px', 5);
+@include Repeater (0, 100, 'pdb', 'padding-bottom', 'px', 5);
 
 /*==== Padding Start ====*/
-@include UtilitiesRepeater (0, 100, 'pds', 'padding-#{$direction-start}', 'px', 5);
+@include Repeater (0, 100, 'pds', 'padding-#{$direction-start}', 'px', 5);
 
 /*==== Padding End ====*/
-@include UtilitiesRepeater (0, 100, 'pde', 'padding-#{$direction-end}', 'px', 5);
+@include Repeater (0, 100, 'pde', 'padding-#{$direction-end}', 'px', 5);

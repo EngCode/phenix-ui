@@ -1,5 +1,5 @@
 /*==== Media Queries ====*/
-@import './assets/mixin/breakpoints';
+@import './assets/mixin';
 
 /*==== Defines Sizes ====*/
 $header-height: 60px;
@@ -45,7 +45,7 @@ $header-height: 60px;
     border: 0 none;
     padding: 0;
     transition: outline 0.3s linear;
-    &:focus{outline: 1px solid rgba(#000, 0.15);}
+    &:focus {outline: 1px dashed var(--primary-color);}
 }
 
 %inline-block {
@@ -54,10 +54,10 @@ $header-height: 60px;
 }
 
 %select-theme {
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    background-repeat:no-repeat;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+        appearance: none;
+    background-repeat: no-repeat;
     background-image: url('../img/select.svg');
     background-size: 9px;
     background-position: var(--direction-end) 10px center;
@@ -109,25 +109,32 @@ $header-height: 60px;
 html {line-height: var(--line-height);}
 
 /*==== Assets [Large Screens] ====*/
-@include large(up) {
+@include large() {
     .mxw-lg-235 {max-width: 235px;}
     .mxw-lg-200 {max-width: 200px;}
 };
 
-@include xlarge(up) {
+@include xlarge() {
     .mxw-xl-275 {max-width: 275px;}
 };
 
 .wp-color {color: var(--wp-color);}
 .tx-align-center {text-align: center;}
+.mt-0 {margin-bottom: 0;}
+.mt-5 {margin-bottom: 5px;}
+.mb-15 {margin-bottom: 15px;}
+.mb-20 {margin-bottom: 20px;}
+.mb-30 {margin-bottom: 30px;}
+.mb-40 {margin-bottom: 40px;}
 
 /*==== Header ====*/
 .main-header {
     /*==== Component Options ====*/
     border-bottom: 1px solid #F1F1F1;
     min-height: $header-height;
-    padding: 0 30px;
-    @include small(false) {padding: 0 15px};
+    padding: 0 REM(20);
+    @include small('down') {padding: 0 15px};
+
     /*==== Select ====*/
     select {
         @extend %inline-block;
@@ -163,7 +170,7 @@ html {line-height: var(--line-height);}
     overflow-y: auto;
     @extend %sticky-element;
     /*==== Size ====*/
-    @include large(up) {height: calc(100vh - #{$header-height})};
+    @include large() {height: calc(100vh - #{$header-height})};
 
     /*==== Links ====*/
     a {
@@ -175,14 +182,14 @@ html {line-height: var(--line-height);}
     /*==== Search ====*/
     .search-form {
         padding: 15px;
-        @include large(up) {padding: 15px 20px};
+        @include large() {padding: 15px 20px};
     }
     
     /*==== Control Wraper ====*/
     .control-wraper {
         position: relative;
         width: calc(100% - 51px);
-        @include large(up) {width: 100%;}
+        @include large() {width: 100%;}
         /*==== Controler ====*/
         input {
             @extend %reset-control;
@@ -193,7 +200,7 @@ html {line-height: var(--line-height);}
             background-color: #F6F6F6;
             height: 36px;
             font-size: 13px;
-            @include large(up) {
+            @include large() {
                 height: 40px;
                 font-size: 14px;
             }
@@ -206,7 +213,7 @@ html {line-height: var(--line-height);}
             left: 12px;
             transform: translateY(-50%);
             font-size: 12px;
-            @include large(up) {font-size: 14px;}
+            @include large() {font-size: 14px;}
         }
     }
 
@@ -266,7 +273,7 @@ html {line-height: var(--line-height);}
                 margin-left: 25px;
                 margin-bottom: 5px;
                 .phenix-active,li:hover {color: var(--headlines-color);}
-                @include xlarge(up) {margin-left: 30px;}
+                @include xlarge() {margin-left: 30px;}
             }
             /*==== Active ====*/
             &.phenix-active {
@@ -287,7 +294,7 @@ html {line-height: var(--line-height);}
     overflow-y: auto;
     @extend %sticky-element;
     /*==== Size ====*/
-    @include large(up) {height: calc(100vh - #{$header-height})};
+    @include large() {height: calc(100vh - #{$header-height})};
 
     /*==== Title ====*/
     h3 {
@@ -300,7 +307,7 @@ html {line-height: var(--line-height);}
     ul {
         @extend %reset-list;
         display: block;
-        padding-left: 10px;
+        padding-left: 5px;
         font-size: 14px;
         line-height: 1.3;
         color: var(--gray-color);
@@ -328,20 +335,32 @@ html {line-height: var(--line-height);}
 .content-side {
     //====> Space Fix <====//
     padding: 15px;
-    @include large(up) {padding: 30px};
+    @include large() {padding: 30px};
+
+    ul {
+        margin-right: 25px;
+        margin-left: 25px;
+        padding-left: 0;
+        padding-right: 0;
+        li {margin-bottom: 5px;}
+    }
+
+    .docs-list {
+        li {margin-bottom: 10px;}
+    }
 
     /*==== Typography ====*/
     h1,h2,h3,h4,h5 {
         &:not(.strong-weight) {font-weight: var(--medium-weight);}
     }
-
+    
     h1, .h1 {font-size: 2rem;}
-
+    
     h2, .h2 {
         margin-bottom: 10px;
         font-size: 1.75rem;
     }
-
+    
     h3, .h3 {
         margin-bottom: 10px;
         font-size: 1.5rem;
@@ -351,20 +370,26 @@ html {line-height: var(--line-height);}
         margin-bottom: 5px;
         font-size: 1.2rem;
     }
-
+    
+    h4 + .enlighter-default {margin-top: 10px;}
     /*==== Images ====*/
     img {max-width: 100%;}
 
     /*==== KBD ====*/
-    kbd {
+    kbd{
         padding: 3px 5px;
         line-height: 1;
-        font-size: 12px;
+        font-size: 0.75em;
         border-radius: 3px;
         background-color: var(--dark-color);
         color: #FFFFFF;
         vertical-align: middle;
         display: inline-block;
+    }
+
+    code {
+        color: #f85b5b;
+        font-size: 0.9em;
     }
 
     .wp-block-separator {border-bottom: 0;}
@@ -379,17 +404,40 @@ html {line-height: var(--line-height);}
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
+
+    code {font-size: 1em;}
+
+    /*==== Table ====*/
+    table {border-radius: 5px;}
+
+    /*==== Table Note ====*/
+    figcaption {
+        text-align: center;
+        padding: 5px;
+        color: var(--gray-color);
+        font-size: 12px;
+    }
     /*==== Table Columns ====*/
     td {
-        padding: 5px;
-        border: 1px solid #f2f2f2;
+        padding: 5px 15px;
+        border: 1px solid #eeeeee;
         img {margin: 8px auto;}
+    }
+    
+    th {
+        padding: 8px 15px;
+        background-color: rgba(#000, 0.06);
+        border: 1px solid #dadada;
     }
 }
 
 //====> Enlighter Plugin <====//
 .enlighter-default.enlighter-t-wpcustom {
     background-color: #101325;
+    max-height: 400px;
+    overflow-y: auto;
+
+    + pre + h4 {margin-top: -25px;}
 
     //====> Line Background <====//
     div.enlighter > div {
@@ -473,6 +521,11 @@ html {line-height: var(--line-height);}
         font-weight: normal;
     }
 
+    .enlighter-x11 {color: #eea766;}
+    .enlighter-g1,.enlighter-x12 {color: #e7e7e7;}
+    .enlighter-x12 {color: #e7e7e7;}
+    .enlighter-k7 {color: #f35858;}
+
     .enlighter-k9,.enlighter-k0 {
         color: #c156fd;
         font-weight: var(--medium-weight);
@@ -488,7 +541,7 @@ html {line-height: var(--line-height);}
     margin-top: auto;
     font-size: 15px;
     padding: 8px 15px;
-    @include large(up) {
+    @include large() {
         margin: -30px -46px;
         margin-top: auto;
     }

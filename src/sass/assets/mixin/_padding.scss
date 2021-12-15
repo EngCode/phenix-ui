@@ -1,0 +1,86 @@
+/**======> Referance <======
+ * ===> 01 - Padding Block
+ * ===> 02 - Padding Inline
+*/
+
+//====> Padding Block <====//
+@mixin padding_block($size, $flow) {
+    //====> Modern Browsers <====//
+    @supports ((-webkit-padding-before: auto) or (padding-block-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            -webkit-padding-before: $size;
+                    padding-block-start: $size;
+            -webkit-padding-after: $size;
+                    padding-block-end: $size;
+        }
+    
+        //====> Start <====//
+        @else if ($flow == 'start') {
+            -webkit-padding-before: $size;
+                 padding-block-start: $size;
+        }
+    
+        //====> End <====//
+        @else if ($flow == 'end') {
+            -webkit-padding-after: $size;
+                padding-block-end: $size;
+        }
+    }
+
+    //====> Logical Properties Polyfill <====///
+    @supports not ((-webkit-padding-before: auto) or (padding-block-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            padding-top: $size;
+            padding-bottom: $size;
+        }
+
+        //====> Start <====//
+        @else if ($flow == 'start') {padding-top: $size;}
+
+        //====> End <====//
+        @else if ($flow == 'end') {padding-bottom: $size;}
+    }
+}
+
+//====> Padding Inline <====//
+@mixin padding_inline($size, $flow) {
+    //====> Modern Browsers <====//
+    @supports ((-webkit-padding-start: auto) or (padding-inline-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            -webkit-padding-start: $size;
+                padding-inline-start: $size;
+            -webkit-padding-end: $size;
+                padding-inline-end: $size;
+        }
+    
+        //====> Start <====//
+        @else if ($flow == 'start') {
+            -webkit-padding-start: $size;
+                padding-inline-start: $size;
+        }
+    
+        //====> End <====//
+        @else if ($flow == 'end') {
+            -webkit-padding-end: $size;
+                padding-inline-end: $size;
+        }
+    }
+
+    //====> Logical Properties Polyfill <====//
+    @supports not ((-webkit-padding-start: auto) or (padding-inline-start: auto)) {
+        //====> Both <====//
+        @if ($flow == 'both') {
+            padding-#{$direction_start}: $size;
+            padding-#{$direction_end}: $size;
+        }
+
+        //====> Start <====//
+        @else if ($flow == 'start') {padding-#{$direction_start}: $size;}
+
+        //====> End <====//
+        @else if ($flow == 'end') {padding-#{$direction_end}: $size;}
+    }
+}
