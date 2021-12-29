@@ -14,5 +14,5 @@ import Phenix from '.';
 //======> D.O.M is Ready [for you] <=======//
 Phenix(document).ready((event:any) => {
     //====> !Here Goes Your Code <====//
-
+    
 });
