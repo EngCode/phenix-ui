@@ -1,150 +1,141 @@
 /**======> Referance By Comment <======
- * ===> 01 - Auto Width Column
- * ===> 02 - Grid Alignments
- * ===> 03 - Display Settings
- * ===> 04 - Grid Gutters
- * ===> 05 - Fix Gutters
+ * ===> 01 - Grid Alignment
+ * ===> 02 - Horizontal Alignment
+ * ===> 03 - Vertical Alignment
+ * ===> 04 - Self Alignment
+ * ===> 05 - Flow Reverse
+ * ===> 06 - Stacked Flow
+ * ===> 07 - Ordering
+ * ===> 08 - Gutters X/Y
+ * ===> 08 - Gutters Horizontal
+ * ===> 08 - Gutters Vertical
 */
 
-/*=== Auto Width Column ===*/
-.col-auto {flex-grow: 1;}
+/*==== SASS Asset ====*/
+@import '../assets/mixin';
 
-/*=== Grid Alignments ===*/
-.align-center-z {
-    align-items: center;
-    justify-content: center;
-} /* Align Columns Centered Vertical and Horizontal */
-
-.align-center-x{
-    justify-content:center;
-} /* Horizontaly Align Columns to the Center */
-
-.align-start-x{
-    justify-content: flex-start;
-} /* Horizontaly Align Columns to the Direction start point */
-
-.align-end-x{
-    justify-content: flex-end;
-} /* Horizontaly Align Columns to the Direction end point */
-
-.align-around{
-    justify-content: space-around;
-} /* Horizontaly Align and spliting the space around Columns */
-
-.align-between{
-    justify-content: space-between;
-} /* Horizontaly Align and spliting the space between Columns */
-
-.align-start-y{
-    align-items: flex-start;
-} /* Vertical Align Columns to the top */
-
-.align-center-y{
-    align-items: center;
-} /* Vertical Align Columns to the Center */
-
-.align-end-y{
-    align-items: flex-end;
-} /* Vertical Align Columns to the bottom */
-
-.align-self-start{
-    align-self: flex-start;
-} /* Vertical Align item to the top */
-
-.align-self-center{
-    align-self: center;
-} /* Vertical Align item to the Center */
-
-.align-self-end {
-    align-self: flex-end;
-} /* Vertical Align item to the bottom */
-
-/*========== Display Settings =========*/
-.hidden{display: none;}
-
-/*=== Small Screen ===*/
-@include small() { 
-    .hidden-s-up{display: none!important;} 
-    .show-s-up{display: block!important;} 
-}
-
-@include small('down') { 
-    .hidden-s-down{display: none!important;} 
-    .show-s-down{display: block!important;} 
-}
-
-/*=== Medium Screen ===*/
-@include medium() { 
-    .hidden-m-up{display: none!important;} 
-    .show-m-up{display: block!important;} 
-}
-
-@include medium('down') { 
-    .hidden-m-down{display: none!important;}
-    .show-m-down{display: block!important;}
-}
-/*=== Large Screen ===*/
-@include large() { 
-    .hidden-l-up{display: none!important;} 
-    .show-l-up{display: block!important;} 
-}
-
-@include large('down') { 
-    .hidden-l-down{display: none!important;}
-    .show-l-down{display: block!important;}
-}
-
-/*=== Extra Large Screen ===*/
-@include xlarge() { 
-    .hidden-xl-up{display: none!important;} 
-    .show-xl-up{display: block!important;} 
-}
-
-@include xlarge('down') { 
-    .hidden-xl-down{display: none!important;} 
-    .show-xl-down{display: block!important;} 
-}
-
-/*==== Grid Gutters ====*/
-.no-gutter{
-    margin:0 0;
-    >[class*="col-"],>[class*="box-"] {
-        padding-#{$direction-start}:0;
-        padding-#{$direction-end}:0;
+/*==== Alignment Mixin ====*/
+@mixin make_align($infix:'') {
+    /*=== Grid Alignment ===*/
+    .align#{$infix}-start {
+        justify-content: flex-start;
+        align-items: flex-start;
     }
-} // Decrease Columns Gutter To 0 
 
-.gutter-small > [class*="col-"],.gutter-small > [class*="box-"] ,.wrap-gutter-s{
-    padding-#{$direction-start}:5px;
-    padding-#{$direction-end}:5px;
-} // Decrease Columns Gutter To 50% 
+    .align#{$infix}-center {
+        justify-content: center;
+        align-items: center;
+    }
 
-.gutter-medium > [class*="col-"],.gutter-medium > [class*="box-"] ,.wrap-gutter-m{
-    padding-#{$direction-start}:10px;
-    padding-#{$direction-end}:10px;
-} // Increase Columns Gutter To 150% */
+    .align#{$infix}-end {
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
 
-.gutter-large > [class*="col-"],.gutter-large > [class*="box-"] ,.wrap-gutter-l{
-    padding-#{$direction-start}:20px;
-    padding-#{$direction-end}:20px;
-} // Increase Columns Gutter 200%
+    /*==== Horizontal Alignment ====*/
+    .align#{$infix}-start-x  {justify-content: flex-start;}
+    .align#{$infix}-center-x {justify-content:center;}
+    .align#{$infix}-end-x    {justify-content: flex-end;}
+    .align#{$infix}-around  {justify-content: space-around;}
+    .align#{$infix}-between {justify-content: space-between;}
 
-/*=== Fix Gutters ===*/
-.gutter-small{
-    margin-#{$direction-start}:-10px;
-    margin-#{$direction-end}:-10px;
+    /*==== Vertical Alignment ====*/
+    .align#{$infix}-start-y  {align-items: flex-start;}
+    .align#{$infix}-center-y {align-items: center;}
+    .align#{$infix}-end-y    {align-items: flex-end;}
+
+    /*==== Self Alignment ====*/
+    .align-self#{$infix}-start  {align-self: flex-start;}
+    .align-self#{$infix}-center {align-self: center;}
+    .align-self#{$infix}-end    {align-self: flex-end;}
 }
 
-.gutter-medium{
-    margin-#{$direction-start}:-10px;
-    margin-#{$direction-end}:-10px;
+/*==== Sorting Mixin ====*/
+@mixin make_sorting($infix:'', $order-limit:24) {
+    /*=== Flow Reverse ===*/
+    .flow#{$infix}-reverse {flex-flow: row-reverse;}
+    /*=== Stacked Flow ===*/
+    .flow#{$infix}-columns {flex-flow: column;}
+    /*=== Reversed Stacked ===*/
+    .flow#{$infix}-columns-reverse {flex-flow: column-reverse;}
+
+    /*==== Ordering ====*/
+    @for $i from 0 through $order-limit { 
+        .order#{$infix}-#{$i} {order: $i;}
+    }
 }
 
-.gutter-large{
-    margin-#{$direction-start}:-20px;
-    margin-#{$direction-end}:-20px;
+/*==== Gutters Mixin ====*/
+@mixin make_gap($infix:'') {
+    /*==== Gutters X/Y ====*/
+    .gp#{$infix}-0  {@include grid_gap(0)}
+    .gp#{$infix}-10 {@include grid_gap(REM(10))}
+    .gp#{$infix}-15 {@include grid_gap(REM(15))}
+    .gp#{$infix}-20 {@include grid_gap(REM(20))}
+    .gp#{$infix}-30 {@include grid_gap(REM(30))}
+    .gp#{$infix}-40 {@include grid_gap(REM(40))}
+    .gp#{$infix}-50 {@include grid_gap(REM(50))}
+
+    /*==== Gutters Horizontal ====*/
+    .gpx#{$infix}-0  {@include grid_gap(0, 'x')}
+    .gpx#{$infix}-10 {@include grid_gap(REM(10), 'x')}
+    .gpx#{$infix}-15 {@include grid_gap(REM(15), 'x')}
+    .gpx#{$infix}-20 {@include grid_gap(REM(20), 'x')}
+    .gpx#{$infix}-30 {@include grid_gap(REM(30), 'x')}
+    .gpx#{$infix}-40 {@include grid_gap(REM(40), 'x')}
+    .gpx#{$infix}-50 {@include grid_gap(REM(50), 'x')}
+
+    /*==== Gutters Vertical ====*/
+    .gpy#{$infix}-0  {@include grid_gap(0, 'y')}
+    .gpy#{$infix}-10 {@include grid_gap(REM(10), 'y')}
+    .gpy#{$infix}-15 {@include grid_gap(REM(15), 'y')}
+    .gpy#{$infix}-20 {@include grid_gap(REM(20), 'y')}
+    .gpy#{$infix}-30 {@include grid_gap(REM(30), 'y')}
+    .gpy#{$infix}-40 {@include grid_gap(REM(40), 'y')}
+    .gpy#{$infix}-50 {@include grid_gap(REM(50), 'y')}
 }
 
-.row-reverse {
-    flex-direction: row-reverse;
+/*==== xSmall Screen ====*/
+@include make_align();   //====> alignment
+@include make_sorting(); //====> sorting
+@include make_gap();     //====> Gutters
+
+/*==== Small Screen ====*/
+@include small() {
+    /*==== alignment ====*/
+    @include make_align('-sm');
+    /*==== sorting ====*/
+    @include make_sorting('-sm');
+    /*==== gap/gutter ====*/
+    @include make_gap('-sm');
+}
+
+/*==== Medium Screen ====*/
+@include medium() {
+    /*==== alignment ====*/
+    @include make_align('-md');
+    /*==== sorting ====*/
+    @include make_sorting('-md');
+    /*==== gap/gutter ====*/
+    @include make_gap('-md');
+}
+
+/*==== Large Screen ====*/
+@include large() {
+    /*==== alignment ====*/
+    @include make_align('-lg');
+    /*==== sorting ====*/
+    @include make_sorting('-lg');
+    /*==== gap/gutter ====*/
+    @include make_gap('-lg');
+}
+
+/*==== xLarge Screen ====*/
+@include xlarge() {
+    /*==== alignment ====*/
+    @include make_align('-xl');
+    /*==== sorting ====*/
+    @include make_sorting('-xl');
+    /*==== gap/gutter ====*/
+    @include make_gap('-xl');
 }

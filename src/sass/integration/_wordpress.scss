@@ -711,17 +711,17 @@ body:not(.wp-admin) #wpadminbar {
     @media screen and (max-width:360px) { overflow: hidden; }
     @extend %fast-motion;
     top:-32px!important;
-    padding-#{$direction}:32px;
+    padding-#{$direction-start}:32px;
 
     @media screen and (max-width:768px) {
         top:-46px!important;
-        padding-#{$direction}:46px;
+        padding-#{$direction-start}:46px;
     }
 
     #wp-admin-bar-wp-logo {
         position: fixed;
         top:0;
-        #{$direction}:0;
+        #{$direction-start}:0;
         background: var(--dark-color);
         .ab-submenu{display: none!important;}
     }
@@ -772,7 +772,7 @@ html{margin: 0!important;}
 
 .alignright {
 	float: $direction-end;
-	margin-#{$direction}: 1.5em;
+	margin-#{$direction-start}: 1.5em;
 }
 
 .aligncenter {

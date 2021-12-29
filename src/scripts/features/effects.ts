@@ -24,18 +24,27 @@ PhenixElements.prototype.slideUp = function (duration?, delay?) {
 
             //====> Animation Data <====//
             let height = Phenix(element).height(),
+                thisStyle = Phenix(element).getCSS(),
                 timespeed = duration || 300,
                 keyframes = [
-                    {height: `${height}px`},
+                    {
+                        height: `${height}px`,
+                        paddingTop: thisStyle.paddingTop,
+                        paddingBottom: thisStyle.paddingBottom,
+                    },
                     //====> To <====//
-                    {height : 0, padding: 0, margin : 0}
+                    {
+                        height: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                    }
                 ];
 
             //====> Slide-Up the Element <====//
             element.animate(keyframes, {
                 duration : timespeed,
                 easing   : 'linear',
-                fill     : 'forwards',
+                fill     : 'backwards',
                 delay    : delay || 0,
             });
 
@@ -62,14 +71,27 @@ PhenixElements.prototype.slideDown = function (duration?, delay?, display?) {
 
             //====> Animation Data <====//
             let height = Phenix(element).height(),
+                thisStyle = Phenix(element).getCSS(),
                 timespeed = duration || 300,
-                keyframes = [{height : 0}, {height: `${height}px`}];
+                keyframes = [
+                    {
+                        height: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                    },
+                    //====> To <====//
+                    {
+                        height: `${height}px`,
+                        paddingTop: thisStyle.paddingTop,
+                        paddingBottom: thisStyle.paddingBottom,
+                    }
+                ];
 
             //====> Slide-Up the Element <====//
             element.animate(keyframes, {
                 duration: timespeed,
                 easing  : 'linear',
-                fill    : 'forwards',
+                fill    : 'backwards',
                 delay   : delay || 0,
             });
 

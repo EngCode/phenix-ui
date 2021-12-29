@@ -6,7 +6,7 @@
 
 //==== Utilities Repeater ====//
 @mixin Repeater ($index, $cond, $name ,$prop, $unite, $increase) {
-    /*==== Padding All ====*/
+    /*==== Repeater Loop ====*/
     @while $index <= $cond {
         .#{$name}-#{$index} {
             #{$prop} : #{$index+$unite};
@@ -17,7 +17,7 @@
 }
 
 //====> REM Calculator <====//
-@function REM($size, $base:var(--rem-xs)) {
+@function REM($size, $base:16) {
     //====> Return REM Size <====//
-    @return calc((#{$size} / #{$base} * 1rem));
+    @return ($size / $base * 1)+rem;
 }

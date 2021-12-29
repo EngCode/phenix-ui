@@ -11,8 +11,8 @@ import Phenix, { PhenixElements } from "..";
 /*====> Smoth-Scroll [Buged] <====*/
 PhenixElements.prototype.smothScroll = function (options?:{
     target?:string,   //===> Target to Scroll to
-    offset?:number,   //===> Increase Target Position By [number]
-    into?:number,     //===> Decrease Target Position By [number]
+    offset?:number,   //===> Decrease Target Position By [number]
+    into?:number,     //===> Increase Target Position By [number]
     duration?:number, //===> Scroll Animation Duration
 }) {
     //====> Loop Through Phenix Elements <====//
@@ -75,19 +75,21 @@ PhenixElements.prototype.smothScroll = function (options?:{
 
 /*====> Sticky Elements <====*/
 PhenixElements.prototype.sticky = function (options?:{
-    type?:string,      //===> Fixed, Sticky
-    offset?:number,    //===> Increase Target Position By [number]
-    into?:number,      //===> Decrease Target Position By [number]
-    direction?:string, //===> Flow Direction [X, Y]
+    type?:string,   //===> Fixed, Sticky
+    offset?:number, //===> Increase Target Position By [number]
+    into?:number,   //===> Decrease Target Position By [number]
+    flow?:string,   //===> Flow Direction [X, Y]
+    active?:string, //===> Active Class Name
 }) {
     //====> Define Direction Flow <====//
-    let direction = options?.direction.toLowerCase();
+    let direction = options?.flow?.toLowerCase() || 'y';
 
     //====> Loop Through Phenix Elements <====//
     this.forEach(element => {
         //====> Get Data <====//
-        let type   = element.getAttribute('data-sticky') || options?.type,
+        let type   = element.getAttribute('data-sticky') || options?.type || 'sticky',
             into   = parseInt(element.getAttribute('data-into')) || options?.into || 0,
+            active = options?.active || 'is-sticky',
             offset = parseInt(element.getAttribute('data-offset')) || options?.offset || 0;
 
         //====> Relative to its Parent [workout] <====//
@@ -100,15 +102,15 @@ PhenixElements.prototype.sticky = function (options?:{
             if (offset && offset > 0) offset   = element.offsetTop - offset;
 
             //====> First Position [workout] <====//
-            if (window.scrollY > offset) element.classList.add('is-sticky'); 
+            if (window.scrollY > offset) element.classList.add(active); 
 
             //====> While Window Scrolling <====//
             window.addEventListener('scroll', event => {
                 //====> if position matches element Activate <====//
-                if (window.scrollY >= offset) element.classList.add('is-sticky'); 
+                if (window.scrollY >= offset) element.classList.add(active); 
 
                 //====> Otherwise De-Activate <====//
-                if (window.scrollY <= offset) element.classList.remove('is-sticky');
+                if (window.scrollY <= offset) element.classList.remove(active);
             });
         }
 
@@ -119,15 +121,15 @@ PhenixElements.prototype.sticky = function (options?:{
             if (offset && offset > 0)   element.offsetLeft - offset;
     
             //====> First Position [workout] <====//
-            if (window.scrollX > offset) element.classList.add('is-sticky'); 
+            if (window.scrollX > offset) element.classList.add(active); 
 
             //====> While Window Scrolling <====//
             window.addEventListener('scroll', event => {
                 //====> if position matches element Activate <====//
-                if (window.scrollX >= offset) element.classList.add('is-sticky'); 
+                if (window.scrollX >= offset) element.classList.add(active); 
 
                 //====> Otherwise De-Activate <====//
-                else if (window.scrollX <= offset) element.classList.remove('is-sticky');
+                else if (window.scrollX <= offset) element.classList.remove(active);
             });
         }
     });
@@ -138,13 +140,13 @@ PhenixElements.prototype.sticky = function (options?:{
 
 /*====> Scroll-Spy <====*/
 PhenixElements.prototype.scrollSpy = function (options?:{
-    active_class:string,  //===> Default : phenix-active
-    flow:string,      //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
-    offset:number,    //====> Increase Target Position By [number]
-    into:number       //====> Decrease Target Position By [number]
+    active:string,  //===> Active Class Name Default : phenix-active
+    flow:string,    //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
+    offset:number,  //====> Decrease Target Position By [number]
+    into:number     //====> Increase Target Position By [number]
 }) {
     //====> Define Options <=====//
-    let className:string = options?.active_class || 'phenix-active',
+    let className:string = options?.active || 'phenix-active',
         spotFlow:string = options?.flow || 'both',
         spotInto:number = options?.into || 0,
         spotOffset:number = options?.offset || 0;

@@ -16,6 +16,21 @@
 /*==== SASS Selectors ====*/
 @import './../assets/selectors';
 
+/*==== Responsive REM Base ====*/
+:root {
+    --current-rem : var(--rem-xs);
+    /*==== Small Screens ====*/
+    @include small() {--current-rem : var(--rem-sm)}
+    /*==== Medium Screens ====*/
+    @include medium() {--current-rem : var(--rem-md)}
+    /*==== Large Screens ====*/
+    @include large() {--current-rem : var(--rem-lg)}
+    /*==== xLarge Screens ====*/
+    @include xlarge() {--current-rem : var(--rem-xl)}
+}
+
+html { font-size: var(--current-rem); }
+
 /*======== Custom Resets ========*/
 body {
     margin: 0;

@@ -1,91 +1,53 @@
 /**======> Referance By Comment <======
- * ===> 01 - Extra Small Screen Loop
- * ===> 02 - Small Screen Loop
- * ===> 03 - Medium Screen Loop
- * ===> 04 - Large Screen Loop
- * ===> 05 - Extra Large Screen Loop
+ * ===> 00 - Layouts Mixin
+ * ===> 01 - xSmall Layouts
+ * ===> 02 - Small Layouts
+ * ===> 03 - Medium Layouts
+ * ===> 04 - Large Layouts
+ * ===> 05 - xLarge Layouts
 */
 
-/*==== Queries Functions ====*/
-@import '../assets/mixin/breakpoints';
+/*==== Assets ====*/
+@import '../assets/mixin';
 
-/*======== Extra Small Screen ========*/
-$grid-columns : 12;
+/*==== Layouts Mixin ====*/
+@mixin make-columns($columns:12, $infix:'') {
+    /*==== Auto Columns ====*/
+    .col#{$infix} {flex-grow: 1;}
+    .col#{$infix}-auto {width: auto;}
 
-@for $i from 1 through $grid-columns { 
-    .col-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid
-    // Dynamic Grid Loop
-    .box-#{$i}x1{width: 100%;}
-    // Masonry Grid
-    .masonry-#{$i}x1{
-        -moz-column-count: $i;
-             column-count: $i;
-        -moz-column-width: 100%/$i;
-             column-width: 100%/$i;
+    /*==== Flex-Box Columns ====*/
+    @for $i from 1 through $columns { 
+        /*==== Columns ====*/
+        .col#{$infix}-#{$i} {width: percentage($i / $columns);}
+        /*==== Row Columns ====*/
+        .row-cols#{$infix}-#{$i}:not(.row-cols#{$infix}-auto) > * {width: (100% / $i);}
     }
 }
 
-/*=== Small Screen ===*/
+/*==== xSmall Screens ====*/
+@include make-columns();
+
+/*==== Small Screens ====*/
 @include small() {
-    @for $i from 1 through $grid-columns {
-        .col-s-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
-        // Masonry Grid
-        .masonry-s-#{$i}x1{
-            -moz-column-count: $i;
-                 column-count: $i;
-            -moz-column-width: 100%/$i;
-                 column-width: 100%/$i;
-        }
-    }
-    // Dynamic Grid
-    .box-5x1,.box-7x1,.box-8x1 {width: 50%;}
-    .box-9x1,.box-10x1,.box-11x1{width:33.333%;}
-    
-} 
+    /*==== Columns ====*/
+    @include make-columns(12, '-sm');
+}
 
-/*=== Medium Screen ===*/
+/*==== Medium Screens ====*/
 @include medium() {
-    @for $i from 1 through $grid-columns {
-        .col-m-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
-        // Masonry Grid
-        .masonry-m-#{$i}x1{
-            -moz-column-count: $i;
-                 column-count: $i;
-            -moz-column-width: 100%/$i;
-                 column-width: 100%/$i;
-        }
-    }
-    // Dynamic Grid
-    .box-5x1 {width: 33.333%;}
-    .box-7x1,.box-8x1{width:25%;}
-    .box-9x1,.box-10x1,.box-11x1{width:20%;}
+    /*==== Columns ====*/
+    @include make-columns(12, '-md');
 }
 
-/*=== Large Screen ===*/
+/*==== Large Screens ====*/
 @include large() {
-    @for $i from 1 through $grid-columns {
-        .col-l-#{$i} {width: percentage($i / $grid-columns);} // Normal Grid Loop
-        .box-#{$i}x1 {width: 100%/$i;} // Dynamic Grid Loop
-        // Masonry Grid
-        .masonry-l-#{$i}x1 {
-            -moz-column-count: $i;
-                 column-count: $i;
-            -moz-column-width: 100%/$i;
-                 column-width: 100%/$i;
-        }
-    }
+    /*==== Columns ====*/
+    @include make-columns(12, '-lg');
 }
 
-/*=== Extra Large Screen ===*/
+/*==== xLarge Screens ====*/
 @include xlarge() {
-    @for $i from 1 through $grid-columns {
-        .col-xl-#{$i} { width: percentage($i / $grid-columns);} // Normal Grid Loop
-        // Masonry Grid
-        .masonry-xl-#{$i}x1{
-            -moz-column-count: $i;
-                 column-count: $i;
-            -moz-column-width: 100%/$i;
-                 column-width: 100%/$i;
-        }
-    }
+    /*==== Columns ====*/
+    @include make-columns(12, '-xl');
 }

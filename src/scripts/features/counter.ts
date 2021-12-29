@@ -17,15 +17,15 @@ PhenixElements.prototype.counter = function (options?:{
         delay?:number,    //===> Animation Delay
         decimal?:number,  //===> Decimal Numbers Support
         symbol?:string,   //===> Symbol After the Number
-        steps?:number,    //===> Steps ber Count
+        steps?:number,    //===> Count per Step
         reverse?:boolean  //===> Count Down instead of Up
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
         //====> Get Options Data <====//
-        let duration = element.getAttribute('data-duration') || options?.duration || 2000,
+        let duration = parseInt(element.getAttribute('data-duration')) || options?.duration || 2000,
             decimal  = parseInt(element.getAttribute('data-decimal')) || options?.decimal || 0,
-            value    = parseInt(element.getAttribute('data-counter') || options?.value || element.innerText) || 0,
+            value    = parseInt(element.getAttribute('data-value') || options?.value || element.innerText) || 0,
             symbol   = element.getAttribute('data-symbol') || options?.symbol || '',
             delay    = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
             steps    = parseInt(element.getAttribute('data-steps')) || options?.steps  || 10,
@@ -62,7 +62,7 @@ PhenixElements.prototype.counter = function (options?:{
             //===> Clear When Count Down Reaches Zero <===//
             else if (reverse && count === 0) clearInterval(interval);
         };
-    
+
         //====> Start Counting <===//
         setTimeout(function() {
             interval = setInterval(runCounter.bind(this), steps);

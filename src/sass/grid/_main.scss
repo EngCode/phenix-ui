@@ -1,10 +1,9 @@
 /**======> Referance By Comment <======
  * ===> 01 - Containers
  * ===> 02 - Breakpoints Container
- * ===> 03 - Rows and Flexbox
- * ===> 04 - Masonry Grid
- * ===> 05 - Responsive Columns
- * ===> 06 - Assets and Utilities
+ * ===> 03 - Flexbox Grid
+ * ===> 04 - Responsive Columns
+ * ===> 05 - Assets and Utilities
 */
 
 /*==== Assets ====*/
@@ -12,16 +11,17 @@
 @import '../assets/mixin';
 
 %container {
-    --container-padding: 15px;
+    $padding-size : REM(15);
+    --container-padding: #{$padding-size};
     position: relative;
-    @include margin_inline(auto, 'both');
+    @include margin_inline(auto);
 }
 
 /*==== Containers ====*/
 .container, .container-fluid, .container-xs,
 .container-sm, .container-md, .container-xl {
     @extend %container;
-    @include padding_inline(var(--container-padding), 'both');
+    @include padding_inline(var(--container-padding));
 }
 
 /*==== Containers ====*/
@@ -48,20 +48,17 @@
     @include large() { max-width: 1024px; }
 }
 
-.container-xl { max-width: 1400px; }
+.container-xl {
+    max-width: 1400px;
+    @include xlarge() {
+        @include padding_inline(calc(var(--container-padding) * 2));
+    };
+}
 
-/*==== Rows and Flexbox ====*/
-.flexbox, .flex-box, .row { @extend %flexbox; }
-
-/*==== Masonry Grid ====*/
-[class*="masonry-"] {
-    word-spacing: -5px;
-    /*==== Columns ====*/
-    > .column, > [class*="col-"] {
-        display: inline-block;
-        word-spacing: normal;
-        width:100%;
-    }
+/*==== Flexbox Grid ====*/
+.row {
+    @extend %flexbox;
+    @include grid_gap(REM(30), 'x');
 }
 
 /*==== Responsive Columns ====*/

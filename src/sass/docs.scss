@@ -4,6 +4,12 @@
 /*==== Defines Sizes ====*/
 $header-height: 60px;
 
+/*==== Direction Options ====*/
+$direction: ltr;
+$direction-reverse: rtl;
+$direction-start: left;
+$direction-end: right;
+
 /*========== Loading Fonts ==========*/
 @font-face {
     font-family: 'BioSans';
@@ -120,8 +126,11 @@ html {line-height: var(--line-height);}
 
 .wp-color {color: var(--wp-color);}
 .tx-align-center {text-align: center;}
-.mt-0 {margin-bottom: 0;}
-.mt-5 {margin-bottom: 5px;}
+.mt-0 {margin-top: 0;}
+.mt-5 {margin-top: 5px;}
+.mt-10 {margin-top: 10px;}
+.mb-5 {margin-bottom: 5px;}
+.mb-10 {margin-bottom: 10px;}
 .mb-15 {margin-bottom: 15px;}
 .mb-20 {margin-bottom: 20px;}
 .mb-30 {margin-bottom: 30px;}
@@ -168,6 +177,7 @@ html {line-height: var(--line-height);}
 .navigator-menu {
     background-color: #fff;
     overflow-y: auto;
+    padding: 0 !important;
     @extend %sticky-element;
     /*==== Size ====*/
     @include large() {height: calc(100vh - #{$header-height})};
@@ -335,14 +345,14 @@ html {line-height: var(--line-height);}
 .content-side {
     //====> Space Fix <====//
     padding: 15px;
-    @include large() {padding: 30px};
+    @include large() {padding: 30px!important};
 
     ul {
         margin-right: 25px;
         margin-left: 25px;
+        margin-top: 0;
         padding-left: 0;
         padding-right: 0;
-        li {margin-bottom: 5px;}
     }
 
     .docs-list {
@@ -374,6 +384,11 @@ html {line-height: var(--line-height);}
     h4 + .enlighter-default {margin-top: 10px;}
     /*==== Images ====*/
     img {max-width: 100%;}
+
+    sub {
+        position: relative;
+        top: -1px;
+    }
 
     /*==== KBD ====*/
     kbd{
@@ -434,8 +449,10 @@ html {line-height: var(--line-height);}
 //====> Enlighter Plugin <====//
 .enlighter-default.enlighter-t-wpcustom {
     background-color: #101325;
-    max-height: 400px;
-    overflow-y: auto;
+    &:not(.enlighter-v-codegroup) {
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
     + pre + h4 {margin-top: -25px;}
 
@@ -515,6 +532,7 @@ html {line-height: var(--line-height);}
 
     /*==== Colors ====*/
     .enlighter-x2 {color: var(--secondary-color);}
+    .enlighter-m0, .enlighter-m3 {color: #10a2ff;}
 
     .enlighter-x1 {
         color: var(--primary-color);
@@ -530,6 +548,37 @@ html {line-height: var(--line-height);}
         color: #c156fd;
         font-weight: var(--medium-weight);
     }
+
+    //====> Enlighter Groups <====//
+    &.enlighter-v-codegroup {
+        border-radius: 8px;
+        overflow: hidden;
+        /*==== Code Wraper ====*/
+        .enlighter-codegroup-wrapper {
+            padding-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        /*==== Buttons ====*/
+        .enlighter-codegroup-switch {
+            background-color: #181c34;
+            padding: 0;
+            .enlighter-btn {
+                border-radius: 0;
+                background-color: #181c34;
+                color: #7c809f;
+                padding: 8px 15px;
+                margin: 0;
+                text-transform: capitalize;
+                &.enlighter-active {
+                    color: #FFF;
+                    background-color: #101325;
+                }
+            }
+        }
+
+        .enlighter-codegroup-wrapper {padding-bottom: 15px;}
+    }
 }
 
 /*==== Footer ====*/
@@ -544,6 +593,75 @@ html {line-height: var(--line-height);}
     @include large() {
         margin: -30px -46px;
         margin-top: auto;
+    }
+}
+
+/*==== Grid Example ====*/
+.grid-example {
+    padding: 5px;
+    border: 1px dashed rgba(#000, 0.1);
+    background-color: #FFF;
+    font-size: REM(14);
+    /*==== Nested ====*/
+    .lvl2-row {
+        margin-top: 5px;
+        [class*="col"] {background-color: #dfe8f5;}
+    }
+
+    /*==== Alignment Example ====*/
+    &.alignment-example {
+        .row, .grid-row {min-height: 80px;}
+    }
+
+    &.alignment-example-x2 {
+        .row, .grid-row {min-height: 100px;}
+    }
+
+    /*==== Remove Gutter ====*/
+    &:not(.gutter-example) {
+        .row, .grid-row {
+            @include grid_gap(0, 'x');
+            > [class*="col"] {
+                background-color: #eef4fc;
+                border: 1px solid #FFF;
+                @include padding-block(15px,'both');
+                @include padding-inline(15px,'both');
+            }
+        }
+    }
+
+    /*==== Gutters Example ====*/
+    &.gutter-example [class*="col"] .content-box {
+        background-color: #eef4fc;
+        border: 1px solid #FFF;
+        @include padding-block(15px,'both');
+    }
+}
+
+/*==== Show/Hide Effects ====*/
+.sliding-example, .fading-example, .live-demo {
+    /*==== Buttons ====*/
+    .slide-btn, .fade-btn, .ex-btn {
+        @extend %inline-block;
+        padding: 5px 10px;
+        margin-right: 5px;
+        margin-bottom: 8px;
+        border-radius: 3px;
+        background-color: var(--dark-color);
+        color: #FFFFFF;
+        font-size: 13px;
+    }
+
+    /*==== The Box ====*/
+    .the-box {
+        text-align: center;
+        padding: 30px 15px;
+        // line-height: 90px;
+        border-radius: 3px;
+        background-color: #f1e2ce;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 }
 
@@ -563,4 +681,3 @@ body.rtl {
         }
     }
 }
-
