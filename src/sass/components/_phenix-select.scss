@@ -1,0 +1,132 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Tornado Select 
+ * ===> 02 - CSS Options
+ * ===> 03 - Standard
+ * ===> 04 - 
+ * ===> 05 - 
+ * ===> 06 - Hover & Active
+*/
+
+/*==== Utlites ====*/
+@import '../assets/mixin';
+
+/*========> Tornado Select <========*/
+.tornado-select {
+    color:var(--typography-color);
+    position: relative;
+    margin-bottom: var(--forms-gutter);
+    text-align: $direction;
+    /*==== Arrow ====*/
+    .arrow-icon {
+        cursor: pointer;
+        position: absolute;
+        top:0;
+        #{$direction-end}:10px;
+        text-align: center;
+        line-height: var(--forms-height);
+        svg{vertical-align: middle;display: inline-block;}
+        .arrow-color {fill:var(--gray-color);}
+    }
+    /*==== Selected Options Wraper ====*/
+    .selected-option {
+        @extend %nowrap;
+        cursor: pointer;
+        margin-bottom: 0;
+        line-height: calc(var(--forms-height) - 3px);
+        &.large,&.large+.arrow-icon{line-height: calc(var(--forms-height-large) - 3px);}
+        &.small,&.small+.arrow-icon{line-height: calc(var(--forms-height-small) - 3px);}
+        background-position:$direction-end 10px center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        text-align: $direction;
+        /*==== Multiple Selection ====*/
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0 10px;
+            background:var(--primary-color);
+            color:var(--primary-reverse);
+            height: 24px;
+            line-height: 24px;
+            border-radius: var(--forms-radius);
+            position: relative;
+            top:-2px;
+            font-size:0.7em;
+            margin-#{$direction-end}:5px;
+            &::after {
+                // @extend %ti-close,:before;
+                font-family: var(--icons-font);
+                padding-#{$direction-start}:5px;
+                font-size: 7px;
+                position: relative;
+                top:-1px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
+        /*==== Multiple Selection ====*/
+        &.filter-select {
+            &::before {display: none;}
+            input {
+                vertical-align: middle;
+                width:auto;
+                @extend %inline-block;
+                @extend %reset-space;
+                height: auto;
+                border:0 none;
+                word-spacing: normal;
+                box-shadow: unset;
+                display: inline-block;
+            }
+        }
+    }
+    /*==== Select List ====*/
+    .options-list {
+        @extend %reset-space;
+        display: none;
+        position: absolute;
+        top:100%;
+        left: 0;
+        right: 0;
+        z-index: 999999;
+        background:var(--forms-bg);
+        border:var(--forms-border);
+        border-radius: var(--forms-radius);
+        max-height: 280px;
+        overflow-y: auto;
+        &.reverse-pos{top:auto;bottom: 100%;}
+        &.active {display: block;}
+
+        /*==== Item ====*/
+        li {
+            margin-bottom: 0;
+            padding:8px 15px;
+            font-size:14px;
+            cursor: pointer;
+            &:not(:last-child) {border-bottom: var(--forms-border);}
+            /*==== Filter Search ====*/
+            &.filter-select {
+                padding: 5px 15px;
+                word-spacing: -5px;
+                &::before {
+                    @extend %inline-block;
+                    line-height: 28px;
+                    width:20px;
+                    font-size:14px;
+                    color:var(--gray-color);
+                    position: relative;
+                    top:-1px;
+                }
+                input {
+                    width:calc(100% - 20px);
+                    @extend %inline-block;
+                    @extend %reset-space;
+                    height: 32px;
+                    border:0 none;
+                    word-spacing: normal;
+                    box-shadow: unset;
+                }
+            }
+        }
+    }
+}

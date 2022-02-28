@@ -1,0 +1,20 @@
+/*======== Dropdowns Animation ========*/
+@-webkit-keyframes dropOpen {
+    0% {opacity: 0;transform: translate3d(0, 10%, 0);}
+    100% {opacity: 1;transform: none;}
+}
+
+@keyframes dropOpen {
+    0% {opacity: 0;transform: translate3d(0, 10%, 0);}
+    100% {opacity: 1;transform: none;}
+}
+
+@-webkit-keyframes dropClose {
+    0% {opacity: 1;transform: none;}
+    100% {opacity: 0;transform: translate3d(0, 10%, 0);}
+}
+
+@keyframes dropClose {
+    0% {opacity: 1;transform: none;}
+    100% {opacity: 0;transform: translate3d(0, 10%, 0);}
+}

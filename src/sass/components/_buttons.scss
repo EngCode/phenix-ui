@@ -1,0 +1,321 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Buttons 
+ * ===> 02 - CSS Options
+ * ===> 03 - Standard
+ * ===> 04 - 
+ * ===> 05 - 
+ * ===> 06 - Hover & Active
+*/
+
+/*==== Utlites ====*/
+@import '../assets/mixin';
+
+/*======== Buttons ========*/
+.btn {
+    /*==== CSS Options ====*/
+    --height : #{REM(42)};
+    --height-xs : #{REM(30)};
+    --height-sm : #{REM(36)};
+    --height-lg : #{REM(52)};
+    --color  : var(--dark-color);
+    --background  : var(--primary-offwhite);
+    --radius : 4px;
+    --f-size : #{REM(13)};
+    --f-size-xs : #{REM(12)};
+    --f-size-sm : #{REM(12)};
+    --f-size-lg : #{REM(16)};
+    --f-weight : var(--medium-weight);
+    --space-in : #{REM(20)};
+    --space-in-xs : #{REM(10)};
+    --space-in-sm : #{REM(15)};
+    --space-in-lg : #{REM(30)};
+    
+    /*==== Standard ====*/
+    @extend %inline-block;
+    @extend %fast-motion;
+    @include padding-inline(var(--space-in), 'both');
+    height:var(--height);
+    line-height: var(--height);
+    color:var(--color);
+    background-color:var(--background);
+    font-size: var(--f-size);
+    font-weight: var(--f-weight);
+    border-radius: var(--radius);
+    text-align: center;
+    border: unset;
+
+    //======> Outline Theme <======//
+    &.outline{ 
+        background-color : transparent;
+        color:var(--xspography-color);
+        line-height: calc(var(--height) - 2px);
+        border: 2px solid rgba(0,0,0, 0.1);
+    }
+
+    //===== Small Button ====//
+    &.tiny {
+        font-size: var(--f-size-xs);
+        height: var(--height-xs);
+        line-height: var(--height-xs);
+        @include padding-inline(var(--space-in-xs), 'both');
+
+        /*==== Outline Mode ====*/
+        &.outline {line-height: calc(var(--height-xs) - 2px);}
+    }
+
+    //===== Small Button ====//
+    &.small {
+        height: var(--height-sm);
+        line-height: var(--height-sm);
+        font-size: var(--f-size-sm);
+        @include padding-inline(var(--space-in-sm), 'both');
+        /*==== Outline Mode ====*/
+        &.outline {line-height: calc(var(--height-sm) - 2px);}
+    }
+
+    //===== Large Button ====//
+    &.large {
+        height: var(--height-lg);
+        line-height: var(--height-lg);
+        font-size: var(--f-size-lg);
+        font-weight: var(--strong-weight);
+        @include padding-inline(var(--space-in-lg), 'both');
+        /*==== Outline Mode ====*/
+        &.outline {line-height: calc(var(--height-lg) - 2px);}
+    }
+
+    //===== Circle Button ====//
+    &.circle {border-radius:50%;}
+
+    //===== Square Button ====//
+    &.square {
+        width: var(--height);
+        @include padding-inline(0, 'both');
+        &.tiny {width: var(--height-xs);}
+        &.small{width: var(--height-sm);}
+        &.large{width: var(--height-lg);}
+    }
+
+    //===== Icons ====//
+    &.btn-icon {
+        /*==== Icon ====*/
+        &::before {
+            margin-#{$direction-end}: REM(8);
+            line-height: inherit;
+            height: inherit;
+        }
+
+        /*==== Labeled Mode ====*/
+        &.labeled {
+            overflow: hidden;
+            &:not(.icon-after) {padding-#{$direction-start}: 0;}
+            /*==== Icon ====*/
+            &::before {
+                background-color: rgba(0,0,0, 0.1);
+                text-align: center;
+                margin-#{$direction-end}: var(--space-in);
+                width: var(--height);
+            }
+
+            /*==== Outline BG ====*/
+            &.outline:not(:hover)::before {
+                background-color: transparent;
+                border-#{$direction-end}-width: 1px;
+                border-#{$direction-end}-sxsle: solid;
+                border-color: inherit;
+            }
+
+            /*==== Sizes ====*/
+            &.tiny::before {
+                width:var(--height-xs);
+                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-xs);}
+            }
+
+            &.small::before {
+                width:var(--height-sm);
+                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-sm);}
+            }
+
+            &.large::before {
+                width: var(--height-lg);
+                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-lg);}
+            }
+        }
+    }
+
+    //===== Icons After ====//
+    &.icon-after {
+        /*==== Icon ====*/
+        &::before {
+            float:$direction-end;
+            margin-#{$direction-start}: REM(8);
+            margin-#{$direction-end} : auto;
+        }
+
+        /*==== Labeled Mode ====*/
+        &.labeled {
+            overflow: hidden;
+            padding-#{$direction-end}: 0;
+            /*==== Icon ====*/
+            &::before {margin-#{$direction-start}: var(--space-in);}
+
+            /*==== Sizes ====*/
+            &.tiny::before { margin-#{$direction-start}: var(--space-in-xs); }
+            &.small::before { margin-#{$direction-start}: var(--space-in-sm); }
+            &.large::before { margin-#{$direction-start}: var(--space-in-lg); }
+        }
+    }
+
+    //==== Button Colors ====//
+    &.primary {
+        background-color: var(--primary-color);
+        color: var(--primary-reverse);
+        &:hover {background-color:var(--primary-hover);}
+        /*==== Outline Mode ====*/
+        &.outline {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color:var(--primary-color);
+            &:hover {
+                background-color: var(--primary-color);
+                color: var(--primary-reverse);
+            }
+        }
+    }
+
+    &.secondary {
+        color:var(--secondary-reverse);
+        background-color: var(--secondary-color);
+        &:hover {background-color: var(--secondary-hover);}
+        /*==== Outline Mode ====*/
+        &.outline {
+            color:var(--secondary-color);
+            border-color: var(--secondary-color);
+            background-color: transparent;
+            &:hover {
+                color: var(--secondary-reverse);
+                background-color: var(--secondary-color);
+            }
+        }
+    }
+
+    &.success {
+        color: white;
+        background-color: var(--success-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--success-color);
+            border-color: var(--success-color);
+            background-color: transparent;
+            &:hover {
+                color: white;
+                background-color: var(--success-color);
+            }
+        }
+    }
+
+    &.danger {
+        color: white;
+        background-color: var(--danger-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--danger-color);
+            border-color: var(--danger-color);
+            background-color: transparent;
+            &:hover {
+                color: white;
+                background-color: var(--danger-color);
+            }
+        }
+    }
+    
+    &.warning {
+        color: var(--dark-color);
+        background-color: var(--warning-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--warning-color);
+            border-color: var(--warning-color);
+            background-color: transparent;
+            &:hover {
+                color: var(--dark-color);
+                background-color: var(--warning-color);
+            }
+        }
+    }
+    
+    &.info {
+        color: white;
+        background-color: var(--info-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--info-color);
+            border-color: var(--info-color);
+            background-color: transparent;
+            &:hover {
+                color: white;
+                background-color: var(--info-color);
+            }
+        }
+    }
+    
+    &.gray {
+        color: white;
+        background-color: var(--gray-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--gray-color);
+            border-color: var(--gray-color);
+            background-color: transparent;
+            &:hover {
+                color: white;
+                background-color: var(--gray-color);
+            }
+        }
+    }
+    
+    &.dark {
+        color: white;
+        background-color: var(--dark-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--dark-color);
+            border-color: var(--dark-color);
+            background-color: transparent;
+            &:hover {
+                color: white;
+                background-color: var(--dark-color);
+            }
+        }
+    }
+    
+    &.light {
+        color: var(--dark-color);
+        background-color: white;
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: white;
+            border-color: white;
+            background-color: transparent;
+            &:hover {
+                color: var(--dark-color);
+                background-color: white;
+            }
+        }
+    }
+    
+    &.disabled, &[disabled], &:disabled {
+        color: var(--gray-color);
+        background-color: var(--disable-color);
+        /*==== Outline Mode ====*/
+        &.outline {
+            color: var(--disable-color);
+            border-color: var(--disable-color);
+            background-color: transparent;
+            &:hover {
+                color: var(--gray-color);
+                background-color: var(--disable-color);
+            }
+        }
+    }
+}

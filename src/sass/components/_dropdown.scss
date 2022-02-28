@@ -1,0 +1,70 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Dropdown 
+ * ===> 02 - CSS Options
+ * ===> 03 - Standard
+ * ===> 04 - 
+ * ===> 05 - 
+ * ===> 06 - Hover & Active
+*/
+
+/*==== Utlites ====*/
+@import '../assets/mixin';
+
+/*======== Dropdown ========*/
+.px-dropdown {
+    position: relative;
+    @extend %inline-block;
+    /*======== Dropdown Button ========*/
+    .dropdown-btn:not(.icon-btn)::after {
+        position: relative;
+        font-family: var(--icons-font);
+        margin-#{$direction-start}: 5px;
+        font-size:0.9em;
+        vertical-align: middle;
+        top: -2px;
+    }
+
+    /*======== Dropdown List ========*/
+    .dropdown-list {
+        /*==== CSS Options ====*/
+        --color : var(--gray-color);
+        --color-hvr : var(--primary-color);
+        --background : white;
+        --space-around : #{REM(15)};
+        --space-in : 0;
+        --f-size : 0.85em;
+        --height : 28px;
+        /*==== Reset ====*/
+        list-style: none;
+        margin: 0;
+        position: absolute;
+        top: 100%;
+        #{$direction-start}: 0;
+        min-width: REM(190);
+        display: none;
+        width: 100%;
+        /*==== Theme ====*/
+        color: var(--color);
+        background-color: var(--background);
+        padding: var(--space-around);
+        z-index: var(--dropdown-index);
+        font-size: var(--f-size);
+        line-height: var(--height);
+        box-shadow: 3px 3px 15px rgba(#000, 0.1);
+        border-radius: 6px;
+        /*==== Links ====*/
+        a {
+            color: inherit;
+            &:focus, &:active {outline: 0 none;}
+        }
+        > a {display: block;}
+        /*====  ====*/
+        li:hover {
+            @extend %fast-motion;
+            color: var(--color-hvr);
+        }
+    }
+
+    /*======== Show the Dropdown ========*/
+    &.phenix-active, &[data-event="hover"]:hover .dropdown-list {display: block;}
+}

@@ -26,54 +26,49 @@ PhenixElements.prototype.tabs = function (options?:{
         },
     }) {
     //====> Default Options <====//
-    let active = options?.active || 1,
-        active_class = options?.active_class || 'phenix-active',
+    let active = options?.active || 0,
+        active_class = options?.active_class || 'px-active',
         navigation   = options?.navigation   || '.tabs-buttons';
 
     //====> Loop Through Phenix Query <====//
     this.forEach(tabs => {
         //====> Get Tabs Buttons <====//
-        let buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab]' || '[href^="#"]');
+        let buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab]');
 
-        //====> Default Activation <====//
-        buttons.forEach(element => {
-            if (element.matches(`:nth-child(${active})`)) {
+        //====> Loog Throgh Buttons <====//
+        buttons.forEach((button:HTMLElement, index:number) => {
+            //====> Default Activation <====//
+            if (index === active) {
                 //====> Active Button <====//
-                let active_btn = element.classList.add(active_class).getAttribute('data-tab' || 'href');
+                button.classList.add(active_class);
+                let active_btn =  button.getAttribute('data-tab' || 'href');
                 //====> Active Tab <====//
                 Phenix(`#${active_btn.replace(/#/g, "")}`).addClass(active_class);
-            }            
-        });
-
-        //====> When Click on a Tab-Button <====//
-        Phenix(buttons).on('click', clicked => {
-            //====> Prevent Default Behavor <====//
-            clicked.preventDefault();
-
-            //====> Tab Data <====//
-            let tab_btn  = clicked.target,
-                panel_id = tab_btn.getAttribute('data-tab' || 'href'),
-                panel_element = Phenix(`#${panel_id.replace(/#/g, "")}`);
-
-            //====> if Panel Exist <====//
-            if (panel_element.length > 0) {
-                //====> Active Panel <====//
-                let other_panel = panel_element.addClass(active_class).siblings(active_class),
-
-                //====> Active Button <====//
-                this_btn = Phenix(tab_btn).addClass(active_class),
-                //====> Get Other Buttons <====//
-                other_btns = this_btn.siblings(active_class) || [];
-
-                //====> Other Buttons Polyfill <====//
-                if (!other_btns ||  other_btns.length < 1)
-                    buttons.forEach(btn => !btn.matches(tab_btn) ? other_btns.push(btn) : null);
-
-                //====> De-Activate Siblings <====//
-                Phenix(other_panel).removeClass(active_class);
-                Phenix(other_btns).removeClass(active_class);
             }
+            //====> When Click on a Tab-Button <====//
+            Phenix(button).on('click', clicked => {
+                //====> Prevent Default Behavor <====//
+                clicked.preventDefault();
+    
+                //====> Tab Data <====//
+                let tab_btn  = clicked.target,
+                    panel_id = tab_btn.getAttribute('data-tab' || 'href'),
+                    panel_element = Phenix(`#${panel_id.replace(/#/g, "")}`);
+    
+                //====> if Panels Exist <====//
+                if (panel_element.length > 0) {
+                    //====> Active Panel & Button <====//
+                    let other_panel = panel_element.addClass(active_class).siblings(),
+                        other_btns = Phenix(tab_btn).addClass(active_class).siblings();
+
+                    //====> Get Other Buttons <====//
+                    Phenix(other_btns).removeClass(active_class);
+                    //====> De-Activate Siblings <====//
+                    Phenix(other_panel).removeClass(active_class);
+                }
+            });
         });
+
     });
 
     //====> Return Phenix Elements <====//

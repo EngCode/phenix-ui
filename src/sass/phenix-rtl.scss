@@ -48,11 +48,12 @@ $direction-end: left;
 @import 'integration/wordpress';  //===> WordPress Integration
 
 /*==== Utilities Modules ====*/
-@import 'utilities/main';     //===> Custom Resets
+@import 'utilities/typography';  //===> Typography Utilites
 @import 'utilities/padding';  //===> Padding Utilites
 @import 'utilities/margin';   //===> Margin Utilites
 @import 'utilities/colors';   //===> CSS Coloring System
-@import 'utilities/force';    //===> Useful Resets
+@import 'utilities/main';     //===> Custom Utilities
+@import 'utilities/force';    //===> CSS Forced Assets
 
 /*==== Customizer ====*/
 @import 'customize';

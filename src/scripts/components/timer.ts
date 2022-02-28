@@ -18,6 +18,7 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Timer Counter [un-tested] <====*/
 PhenixElements.prototype.timer = function (options?:{
+        type?:string,    //===> Timer Type [countdown, stopwatch]
         time?:string,    //===> Time = Hour:Minutes
         date?:string,    //===> Date = Year-Month-Day
         message?:string, //===> Time End Message

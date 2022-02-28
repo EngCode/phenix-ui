@@ -11,8 +11,7 @@
 @import '../assets/mixin';
 
 %container {
-    $padding-size : REM(15);
-    --container-padding: #{$padding-size};
+    --container-padding: #{REM(15)};
     position: relative;
     @include margin_inline(auto);
 }
@@ -48,12 +47,7 @@
     @include large() { max-width: 1024px; }
 }
 
-.container-xl {
-    max-width: 1400px;
-    @include xlarge() {
-        @include padding_inline(calc(var(--container-padding) * 2));
-    };
-}
+.container-xl {max-width: 1400px;}
 
 /*==== Flexbox Grid ====*/
 .row {

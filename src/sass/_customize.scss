@@ -8,7 +8,7 @@
 =                                   =
 ===================================*/
 
-/*======== Design Options ========*/
+/*==== Design Options ====*/
 :root {
     /*==== Body Background ====*/
     --body-bg : #fcfcfc;
@@ -22,6 +22,11 @@
     --secondary-color   : #F9AF5B;
     --secondary-hover   : #F8C35B;
     --secondary-reverse : #1c1c1c;
+
+    /*==== Gradiens ====*/
+    --primary-gradient   : var(--primary-hover), var(--primary-color);
+    --secondary-gradient : var(--secondary-color), var(--secondary-hover);
+    --blue-gradient      : #54AEFC, #3289E9, #5848D2;
 
     /*=== Assets Colors ====*/
     --links-color   :#4166d6;
@@ -47,9 +52,56 @@
     --light-reverse    : #000;
     --dark-reverse     : #FFF;
 
+    /*==== Index Order ====*/
+    --header-index : 9999;
+    --modal-index  : 99999;
+    --dropdown-index : 99999;
+
     /*==== Directions [do not edit] ====*/
     --direction: #{$direction};
     --direction-reverse: #{$direction-reverse};
     --direction-start: #{$direction-start};
     --direction-end: #{$direction-end};
 }
+
+/*==== Tornado Components ====*/
+@import 'tornado/components/accordion';
+@import 'tornado/components/forms';
+@import 'tornado/components/modals';
+@import 'tornado/components/navigation-menu';
+@import 'tornado/components/tables';
+@import 'tornado/components/tabs-system';
+
+/*==== Tornado Elements ====*/
+@import 'tornado/elements/labels';
+@import 'tornado/elements/headers';
+@import 'tornado/elements/breadcrumbs';
+
+/*==== Assets ====*/
+.radius-g {border-radius: 4px;}
+.radius-gl {border-radius: 8px;}
+
+.blue-grade {
+    color: #FFFFFF;
+    background-image: linear-gradient(105deg, var(--blue-gradient));
+}
+
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.primary-bg-offwhite {
+    background-color: var(--primary-offwhite);
+    &.bordered {border: 1px solid #d0e4da;}
+}
+
+.tx-icon::before {margin-#{$direction-end}: 7px;}
+.flow-nowrap {flex-wrap: nowrap;}
+
+.divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
+.divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
+.fluid-height {min-height: 100%;}
+.no-radius {border-radius: 0;}
+.alpha-05-bg {background-color: rgba(#000, 0.05);}
+.alpha-10-bg {background-color: rgba(#000, 0.1);}

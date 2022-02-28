@@ -13,15 +13,15 @@
  * ===> 12 - Insert Elements
  * ===> 13 - Event Handler
  * ===> 14 - Multimedia Lazy-Loader
+ * ===> 15 - MediaQuery Method
+ * ===> 16 - Define Info Grapers
+ * ===> 17 - Define UI Effects
+ * ===> 18 - Define Other Features
  * ===> .. - 
- * ===> .. - Define Info Grapers
- * ===> .. - Define UI Effects
- * ===> .. - Define Other Features
- * ===> .. - 
- * ===> 00 - Phenix Selecting Method
- * ===> 00 - Include Features
- * ===> 00 - Integration
- * ===> 00 - Your Custom Script [JS]
+ * ===> 20 - Phenix Selecting Method
+ * ===> 21 - Include Features
+ * ===> 22 - Integration
+ * ===> 23 - Your Custom Script [JS]
 */
 
 /*====> Phenix Object <====*/
@@ -78,7 +78,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             //====> if has a Target <===//
             if (target && !element.matches('html')) {
                 //====> Loop Over The Ancestors <====//
-                while (parent) {
+                while (parent && !parent.matches('html')) {
                     //====> When the Target has been Found Return it <====//
                     if (parent.matches(target)) { ancestors.push(parent); break; }
                     //====> Otherwise get the Next Ancestor <====//
@@ -91,7 +91,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         });
 
         //====> Return Ancestors <====//
-        if (ancestors.length > 0) return ancestors;
+        if (ancestors.length > 1) return ancestors;
         else if (ancestors.length === 1) return ancestors[0];
     }
 
@@ -216,6 +216,28 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         else if (siblings.length === 1) return siblings[0];
     }
 
+    /*====> Get Childrens <====*/
+    child(target?:string) {
+        //====> Childrens Define <====//
+        let childs = [];
+
+        //====> Loop Through Phenix Elements <====//
+        this.forEach((element:any) => {
+            //====> All Childrens <====//
+            let all_childs = element.children;
+    
+            //====> if No target [Return All Direct Childrens] <====//
+            if (!target) childs = all_childs;
+    
+            //====> if Target is Matched Return it <====//
+            if (target) all_childs.forEach(element => element.matches(target) ? childs.push(element) : '');
+        });
+
+        //====> Return Childrens <====//
+        if (childs.length > 1) return childs;
+        else if (childs.length === 1) return childs[0];
+    }
+
     /*====> CSS Styling <====*/
     css(style:object, clearInline?) {
         //====> if inline-style Clear is Activated <====//
@@ -330,11 +352,12 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             if (!Phenix(element).inView()) {
                 //====> Get Data <====//
                 let playable = element.matches('video' || 'audio'),
-                    source = !playable ? element.getAttribute('data-lazyload' || 'src') : null,
+                    source = !playable ? element.getAttribute('src') : null,
                     preloaded = element.getAttribute('preload' || 'loading');
 
                 //===> for [images, iframe] <===//
                 if (element.matches('img'||'iframe')) {
+                    element.setAttribute('data-lazyload', source);
                     element.setAttribute('src', spiner);
                     element.classList.add('phenix-loading')
                 }
@@ -360,13 +383,20 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             }
         });
 
+        //====> Other Elements Types <====//
+        Phenix('.px-counter').forEach((counter:HTMLElement) => {
+            if(!counter.classList.contains('counting')) document.addEventListener('scroll', event => {
+                if(Phenix(counter).inView() && !counter.classList.contains('counting')) Phenix(counter).counter();
+            });
+        });
+
         //====> Return Phenix Elements <====//
         return this;
     }
 
     /*====> Define Info Grapers <====*/
     height; getCSS; direction;
-    inView; viewport;
+    inView; viewport; copyrights;
 
     /*====> Define UI Effects <====*/
     slideUp; slideDown; slideToggle;
@@ -375,11 +405,14 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> Define Other Features <====*/
     counter; multimedia; timer;
     sticky; smothScroll; scrollSpy;
-    
+    design; themes;
+
     /*====> Define Components <====*/
     dropdown; tabs; accordion;
-    popup; lightbox; design;
-    themes;
+    popup; lightbox; menu; datatable;
+    validation; uploader; progress;
+    select; repeater; rating;
+    slider; utilities;
 }
 
 /*====> Import Features <====*/
@@ -387,10 +420,16 @@ import './features/get-info';  //==> Info Grapers
 import './features/effects';   //==> UI Effects
 import './features/counter';   //==> Animated Counter
 import './features/media';     //==> Media Setter
+import './features/uploader';  //==> File Uploader
 
 /*====> Import Components <====*/
-import './components/timer';    //==> Time Counter
-import './components/dropdown'; //==> Dropddown
+import './components/timer';     //==> Time Counter
+import './components/dropdown';  //==> Dropddown
+import './components/menu';      //==> Menus
+import './components/slider';    //==> Slider
+import './components/popup';     //==> Popups
+import './components/accordion'; //==> Accordions
+import './components/tabs';      //==> Tabs System
 
 /*====> Phenix Selecting Method <====*/
 const Phenix = (selector?:any) => {
@@ -417,6 +456,7 @@ export default Phenix;
 
 /*====> Integration <====*/
 import './integration/wordpress';
+import './integration/utilities';
 
 /*====> Custom Script <====*/
 import './custom-scripts';

@@ -711,6 +711,7 @@ body:not(.wp-admin) #wpadminbar {
     @media screen and (max-width:360px) { overflow: hidden; }
     @extend %fast-motion;
     top:-32px!important;
+    padding-top: 0;
     padding-#{$direction-start}:32px;
 
     @media screen and (max-width:768px) {
@@ -735,7 +736,15 @@ body:not(.wp-admin) #wpadminbar {
     }
 }
 
-html{margin: 0!important;}
+body:not(.wp-admin) {
+    /*==== Prevent Text Selection ====*/
+    *:not(input):not(textarea) {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
 
 /*======== REQUIRED CSS ========*/
 .wp-caption,.gallery-caption {

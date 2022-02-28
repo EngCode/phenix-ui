@@ -18,18 +18,20 @@ PhenixElements.prototype.counter = function (options?:{
         decimal?:number,  //===> Decimal Numbers Support
         symbol?:string,   //===> Symbol After the Number
         steps?:number,    //===> Count per Step
-        reverse?:boolean  //===> Count Down instead of Up
+        reverse?:boolean,  //===> Count Down instead of Up
+        lazyloading?:boolean, //===> Lazyload Animation
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
         //====> Get Options Data <====//
         let duration = parseInt(element.getAttribute('data-duration')) || options?.duration || 2000,
             decimal  = parseInt(element.getAttribute('data-decimal')) || options?.decimal || 0,
-            value    = parseInt(element.getAttribute('data-value') || options?.value || element.innerText) || 0,
+            value    = parseInt(element.getAttribute('data-value')) || options?.value || 0,
             symbol   = element.getAttribute('data-symbol') || options?.symbol || '',
             delay    = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
             steps    = parseInt(element.getAttribute('data-steps')) || options?.steps  || 10,
-            reverse  = element.getAttribute('data-reverse') || options?.reverse || false;
+            reverse  = element.getAttribute('data-reverse') || options?.reverse || false,
+            counting = element.classList.contains('counting');
 
         //====> Counter Data <===//
         let input = (element.nodeName.toLowerCase() === 'input') ? true : false,
@@ -40,9 +42,10 @@ PhenixElements.prototype.counter = function (options?:{
 
         //====> Switch Count for Counting Down <====//
         if (reverse) count = value;
-    
+
         //====> Count Runer <===//
         const runCounter = () => {
+            if (!counting) element.classList.add('counting');
             //===> if [Count Down] is Activated => Decrease the Count <===//
             if (reverse) count -= increment;
             //===> Otherwise Increase the Count <===//

@@ -2,16 +2,39 @@
 @import '../assets/mixin';
 
 /*==== Padding All ====*/
-@include Repeater (0, 100, 'pd', 'padding', 'px', 5);
+@include Repeater (0, 70, 'pd', 'padding', 'px', 5);
 
 /*==== Padding Top ====*/
-@include Repeater (0, 100, 'pdt', 'padding-top', 'px', 5);
+@include Repeater (0, 70, 'pdt', 'padding-top', 'px', 5);
 
 /*==== Padding Bottom ====*/
-@include Repeater (0, 100, 'pdb', 'padding-bottom', 'px', 5);
+@include Repeater (0, 70, 'pdb', 'padding-bottom', 'px', 5);
 
 /*==== Padding Start ====*/
-@include Repeater (0, 100, 'pds', 'padding-#{$direction-start}', 'px', 5);
+@include Repeater (0, 70, 'pds', 'padding-#{$direction-start}', 'px', 5);
 
 /*==== Padding End ====*/
-@include Repeater (0, 100, 'pde', 'padding-#{$direction-end}', 'px', 5);
+@include Repeater (0, 70, 'pde', 'padding-#{$direction-end}', 'px', 5);
+
+/*==== Padding X ====*/
+@mixin make_padding_x($infix:'', $limit: 70, $index: 0, $increase: 5) {
+    /*==== Repeater Loop ====*/
+    @while $index <= $limit {
+        .pdx#{$infix}-#{$index} { @include padding-inline(#{REM($index)}) }
+        /*==== Increase ====*/
+        $index : ($index + $increase);
+    }
+}
+
+/*==== Padding Y ====*/
+@mixin make_padding_y($infix:'', $limit: 70, $index: 0, $increase: 5) {
+    /*==== Repeater Loop ====*/
+    @while $index <= $limit {
+        .pdy#{$infix}-#{$index} { @include padding-block(#{REM($index)}) }
+        /*==== Increase ====*/
+        $index : ($index + $increase);
+    }
+}
+
+@include make_padding_x();
+@include make_padding_y();

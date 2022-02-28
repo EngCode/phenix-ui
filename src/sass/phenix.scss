@@ -49,10 +49,11 @@ $direction-end: right;
 @import 'integration/wordpress';  //===> WordPress Integration
 
 /*==== Utilities Modules ====*/
-@import 'utilities/main';     //===> Custom Utilities
-// @import 'utilities/padding';  //===> Padding Utilites
-// @import 'utilities/margin';   //===> Margin Utilites
+@import 'utilities/typography';  //===> Typography Utilites
+@import 'utilities/padding';  //===> Padding Utilites
+@import 'utilities/margin';   //===> Margin Utilites
 @import 'utilities/colors';   //===> CSS Coloring System
+@import 'utilities/main';     //===> Custom Utilities
 @import 'utilities/force';    //===> CSS Forced Assets
 
 /*==== Customizer ====*/

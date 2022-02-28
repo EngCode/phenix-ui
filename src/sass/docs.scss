@@ -112,7 +112,7 @@ $direction-end: right;
 }
 
 /*==== Page Options ====*/
-html {line-height: var(--line-height);}
+html {line-height: 1.5;}
 
 /*==== Assets [Large Screens] ====*/
 @include large() {
@@ -353,6 +353,8 @@ html {line-height: var(--line-height);}
         margin-top: 0;
         padding-left: 0;
         padding-right: 0;
+        line-height: 1.4;
+        li {margin-bottom: 5px;}
     }
 
     .docs-list {

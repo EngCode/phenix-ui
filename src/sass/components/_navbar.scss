@@ -1,0 +1,173 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Phenix Navbar 
+ * ===> 02 - CSS Options
+ * ===> 03 - Menu Items
+ * ===> 04 - Links
+ * ===> 05 - 
+ * ===> 06 - Hover & Active
+*/
+
+/*==== Utlites Repeaters ====*/
+@import '../assets/mixin';
+
+/*==== Phenix Navbar ====*/
+.phenix-navbar {
+    /*==== CSS Options ====*/
+    --font-size : 14px;
+    --space-in  : #{REM(10)};
+    --height : #{REM(34)};
+    --color  : var(--gray-color);
+    --color-hvr : var(--primary-color);
+    --background : transparent;
+    --background-hvr : var(--success-light);
+    --font-weight : var(--bold-weight);
+    /*==== Menu Items ====*/
+    > ul > li {
+        font-size: var(--font-size);
+        height: var(--height);
+        line-height: calc(var(--height) + 1px);
+        color: var(--color);
+        background-color: var(--background);
+        font-weight: var(--font-weight);
+        position: relative;
+        @extend %fast-motion;
+        @include padding_inline(var(--space-in), 'both');
+        /*==== Links ====*/
+        a {
+            color: inherit;
+            &:focus, &:active {outline: 0 none;}
+        }
+        > a {display: block;}
+        /*==== Submenu ====*/
+        ul {@extend %reset-list;}
+        .submenu, .megamenu {
+            position: absolute;
+            top: 100%;
+            #{$direction-start}: 0;
+            margin-top: -2px;
+            min-width: REM(230);
+            display: none;
+            width: 100%;
+        }
+        
+        /*==== Submenu Theme ====*/
+        .submenu {
+            /*==== CSS Options ====*/
+            --color : var(--gray-color);
+            --color-hvr : var(--primary-color);
+            --background : white;
+            --space-around : #{REM(15)};
+            --space-in : 0;
+            --f-size : 0.85em;
+            --height : 26px;
+            /*==== ... ====*/
+            color: var(--color);
+            background-color: var(--background);
+            padding: var(--space-around);
+            z-index: var(--dropdown-index);
+            font-size: var(--f-size);
+            line-height: var(--height);
+            /*====  ====*/
+            li:hover {
+                @extend %fast-motion;
+                color: var(--color-hvr);
+            }
+        }
+
+        /*==== Hover & Active ====*/
+        &:hover, &.px-item-active {
+            color: var(--color-hvr);
+            background-color: var(--background-hvr);
+        }
+
+        /*==== Submenu ====*/
+        &:hover, &.px-menu-active {
+            > .submenu, > .megamenu {display: block;}
+        }
+    }
+}
+
+/*==== Phenix Custom Menu ====*/
+.phenix-custom-menu {
+    /*==== CSS Options ====*/
+    --width : 300px;
+    /*==== Standard ====*/
+    position: fixed;
+    top: 0;
+    #{$direction-end}: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    opacity: 0;
+    z-index: var(--modal-index);
+    @extend .align-center-y;
+    @extend .align-center-x;
+    /*==== Activated ====*/
+    &.px-menu-active {
+        @extend %flexbox;
+        -webkit-animation: fadeIn 300ms linear forwards 50ms;
+                animation: fadeIn 300ms linear forwards 50ms;
+    }
+    /*==== Menu Toggle ====*/
+    .menu-toggle {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.7;
+    }
+    /*==== Menu Wraper ====*/
+    .menu-wraper {
+        background-color: #fff;
+        padding: REM(15) REM(25);
+        position: relative;
+        z-index: 1;
+        width: var(--width);
+        max-height: 95vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        /*==== Menu ====*/
+        > ul {
+            font-size: 12px;
+            line-height: 32px;
+            /*==== Links ====*/
+            li > a {
+                color: inherit;
+                display: block;
+            }
+            /*==== Items ====*/
+            > li {
+                font-weight: var(--medium-weight);
+            }
+            /*==== Submenu ====*/
+            .submenu, .megamenu {
+                list-style: none;
+                margin: 0;
+                padding: 8px;
+                background-color: rgba(#000, 0.03);
+                display: none;
+                line-height: 24px;
+                font-size: 11px;
+                color: var(--gray-color);
+                font-weight: normal;
+                border-radius: 4px;
+            }
+        }
+        /*==== Submenus Icons ====*/
+        .submenu-item > a {
+            @extend %flexbox;
+            @extend .align-between;
+            &::after {
+                content: '\f067';
+                font-family: var(--icons-font);
+                font-weight: normal;
+                line-height: inherit;
+            }
+        }
+
+        .submenu-active > a::after {content: '\f068';}
+    }
+}

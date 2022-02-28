@@ -1,0 +1,64 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Full Width
+ * ===> 01 - 
+ * ===> 01 - 
+ * ===> 01 - 
+*/
+
+/*==== Utlites Repeaters ====*/
+@import '../assets/mixin';
+
+/*==== Full Width ====*/
+.w-fluid, .fluid {width: 100%;}
+
+/*==== Max Sizes ====*/
+.mxw-1024 {max-width: 1024px;}
+.mxw-768 {max-width: 768px;}
+.mxw-640 {max-width: 640px;}
+.mxw-480 {max-width: 480px;}
+.mxw-420 {max-width: 420px;}
+.mxw-570 {max-width: 570px;}
+.mxw-360 {max-width: 360px;}
+.mxw-200 {max-width: 200px;}
+.mxw-180 {max-width: 180px;}
+.mxw-150 {max-width: 150px;}
+.mxw-120 {max-width: 120px;}
+
+/*==== Min Sizes ====*/
+.miw-1024 {min-width: 1024px;}
+.miw-768 {min-width: 768px;}
+.miw-640 {min-width: 640px;}
+.miw-480 {min-width: 480px;}
+.miw-360 {min-width: 360px;}
+.miw-200 {min-width: 200px;}
+.miw-180 {min-width: 180px;}
+.miw-150 {min-width: 150px;}
+.miw-140 {min-width: 140px;}
+.miw-120 {min-width: 120px;}
+
+/*==== Font Size ====*/
+.fs-12 {font-size: 12px;}
+.fs-13 {font-size: 13px;}
+.fs-14 {font-size: REM(14);}
+.fs-15 {font-size: REM(15);}
+.fs-16 {font-size: REM(16);}
+.fs-17 {font-size: REM(17);}
+.fs-18 {font-size: REM(18);}
+.fs-19 {font-size: REM(19);}
+.fs-20 {font-size: REM(20);}
+
+/*==== Aspect Ratio ====*/
+.ratio-1x1 {padding-bottom: 100%;}
+.ratio-4x3,.ratio-3x1 {padding-bottom: 75%;}
+.ratio-16x9 {padding-bottom: 56.3%;}
+.ratio-21x9 {padding-bottom: 42.9%;}
+/*==== .... ====*/
+.px-media[data-type="image"] {
+    position: relative;
+    > img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}

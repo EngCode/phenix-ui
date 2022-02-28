@@ -26,7 +26,7 @@ PhenixElements.prototype.dropdown = function (options?:{
             delay?:number,
             display?:string,
         },
-    }) {
+}) {
     //====> Default Options <====//
     let active  = options?.target || 'phenix-active',
         target  = options?.active || '.dropdown-list',
@@ -34,15 +34,15 @@ PhenixElements.prototype.dropdown = function (options?:{
         activated = `${target}.${active}`,
         delay = options?.effect?.delay || null,
         display = options?.effect?.display || null,
-        duration = options?.effect?.duration || 700;
+        duration = options?.effect?.duration || 300;
 
     //====> Set Trigger Accessibility <====//
     this.setAttributes({
-        "tabindex":0,
-        "role":"button",
-        "aria-pressed":"false"
-
-    //====> When Click on the Trigger <====//
+            "tabindex": 0,
+            "role": "button",
+            "aria-pressed": "false"
+    
+        //====> When Click on the Trigger <====//
     }).on('click', event => {
         //====> Prevent Default Behavor <====//
         event.preventDefault();
@@ -75,13 +75,14 @@ PhenixElements.prototype.dropdown = function (options?:{
         let clicked:any = blank.target;
 
         //====> if the target is not the current element or any of its childerns <====//
-        if (!clicked.matches(target || `${target} *${exclude}`)) {
+        if (!clicked.matches(target || `${target} *${exclude}`) && !clicked.matches('.dropdown-btn')) {
             //====> De-Activate any active dropdown <====//
             let others = Phenix(activated).removeClass(active);
+            //====> De-Activate Triggers <====//
+            others.siblings(active)?.forEach((sibling:HTMLElement) => sibling.classList.remove(active));
 
             //====> Effect : Fade-Out <====//
             if (options?.effect?.type == 'fade') others.fadeOut(duration, delay, display);
-
             //====> Effect : Slide-Up <====//
             else if (options?.effect?.type == 'slide') others.slideUp(duration, delay, display);
         }

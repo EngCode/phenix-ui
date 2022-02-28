@@ -1,0 +1,66 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Screen Reader Only
+ * ===> 02 - Display
+ * ===> 03 - Hidden
+*/
+
+/*==== Screen Reader Only ====*/
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/*==== Display ====*/
+.inline-block  {display: inline-block;}
+.display-block {display: block;}
+.flexbox { @extend %flexbox; }
+
+.fluid, .line-break {
+    width: 100%;
+    display: block
+}
+
+/*==== Hidden ====*/
+.hidden {
+    display: none;
+    /*==== Small ====*/
+    @include small() {
+        &-sm-up {display: none;}
+    };
+
+    @include small('down') {
+        &-sm-down {display: none;}
+    };
+    /*==== Medium ====*/
+    @include medium() {
+        &-md-up {display: none;}
+    };
+
+    @include medium('down') {
+        &-md-down {display: none;}
+    };
+    /*==== Large ====*/
+    @include large() {
+        &-lg-up {display: none;}
+    };
+
+    @include large('down') {
+        &-lg-down {display: none;}
+    };
+    /*==== xLarge ====*/
+    @include xlarge() {
+        &-xl-up {display: none;}
+    };
+
+    @include xlarge('down') {
+        &-xl-down {display: none;}
+    };
+}

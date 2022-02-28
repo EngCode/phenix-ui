@@ -1,0 +1,87 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Standard Header
+ * ===> 02 - Container Layout
+ * ===> 03 - Logo Element
+ * ===> 04 - Actions Buttons
+ * ===> 05 - Search Box
+ * ===> 06 - Primary Colored
+ * ===> 07 - Secondary Colored
+*/
+
+/*======== Standard Header ========*/
+.tornado-header {
+    box-shadow: var(--component-shadow);
+    //=== Container Layout ===//
+    .container,.container-fluid,.container-xl {
+        @extend %flexbox;
+        @extend .align-between;
+        @extend .align-center-y;
+        &::after{ display: none; }
+    }
+
+    //=== Logo Element ===//
+    .logo {
+        color:inherit;
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: var(--medium-weight);
+            text-transform: uppercase;
+            color: inherit;
+        }
+
+        img {max-height: 3rem;}
+    }
+    
+    /*=== Actions Buttons ===*/
+    .action-btns {
+        /*==== Icon Button ====*/
+        .icon-btn {
+            text-align: center;
+            &:not(.menu-btn) { @extend %inline-block; }
+            @extend %fast-motion;
+        }
+        /*==== Buttons ====*/
+        .btn {margin-#{$direction-start}: REM(15);}
+        /*=== Dropdown Buttons ===*/
+        .dropdown {
+            .dropdown-list {
+                #{$direction-start}:auto;
+                #{$direction-end}:0;
+                &::after,&::before { 
+                    #{$direction-start}:auto;
+                    #{$direction-end}:12px;
+                 }
+            }
+            
+            @include small(false) {
+                position: static;
+                .dropdown-list {
+                    margin-top: -1.125rem;
+                    width:100%;
+                    &::before{display: none;}
+                    &::after{display: none;}
+                }
+            };
+        }
+    }
+
+    /*=== Search Box ===*/
+    .search-box {
+        display: inline-block;
+        position: relative;
+        @include medium(true) { width:14.38rem; }
+        &.form-ui { input { margin-bottom: 0; } }
+        .search-btn {
+            position: absolute;
+            #{$direction-end}:0;
+            top:0;
+            bottom: 0;
+            background:transparent;
+            color:var(--forms-color);
+            width:2.375rem;
+            border:0 none;
+            cursor: pointer;
+        }
+    }
+}

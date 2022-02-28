@@ -4,9 +4,9 @@
  * ===> 03 - Scrollable Overflow
  * ===> 04 - Float Elements
  * ===> 05 - Overlay
- * ===> 05 - 
- * ===> 06 - 
- * ===> 07 - 
+ * ===> 05 - View-Port Status [JS Assets]
+ * ===> 06 - Dynamic Backgrounds [JS Assets]
+ * ===> 07 - Sticky Elements [JS Assets]
  * ===> 08 - 
  * ===> 09 - 
  * ===> 10 - 
@@ -29,9 +29,12 @@
     @include xlarge() {--current-rem : var(--rem-xl)}
 }
 
-html { font-size: var(--current-rem); }
+html {
+    font-size: var(--current-rem);
+    line-height: var(--line-height);
+}
 
-/*======== Custom Resets ========*/
+/*==== Custom Resets ====*/
 body {
     margin: 0;
     padding: 0;
@@ -47,6 +50,7 @@ iframe {
 }
 
 .reset-block, .reset { @extend %reset-space; }
+.reset-list { @extend %reset-list; }
 
 /*==== Hidden Overflow ====*/
 .overflow-hidden   { overflow:   hidden; }
@@ -60,9 +64,7 @@ iframe {
 
 /*======== Float Elements ========*/
 .float-start { float: $direction-start; }
-
-.float-end { float: $direction-end; }
-
+.float-end   { float: $direction-end; }
 .clear-after::after,.clear-fix { @extend %clear-after,:after; }
 
 /*==== Overlay ====*/
@@ -76,27 +78,61 @@ iframe {
     &::before {background-color: #FFF;}
 }
 
-/*======== View-Port Detector ========*/
+/*==== View-Port Status ====*/
 .view-status {
     visibility: hidden;
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
-            animation-duration: 1s;
     &.view-active { visibility: visible; }
 }
 
-/*==== Screen Reader Only ====*/
-.visually-hidden,
-.visually-hidden-focusable:not(:focus):not(:focus-within) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border-width: 0;
+/*==== Dynamic Backgrounds ====*/
+[data-src] {
+    display: block;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.lazyloader {
+    -o-object-fit: contain;
+       object-fit: contain;
+    background-size: auto 100%;
+    background-color: #F1F2F3;
+}
+
+/*==== Sticky Elements ====*/
+[data-sticky="inner"].is-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+}
+
+[data-sticky="absolute"].is-sticky {
+    position: fixed;
+    top:0;
+    &.tornado-header {
+        left: 0;
+        right:0;
+        width:100%;
+    }
+}
+
+/*==== Phenix Media ====*/
+.px-media {
+    padding-bottom: 60%;
+    position: relative;
+    /*==== elements ====*/
+    video, iframe, .media-element {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        -o-object-fit: cover;
+           object-fit: cover;
+    }
 }
 

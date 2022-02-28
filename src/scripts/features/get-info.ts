@@ -135,3 +135,20 @@ PhenixElements.prototype.viewport = function (property:string) {
     //====> Get Both <====//
     else return {width: width, height: height}
 }
+
+//====> Copyrights <====//
+PhenixElements.prototype.copyrights = function () {
+  console.log(`🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥
+🔥                                     🔥
+🔥  - Name    : Mada Consulting        🔥
+🔥  - System  : Phenix Design System   🔥
+🔥  - Front   : PDS UI/UX Framework    🔥
+🔥  - Auther  : Abdullah Ramadan       🔥
+🔥  - Version : PDS v0.5 Alpha         🔥
+🔥  - Website : phenixthemes.com       🔥
+🔥  - Docs    : docs.phenixthemes.com  🔥
+🔥  - Contact : +2-01122974539         🔥
+🔥                                     🔥
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥💥🐦`, "color: #FB955D;font-weight: 600");
+    return this;
+};

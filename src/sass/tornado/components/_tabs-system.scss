@@ -1,0 +1,27 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Tabs Settings
+ * ===> 02 - Tabs Menu Default Theme
+ * ===> 03 - Tabs Default Theme : Tabs Menu
+ * ===> 04 - Tabs Default Theme : Tabs Content 
+ * ===> 05 - Tabs Dialog Theme
+ * ===> 08 - Tabs Tabular Theme
+ * ===> 09 - Tabs Lined Theme
+*/
+
+/*======= Tabs Settings =======*/
+.tab-content:not(.px-active) {display: none;}
+
+/*======== Tabs Menu ========*/
+.tabs-buttons {
+    @extend %reset-list;
+    li{
+        cursor: pointer;
+        @extend %fast-motion;
+        a{color:inherit;}
+        /*==== Active Mode ====*/
+        &.px-active {
+            background:var(--component-active-bg);
+            color:var(--component-active-color);
+        }
+    }
+}

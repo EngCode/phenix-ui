@@ -1,0 +1,457 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Navigation Menu
+ * ===> 02 - Menu Mobile Button
+ * ===> 03 - Mobile Menu
+ * ===> 04 - Nested Menus
+*/
+
+/*======== Navigation Menu Mixin ========*/
+@mixin custom-navigation (
+    $height:null,// Height
+    $font-size:null,// Font-size
+    $font-weight:null,// Font Weight
+    $item-gutter: null,
+    $color:null,// Text Color
+    $hvr-color:null,// Hover Color
+    $hvr-bg:null,// Hover Background
+    // submenu
+    $sub-color:null,// Submenu Color
+    $sub-bg:null,// Submenu Background
+    $sub-font-size:null,// Submenu Font-size
+    $sub-height:null,// Submenu Height
+    $sub-hvr-bg:null,// Submenu Hover Background
+    $sub-hvr-color:null// Submenu Hover Color
+    ) {
+    //=== Menu Theme ===//
+    > ul > li {
+        @if ($font-size) {font-size:$font-size;}
+        @if ($font-weight) { font-weight: $font-weight; }
+        @if ($color) { color:$color; }
+        @if ($height) { line-height: $height; }
+        @if ($item-gutter) { padding: 0 $item-gutter/2; }
+        //==== Hover Theme ====//
+        &:hover,&.active,&.current-menu-parent,&.current-menu-item{ 
+            @if ($hvr-color) { color:$hvr-color; }
+            @if ($hvr-bg) { background:$hvr-bg; }
+        }
+    }
+    //=== Nested Menus ===//
+    li > ul,.megamenu {
+        @if ($sub-bg) {background: $sub-bg;}
+        //==== Nested Menus Items ====//
+        > li {
+            @if ($sub-font-size) { font-size:$sub-font-size; }
+            @if ($sub-height) { line-height:$sub-height; }
+            @if ($sub-color) { color:$sub-color; }
+            @if ($item-gutter) { padding: 0 $item-gutter/2; }
+            &:hover,&.active,&.current-menu-parent,&.current-menu-item{
+                @if ($sub-hvr-bg) { background:$sub-hvr-bg; }
+                @if ($sub-hvr-color) { color:$sub-hvr-color; }
+            }
+        }
+    }
+    //===> Megamenu Lists <===//
+    .megamenu li {
+        @if ($sub-font-size) { font-size:$sub-font-size; }
+        @if ($sub-height) { line-height:$sub-height; }
+        @if ($sub-color) { color:$sub-color; }
+    }
+}
+
+/*======== Mobile Menu Mixin ========*/
+@mixin mobile-menu (
+    $menu-width : null, //====> Menu Width
+    $menu-background : null, //====> Menu Background
+    $item-padding : null, //====> Menu Item Padding
+    $item-height : null, //====> Item Height
+    $item-font-size : null, //===> Item Font Size
+    $item-active-bg : null, //====> Activated Item Background
+    $item-active-color : null, //===> Activated Item Color
+    $sub-height : null, //====> Sub Item Height
+    $sub-font-size : null, //====> Sub Item Font Size
+    $sub-bg : null, //===> Sub Item Background
+    $sub-color : null, //===> Sub Item Color
+    $divider-color : null, //====> Menu Item Border Color
+    $icon-size : null, //====> Menu Item Icons Font Size
+    $menu-direction:null, //====> Menu Direction
+) {
+    /*======== Menu Wrapper ========*/
+    .menu-content {
+        width:$menu-width;
+        background:$menu-background;
+        margin: auto;
+        margin-#{$menu-direction}:-$menu-width;
+    }
+
+    /*======== Menu Logo ========*/
+    .logo { border-bottom: $divider-color; }
+    
+    //==== Activated Effects =====//
+    &.active .menu-content{margin-#{$menu-direction}:0;}
+
+    /*======== Menu Theme ========*/
+    ul {
+        //======== Menu Icons ========//
+        [class*="ti-"]:not(.dropdown-toggle)::before {
+            margin-#{$direction-start}:-#{$item-padding};
+            font-size:$icon-size;
+        }
+        /*======== Menu Items ========*/
+        li{
+            padding:0 $item-padding;
+            border-bottom:$divider-color;
+            line-height: $item-height;
+            //=== Activated Item ===//
+            &.active{
+                background:$item-active-bg;
+                color:$item-active-color;
+                ul,.megamenu{
+                    background:$sub-bg;
+                    color:$sub-color;
+                    margin-top: $item-padding/2;
+                    margin-bottom: -$item-padding/2;
+                    border-top:$divider-color;
+                    li {
+                        line-height: $sub-height;
+                        font-size:$sub-font-size
+                    }
+                }
+            }
+        }
+
+        //==== Nested Menus Button =====//
+        .dropdown-toggle {
+            height:$item-height;
+            line-height: $item-height;
+        }
+
+        /*======== Nested Menu Core ========*/
+        ul,.megamenu {
+            margin-#{$direction-start}:-$item-padding;
+            margin-#{$direction-end}:-$item-padding;
+        }
+    }
+    
+    //==== Overlaps Nested Theme ====//
+    &.overlaps ul {
+        ul,.megamenu { #{$direction-start}:-100%; }
+        //======== Activated ========//
+        .dropdown-item.active {
+            > ul,.megamenu {
+                #{$direction-start}:10%;
+                background: $menu-background;
+            }
+            .dropdown-toggle {
+                #{$direction-start}:0;
+                background: var(--danger-color);
+                color:var(--dark-reverse);
+            }
+        }
+    }
+}
+
+/*======== Navigation Menu ========*/
+.navigation-menu {
+    //=== Menu Settings ===//
+    position: relative;
+    z-index: 99;
+    @extend %fast-motion;
+    @include medium(false) { display: none; }
+    &.collapsed { display: none; }
+    /*==== Default Theme ====*/
+    background: var(--component-background);
+    border:var(--component-border);
+    padding: 0 var(--component-padding);
+    margin-bottom: REM(30);
+    box-shadow: var(--component-shadow);
+    //=== Primary Menu List ===//
+    ul { @extend %reset-space; }
+
+    > ul {
+        word-spacing: -5px;
+        //=== Items Reset ===//
+        li,a {
+            @extend %reset-space;
+            @extend %fast-motion;
+        }
+        //== item ==//
+        > li {
+            @extend %inline-block;
+            word-spacing: normal;
+            position: relative;
+            //=== List item Link ===//
+            a {
+                @extend %inline-block;
+                color:inherit;
+                font-weight: inherit;
+                font-family: inherit;
+            }
+            //=== List item Arrow ===//
+            .dropdown-toggle:before {
+                float:$direction-end;
+                margin-#{$direction-start}:5px;
+                position:relative;
+                line-height:inherit;
+                @extend %fast-motion;
+                font-size:0.8em;
+                top:0;
+            }
+            //=== Nested List ===//
+            > ul {
+                /*==== Settings ====*/
+                top:100%;
+                #{$direction-start}:0;
+                /*==== List item ====*/
+                li {
+                    position: relative;
+                    font-weight:normal;
+                    padding:0 0.9375rem;
+                    a{display: block;}
+                    &:not(:last-child) { border-bottom:1px solid rgba(0,0,0,.15); }
+                    /*==== Nested Lvl >= 3 ====*/
+                    ul {
+                        top: 0;
+                        #{$direction-start}: 100%;
+                    }
+                }
+            }
+            //=== Nested Positon Reverse for Last Item ===//
+            &:last-child {
+                /*==== Submenu Position Fix ====*/
+                > ul {
+                    #{$direction-start}:auto;
+                    #{$direction-end}:0;
+                    /*==== Lvl >= 3 Position Fix ====*/
+                    li ul {
+                        #{$direction-start}:auto;
+                        #{$direction-end}:100%;
+                    }
+                }
+            }
+        }
+        //=== Hover Dropdown ===//
+        li:hover > ul,li:hover > .megamenu { 
+            -webkit-animation: dropOpen 0.5s both; 
+                animation: dropOpen 0.5s both;
+            visibility: visible;
+        }
+        //=== Nested Setup ===//
+        li > ul,li > .megamenu {
+            width:100%;
+            &:not(.megamenu) {width:220px;}
+            position: absolute;
+            border:1px solid rgba(0,0,0,.15);
+            visibility: hidden;
+            /*==== Closing Animation ====*/
+            -webkit-animation: dropClose 0.5s both;
+                    animation: dropClose 0.5s both;
+        }
+    }
+
+    /*==== Megamenu ====*/
+    .megamenu {
+        @extend %flexbox;
+        padding:25px 5px;
+        padding-bottom: 20px;
+        top:100%;
+        #{$direction-start}:REM(15);
+        .col-12 {padding:0 15px;}
+        h3,h2,h4 {
+            font-size:1rem;
+            @extend .tx-uppercase;
+            line-height: 1;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+            /*==== icon ====*/
+            &::before {
+                font-size:1.1em;
+                margin-#{$direction-end}:5px;
+            }
+            /*==== Line ====*/
+            &::after {
+                display: block;
+                content: '';
+                height: 3px;
+                width:45px;
+                background-color: var(--primary-color);
+                margin-top: 10px;
+                margin-bottom: -2px;
+            }
+        }
+        ul {
+            margin-bottom: 0;
+            li {
+                margin-bottom: 0;
+                border-bottom : varr(--component-border);
+                color:var(--gray-color);
+                font-weight: normal;
+                line-height: 32px;
+                font-size: 14px;
+                &:hover { color:var(--primary-color); }
+            }
+        }
+    }
+
+    /*==== Menu Theme ====*/
+    @include custom-navigation (
+        $height:44px,                 //==> Height
+        $font-size:16px,              //==> Font-size
+        $font-weight:var(--strong-weight),  //==> Font Weight
+        $item-gutter : 20px,          //==> Space Between Items
+        $color:var(--component-color),           //==> Text Color
+        $hvr-color:var(--component-active-bg),    //==> Hover Color
+        $hvr-bg:transparent,          //==> Hover Background
+        //===> Sub Menu <===//
+        $sub-color:var(--component-color),       //==> Submenu Color
+        $sub-bg:var(--component-background),     //==> Submenu Background
+        $sub-font-size:14px,           //==> Submenu Font-size
+        $sub-height:36px,              //==> Submenu Height
+        $sub-hvr-bg:var(--component-active-bg),    //==> Submenu Hover Background
+        $sub-hvr-color:var(--component-active-color)  //==> Submenu Hover Color
+    );
+
+    /*==== Primary Theme ====*/
+    &.primary {
+        background-color:var(--primary-color);
+        border: 0 none;
+        @include custom-navigation (
+            $color:var(--primary-reverse),// Text Color
+            $hvr-color:var(--primary-reverse),// Hover Color
+            $hvr-bg:var(--primary-hover),// Hover Background
+            $sub-color:var(--primary-reverse),// Submenu Color
+            $sub-bg:var(--primary-color),// Submenu Background
+            $sub-hvr-bg:var(--primary-hover),// Submenu Hover Background
+            $sub-hvr-color:var(--primary-reverse)// Submenu Hover Color
+        );
+    }
+    /*==== Black Theme ====*/
+    &.dark {
+        background-color:var(--dark-color);
+        border: 0 none;
+        @include custom-navigation (
+            $color:var(--dark-reverse),// Text Color
+            $hvr-color:var(--dark-reverse),// Hover Color
+            $hvr-bg:var(--primary-color),// Hover Background
+            $sub-color:var(--dark-reverse),// Submenu Color
+            $sub-bg:var(--primary-color),// Submenu Background
+            $sub-hvr-bg:var(--dark-color),// Submenu Hover Background
+            $sub-hvr-color:var(--dark-reverse)// Submenu Hover Color
+        );
+    }
+}
+
+/*=== Menu Mobile Button ===*/
+.menu-btn[data-id] { 
+    @extend %inline-block;
+
+    @include large(true) {
+        &:not(.collapsed) { display: none; }
+    };
+}
+
+//==== Mobile Menu =====//
+.mobile-menu {
+    position:fixed;
+    top:0;
+    left: 0;
+    width:100vw;
+    height:100vh;
+    z-index:999999;
+    visibility: hidden;
+    
+    /*======== Overlay ========*/
+    .overlay-close {
+        position:fixed;
+        display:block;
+        top:0;
+        left:0;
+        background:rgba(0,0,0,.80);
+        width:100%;
+        height:100%;
+        @extend %fast-motion;
+        z-index: -1;
+        opacity: 0;
+    }
+    
+    /*======== Menu Wrapper ========*/
+    .menu-content {
+        position: relative;
+        height:100vh;
+        overflow-x:hidden;
+        overflow-y:visible;
+        @extend %fast-motion;
+        z-index:2;
+        margin: 0;
+    }
+
+    //==== Activated Effects =====//
+    &.active{
+        visibility:visible;
+        .overlay-close {opacity: 1;}
+        ul li.active {
+            ul,.megamenu {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            .megamenu {padding:0 15px;}
+        }
+    }
+
+    /*======== Menu Theme ========*/
+    ul {
+        @extend %reset-space;
+        /*======== Menu Items ========*/
+        li{
+            position: relative;
+            margin-bottom: 0;
+            border-bottom: 1px solid rgba(#000, 0.1);
+            //=== List item Link ===//
+            a {
+                display: block;
+                color:inherit;
+                font-weight: inherit;
+                font-family: inherit;
+            }
+            //=== Activated Item ===//
+            &.active { border-bottom-width:0; }
+
+             /*======== Nested Menu Core ========*/
+            &:not(.active) {
+                ul,.megamenu {display: none;}
+            }
+        }
+
+        //=== List item Arrow ===//
+        .dropdown-toggle:before {
+            float:$direction-end;
+            margin-#{$direction-start}:5px;
+            position:relative;
+            line-height:inherit;
+            @extend %fast-motion;
+            font-size:0.8em;
+            top:0;
+        }
+    }
+
+    
+
+    *[calss*="col-"],*[calss*="box-"] {width: 100%;}
+
+    @include mobile-menu (
+        $menu-width : 280px, //====> Menu Width
+        $menu-background : var(--component-background), //====> Menu Background
+        $item-padding : 1.25rem, //====> Menu Item Padding
+        $item-height : 2.875rem, //====> Item Height
+        $item-font-size : 1rem, //===> Item Font Size
+        $item-active-bg : var(--component-active-bg), //====> Activated Item Background
+        $item-active-color : var(--component-active-color), //===> Activated Item Color
+        $sub-height : 2.875rem, //====> Sub Item Height
+        $sub-font-size : 0.9rem, //====> Sub Item Font Size
+        $sub-bg : var(--component-darker-bg), //===> Sub Item Background
+        $sub-color : var(--component-color), //===> Sub Item Color
+        $divider-color : var(--component-border), //====> Menu Item Border Color
+        $icon-size : 1.25rem, //====> Menu Item Icons Font Size
+        $menu-direction: $direction, //====> Menu Direction Position [left,right]
+    );
+}
