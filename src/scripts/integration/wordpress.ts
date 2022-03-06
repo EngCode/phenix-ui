@@ -24,8 +24,8 @@ Phenix(document).ready(ready => {
         Phenix('.wpcf7-form[dir],.wpcf7-form [dir]').forEach((element:HTMLElement) => element.removeAttribute('dir'));
 
         //====> Copyrights Protection <====//
-        Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
-        Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
+        // Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
+        // Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
 
         //====> H1 Fix <====//
         let headline = document.querySelector('h1');

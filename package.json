@@ -45,20 +45,20 @@
     }
   ],
   "scripts": {
-    "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
-    "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\""
+    "phenix-ts": "pnpx webpack --config typescript.webpack.js --watch",
+    "phenix-sass": "pnpx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
+    "phenix-start": "concurrently --kill-others \"pnpm run phenix-sass\" \"pnpm run phenix-ts && size-limit\""
   },
   "devDependencies": {
     "concurrently": "^6.4.0",
-    "node-sass": "^7.0.0",
+    "node-sass": "^7.0.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.7",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@splidejs/splide": "^3.5.0"
+    "@splidejs/splide": "^3.6.12"
   }
 }

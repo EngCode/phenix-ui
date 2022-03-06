@@ -14,9 +14,11 @@
     --body-bg : #fcfcfc;
 
     /*==== Primary Color ====*/
-    --primary-color   : #0C97F9;
-    --primary-hover   : #1A69F4;
+    --primary-color   : #375523;
+    --primary-hover   : #4a7c24;
     --primary-reverse : #FFFFFF;
+    --primary-offwhite: #e9f3ee;
+    --offwhite-border : #d0e4da;
 
     /*==== Secondary Color ====*/
     --secondary-color   : #F9AF5B;
@@ -78,30 +80,4 @@
 @import 'tornado/elements/breadcrumbs';
 
 /*==== Assets ====*/
-.radius-g {border-radius: 4px;}
-.radius-gl {border-radius: 8px;}
 
-.blue-grade {
-    color: #FFFFFF;
-    background-image: linear-gradient(105deg, var(--blue-gradient));
-}
-
-.parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-}
-
-.primary-bg-offwhite {
-    background-color: var(--primary-offwhite);
-    &.bordered {border: 1px solid #d0e4da;}
-}
-
-.tx-icon::before {margin-#{$direction-end}: 7px;}
-.flow-nowrap {flex-wrap: nowrap;}
-
-.divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
-.divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
-.fluid-height {min-height: 100%;}
-.no-radius {border-radius: 0;}
-.alpha-05-bg {background-color: rgba(#000, 0.05);}
-.alpha-10-bg {background-color: rgba(#000, 0.1);}

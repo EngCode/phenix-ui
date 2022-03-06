@@ -74,6 +74,16 @@
 .flicker-color {color: var(--flicker-color);}
 
 /*==== Assets Backgrounds ====*/
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.primary-bg-offwhite {
+    background-color: var(--primary-offwhite);
+    &.bordered {border: 1px solid var(--offwhite-border);}
+}
+
 .primary-bg {
     background-color: var(--primary-color);
     color: var(--dark-reverse);
@@ -254,6 +264,22 @@
 .offwhite-lavenderblush-bg {
     background-color: #FFF0F5;
     color: var(--dark-color);
+}
+
+/*==== Gradients ====*/
+.primary-grade {
+    color: #FFFFFF;
+    background-image: linear-gradient(105deg, var(--primary-gradient));
+}
+
+.secondary-grade {
+    color: #FFFFFF;
+    background-image: linear-gradient(105deg, var(--secondary-gradient));
+}
+
+.blue-grade {
+    color: #FFFFFF;
+    background-image: linear-gradient(105deg, var(--blue-gradient));
 }
 
 .transparent {background-color: transparent;}
