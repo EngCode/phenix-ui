@@ -37,9 +37,11 @@
             color: inherit;
             &:focus, &:active {outline: 0 none;}
         }
+
         > a {display: block;}
         /*==== Submenu ====*/
         ul {@extend %reset-list;}
+        
         .submenu, .megamenu {
             position: absolute;
             top: 100%;
@@ -142,6 +144,18 @@
             > li {
                 font-weight: var(--medium-weight);
             }
+            /*==== icons ====*/
+            .icon {
+                top: -1px;
+                line-height: 1;
+                font-size: 15px;
+                font-style: normal;
+                text-align: center;
+                position: relative;
+                @extend %inline-block;
+                color: var(--primary-color);
+                margin-#{$direction-end}: 5px;
+            }
             /*==== Submenu ====*/
             .submenu, .megamenu {
                 list-style: none;
@@ -156,16 +170,14 @@
                 border-radius: 4px;
             }
         }
-        /*==== Submenus Icons ====*/
-        .submenu-item > a {
-            @extend %flexbox;
-            @extend .align-between;
-            &::after {
-                content: '\f067';
-                font-family: var(--icons-font);
-                font-weight: normal;
-                line-height: inherit;
-            }
+        /*==== Submenu Arrows ====*/
+        .submenu-item > a::after {
+            opacity: 0.5;
+            content: '\f107';
+            line-height: inherit;
+            float: $direction-end;
+            @extend %inline-block;
+            font-family: var(--icons-font);
         }
 
         .submenu-active > a::after {content: '\f068';}

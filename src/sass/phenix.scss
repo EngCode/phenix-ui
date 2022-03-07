@@ -17,44 +17,61 @@ $direction-end: right;
 /*==== Font Options ====*/
 :root {
     //==== Font Families ====//
-    --primary-font: 'Roboto';
-    --secondary-font: 'Roboto';
-    --icons-font: "Font Awesome 5";
+    --primary-font: 'Somar Rounded';
+    --secondary-font: 'Somar Rounded';
+    --icons-font: "Font Awesome 5 Pro";
 
     //==== Font Weight ====//
     --normal-weight: 400;
     --medium-weight: 500;
+    --bold-weight  : 600;
     --strong-weight: 700;
 
     /*==== Responsive REM:Base ====*/
-    --rem-xl : 17px; //===> xLarge Screens and Up
+    --rem-xl : 16px; //===> xLarge Screens and Up
     --rem-lg : 16px; //===> Large Screens and Up
     --rem-md : 15px; //===> Medium Screens and Up
-    --rem-sm : 14px; //===> Small Screens and Up
-    --rem-xs : 13px; //===> Extra Small Screens and Up
+    --rem-sm : 15px; //===> Small Screens and Up
+    --rem-xs : 15px; //===> Extra Small Screens and Up
 
     //==== Standard Line-Height ====//
     --line-height: 1.625;
+}
+
+/*========== Loading Fonts ==========*/
+@font-face {
+    font-family: 'Somar Rounded';
+    src: url('../webfonts/sr-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Somar Rounded';
+    src: url('../webfonts/sr-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Somar Rounded';
+    src: url('../webfonts/sr-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Somar Rounded';
+    src: url('../webfonts/sr-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
 }
 
 /*==== Required Modules ====*/
 @import 'assets/mixin';     //===> SASS Mixin
 @import 'assets/selectors'; //===> SASS Selectors
 @import 'assets/reset';     //===> CSS RESET
-
-/*==== Components Modules ====*/
-@import 'grid/main';    //===> Layout Grid System
-
-/*==== Integration ====*/
-@import 'integration/wordpress';  //===> WordPress Integration
-
-/*==== Utilities Modules ====*/
-@import 'utilities/typography';  //===> Typography Utilites
-@import 'utilities/padding';  //===> Padding Utilites
-@import 'utilities/margin';   //===> Margin Utilites
-@import 'utilities/colors';   //===> CSS Coloring System
-@import 'utilities/main';     //===> Custom Utilities
-@import 'utilities/force';    //===> CSS Forced Assets
+@import 'grid/main';        //===> Layout Grid System
 
 /*==== Customizer ====*/
 @import 'customize';

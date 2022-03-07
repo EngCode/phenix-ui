@@ -15,10 +15,12 @@
 .mxw-1024 {max-width: 1024px;}
 .mxw-768 {max-width: 768px;}
 .mxw-640 {max-width: 640px;}
+.mxw-570 {max-width: 570px;}
 .mxw-480 {max-width: 480px;}
 .mxw-420 {max-width: 420px;}
-.mxw-570 {max-width: 570px;}
+.mxw-390 {max-width: 390px;}
 .mxw-360 {max-width: 360px;}
+.mxw-260 {max-width: 260px;}
 .mxw-200 {max-width: 200px;}
 .mxw-180 {max-width: 180px;}
 .mxw-150 {max-width: 150px;}
@@ -28,12 +30,15 @@
 .miw-1024 {min-width: 1024px;}
 .miw-768 {min-width: 768px;}
 .miw-640 {min-width: 640px;}
+.miw-570 {min-width: 570px;}
 .miw-480 {min-width: 480px;}
+.miw-420 {min-width: 420px;}
+.miw-390 {min-width: 390px;}
 .miw-360 {min-width: 360px;}
+.miw-260 {min-width: 260px;}
 .miw-200 {min-width: 200px;}
 .miw-180 {min-width: 180px;}
 .miw-150 {min-width: 150px;}
-.miw-140 {min-width: 140px;}
 .miw-120 {min-width: 120px;}
 
 /*==== Font Size ====*/
@@ -52,7 +57,8 @@
 .ratio-4x3,.ratio-3x1 {padding-bottom: 75%;}
 .ratio-16x9 {padding-bottom: 56.3%;}
 .ratio-21x9 {padding-bottom: 42.9%;}
-/*==== .... ====*/
+
+/*==== Phenix Media ====*/
 .px-media[data-type="image"] {
     position: relative;
     > img {

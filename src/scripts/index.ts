@@ -421,6 +421,7 @@ import './features/effects';   //==> UI Effects
 import './features/counter';   //==> Animated Counter
 import './features/media';     //==> Media Setter
 import './features/uploader';  //==> File Uploader
+import './features/datatable'; //==> Data-Tables
 
 /*====> Import Components <====*/
 import './components/timer';     //==> Time Counter

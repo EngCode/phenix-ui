@@ -22,93 +22,63 @@
 .table {
     /*==== Setup ====*/
     width:100%;
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
-    font-size:15px;
-    margin-bottom: REM(30);
 
     /*==== Table Columns ====*/
-    tr td,th{
-        padding-top: calc( var(--table-padding) / 2 );
-        padding-bottom: calc( var(--table-padding) / 2 );
+    td, th{
         border-bottom: var(--table-border);
-        text-align: $direction-start;
-    }
-
-    /*==== Table Head ====*/
-    thead th {
-        font-weight: var(--strong-weight);
-        text-align: inherit;
+        @include padding-block(calc( var(--table-padding) / 2 ));
     }
 
     /*==== Striped and Bordered ====*/
     &.bordered, &.striped {
         background-color: var(--table-background);
-        td,th {
-            padding:calc( var(--table-padding) / 2 ) var(--table-padding);
+        td, th {
             border-bottom: 0 none;
+            @include padding-inline(var(--table-padding));
         }
     }
 
     /*==== Striped BG ====*/
-    &.striped tbody tr:not([class*="-bg"]):nth-child(odd) {
-        td,th {background:var(--table-striped);}
-    }
+    &.striped tbody tr:not([class*="-bg"]):nth-child(even) {background:var(--table-striped);}
 
     /*==== Bordered Table ====*/
     &.bordered {
         border: var(--table-border);
         /*==== Columns ====*/
-        td,th {border: var(--table-border);}
+        td, th {border: var(--table-border);}
         /*==== Head ====*/
-        thead tr:not([class*="-bg"]) {
-            td,th{background:var(--table-head-bg);}
-        }
-        /*==== Striped BG ====*/
-        &.striped thead tr:not([class*="-bg"]):nth-child(odd) {
-            td,th {background:var(--table-head-bg);}
-        }
+        thead tr:not([class*="-bg"]) {background:var(--table-head-bg);}
     }
 }
 
 /*==== Table Responsive ====*/
-.responsive-table,.responsive-sm-table{
-    overflow: auto;
-    margin-bottom: REM(30);
-    .table{margin-bottom: 0;}
-}
+.responsive-table, .responsive-sm-table{overflow: auto;}
 
-@include medium(false) { 
+@include medium('down') { 
     .responsive-table .table{width:970px;}
 }
 
-@include small(false) { 
+@include small('down') { 
     .responsive-sm-table .table{width:768px;}
 }
 
 /*==== Data Table ====*/
-.data-table-wrap .sort-table {
+.px-sortable {
     cursor: pointer;
-    .sort-icon {
-        float: $direction-start;
-        font-size:13px;
+    
+    &:not(.hide-sorting) .sort-icon {
         color:inherit;
-        margin-#{$direction}:-5px;
-        margin-#{$direction-end}:3px;
         opacity: 0.5;
         &::before{top:0;}
     }
 
     &.active .sort-icon{opacity: 1;}
-    
-    &.desc-sort .sort-icon::before {
-        transform: rotate(180deg);
-        top:1px;
-    }
 }
 
 /*==== Data Tables Navigation ====*/
-.data-table-nav {
+.px-datatable-nav {
     margin-bottom: 10px;
     padding-bottom: 12px;
     border-bottom: var(--table-border);
@@ -144,7 +114,7 @@
 }
 
 /*==== Data Table Pagination ====*/
-.data-table-pagi {
+.px-datatable-pagi {
     margin-top: -REM(30)/1.5;
     margin-bottom: REM(30);
     /*==== info ====*/

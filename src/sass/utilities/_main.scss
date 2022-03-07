@@ -107,6 +107,7 @@ iframe {
 .px-media {
     padding-bottom: 60%;
     position: relative;
+    display: block;
     /*==== elements ====*/
     video, iframe, .media-element {
         position: absolute;
@@ -121,7 +122,6 @@ iframe {
 }
 
 .px-bg {
-    display: block;
     background-size: cover;
     background-position: center;
     position: relative;

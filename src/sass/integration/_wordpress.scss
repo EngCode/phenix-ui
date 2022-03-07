@@ -736,15 +736,15 @@ body:not(.wp-admin) #wpadminbar {
     }
 }
 
-body:not(.wp-admin) {
-    /*==== Prevent Text Selection ====*/
-    *:not(input):not(textarea) {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-}
+// body:not(.wp-admin) {
+//     /*==== Prevent Text Selection ====*/
+//     *:not(input):not(textarea) {
+//         -webkit-user-select: none;
+//         -moz-user-select: none;
+//         -ms-user-select: none;
+//         user-select: none;
+//     }
+// }
 
 /*======== REQUIRED CSS ========*/
 .wp-caption,.gallery-caption {

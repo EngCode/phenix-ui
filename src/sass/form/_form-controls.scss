@@ -34,7 +34,7 @@
     --forms-radius : 5px;
     --forms-border : 1px solid rgba(0,0,0, 0.1);
     --forms-darker-bg : #ebebeb;
-    --forms-shadow : inset 0 0 5px rgba(0,0,0, 0.03);
+    --forms-shadow : 0 0 2px rgba(0,0,0, 0.15);
     --forms-btns-shadow : none;
     --forms-height : #{ REM(42)};
     --forms-height-small  : #{REM(36)};
@@ -211,14 +211,14 @@ label {
 }
 
 /*==== File Upload Input ====*/
-.file-input {
+.px-uploader:not([data-uploader="advanced"]) {
     position:relative;
     overflow: hidden;
     line-height: calc(var(--forms-height) - 3px);
     @extend .form-control;
     /*==== Value Text ====*/ 
     &::before {
-        content: attr(data-text);
+        content: attr(data-placeholder);
         line-height: inherit;
     }
     /*==== Browse Button ====*/
@@ -442,7 +442,7 @@ label {
 }
 
 /*======== Advanced Uploader ========*/
-.advanced-uploader {
+.px-uploader[data-uploader="advanced"] {
     position: relative;
     margin-bottom: var(--forms-gutter);
     background-size:cover;
