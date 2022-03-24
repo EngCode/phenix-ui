@@ -47,7 +47,10 @@
     @include large() { max-width: 1024px; }
 }
 
-.container-xl {max-width: 1400px;}
+.container-xl {
+    max-width: 1400px;
+    @include large('down') { @include padding-inline(30px); }
+}
 
 /*==== Flexbox Grid ====*/
 .row {

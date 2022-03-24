@@ -34,7 +34,7 @@
     --forms-radius : 5px;
     --forms-border : 1px solid rgba(0,0,0, 0.1);
     --forms-darker-bg : #ebebeb;
-    --forms-shadow : unset;
+    --forms-shadow : inset 3px 3px 8px rgba(0,0,0, 0.10);
     --forms-btns-shadow : none;
     --forms-height : #{ REM(42)};
     --forms-height-small  : #{REM(36)};
@@ -173,6 +173,10 @@ label {
             font-size: 14px;
         }
         .file-input{line-height: var(--forms-height-large);}
+        textarea {
+            padding-top: REM(15);
+            padding-#{$direction-start}: calc(var(--forms-height-large) / 1.2);
+        }
     }
 
     &.small{
