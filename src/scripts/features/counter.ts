@@ -60,10 +60,10 @@ PhenixElements.prototype.counter = function (options?:{
             else element.innerHTML = current;
 
             //===> Clear When Count Up Reaches The Target <===//
-            if (!reverse && count === value) clearInterval(interval);
+            if (!reverse) Math.round(count) === Math.round(value) ? clearInterval(interval) : null;
 
             //===> Clear When Count Down Reaches Zero <===//
-            else if (reverse && count === 0) clearInterval(interval);
+            else if (reverse) Math.round(count) === 0 ? clearInterval(interval) : null;
         };
 
         //====> Start Counting <===//

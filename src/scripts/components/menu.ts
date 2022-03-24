@@ -45,7 +45,7 @@ PhenixElements.prototype.menu = function (options?:{
             dropdowns = [];
 
         //====> Dropdown Default Effect <====//
-        if (menu_type === 'dropdown' && !inline('data-effect') || !options?.effect) effect = 'slide';
+        if (menu_type === 'dropdown') !effect ? effect = 'slide' : null;
 
         //====> Marking Submenus <====//
         submenus.forEach((submenu_item:any) => {
@@ -133,7 +133,7 @@ PhenixElements.prototype.menu = function (options?:{
 
                 //===> Toggle Menu <====//
                 target.classList.toggle(active);
-                if (responsive === 'dropdown') {
+                if (effect === 'slide') {
                     if (effect === 'slide') Phenix(target).slideToggle();
                     else if (effect === 'fade') Phenix(target).fadeToggle();
                 }

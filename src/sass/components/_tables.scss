@@ -16,6 +16,7 @@
     --table-striped    : #f4f4f4;
     --table-border     : 1px solid rgba(0,0,0, 0.1);
     --table-padding    : 15px;
+    --table-radius     : 5px;
 }
 
 /*==== Tables CSS ====*/
@@ -24,12 +25,10 @@
     width:100%;
     border-collapse: collapse;
     border-spacing: 0;
-
     /*==== Table Columns ====*/
-    td, th{
-        border-bottom: var(--table-border);
-        @include padding-block(calc( var(--table-padding) / 2 ));
-    }
+    td, th{border-bottom: var(--table-border);}
+    th {@include padding-block(calc( var(--table-padding) / 1.5 ));}
+    td {@include padding-block(calc( var(--table-padding) / 2 ));}
 
     /*==== Striped and Bordered ====*/
     &.bordered, &.striped {
@@ -54,14 +53,17 @@
 }
 
 /*==== Table Responsive ====*/
-.responsive-table, .responsive-sm-table{overflow: auto;}
+.responsive-table, .responsive-sm-table{
+    overflow: auto;
+    // border-radius: 8px 8px 0 0;
+}
 
 @include medium('down') { 
-    .responsive-table .table{width:970px;}
+    .responsive-table .table {width:970px;}
 }
 
 @include small('down') { 
-    .responsive-sm-table .table{width:768px;}
+    .responsive-sm-table .table {width:768px;}
 }
 
 /*==== Data Table ====*/
@@ -77,55 +79,35 @@
     &.active .sort-icon{opacity: 1;}
 }
 
-/*==== Data Tables Navigation ====*/
-.px-datatable-nav {
-    margin-bottom: 10px;
-    padding-bottom: 12px;
-    border-bottom: var(--table-border);
-    /*==== Form Controls ====*/
-    .form-control:not(.selected-option),.tornado-select,label {
-        margin-bottom: 0;
-        width:auto;
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    /*==== Filters ====*/
-    .table-filters {
-        /*==== Labels ====*/
-        label {
-            margin-#{$direction-end}: 5px;
-            text-transform: uppercase;
-            &.backspace {
-                margin-#{$direction}: -5px;
-                margin-#{$direction-end}: 10px;
-            }
-        }
-
-        /*==== Form Controls ====*/
-        .form-control:not(.selected-option):not(.table-search),.tornado-select {margin-#{$direction-end}: 10px;}
-        .form-control{padding: 0 12px;}
-
-        /*==== Per Page Controls ====*/
-        .perpage + .tornado-select {width:90px;
-            .filter-select{display: none;}
-        }
-    }
-}
-
 /*==== Data Table Pagination ====*/
 .px-datatable-pagi {
     margin-top: -REM(30)/1.5;
     margin-bottom: REM(30);
+    border-radius: 0 0 8px 8px;
     /*==== info ====*/
     p {
         margin: 0;
-        font-size:14px;
-        color:var(--gray-color);
+        font-size: 13px;
+        line-height: 24px;
+        height: 28px;
+        color: var(--gray-color);
     }
     /*==== Pagination ====*/
-    .pagination li {
+    .pagination.small li {
         cursor: pointer;
         margin-bottom: 0;
+        width: auto;
+        padding: 0 5px;
+        height: 28px;
+        line-height: 24px;
+        text-align: center;
+        background-color: transparent;
+        border: 0 none;
+        font-size: 13px;
+        font-weight: var(--medium-weight);
+        &.active, &:hover {
+            background-color: transparent;
+            color: var(--primary-hover);
+        }
     }
 }

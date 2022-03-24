@@ -34,7 +34,7 @@
     --forms-radius : 5px;
     --forms-border : 1px solid rgba(0,0,0, 0.1);
     --forms-darker-bg : #ebebeb;
-    --forms-shadow : 0 0 2px rgba(0,0,0, 0.15);
+    --forms-shadow : unset;
     --forms-btns-shadow : none;
     --forms-height : #{ REM(42)};
     --forms-height-small  : #{REM(36)};

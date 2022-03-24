@@ -14,6 +14,7 @@ PhenixElements.prototype.smothScroll = function (options?:{
     offset?:number,   //===> Decrease Target Position By [number]
     into?:number,     //===> Increase Target Position By [number]
     duration?:number, //===> Scroll Animation Duration
+    delay?:number,    //===> Delay Before Scroll
 }) {
     //====> Loop Through Phenix Elements <====//
     this.on('click', event => {
@@ -28,7 +29,10 @@ PhenixElements.prototype.smothScroll = function (options?:{
             offset:number = parseInt(element.getAttribute('data-offset')) || options?.offset || 0,
             viewPos:number  = Math.round(window.pageYOffset || window.scrollY),
             duration:number = parseInt(element.getAttribute('data-duration')) || options?.duration || 700,
-            position:number = Math.round(target.getBoundingClientRect().top),
+            delay:number = parseInt(element.getAttribute('data-delay')) || options?.delay || 0,
+            posTest = target?.getBoundingClientRect(),
+            position:number = posTest ? Math.round(posTest?.top) : 0,
+            numCheck = (n) => {return 1/(n*0)===1/0},
             //====> Animations Timing Function <====//
             timeFunc:any  = (time, current, target, duration) => {
                 //===> Time / Duration / 2 <===//
@@ -62,11 +66,19 @@ PhenixElements.prototype.smothScroll = function (options?:{
             if (timeElapsed < duration) requestAnimationFrame(activator);
 
             //====> the End ? Update View Position <====//
-            else viewPos = Math.round(window.pageYOffset);
+            else {
+                viewPos = Math.round(window.pageYOffset);
+                //===> Hash URL Update <===//
+                let loc:any = window;
+                loc.location.href = element.getAttribute('href') || element.getAttribute('data-target') || options?.target;
+            }
         }
 
         //====> Activate Scrolling <====//
-        requestAnimationFrame(activator);
+        if(delay > 0) {
+            //====> Delay Scroll <====//
+            setTimeout(() => requestAnimationFrame(activator), delay);
+        } else requestAnimationFrame(activator);
     });
 
     //====> Return Phenix Elements <====//

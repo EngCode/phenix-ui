@@ -137,10 +137,10 @@ PhenixElements.prototype.viewport = function (property:string) {
 }
 
 //====> Copyrights <====//
-PhenixElements.prototype.copyrights = function () {
+PhenixElements.prototype.copyrights = function (project_name) {
   console.log(`🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥
 🔥                                     🔥
-🔥  - Name    : Mada Consulting        🔥
+🔥  - Name    : ${project_name || 'Project Untitlted'}      🔥
 🔥  - System  : Phenix Design System   🔥
 🔥  - Front   : PDS UI/UX Framework    🔥
 🔥  - Auther  : Abdullah Ramadan       🔥

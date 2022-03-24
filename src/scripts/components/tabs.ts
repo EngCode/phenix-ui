@@ -51,7 +51,7 @@ PhenixElements.prototype.tabs = function (options?:{
                 clicked.preventDefault();
     
                 //====> Tab Data <====//
-                let tab_btn  = clicked.target,
+                let tab_btn  = button,
                     panel_id = tab_btn.getAttribute('data-tab' || 'href'),
                     panel_element = Phenix(`#${panel_id.replace(/#/g, "")}`);
     
