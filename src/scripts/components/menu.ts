@@ -32,7 +32,7 @@ PhenixElements.prototype.menu = function (options?:{
         let inline = attr => menu.getAttribute(attr);
 
         /*====> Default Options <====*/
-        let menu_type = inline('data-type') || options?.type || null,
+        let menu_type = inline('data-type') || options?.type || 'navigation',
             menu_id = inline('data-id') || options?.menu_id || null,
             hover = inline('data-hover') || options?.hover || false,
             active = inline('data-active') || options?.active || 'px-menu-active',
@@ -98,24 +98,26 @@ PhenixElements.prototype.menu = function (options?:{
         /*====> Responsive Toggle <====*/
         if (menu_id && menu_id !== null) {
             /*====> Set ID to the Menu <====*/
-            if (responsive === 'dropdown' && !menu.getAttribute('id')) menu.setAttribute('id', menu_id);
+            if (responsive === 'dropdown') !menu.getAttribute('id') ? menu.setAttribute('id', menu_id) : null;
 
             /*====> Create External Menu <====*/
-            else if (responsive === 'custom' && !document.querySelector(`#${menu_id}`)) {
-                //====> Create the Menu into the Body <====//
-                Phenix(document.body).insert('append', 
-                    `<nav id="${menu_id}" class="phenix-custom-menu">
-                        <div class="menu-wraper">${menu.innerHTML}</div>
-                        <a href="#${menu_id}" class="menu-toggle" tabindex="0" role="button" aria-pressed="false"></a>
-                    </nav>`
-                );
-
-                //====> Clean Markup <====//
-                Phenix(`#${menu_id} [id]`).forEach((element:HTMLElement) => element.removeAttribute('id'));
-                Phenix(`#${menu_id} .menu-wraper > *`).removeClass('flexbox');
-
-                /*====> Active Submenus <====*/
-                submenus_handle(Phenix(`#${menu_id} .submenu-item > a`));
+            else if (responsive === 'custom') {
+                if (!document.querySelector(`#${menu_id}`)) {
+                    //====> Create the Menu into the Body <====//
+                    Phenix(document.body).insert('append', 
+                        `<nav id="${menu_id}" class="phenix-custom-menu">
+                            <div class="menu-wraper">${menu.innerHTML}</div>
+                            <a href="#${menu_id}" class="menu-toggle" tabindex="0" role="button" aria-pressed="false"></a>
+                        </nav>`
+                    );
+    
+                    //====> Clean Markup <====//
+                    Phenix(`#${menu_id} [id]`).forEach((element:HTMLElement) => element.removeAttribute('id'));
+                    Phenix(`#${menu_id} .menu-wraper > *`).removeClass('flexbox');
+    
+                    /*====> Active Submenus <====*/
+                    submenus_handle(Phenix(`#${menu_id} .submenu-item > a`));
+                }
             }
 
             /*====> Toggle Button <====*/
