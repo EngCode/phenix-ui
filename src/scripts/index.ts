@@ -12,8 +12,8 @@
  * ===> 11 - Set Multiple Attributes
  * ===> 12 - Insert Elements
  * ===> 13 - Event Handler
- * ===> 14 - Multimedia Lazy-Loader
- * ===> 15 - MediaQuery Method
+ * ===> 14 - Resources Lazy-Loader
+ * ===> 15 - Media Query Method
  * ===> 16 - Define Info Grapers
  * ===> 17 - Define UI Effects
  * ===> 18 - Define Other Features
@@ -341,7 +341,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         }
     }
 
-    /*====> Multimedia Lazy-Loader [un-tested] <====*/
+    /*====> Resources Lazy-Loader [un-tested] <====*/
     lazyLoading() {
         //====> Element Data <====//
         let spiner = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
@@ -389,6 +389,59 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
                 if(Phenix(counter).inView() && !counter.classList.contains('counting')) Phenix(counter).counter();
             });
         });
+
+        //====> Return Phenix Elements <====//
+        return this;
+    }
+
+    /*====> Media Query [un-tested] <====*/
+    mediaQuery(breakpoint:any, callback?:any, mobile_first?:boolean) {
+        /*==== Breakpoints Points ====*/
+        let xsmall_end = 485, /*===> Max xSmall breakpoint Width */
+            small_start= 580, /*===> Min Small breakpoint Width */
+            small_end = 705,  /*===> Max Small breakpoint Width */
+            /*==== Medium Points ====*/
+            medium_start = 775,  /*===> Min Medium breakpoint Width */
+            medium_end = 1105,   /*===> Max Medium breakpoint Width */
+            /*==== Large Points ====*/
+            large_start = 1205, /*===> Min Large breakpoint Width */
+            large_end = 1370,   /*===> Max Large breakpoint Width */
+            /*==== xLarge Points ====*/
+            xlarge_start = 1405, /*===> Min xLarge breakpoint Width */
+            xlarge_end = 2565,   /*===> Max xLarge breakpoint Width */
+            /*==== Activator ====*/
+            createQuery = () => {
+                //==== Get Current Screen Width ====//
+                let current_vw = Phenix(document).viewport('width')
+                /*==== Extra Small ====*/
+                if (mobile_first && breakpoint == 'xsmall')  current_vw >= 0 ? callback : null;
+                else if (breakpoint == 'xsmall') current_vw <= xsmall_end ? callback : null;
+
+                /*==== Small ====*/
+                if (mobile_first && breakpoint == 'small')  current_vw >= small_start ? callback : null;
+                else if (breakpoint == 'small') current_vw <= small_end ? callback : null;
+
+                /*==== Medium ====*/
+                if (mobile_first && breakpoint == 'medium')  current_vw >= medium_start ? callback : null;
+                else if (breakpoint == 'medium') current_vw <= medium_end ? callback : null;
+
+                /*==== Large ====*/
+                if (mobile_first && breakpoint == 'large')  current_vw >= large_start ? callback : null;
+                else if (breakpoint == 'large') current_vw <= large_end ? callback : null;
+
+                /*==== Extra Large ====*/
+                if (mobile_first && breakpoint == 'xlarge')  current_vw >= xlarge_start ? callback : null;
+                else if (breakpoint == 'xlarge') current_vw <= xlarge_end ? callback : null;
+
+                /*==== Custom Media ====*/
+                if (mobile_first && typeof(breakpoint) == 'number')  current_vw >= breakpoint ? callback : null;
+                else if (typeof(breakpoint) == 'number') current_vw <= breakpoint ? callback : null;
+            };
+
+        //===> Active <===//
+        createQuery();
+        //===> Live Check <===//
+        window.addEventListener('resize', resizing => createQuery);
 
         //====> Return Phenix Elements <====//
         return this;
@@ -448,7 +501,6 @@ const Phenix = (selector?:any) => {
 
         //====> and Create Elements Query <====//
         return new PhenixElements(...selector);
-    /*====> Selecting Error <====*/
     }
 }
 

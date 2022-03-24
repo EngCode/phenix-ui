@@ -14,7 +14,7 @@ import Phenix, { PhenixElements } from "..";
 /*====> Tabs Panels [Un-Tested] <====*/
 PhenixElements.prototype.tabs = function (options?:{
         active?:string,       //====> Default Active Tab number Default : first-child;
-        active_class?:string, //====> Active Class Name : phenix-active
+        active_class?:string, //====> Active Class Name : px-active
         navigation?:string,   //====> Tabs menu/buttons Wraper Selector
 
         //====> Hide/Show Toggle Effect [fade, slide] <====//

@@ -18,7 +18,7 @@ PhenixElements.prototype.counter = function (options?:{
         decimal?:number,  //===> Decimal Numbers Support
         symbol?:string,   //===> Symbol After the Number
         steps?:number,    //===> Count per Step
-        reverse?:boolean,  //===> Count Down instead of Up
+        reverse?:boolean, //===> Count Down instead of Up
         lazyloading?:boolean, //===> Lazyload Animation
     }) {
     //====> Loop Through Phenix Elements <====//
@@ -26,7 +26,7 @@ PhenixElements.prototype.counter = function (options?:{
         //====> Get Options Data <====//
         let duration = parseInt(element.getAttribute('data-duration')) || options?.duration || 2000,
             decimal  = parseInt(element.getAttribute('data-decimal')) || options?.decimal || 0,
-            value    = parseInt(element.getAttribute('data-value')) || options?.value || 0,
+            value    = parseInt(element.getAttribute('data-value')) || options?.value || parseInt(element.textContent),
             symbol   = element.getAttribute('data-symbol') || options?.symbol || '',
             delay    = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
             steps    = parseInt(element.getAttribute('data-steps')) || options?.steps  || 10,

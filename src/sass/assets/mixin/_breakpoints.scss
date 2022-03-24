@@ -26,7 +26,7 @@ $xl-end   : 2560px; /*===> Max xLarge Screen Width */
 /*====> Extra Small Screens <====*/
 @mixin xSmall($flow:'') {
     //====> From End to Start <====//
-    @if ($flow == 'down') {
+    @if ($flow == 'down' or $flow ==  'max') {
         @media (max-width: $xs-end) { @content; }
     } 
 
@@ -39,7 +39,7 @@ $xl-end   : 2560px; /*===> Max xLarge Screen Width */
 /*====> Small Screens <====*/
 @mixin small($flow:'') {
     //====> From End to Start <====//
-    @if ($flow == 'down') {
+    @if ($flow == 'down' or $flow ==  'max') {
         @media (max-width: $sm-end) { @content; }
     } 
 
@@ -52,7 +52,7 @@ $xl-end   : 2560px; /*===> Max xLarge Screen Width */
 /*====> Medium Screens <====*/
 @mixin medium($flow:'') {
     //====> From End to Start <====//
-    @if ($flow == 'down') {
+    @if ($flow == 'down' or $flow ==  'max') {
         @media (max-width: $md-end) { @content; }
     }
 
@@ -65,7 +65,7 @@ $xl-end   : 2560px; /*===> Max xLarge Screen Width */
 /*====> Large Screens <====*/
 @mixin large($flow:'') {
     //====> From End to Start <====//
-    @if ($flow == 'down') {
+    @if ($flow == 'down' or $flow ==  'max') {
         @media (max-width: $lg-end) { @content; }
     }
 
@@ -78,7 +78,7 @@ $xl-end   : 2560px; /*===> Max xLarge Screen Width */
 /*====> Extra Large Screens <====*/
 @mixin xlarge($flow:'') {
     //====> From End to Start <====//
-    @if ($flow == 'down') {
+    @if ($flow == 'down' or $flow ==  'max') {
         @media (max-width: $xl-end) { @content; }
     }
 

@@ -105,7 +105,7 @@ PhenixElements.prototype.sticky = function (options?:{
             offset = parseInt(element.getAttribute('data-offset')) || options?.offset || 0;
 
         //====> Relative to its Parent [workout] <====//
-        if (type && type === 'sticky') element.parentNode.style.transform = "translateZ(0)";
+        // if (type && type === 'sticky') element.parentNode.style.transform = "translateZ(0)";
 
         //====> Y Scroll Mode <====//
         if(!direction || direction === 'y') {
@@ -152,13 +152,13 @@ PhenixElements.prototype.sticky = function (options?:{
 
 /*====> Scroll-Spy <====*/
 PhenixElements.prototype.scrollSpy = function (options?:{
-    active:string,  //===> Active Class Name Default : phenix-active
+    active:string,  //===> Active Class Name Default : px-active
     flow:string,    //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
     offset:number,  //====> Decrease Target Position By [number]
     into:number     //====> Increase Target Position By [number]
 }) {
     //====> Define Options <=====//
-    let className:string = options?.active || 'phenix-active',
+    let className:string = options?.active || 'px-active',
         spotFlow:string = options?.flow || 'both',
         spotInto:number = options?.into || 0,
         spotOffset:number = options?.offset || 0;

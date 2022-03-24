@@ -16,7 +16,7 @@ import Phenix, { PhenixElements } from "..";
 /*====> Dropdown [Un-Tested] <====*/
 PhenixElements.prototype.dropdown = function (options?:{
         target?:string,  //====> Target to Toggle (add/remove) Active Class
-        active?:string,  //====> Active Class Name : phenix-active
+        active?:string,  //====> Active Class Name : px-active
         exclude?:string, //====> Exclude from on Blank Click only [CSS :not()... Selector]
 
         //====> Hide/Show Toggle Effect [fade, slide] <====//
@@ -28,7 +28,7 @@ PhenixElements.prototype.dropdown = function (options?:{
         },
 }) {
     //====> Default Options <====//
-    let active  = options?.target || 'phenix-active',
+    let active  = options?.target || 'px-active',
         target  = options?.active || '.dropdown-list',
         exclude = options?.exclude || ':not(a[href^="http"]):not(a[href^="//"])',
         activated = `${target}.${active}`,

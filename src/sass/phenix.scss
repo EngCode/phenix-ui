@@ -17,9 +17,8 @@ $direction-end: right;
 /*==== Font Options ====*/
 :root {
     //==== Font Families ====//
-    --primary-font: 'Somar Rounded';
-    --secondary-font: 'Somar Rounded';
-    --icons-font: "Font Awesome 5 Pro";
+    --primary-font: 'BioSans';
+    --secondary-font: 'BioSans';
 
     //==== Font Weight ====//
     --normal-weight: 400;
@@ -36,35 +35,6 @@ $direction-end: right;
 
     //==== Standard Line-Height ====//
     --line-height: 1.625;
-}
-
-/*========== Loading Fonts ==========*/
-@font-face {
-    font-family: 'Somar Rounded';
-    src: url('../webfonts/sr-regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Somar Rounded';
-    src: url('../webfonts/sr-medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Somar Rounded';
-    src: url('../webfonts/sr-semibold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Somar Rounded';
-    src: url('../webfonts/sr-bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
 }
 
 /*==== Required Modules ====*/

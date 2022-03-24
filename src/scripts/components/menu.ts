@@ -21,8 +21,8 @@ PhenixElements.prototype.menu = function (options?:{
     type?:string,       //===> Menu Type [navigation, dropdown]
     menu_id?:string,    //===> Menu CSS ID
     hover?:boolean,     //===> Dropdown on Hover [Disktop only]
-    active?:boolean,    //===> Menu CSS Active Class [phenix-active]
-    sub_active?:boolean,//===> Submenus CSS Active Class [submenu-active]
+    active?:boolean,    //===> Menu CSS Active Class [px-active]
+    sub_active?:boolean,//===> Submenus CSS Active Class [px-submenu-active]
     mobile?:string,     //===> Responsive Mode [dropdown, custom]
     effect?:string,     //===> Dropdown Effect [slide, fade, custom]
 }) {
