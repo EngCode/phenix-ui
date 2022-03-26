@@ -86,7 +86,7 @@ PhenixElements.prototype.multimedia = function (options?:{
         //====> Set Media Size <====//
         if (ratio && ratio != 'none') {
             //====> Predefined Ratio's <====//
-            if (ratio.includes('x')) element.classList.add(`ratio-${ratio}`);
+            if (ratio !== null || false || 'false' || 'none' && !ratio.includes('x')) element.classList.add(`ratio-${ratio}`);
 
             //====> Otherwise <====//
             else {
