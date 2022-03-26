@@ -84,9 +84,9 @@ PhenixElements.prototype.multimedia = function (options?:{
             controls = player_controls && player_controls !== 'false' ? true : false,
             autoplay = player_autoplay && player_autoplay !== 'false' ? true : false;
         //====> Set Media Size <====//
-        if (ratio && ratio != 'none') {
+        if (ratio && ratio != null || false || 'false' || 'none') {
             //====> Predefined Ratio's <====//
-            if (ratio !== null || false || 'false' || 'none' && !ratio.includes('x')) element.classList.add(`ratio-${ratio}`);
+            if (!ratio.includes('x')) element.classList.add(`ratio-${ratio}`);
 
             //====> Otherwise <====//
             else {
