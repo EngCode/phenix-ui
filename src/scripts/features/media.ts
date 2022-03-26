@@ -93,7 +93,7 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> Convert To Number <====//
                 let ratio_convert = parseInt(ratio);
                 //====> Set Height w/ Padding Bottom <====//
-                ratio_convert > 0 ? element.style.paddingBottom = `${ratio_convert}%` : null;
+                ratio_convert > 0 ? element.style.setProperty('--ratio-size', `${ratio_convert}%`) : null;
             }
         }
 
