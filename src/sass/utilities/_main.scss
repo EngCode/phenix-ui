@@ -7,10 +7,14 @@
  * ===> 05 - View-Port Status [JS Assets]
  * ===> 06 - Dynamic Backgrounds [JS Assets]
  * ===> 07 - Sticky Elements [JS Assets]
- * ===> 08 - 
- * ===> 09 - 
- * ===> 10 - 
- * ===> 11 - View-Port Detector [JS Assets]
+ * ===> 08 - Phenix Media
+ * ===> 09 - Aspect Ratio
+ * ===> 10 - Lazy Loader
+ * ===> 11 - 
+ * ===> 12 - 
+ * ===> 13 - 
+ * ===> 14 - 
+ * ===> 15 - View-Port Detector [JS Assets]
 */
 
 /*==== SASS Selectors ====*/
@@ -96,40 +100,49 @@ iframe {
 [data-sticky="absolute"].is-sticky {
     position: fixed;
     top:0;
-    &.tornado-header {
-        left: 0;
-        right:0;
-        width:100%;
-    }
 }
 
 /*==== Phenix Media ====*/
 .px-media {
-    padding-bottom: 60%;
-    position: relative;
+    /*==== Css Options ====*/
+    --ratio-size : 60%;
+    /*==== ....====*/
     display: block;
+    position: relative;
     background-size: cover;
+    background-position: center;
+    padding-bottom: var(--ratio-size);
     /*==== elements ====*/
-    video, iframe, .media-element {
-        position: absolute;
-        left: 0;
+    video, iframe, .px-media-img {
         top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
+        position: absolute;
         border-radius: inherit;
         -o-object-fit: cover;
            object-fit: cover;
     }
+    /*==== image type ====*/
+    .px-media-img {opacity: 0;}
 }
 
-.px-bg {
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    background-repeat: no-repeat;
+/*==== Aspect Ratio ====*/
+[class*="ratio-"] {
+    --ratio-size : 60%;
+    padding-bottom: var(--ratio-size);
+    /*==== Square 1x1 ====*/
+    &.ratio-1x1  {--ratio-size: 100%;}
+    /*==== FHD 16x9 ====*/
+    &.ratio-16x9 {--ratio-size: 56.3%;}
+    /*==== Landscape 21x9 ====*/
+    &.ratio-21x9 {--ratio-size: 42.9%;}
+    /*==== Classic 21x9 ====*/
+    &.ratio-4x3,.ratio-3x1 {--ratio-size: 75%;}
 }
 
-.lazyloader {
+/*==== Lazy Loader ====*/
+.px-loader {
     -o-object-fit: contain;
        object-fit: contain;
     background-size: auto 100%;
@@ -137,28 +150,21 @@ iframe {
 }
 
 /*==== Assets ====*/
-.radius-g {border-radius: 4px;}
+.radius-g  {border-radius: 4px;}
 .radius-gl {border-radius: 8px;}
 .tx-icon::before {margin-#{$direction-end}: 7px;}
 .flow-nowrap {flex-wrap: nowrap;}
 .divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
 .divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
+.no-radius    {border-radius: 0;}
 .fluid-height {min-height: 100%;}
-.no-radius {border-radius: 0;}
 .alpha-border {border: 1px solid rgba(#000, 0.1);}
-.alpha-05-bg {background-color: rgba(#000, 0.05);}
-.alpha-10-bg {background-color: rgba(#000, 0.1);}
+.alpha-05-bg  {background-color: rgba(#000, 0.05);}
+.alpha-10-bg  {background-color: rgba(#000, 0.1);}
 
 /*==== Assets ====*/
-.full-screen {min-height: 100vh;}
-.postion-ab {position: absolute;}
-.postion-rv {position: relative;}
-
-/*==== Width's ====*/
-.w-50 {width: 50px;}
-.w-auto {width: auto!important;}
-.miw-90 {min-width: 90px;}
-.hide-sorting .sort-icon {display: none;}
+.postion-ab  {position: absolute;}
+.postion-rv  {position: relative;}
 
 /*==== Buttons Options ====*/
 .btn {

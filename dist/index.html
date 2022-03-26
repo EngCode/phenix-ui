@@ -16,8 +16,30 @@
         <link href="css/phenix.css" rel="stylesheet" />
     </head>
     <body>
+        <!-- Container -->
+        <div class="container-sm">
+            <!-- ... -->
+            <br /><br />
+            <!-- Media [embed] -->
+            <div class="px-media mb-30" data-src="https://phenixthemes.com/sample.mp4" data-type="embed" data-controls="true"></div>
+            <!-- Media [embed] -->
+            <div class="px-media" data-src="https://vimeo.com/691180937" data-type="embed" data-embed="vimeo"></div>
+            <!-- Media [custom] -->
+            <div class="px-media mb-30" data-type="custom"></div>
+            <!-- ... -->
+            <br /><br /><br /><br />
+        </div>
+        <!-- // Container -->
 
         <!-- Required JS Files -->
         <script src="js/phenix.js"></script>
+        <!-- Docs Script -->
+        <script>
+            //======> D.O.M is Ready <=======//
+            Phenix(document).ready((event) => {
+                //====> Multimedia Active <====//
+                Phenix('.px-media').multimedia();
+            });
+        </script>
     </body>
 </html>

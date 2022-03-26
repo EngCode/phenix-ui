@@ -29,9 +29,9 @@ PhenixElements.prototype.multimedia = function (options?:{
     title?:string, //===> Media Title for Playlist [First Item]
     //===> Gradient Settings <===//
     gradient?:{
-        colors?:[],    //===> colors Array
-        rotate?:number, //===> Rotation Degree
-        mode?:string,   //===> Gradient Mode [linear, radial, conic]
+        value?:[],       //===> CSS Gradient Value [rtoation, color1, color2, etc...]
+        mode?:string,    //===> Gradient Mode [linear, radial, conic]
+        repeat?:boolean, //===> Gradient Repeat [true, false]
     },
     //===> Playlist Settings [audio, video] types only <===//
     playlist?:[{
@@ -39,11 +39,15 @@ PhenixElements.prototype.multimedia = function (options?:{
         url:string,    //===> Media URL
         cover:string,  //===> Cover Image
     }],
+    //===> Players and Embed <===//
+    embed?:string,      //====> Embed Source [video, audio, youtube, vemio]
+    controls?:boolean,  //====> Embed Controls Enable
+    autoplay?:boolean,  //====> Embed Autoplay Enable
 }) {
-    
-
     //====> Background Method <====//
     let background = (element, source) => {
+        //===> Clean Source [URL] <===//
+        source = encodeURI(source);
         //===> Clean # for CSS Benefits <===//
         source = source.replaceAll('#','%23');
 
@@ -54,7 +58,6 @@ PhenixElements.prototype.multimedia = function (options?:{
         element.style.backgroundImage = `url("${source}")`;
     };
 
-    
     //====> Loop Through Phenix Elements <====//
     this.forEach(element => {
         //====> Media Checker <====//
@@ -66,16 +69,20 @@ PhenixElements.prototype.multimedia = function (options?:{
         let type = element.getAttribute('data-type') || options?.type || 'background',
             src  = element.getAttribute('data-src') || options?.src,
             alt  = element.getAttribute('data-alt') || options?.alt || '',
-            title  = element.getAttribute('data-title') || options?.title,
-            cover  = element.getAttribute('data-cover') || options?.cover,
             ratio  = element.getAttribute('data-size') || options?.size || 'none',
-            player = element.getAttribute('data-player') || options?.player || 'html',
             splide = Phenix(element).ancestor('.splide__slide--clone'),
-            lazy = element.getAttribute('data-lazyloading') || options?.lazyloading || false;
-
-        //====> Inline Fix <====//
-        // if (element.getComputedStyle().display == 'inline') element.style.display = "block";
-
+            embed  = element.getAttribute('data-embed') || options?.embed || 'video',
+            gradient = element.getAttribute('data-gradient') || options?.gradient?.value || false,
+            gradient_mode = element.getAttribute('data-mode') || options?.gradient?.mode || 'linear',
+            gradient_repeat = element.getAttribute('data-repeat') || options?.gradient?.repeat,
+            //====> Embed & Lazyloading <====//
+            lazyloading = element.getAttribute('data-lazyloading') || options?.lazyloading || false,
+            player_controls = element.getAttribute('data-controls') || options?.controls || false,
+            player_autoplay = element.getAttribute('data-autoplay') || options?.autoplay || false,
+            //====> .... <====//
+            lazy = lazyloading && lazyloading !== 'false' ? true : false,
+            controls = player_controls && player_controls !== 'false' ? true : false,
+            autoplay = player_autoplay && player_autoplay !== 'false' ? true : false;
         //====> Set Media Size <====//
         if (ratio && ratio != 'none') {
             //====> Predefined Ratio's <====//
@@ -86,33 +93,91 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> Convert To Number <====//
                 let ratio_convert = parseInt(ratio);
                 //====> Set Height w/ Padding Bottom <====//
-                element.style.paddingBottom = `${ratio_convert}%`;
+                ratio_convert > 0 ? element.style.paddingBottom = `${ratio_convert}%` : null;
             }
         }
 
         //====> if has Valid Source <====//
-        if (src && src !== '' || src !== ' ')  {
-            //===> Clean Source [URL] <===//
-            if (type === 'background' || 'image' || 'video' || 'audio' || 'embed' || 'iframe') src = encodeURI(src);
-
+        if (src || gradient)  {
             //====> Media Handler <====//
             let mediaHandle = () => {
-                //====> De-Activate Lazy-Loading <====//
+                //====> De-Activate Loader <====//
                 if (lazy) {
-                    element.classList.remove('phenix-loader');
+                    element.classList.remove('px-loader');
                     if (element.style.backgroundImage) element.style.removeProperty('background-image');
                 }
-
+    
                 //====> Background Type <====//
-                if (type == 'background') {                    
+                if (type == 'background') {
+                    //===> Set Background <===//
                     background(element, src);
+                    //===> Matk as Done <===//
+                    mediaDone = true;
+                }
+    
+                //====> Image Type <====//
+                else if (type == 'image') {
+                    //===> Set Background <===//
+                    background(element, src);
+                    //===> Create Image <===//
+                    if(!element.querySelector('img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="px-media-img" />`);
+                    //===> Matk as Done <===//
+                    mediaDone = true;
+                }
+                
+                //====> Gradient Type <====//
+                else if (type == 'gradient') {
+                    //===> Check for Repeat <====//
+                    gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
+                    //===> Set the Gradient <===//
+                    element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient})`;
+                    //===> Matk as Done <===//
+                    mediaDone = true;
+                }
+    
+                //====> Mixed Type <====//
+                else if (type == 'mixed-bg') {
+                    //===> Set Background <===//
+                    background(element, src);
+                    //===> Grap Current Background <===//
+                    let currentBg = element.style.backgroundImage;
+                    //===> Check for Repeat <====//
+                    gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
+                    //===> Set the Gradient <===//
+                    element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient}), ${currentBg}`;
+                    //===> Matk as Done <===//
                     mediaDone = true;
                 }
 
-                //====> Image Type <====//
-                else if (type == 'image') {
-                    background(element, src);
-                    if(!element.querySelector('img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="phenix-media-img" />`);
+                //====> iFrame Type <====//
+                else if (type == 'iframe') {
+                    //===> Get the Current iFrame <===//
+                    let iframe = element.querySelector('iframe');
+                    //===> Create View <===//
+                    if (!iframe) Phenix(element).insert('append', `<iframe src="${src}" frameborder="0" ${lazy ? 'loading="lazy"' : ''} allowfullscreen></iframe>`);
+                    //===> Matk as Done <===//
+                    mediaDone = true;
+                }
+
+                //====> Embed Type <====//
+                else if (type == 'embed') {
+                    //===> Embed Options <===//
+                    let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${controls ? 'controls' : ''} ${autoplay ? 'autoplay="true"' : ''}`;
+                    //===> Video Source <===//
+                    if (embed == 'video' && !element.querySelector('video')){
+                        Phenix(element).insert('append', `<video src="${src}" ${media_attributes}></video>`);
+                    }
+                    //===> Video Source <===//
+                    else if (embed != 'video' && !element.querySelector('iframe')) {
+                        //====> Get the Source <====//
+                        let source = src;
+                        //====> Cleanup URL <====//
+                        if (embed == 'youtube') source = src.replace('watch?v=', 'embed/');
+                        else if (embed == 'vimeo') source = src.replace('vimeo.com', 'player.vimeo.com/video');
+                        //====> Create the View <====//
+                        Phenix(element).insert('append', `<iframe src="${source} "  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
+                    } 
+                    //===> Matk as Done <===//
                     mediaDone = true;
                 }
             };
@@ -121,7 +186,7 @@ PhenixElements.prototype.multimedia = function (options?:{
             if (lazy) {
                 //====> Activate Lazy-Loading <====//
                 if (!splide) {
-                    element.classList.add('phenix-loader');
+                    element.classList.add('px-loader');
                     element.style.backgroundImage = `url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+)`;
                 }
 
@@ -129,9 +194,7 @@ PhenixElements.prototype.multimedia = function (options?:{
                 if (Phenix(element).inView()) mediaHandle();
 
                 //====> On-Scroll Handler <====//
-                window.addEventListener('scroll', event => {
-                    if (Phenix(element).inView()) mediaHandle();
-                });
+                window.addEventListener('scroll', event => Phenix(element).inView() ? mediaHandle() : null);
             }
 
             //====> None-Lazy <====//

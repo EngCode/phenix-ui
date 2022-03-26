@@ -359,7 +359,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
                 if (element.matches('img'||'iframe')) {
                     element.setAttribute('data-lazyload', source);
                     element.setAttribute('src', spiner);
-                    element.classList.add('phenix-loading')
+                    element.classList.add('px-loading')
                 }
 
                 //===> for [video, audio] <===//
@@ -368,10 +368,10 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
                 //====> Keep Watching Element While Scrolling <====//
                 document.addEventListener('scroll', event => {
                     //====> if its in view-point set the original source <====//
-                    if (element.matches('img'||'iframe') && Phenix(element).inView() && !element.matches('.phenix-loaded')) {
+                    if (element.matches('img'||'iframe') && Phenix(element).inView() && !element.matches('.px-loaded')) {
                         element.setAttribute('src', source);
-                        element.classList.remove('phenix-loading');
-                        element.classList.add('phenix-loaded');
+                        element.classList.remove('px-loading');
+                        element.classList.add('px-loaded');
                     };
                 });
             }
@@ -379,7 +379,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             //====> First View [workout] <====//
             else if (Phenix(element).inView() && element.matches('img') && element.getAttribute('data-lazyload')) {
                 element.setAttribute('src', element.getAttribute('data-lazyload'));
-                element.classList.add('phenix-loaded');
+                element.classList.add('px-loaded');
             }
         });
 

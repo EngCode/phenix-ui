@@ -84,20 +84,11 @@
 /*==== Form Components ====*/
 @import 'form/form-controls';
 /*==== Utilities Modules ====*/
-@import 'utilities/typography';  //===> Typography Utilites
-@import 'utilities/padding';  //===> Padding Utilites
-@import 'utilities/margin';   //===> Margin Utilites
-@import 'utilities/colors';   //===> CSS Coloring System
-@import 'utilities/main';     //===> Custom Utilities
+@import 'utilities/typography'; //===> Typography Utilites
+@import 'utilities/padding';    //===> Padding Utilites
+@import 'utilities/margin';     //===> Margin Utilites
+@import 'utilities/colors';     //===> CSS Coloring System
+@import 'utilities/main';       //===> Custom Utilities
 @import 'utilities/visibility'; //===> Visibility Utilities
-@import 'utilities/sizes';  //===> Sizing Utilities
-@import 'utilities/force';    //===> CSS Forced Assets
-
-/*==== Buttons Options ====*/
-.btn {
-    --f-size : #{REM(13)};
-    --f-size-xs : #{REM(12)};
-    --f-size-sm : #{REM(12)};
-    --f-size-lg : #{REM(14)};
-    --f-weight : var(--medium-weight);
-}
+@import 'utilities/sizes';      //===> Sizing Utilities
+@import 'utilities/force';      //===> CSS Forced Assets
