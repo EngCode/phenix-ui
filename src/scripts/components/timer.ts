@@ -22,50 +22,102 @@ PhenixElements.prototype.timer = function (options?:{
         time?:string,    //===> Time = Hour:Minutes
         date?:string,    //===> Date = Year-Month-Day
         message?:string, //===> Time End Message
+        callback?:any,   //===> Callback Function When timer is finshed
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
         //====> Get Options Data <====//
-        let time = element.getAttribute('data-time') || options?.time || '00:00',
-            date = element.getAttribute('data-date').replace(/:/g, "/") || options?.date.replace(/:/g, "/") || '2030-10-20',
-            message = element.getAttribute('data-date') || options?.message || 'Time is up.',
+        let type = element.getAttribute('data-type') || options?.type || 'countdown',
+            time = element.getAttribute('data-time') || options?.time || '00:00',
+            date = element.getAttribute('data-date')?.replace(/:/g, "/") || options?.date.replace(/:/g, "/") || '',
+            message = element.getAttribute('data-message') || options?.message || 'Time is up.',
+            elementPds = Phenix(element);
+        //====> Countdown Mode<====//
+        if (type == 'countdown') {
+            //====> Timer Markup Elements <====//
+            let childs  = {
+                seconds : element.querySelector('.seconds') || elementPds.insert('append', `<span data-label="seconds" class="seconds">00</span>`),
+                minutes : element.querySelector('.minutes') || elementPds.insert('append', `<span data-label="minutes" class="minutes">00</span>`),
+                hours   : element.querySelector('.hours')   || elementPds.insert('append', `<span data-label="hours" class="hours">00</span>`),
+                days    : element.querySelector('.days')    || elementPds.insert('append', `<span data-label="days" class="days">00</span>`)
+            };
 
-        //====> Timer Markup Elements <====//
-        elementPds = Phenix(element),
-        childs  = {
-            seconds : element.querySelector('.seconds') || elementPds.insert('append', '<span data-after="seconds" class="seconds">00</span>'),
-            minutes : element.querySelector('.minutes') || elementPds.insert('append', '<span data-after="minutes" class="minutes">00</span>'),
-            hours   : element.querySelector('.hours')   || elementPds.insert('append', '<span data-after="hours" class="hours">00</span>'),
-            days    : element.querySelector('.days')    || elementPds.insert('append', '<span data-after="days" class="days">00</span>')
-        },
+            //====> Convert Date <====//
+            if(date.split("-")[0].length < 4) date = date.split(/\D/).reverse().join('-');
+    
+            //====> Time Loop <====//
+            let stringDate = new Date(`${date}T${time}`).getTime(),
+                update = setInterval(function () {
+                    //====> Get Elapsed Time <====//
+                    let current = new Date().getTime(),
+                        elapsed = stringDate - current,
+                        //====> Timer Calculation <====//
+                        days = Math.floor(elapsed / (1000 * 60 * 60 * 24)),
+                        hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60)),
+                        seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+    
+                    //====> Update Timer <====//
+                    childs.seconds.innerHTML = seconds.toString().padStart(2, '0');
+                    childs.minutes.innerHTML = minutes.toString().padStart(2, '0');
+                    childs.hours.innerHTML = hours.toString().padStart(2, '0');
+                    childs.days.innerHTML = days.toString().padStart(2, '0');
+    
+                    //====> Clear Time Loop <====//
+                    if (elapsed < 0) {
+                        clearInterval(update);
+                        element.innerHTML = `<p class="timer-message reset-block">${message}</p>`;
+                        element.classList.add('px-timer-ended');
+                        options?.callback ? options.callback : '';
+                    }
+                }, 1000);
+        }
 
-        //====> Create Date Object <====//
-        stringDate = new Date(`${date}T${time}`).getTime(),
+        //====> Countdown Mode<====//
+        else if (type == 'stopwatch') {
+            //====> Timer Markup Elements <====//
+            let time_unites = time.split(':'),
+                total_seconds = 0,
+                childs  = {
+                    hours   : time_unites.length >= 3 ? element.querySelector('.hours')   || elementPds.insert('append', `<span data-label="hours" class="hours">00</span>`) : '',
+                    minutes : time_unites.length >= 2 ? element.querySelector('.minutes') || elementPds.insert('append', `<span data-label="minutes" class="minutes">00</span>`) : '',
+                    seconds : element.querySelector('.seconds') || elementPds.insert('append', `<span data-label="seconds" class="seconds">00</span>`),
+                },
+            //====> Time Loop <====//
+            update = setInterval(function () {
+                //====> Increase Seconds <====//
+                ++total_seconds;
+                //====> Increase Seconds <====//
+                let hours:any = Math.floor(total_seconds / 3600),
+                    minutes:any = Math.floor((total_seconds - hours * 3600) / 60),
+                    seconds:any = total_seconds - (hours * 3600 + minutes * 60);
 
-        //====> Time Loop <====//
-        update = setInterval(function () {
-            //====> Get Elapsed Time <====//
-            let current = new Date().getTime(),
-                elapsed = stringDate - current,
+                //====> Convert to Dubble Digits <====//
+                hours = hours.toString().padStart(2, '0');
+                minutes = minutes.toString().padStart(2, '0');
+                seconds = seconds.toString().padStart(2, '0');
 
-            //====> Timer Calculation <====//
-            days = Math.floor(elapsed / (1000 * 60 * 60 * 24)),
-            hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+                //====> Update Timer <====//
+                time_unites.length >= 3 ? childs.hours.innerHTML = hours : '';
+                time_unites.length >= 2 ? childs.minutes.innerHTML = minutes : '';
+                childs.seconds.innerHTML = seconds;
 
-            //====> Update Timer <====//
-            childs.seconds.innerHTML = seconds;
-            childs.minutes.innerHTML = minutes;
-            childs.hours.innerHTML = hours;
-            childs.days.innerHTML = days;
+                //====> Timer Checker <====//
+                let timer_checker = () => {
+                    if (time_unites.length >= 3) return `${hours}:${minutes}:${seconds}`;
+                    else if (time_unites.length >= 2) return `${minutes}:${seconds}`;
+                    else return `${seconds}`;
+                };
 
-            //====> Clear Time Loop <====//
-            if (elapsed < 0) {
-                clearInterval(update);
-                element.innerHTML = message;
-            }
-        }, 1000);
+                //====> Clear Time Loop <====//
+                if (time == timer_checker()) {
+                    clearInterval(update);
+                    element.innerHTML = `<p class="timer-message reset-block">${message}</p>`;
+                    element.classList.add('px-timer-ended');
+                    options?.callback ? options.callback : '';
+                }
+            }, 1000);
+        }
     });
 
     //====> Return Phenix Elements <====//

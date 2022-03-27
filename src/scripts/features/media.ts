@@ -23,26 +23,21 @@ PhenixElements.prototype.multimedia = function (options?:{
     size?:string,   //===> Aspect Ratio Size [1x1, 4x3, 16x9, 16x10, 21x9, *%]
     player?:string, //===> Players [phenix, html or standard]
     lazyloading?:boolean, //===> Lazyloading [true, false]
-    //===> Extra <===//
-    alt?:string,   //===> Alternative Text for SEO
-    cover?:string, //===> Cover Image for [audio, video]
-    title?:string, //===> Media Title for Playlist [First Item]
     //===> Gradient Settings <===//
     gradient?:{
         value?:[],       //===> CSS Gradient Value [rtoation, color1, color2, etc...]
         mode?:string,    //===> Gradient Mode [linear, radial, conic]
         repeat?:boolean, //===> Gradient Repeat [true, false]
     },
-    //===> Playlist Settings [audio, video] types only <===//
-    playlist?:[{
-        title:string,  //===> Media Title
-        url:string,    //===> Media URL
-        cover:string,  //===> Cover Image
-    }],
     //===> Players and Embed <===//
     embed?:string,      //====> Embed Source [video, audio, youtube, vemio]
     controls?:boolean,  //====> Embed Controls Enable
     autoplay?:boolean,  //====> Embed Autoplay Enable
+    loop?:boolean,  //====> Embed infinite loop Enable
+    muted?:boolean,  //====> Embed Audio Mute Enable
+    //===> Extra <===//
+    alt?:string,   //===> Alternative Text for SEO
+    cover?:string, //===> Cover Image for [videos]
 }) {
     //====> Background Method <====//
     let background = (element, source) => {
@@ -79,10 +74,14 @@ PhenixElements.prototype.multimedia = function (options?:{
             lazyloading = element.getAttribute('data-lazyloading') || options?.lazyloading || false,
             player_controls = element.getAttribute('data-controls') || options?.controls || false,
             player_autoplay = element.getAttribute('data-autoplay') || options?.autoplay || false,
+            player_loop = element.getAttribute('data-loop') || options?.loop || false,
+            player_muted = element.getAttribute('data-muted') || options?.muted || false,
             //====> .... <====//
             lazy = lazyloading && lazyloading !== 'false' ? true : false,
             controls = player_controls && player_controls !== 'false' ? true : false,
-            autoplay = player_autoplay && player_autoplay !== 'false' ? true : false;
+            autoplay = player_autoplay && player_autoplay !== 'false' ? true : false,
+            loop = player_loop && player_loop !== 'false' ? true : false,
+            muted = player_muted && player_muted !== 'false' ? true : false;
         //====> Set Media Size <====//
         if (ratio && ratio != null || false || 'false' || 'none') {
             //====> Predefined Ratio's <====//
@@ -162,9 +161,9 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> Embed Type <====//
                 else if (type == 'embed') {
                     //===> Embed Options <===//
-                    let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${controls ? 'controls' : ''} ${autoplay ? 'autoplay="true"' : ''}`;
+                    let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${autoplay ? 'autoplay="true"' : ''} ${controls ? 'controls' : ''} ${loop ? 'loop' : ''} ${muted ? 'muted' : ''}`;
                     //===> Video Source <===//
-                    if (embed == 'video' && !element.querySelector('video')){
+                    if (embed == 'video' && !element.querySelector('video')) {
                         Phenix(element).insert('append', `<video src="${src}" ${media_attributes}></video>`);
                     }
                     //===> Video Source <===//
@@ -172,10 +171,10 @@ PhenixElements.prototype.multimedia = function (options?:{
                         //====> Get the Source <====//
                         let source = src;
                         //====> Cleanup URL <====//
-                        if (embed == 'youtube') source = src.replace('watch?v=', 'embed/');
-                        else if (embed == 'vimeo') source = src.replace('vimeo.com', 'player.vimeo.com/video');
+                        if (source.includes('youtube.com')) source = src.replace('watch?v=', 'embed/');
+                        else if (source.includes('vimeo.com')) source = src.replace('vimeo.com', 'player.vimeo.com/video');
                         //====> Create the View <====//
-                        Phenix(element).insert('append', `<iframe src="${source} "  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
+                        Phenix(element).insert('append', `<iframe src="${source}"  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
                     } 
                     //===> Matk as Done <===//
                     mediaDone = true;

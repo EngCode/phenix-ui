@@ -683,3 +683,21 @@ body.rtl {
         }
     }
 }
+
+/*==== Timer Demo ====*/
+.timer-demo {
+    // padding: 20px;
+    span[data-label] {
+        line-height: 1.2;
+        &::after {
+            content: attr(data-label);
+            font-size: 13px;
+            display: block;
+        }
+    }
+
+    &.px-timer-ended {
+        padding: 20px;
+        color: var(--danger-color);
+    }
+}

@@ -123,6 +123,15 @@ iframe {
         -o-object-fit: cover;
            object-fit: cover;
     }
+
+    /*==== Custom Mode ====*/
+    .px-media-element {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        @extend %position-center;
+    }
+
     /*==== image type ====*/
     .px-media-img {opacity: 0;}
 }
