@@ -170,3 +170,20 @@
         transform: scale(1);
     }
 }
+
+/*==== Background X ====*/
+.animated-bg-x {
+    background-repeat: repeat-x;
+    -webkit-animation: background_x 60s linear infinite;
+            animation: background_x 60s linear infinite;
+}
+
+@-webkit-keyframes background_x {
+    from {background-position: 0 0;}
+    to {background-position: 100% 0;}
+}
+
+@keyframes background_x {
+    from {background-position: 0 0;}
+    to {background-position: 100% 0;}
+}

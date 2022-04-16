@@ -48,7 +48,7 @@
     &.outline{ 
         background-color : transparent;
         color:var(--xspography-color);
-        line-height: calc(var(--height) - 2px);
+        line-height: calc(var(--height));
         border: 2px solid rgba(0,0,0, 0.1);
     }
 
@@ -60,17 +60,17 @@
         @include padding-inline(var(--space-in-xs), 'both');
 
         /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-xs) - 2px);}
+        &.outline {line-height: calc(var(--height-xs));}
     }
 
     //===== Small Button ====//
     &.small {
         height: var(--height-sm);
-        line-height: calc(var(--height-sm) - 2px);
+        line-height: calc(var(--height-sm));
         font-size: var(--f-size-sm);
         @include padding-inline(var(--space-in-sm), 'both');
         /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-sm) - 2px);}
+        &.outline {line-height: calc(var(--height-sm));}
     }
 
     //===== Large Button ====//
@@ -81,7 +81,7 @@
         font-weight: var(--strong-weight);
         @include padding-inline(var(--space-in-lg), 'both');
         /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-lg) - 2px);}
+        &.outline {line-height: calc(var(--height-lg));}
     }
 
     //===== Circle Button ====//

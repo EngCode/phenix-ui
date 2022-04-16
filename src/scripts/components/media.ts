@@ -64,7 +64,7 @@ PhenixElements.prototype.multimedia = function (options?:{
         let type = element.getAttribute('data-type') || options?.type || 'background',
             src  = element.getAttribute('data-src') || options?.src,
             alt  = element.getAttribute('data-alt') || options?.alt || '',
-            ratio  = element.getAttribute('data-size') || options?.size || 'none',
+            ratio  = element.getAttribute('data-size') || options?.size,
             splide = Phenix(element).ancestor('.splide__slide--clone'),
             embed  = element.getAttribute('data-embed') || options?.embed || 'video',
             gradient = element.getAttribute('data-gradient') || options?.gradient?.value || false,
@@ -83,9 +83,9 @@ PhenixElements.prototype.multimedia = function (options?:{
             loop = player_loop && player_loop !== 'false' ? true : false,
             muted = player_muted && player_muted !== 'false' ? true : false;
         //====> Set Media Size <====//
-        if (ratio && ratio != null || false || 'false' || 'none') {
+        if (ratio && ratio != null || undefined) {
             //====> Predefined Ratio's <====//
-            if (!ratio.includes('x')) element.classList.add(`ratio-${ratio}`);
+            if (!element.classList.toString().includes('ratio')) element.classList.add(`ratio-${ratio}`);
 
             //====> Otherwise <====//
             else {
@@ -129,7 +129,10 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Check for Repeat <====//
                     gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
                     //===> Set the Gradient <===//
-                    element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient})`;
+                    if(gradient.includes(',')) {
+                        element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient})`;
+                    //===> Set As Color if it Single Value <===//
+                    } else element.style.backgroundColor = `${gradient}`;
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }

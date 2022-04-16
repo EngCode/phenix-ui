@@ -43,7 +43,8 @@ PhenixElements.prototype.slider = function (options?:{
 
         //====> Move Main Classes <====//
         Array.from(currentClasses).forEach(cl => {
-            if(cl.includes('slider') || cl.includes('carousel')) {
+            if(!cl.includes('splide__list') && !cl.includes('row')) {
+                /* cl.includes('slider') || cl.includes('carousel') */
                 sliderWraper.classList.add(cl);
                 slider.classList.remove(cl);
             }
@@ -95,7 +96,7 @@ PhenixElements.prototype.slider = function (options?:{
             perPage: inline('data-xl') || items,
             height: verticalFix(inline('data-md') || items),
         } : '';
-    
+
         //====> Splide Active <====//
         let the_slider = new Splide(sliderWraper, {
             type : type,
@@ -122,7 +123,7 @@ PhenixElements.prototype.slider = function (options?:{
             Phenix(media_elements).multimedia();
 
             //====> Lazyloading <====//
-            slider.querySelectorAll('.phenix-loading, .phenix-loader').forEach(media => {
+            slider.querySelectorAll('.px-loading, .px-loader').forEach(media => {
                 if (Phenix(media).inView()) {
                     if (media.getAttribute('data-src')) {
                         Phenix(media).multimedia();

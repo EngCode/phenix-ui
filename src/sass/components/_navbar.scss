@@ -1,5 +1,5 @@
 /**======> Referance By Comment <======
- * ===> 01 - Phenix Navbar 
+ * ===> 01 - Phenix Navigation 
  * ===> 02 - CSS Options
  * ===> 03 - Menu Items
  * ===> 04 - Links
@@ -10,8 +10,8 @@
 /*==== Utlites Repeaters ====*/
 @import '../assets/mixin';
 
-/*==== Phenix Navbar ====*/
-.phenix-navbar {
+/*==== Phenix Navigation ====*/
+.px-navigation {
     /*==== CSS Options ====*/
     --font-size : 14px;
     --space-in  : #{REM(10)};
@@ -19,16 +19,23 @@
     --color  : var(--gray-color);
     --color-hvr : var(--primary-color);
     --background : transparent;
-    --background-hvr : var(--success-light);
+    --background-hvr : var(--primary-offwhite);
     --font-weight : var(--bold-weight);
+
+    /*==== global options ====*/
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    
     /*==== Menu Items ====*/
     > ul > li {
-        font-size: var(--font-size);
+        /*==== inherited ====*/
+        font-size: inherit;
+        font-weight: inherit;
+        /*==== Options ====*/
         height: var(--height);
-        line-height: calc(var(--height) + 1px);
+        line-height: var(--height);
         color: var(--color);
         background-color: var(--background);
-        font-weight: var(--font-weight);
         position: relative;
         @extend %fast-motion;
         @include padding_inline(var(--space-in), 'both');
@@ -90,7 +97,7 @@
 }
 
 /*==== Phenix Custom Menu ====*/
-.phenix-custom-menu {
+.px-custom-menu {
     /*==== CSS Options ====*/
     --width : 300px;
     /*==== Standard ====*/

@@ -18,13 +18,13 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Menu Builder <====*/
 PhenixElements.prototype.menu = function (options?:{
-    type?:string,       //===> Menu Type [navigation, dropdown]
-    menu_id?:string,    //===> Menu CSS ID
-    hover?:boolean,     //===> Dropdown on Hover [Disktop only]
-    active?:boolean,    //===> Menu CSS Active Class [px-active]
-    sub_active?:boolean,//===> Submenus CSS Active Class [px-submenu-active]
-    mobile?:string,     //===> Responsive Mode [dropdown, custom]
-    effect?:string,     //===> Dropdown Effect [slide, fade, custom]
+    type?:string,        //===> Menu Type [navigation, dropdown]
+    menu_id?:string,     //===> Menu CSS ID
+    hover?:boolean,      //===> Dropdown on Hover [Disktop only]
+    active?:string ,     //===> Menu CSS Active Class [px-active]
+    sub_active?:string,  //===> Submenus CSS Active Class [px-submenu-active]
+    mobile?:string,      //===> Responsive Mode [dropdown, custom]
+    effect?:string,      //===> Dropdown Effect [slide, fade, custom]
 }) {
     //====> Loop Through Phenix Query <====//
     this.forEach(menu => {
@@ -37,7 +37,7 @@ PhenixElements.prototype.menu = function (options?:{
             hover = inline('data-hover') || options?.hover || false,
             active = inline('data-active') || options?.active || 'px-menu-active',
             sub_active = inline('data-sub-active') || options?.sub_active || 'px-submenu-active',
-            effect = inline('data-effect') || options?.effect || 'custom',
+            effect = inline('data-effect') || options?.effect || 'slide',
             responsive = inline('data-mobile') || options?.mobile || 'dropdown';
 
         //====> Dropdown Submenus <====//
@@ -105,7 +105,7 @@ PhenixElements.prototype.menu = function (options?:{
                 if (!document.querySelector(`#${menu_id}`)) {
                     //====> Create the Menu into the Body <====//
                     Phenix(document.body).insert('append', 
-                        `<nav id="${menu_id}" class="phenix-custom-menu">
+                        `<nav id="${menu_id}" class="px-custom-menu">
                             <div class="menu-wraper">${menu.innerHTML}</div>
                             <a href="#${menu_id}" class="menu-toggle" tabindex="0" role="button" aria-pressed="false"></a>
                         </nav>`

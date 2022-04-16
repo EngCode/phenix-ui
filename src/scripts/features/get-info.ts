@@ -138,17 +138,17 @@ PhenixElements.prototype.viewport = function (property:string) {
 
 //====> Copyrights <====//
 PhenixElements.prototype.copyrights = function (project_name) {
-  console.log(`🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥
-🔥                                     🔥
-🔥  - Name    : ${project_name || 'Project Untitlted'}      🔥
-🔥  - System  : Phenix Design System   🔥
-🔥  - Front   : PDS UI/UX Framework    🔥
-🔥  - Auther  : Abdullah Ramadan       🔥
-🔥  - Version : PDS v0.5 Alpha         🔥
-🔥  - Website : phenixthemes.com       🔥
-🔥  - Docs    : docs.phenixthemes.com  🔥
-🔥  - Contact : +2-01122974539         🔥
-🔥                                     🔥
-🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥💥🐦`, "color: #FB955D;font-weight: 600");
+  console.log(`🔥🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥🔥
+🔥                                       🔥
+🔥  - Name    : ${project_name || 'Project Untitlted'}        🔥
+🔥  - System  : Phenix Design System     🔥
+🔥  - Front   : PDS UI/UX Framework      🔥
+🔥  - Auther  : Abdullah Ramadan         🔥
+🔥  - Version : PDS v0.5 Alpha           🔥
+🔥  - Website : phenixthemes.com         🔥
+🔥  - Docs    : design.phenixthemes.com  🔥
+🔥  - Contact : +2-01122974539           🔥
+🔥                                       🔥
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥💥🐦`, "color: #FB955D;font-weight: 600");
     return this;
 };

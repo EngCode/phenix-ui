@@ -9,7 +9,7 @@
  * ===> 00 - Item Remover
  * ===> 00 - Responsive Multimedia
  * ===> 00 - Viewport Utilities
- * ===> 00 - 
+ * ===> 00 - Notficationss
 */
 
 /*====> Phenix Object <====*/
@@ -41,7 +41,7 @@ PhenixElements.prototype.utilities = function (options?:{
         if (type === 'accessibility' || 'all') {
             //====> Buttons Accessibility <====//
             Phenix('.btn, .remove-item').setAttributes({
-                "tabindex":0,
+                "tabindex": 0,
                 "role":"button",
                 "aria-pressed":"false",
             });
@@ -69,31 +69,44 @@ PhenixElements.prototype.utilities = function (options?:{
                 //=== Remove the Closest Target ===//
                 else if (relation === 'closest' || 'related') trigger.closest(target).remove();
             }, true);
+
+            //====> Masonry Grid <====//
+            Phenix('.px-masonry').forEach((gallery:HTMLElement) => {
+                //===> Wait for Loading <===//
+                setTimeout(() => {
+                    let max_height = Phenix(gallery).height();
+                    gallery.style.maxHeight = `${max_height}px`;
+                    gallery.classList.add('flow-columns');
+                }, 500);
+            });
+
+            //====> H1 Fix <====//
+            let headline = document.querySelector('h1');
+            if(headline !== null) Phenix('body').insert('prepend', `<h1 class="hidden">${document.title}</h1>`);
         }
 
         //====> Viewport Utilities <====//
         if (type === 'viewport' || 'all') {
             //====> Watched Elements <====//
-            Phenix('[data-counter], .view-status').forEach((element:HTMLElement) => {
+            Phenix('.view-status').forEach((element:HTMLElement) => {
                 //====> Animations Data <====//
                 let animation = element.getAttribute('data-animation'),
-                    delay = element.getAttribute('data-delay') || 0,
-                    duation = element.getAttribute('data-duration') || 1000;
+                    delay = parseInt(element.getAttribute('data-delay')) || 0,
+                    duation = parseInt(element.getAttribute('data-duration')) || 1000,
+                    isInView = () => {
+                        //====> if the Element in view <====//
+                        if (Phenix(element).inView()) {
+                            //====> Active View Status <====//
+                            Phenix(element).addClass('view-active').css({
+                                "animation-name" : animation,
+                                "animation-duration" : duation,
+                                "animation-delay" : delay,
+                            });
+                        }
+                    };
                 //====> Scrolling Spy <====//
-                Phenix(window).on('scroll', scroll => {
-                    //====> if the Element in view <====//
-                    if (Phenix(element).inView()) {
-                        //====> Active Counters <====//
-                        if (element.matches('[data-counter]')) Phenix(element).counter();
-    
-                        //====> Active View Status <====//
-                        else if (element.matches('.view-status')) Phenix(element).addClass('view-active').css({
-                            animationName : animation,
-                            animationDuration : delay,
-                            animationDelay : duation,
-                        });
-                    }
-                });
+                isInView();
+                Phenix(window).on('scroll', isInView);
             });
         }
     });
@@ -101,3 +114,35 @@ PhenixElements.prototype.utilities = function (options?:{
     //====> Return Phenix Query <====//
     return this;
 }
+
+//=====> Notficationss <=====//
+PhenixElements.prototype.notfications = function (options?:{
+    message?:string,
+    type?:string,
+    duration?:number,
+}) {
+    //====> Element & Data <====//
+    let current,
+        type = options?.type || 'normal',
+        message = options?.message || 'No Message Defined.',
+        duration = options?.duration || 1000,
+        notfications = document.querySelector('.px-notfis'),
+        error_alert = `<div class="px-item pdy-10 pdx-20 fs-14 danger-bg mb-10">${message}</div>`,
+        normal_alert = `<div class="px-item pdy-10 pdx-20 fs-14 dark-bg mb-10">${message}</div>`,
+        success_alert = `<div class="px-item pdy-10 pdx-20 fs-14 success-bg mb-10">${message}</div>`;
+    //====> Create Notifcation Area <====//
+    if(!document.querySelector('.px-notfis')) notfications = Phenix('body').insert('append', '<div class="px-notfis"></div>');
+    //====> Apply Notifcations <====//
+    if (type === 'error') current = Phenix(notfications).insert('append', error_alert);
+    else if (type === 'success') current = Phenix(notfications).insert('append', success_alert);
+    else current = Phenix(notfications).insert('append', normal_alert);
+    //====> Show Notifcations <====//
+    Phenix(notfications).fadeIn();
+    //====> Hide Notifcations <====//
+    setTimeout(()=> {
+        Phenix(notfications).fadeOut();
+        setTimeout(() => current ? current.remove() : '', 500)
+    }, duration);
+    //====> Return Phenix <====//
+    return this;
+};

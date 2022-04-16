@@ -104,14 +104,11 @@ iframe {
 
 /*==== Phenix Media ====*/
 .px-media {
-    /*==== Css Options ====*/
-    --ratio-size : 60%;
     /*==== ....====*/
     display: block;
     position: relative;
     background-size: cover;
     background-position: center;
-    padding-bottom: var(--ratio-size);
     /*==== elements ====*/
     video, iframe, .px-media-img {
         top: 0;
@@ -137,17 +134,24 @@ iframe {
 }
 
 /*==== Aspect Ratio ====*/
-[class*="ratio-"] {
-    --ratio-size : 60%;
+[class*="ratio"] {
+    --ratio-size : initial;
     padding-bottom: var(--ratio-size);
+}
+
+.ratio {
+    --ratio-size : 60%;
     /*==== Square 1x1 ====*/
-    &.ratio-1x1  {--ratio-size: 100%;}
+    &-1x1  {--ratio-size: 100%;}
     /*==== FHD 16x9 ====*/
-    &.ratio-16x9 {--ratio-size: 56.3%;}
+    &-16x9 {--ratio-size: 56.3%;}
     /*==== Landscape 21x9 ====*/
-    &.ratio-21x9 {--ratio-size: 42.9%;}
-    /*==== Classic 21x9 ====*/
-    &.ratio-4x3,.ratio-3x1 {--ratio-size: 75%;}
+    &-21x9 {--ratio-size: 42.9%;}
+    /*==== Classic 4x3 ====*/
+    &-4x3 {--ratio-size: 75%;}
+    &-3x4 {--ratio-size: 125%;}
+    /*==== Wide 3x1 ====*/
+    &-3x1 {--ratio-size: 55%;}
 }
 
 /*==== Lazy Loader ====*/
@@ -202,31 +206,30 @@ iframe {
 /*==== Forms Assets ====*/
 .form-ui {
     &.none-border {
-        #{$input_elements}, textarea {border: 0 none;box-shadow: unset;}
+        /*==== Forms Compnents ====*/
+        --forms-border : 0 none;
+        --forms-shadow : unset;
     }
-    
+
     &.gray-form {
-        #{$input_elements},textarea {background-color: #F5F5F5;}
-        &:not(.none-border) {
-            #{$input_elements},textarea {border: 1px solid #f1f1f1;}
-        }
+        /*==== Forms Compnents ====*/
+        --forms-bg     : #F5F5F5;
+        &:not(.none-border) {--forms-border : 1px solid #f1f1f1;}
     }
 
     &.dark-form {
+        /*==== Forms Compnents ====*/
+        --forms-bg     : var(--dark-color);
+        --forms-color  : #FFFF;
+        --forms-border : 0 none;
+        --forms-shadow : inset 3px 3px 5px rgba(#000, 0.1), inset -3px -3px 5px rgba(#c2c2c2, 0.10);
         .control-icon::before {color: var(--primary-color);}
-        #{$input_elements},textarea {
-            color: #FFF;
-            background-color: var(--secondary-color);
-            box-shadow: inset 3px 3px 5px rgba(#000, 0.1), inset -3px -3px 5px rgba(#91C2BA, 0.10);
-        }
     }
     
-    &.gpy-none {
-        #{$input_elements},textarea {margin-bottom: 0;}
-    }
+    &.gpy-none {--forms-gutter : 0;}
     
     &.small-spaces {
-        #{$input_elements},textarea {margin-bottom: 15px;}
+        --forms-gutter : 15px;
         textarea {height: REM(80);}
     }
 }
@@ -240,4 +243,12 @@ iframe {
     background-repeat: no-repeat;
     background-image: url('../img/select.svg');
     background-position: $direction-end calc(var(--forms-padding) - 3px) center;
+}
+
+/*==== Viewport Animations ====*/
+.view-status {
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
 }

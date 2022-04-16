@@ -1,3 +1,10 @@
+/*!
+ * Phenix.js
+ * Version  : 0.6 Beta
+ * License  : MIT
+ * Copyright: 2022 Abdullah.Ramadan
+ */
+
 /**======> Referance By Comment <======
  * ===> 01 - Phenix Object
  * ===> 02 - D.O.M Ready
@@ -17,11 +24,10 @@
  * ===> 16 - Define Info Grapers
  * ===> 17 - Define UI Effects
  * ===> 18 - Define Other Features
- * ===> .. - 
- * ===> 20 - Phenix Selecting Method
- * ===> 21 - Include Features
- * ===> 22 - Integration
- * ===> 23 - Your Custom Script [JS]
+ * ===> 19 - Include Features
+ * ===> 20 - Integration
+ * ===> 21 - Phenix Selecting Method
+ * ===> 22 - Your Custom Script [JS]
 */
 
 /*====> Phenix Object <====*/
@@ -247,9 +253,12 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         for (const [key, value] of Object.entries(style)) {
             //====> Convert Property[String] To Object Name[Key] <====//
             let property = key.replace(/(-[a-z])/, prop => prop.replace("-", "").toUpperCase());
-
+            
             //====> Style Elements <====//
-            this.forEach((element:HTMLElement) => (element.style[property] = value));
+            this.forEach((element:HTMLElement) => {
+                // console.log(element);
+                element.style[property] = value
+            });
         }
 
         //====> Return Phenix Elements <====//
@@ -465,25 +474,8 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     popup; lightbox; menu; datatable;
     validation; uploader; progress;
     select; repeater; rating;
-    slider; utilities;
+    slider; utilities; notfications;
 }
-
-/*====> Import Features <====*/
-import './features/get-info';  //==> Info Grapers
-import './features/effects';   //==> UI Effects
-import './features/counter';   //==> Animated Counter
-import './features/media';     //==> Media Setter
-import './features/uploader';  //==> File Uploader
-import './features/datatable'; //==> Data-Tables
-
-/*====> Import Components <====*/
-import './components/timer';     //==> Time Counter
-import './components/dropdown';  //==> Dropddown
-import './components/menu';      //==> Menus
-import './components/slider';    //==> Slider
-import './components/popup';     //==> Popups
-import './components/accordion'; //==> Accordions
-import './components/tabs';      //==> Tabs System
 
 /*====> Phenix Selecting Method <====*/
 const Phenix = (selector?:any) => {
@@ -507,9 +499,26 @@ const Phenix = (selector?:any) => {
 //====> Export Phenix <====//
 export default Phenix;
 
+/*====> Import Features <====*/
+import './features/get-info';  //==> Info Grapers
+import './features/effects';   //==> UI Effects
+import './features/counter';   //==> Animated Counter
+
+/*====> Import Components <====*/
+import './components/menu';      //==> Menus
+import './components/media';     //==> Media Setter
+import './components/timer';     //==> Time Counter
+import './components/tabs';      //==> Tabs System
+import './components/popup';     //==> Popups
+import './components/dropdown';  //==> Dropddown
+import './components/uploader';  //==> File Uploader
+import './components/accordion'; //==> Accordions
+import './components/datatable'; //==> Data-Tables
+
 /*====> Integration <====*/
-import './integration/wordpress';
-import './integration/utilities';
+import './integration/slider';    //==> Splide.js Slider
+import './integration/utilities'; //==> Phenix Utilities
+import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/
 import './custom-scripts';

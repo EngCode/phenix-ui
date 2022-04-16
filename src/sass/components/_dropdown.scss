@@ -14,16 +14,6 @@
 .px-dropdown {
     position: relative;
     @extend %inline-block;
-    /*======== Dropdown Button ========*/
-    .dropdown-btn:not(.icon-btn)::after {
-        position: relative;
-        font-family: var(--icons-font);
-        margin-#{$direction-start}: 5px;
-        font-size:0.9em;
-        vertical-align: middle;
-        top: -2px;
-    }
-
     /*======== Dropdown List ========*/
     .dropdown-list {
         /*==== CSS Options ====*/
