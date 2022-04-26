@@ -11,16 +11,13 @@
 
 /*==== Typography Settings ====*/
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+    margin-top: 0;
+    margin-bottom: 1rem;
     font-family: var(--primary-font);
     font-weight: var(--strong-weight);
-    margin: 0 auto;
 }
 
-p {
-    padding: 0;
-    margin: 0;
-    margin-bottom: REM(15);
-}
+p {margin-bottom: .5rem;}
 
 /*==== Headine Sizes ====*/
 h1,.h1 {font-size: REM(32);}

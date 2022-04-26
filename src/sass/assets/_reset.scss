@@ -65,9 +65,9 @@ sup {top: -0.5rem;}
 
 /*==== Media ====*/
 img {
+    height: auto;
     max-width: 100%;
     border-style: none;
-    height: auto;
     @extend %inline-block;
 }
 
@@ -160,12 +160,16 @@ input {
 }
 
 /*==== Custom Resets ====*/
+[hidden] { display: none !important; }
+
 iframe {
     max-width: 100%;
     border: 0 none;
 }
 
 hr {opacity: 0.3;}
+
 .reset-block, .reset { @extend %reset-space; }
 .reset-list { @extend %reset-list; }
+.reset-all {all: unset;}
 .no-border {border: 0 none;}

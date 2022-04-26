@@ -137,7 +137,6 @@ label,legend  {@extend %inline-block;}
 
 /*==== Options Controls ====*/
 .option-control {
-    --height : #{REM(30)};
     --color  : var(--gray-color);
     --color-active : var(--success-color);
     /*==== ... ====*/
@@ -184,25 +183,25 @@ label,legend  {@extend %inline-block;}
     }
     /*==== Switchs ====*/
     &[data-type="switch"] .switch {
-        width: 40px;
-        height: 7px;
         position: relative;
-        border-radius: 7px;
         @extend %fast-motion;
         @extend %inline-block;
         @include margin-inline(5px);
         background-color: var(--color);
+        width: calc(var(--height) + 10px);
+        height: calc(var(--height) / 3.25);
+        border-radius: calc(var(--height) / 3.25);
         /*==== Handle ====*/
         &::before {
             top: 50%;
             content: '';
-            width: 15px;
-            height: 15px;
             border-radius: 50%;
             position: absolute;
             #{$direction-start}: 0;
             @extend %position-center-y;
             background-color: var(--color);
+            width: calc(var(--height) / 2);
+            height: calc(var(--height) / 2);
         }
     }
     /*==== Checked mode ====*/

@@ -35,7 +35,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> D.O.M Ready <====*/
     ready(callback:any) {
         //====> Check if its Ready <====//
-        if (document.readyState == 'complete') callback;
+        if (document.readyState == 'complete') callback();
 
         //====> Wait for It to be Ready <====//
         else document.addEventListener('DOMContentLoaded', callback);
@@ -404,7 +404,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     }
 
     /*====> Media Query [un-tested] <====*/
-    mediaQuery(breakpoint:any, callback?:any, mobile_first?:boolean) {
+    mediaQuery(breakpoint:any, fn_callback?:any, mobile_first?:boolean) {
         /*==== Breakpoints Points ====*/
         let xsmall_end = 485, /*===> Max xSmall breakpoint Width */
             small_start= 580, /*===> Min Small breakpoint Width */
@@ -417,40 +417,86 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             large_end = 1370,   /*===> Max Large breakpoint Width */
             /*==== xLarge Points ====*/
             xlarge_start = 1405, /*===> Min xLarge breakpoint Width */
-            xlarge_end = 2565,   /*===> Max xLarge breakpoint Width */
-            /*==== Activator ====*/
-            createQuery = () => {
-                //==== Get Current Screen Width ====//
-                let current_vw = Phenix(document).viewport('width')
-                /*==== Extra Small ====*/
-                if (mobile_first && breakpoint == 'xsmall')  current_vw >= 0 ? callback : null;
-                else if (breakpoint == 'xsmall') current_vw <= xsmall_end ? callback : null;
+            xlarge_end = 2565;   /*===> Max xLarge breakpoint Width */
 
-                /*==== Small ====*/
-                if (mobile_first && breakpoint == 'small')  current_vw >= small_start ? callback : null;
-                else if (breakpoint == 'small') current_vw <= small_end ? callback : null;
+        /*==== Activator ====*/
+        const createQuery = () => {
+            //==== Get Current Screen Width ====//
+            let current_vw = Phenix(document).viewport('width');
 
-                /*==== Medium ====*/
-                if (mobile_first && breakpoint == 'medium')  current_vw >= medium_start ? callback : null;
-                else if (breakpoint == 'medium') current_vw <= medium_end ? callback : null;
+            /*==== Extra Small ====*/
+            if (mobile_first && breakpoint == 'xsmall') {
+                if (current_vw >= 0) {
+                    fn_callback();
+                }
+            } else if (breakpoint == 'xsmall') {
+                if (current_vw <= xsmall_end) {
+                    fn_callback();
+                }
+            }
 
-                /*==== Large ====*/
-                if (mobile_first && breakpoint == 'large')  current_vw >= large_start ? callback : null;
-                else if (breakpoint == 'large') current_vw <= large_end ? callback : null;
+            /*==== Small ====*/
+            if (mobile_first && breakpoint == 'small')  {
+                if (current_vw >= small_start) {
+                    fn_callback();
+                }
+            } else if (breakpoint == 'small')  {
+                if (current_vw <= small_end) {
+                    fn_callback();
+                }
+            }
 
-                /*==== Extra Large ====*/
-                if (mobile_first && breakpoint == 'xlarge')  current_vw >= xlarge_start ? callback : null;
-                else if (breakpoint == 'xlarge') current_vw <= xlarge_end ? callback : null;
+            /*==== Medium ====*/
+            if (mobile_first && breakpoint == 'medium') {
+                if (current_vw >= medium_start) {
+                    fn_callback();
+                }
+            } else if (breakpoint == 'medium') {
+                if (current_vw <= medium_end) {
+                    fn_callback();
+                }
+            }
 
-                /*==== Custom Media ====*/
-                if (mobile_first && typeof(breakpoint) == 'number')  current_vw >= breakpoint ? callback : null;
-                else if (typeof(breakpoint) == 'number') current_vw <= breakpoint ? callback : null;
-            };
+            /*==== Large ====*/
+            if (mobile_first && breakpoint == 'large')  {
+                if (current_vw >= large_start) {
+                    fn_callback();
+                }
+            } else if (breakpoint == 'large')  {
+                if (current_vw <= large_end) {
+                    fn_callback();
+                }
+            }
+
+            /*==== Extra Large ====*/
+            if (mobile_first && breakpoint == 'xlarge') {
+                if (current_vw >= xlarge_start) {
+                    fn_callback();
+                }
+            } else if (breakpoint == 'xlarge')  {
+                if (current_vw <= xlarge_end) {
+                    fn_callback();
+                }
+            }
+
+            /*==== Custom Media ====*/
+            if (mobile_first && typeof(breakpoint) == 'number')   {
+                if (current_vw >= breakpoint) {
+                    fn_callback();
+                }
+            } else if (typeof(breakpoint) == 'number')  {
+                if (current_vw <= breakpoint) {
+                    fn_callback();
+                }
+            }
+        };
 
         //===> Active <===//
         createQuery();
         //===> Live Check <===//
-        window.addEventListener('resize', resizing => createQuery);
+        window.addEventListener('resize', resizing => {
+            createQuery();
+        });
 
         //====> Return Phenix Elements <====//
         return this;
