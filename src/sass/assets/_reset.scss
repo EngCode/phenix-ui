@@ -158,3 +158,14 @@ input {
         border:0 none;
     }
 }
+
+/*==== Custom Resets ====*/
+iframe {
+    max-width: 100%;
+    border: 0 none;
+}
+
+hr {opacity: 0.3;}
+.reset-block, .reset { @extend %reset-space; }
+.reset-list { @extend %reset-list; }
+.no-border {border: 0 none;}

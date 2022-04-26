@@ -508,16 +508,16 @@ import './features/counter';   //==> Animated Counter
 import './components/menu';      //==> Menus
 import './components/media';     //==> Media Setter
 import './components/timer';     //==> Time Counter
+import './components/dropdown';  //==> Dropddown
 import './components/tabs';      //==> Tabs System
 import './components/popup';     //==> Popups
-import './components/dropdown';  //==> Dropddown
 import './components/uploader';  //==> File Uploader
 import './components/accordion'; //==> Accordions
 import './components/datatable'; //==> Data-Tables
 
 /*====> Integration <====*/
 import './integration/slider';    //==> Splide.js Slider
-import './integration/utilities'; //==> Phenix Utilities
+import './integration/utilities';    //==> Phenix Utilities
 import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/

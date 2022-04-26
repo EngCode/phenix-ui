@@ -38,7 +38,6 @@ html {
     line-height: var(--line-height);
 }
 
-/*==== Custom Resets ====*/
 body {
     margin: 0;
     padding: 0;
@@ -47,14 +46,6 @@ body {
     background: var(--body-bg);
     font-family: var(--primary-font);
 }
-
-iframe {
-    max-width: 100%;
-    border: 0 none;
-}
-
-.reset-block, .reset { @extend %reset-space; }
-.reset-list { @extend %reset-list; }
 
 /*==== Hidden Overflow ====*/
 .overflow-hidden   { overflow:   hidden; }
@@ -91,15 +82,16 @@ iframe {
 }
 
 /*==== Sticky Elements ====*/
-[data-sticky="inner"].is-sticky {
-    position: -webkit-sticky;
-    position: sticky;
+.is-sticky {
     top:0;
-}
-
-[data-sticky="absolute"].is-sticky {
-    position: fixed;
-    top:0;
+    z-index: var(--header-index);
+    /*==== Absolute ====*/
+    &[data-sticky="absolute"] {position: fixed;}
+    /*==== Native ====*/
+    [data-sticky="inner"].is-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
 }
 
 /*==== Phenix Media ====*/
@@ -163,30 +155,27 @@ iframe {
 }
 
 /*==== Assets ====*/
-.radius-g  {border-radius: 4px;}
-.radius-gl {border-radius: 8px;}
 .tx-icon::before {margin-#{$direction-end}: 7px;}
-.flow-nowrap {flex-wrap: nowrap;}
-.divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
-.divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
-.no-radius    {border-radius: 0;}
-.fluid-height {min-height: 100%;}
 .alpha-border {border: 1px solid rgba(#000, 0.1);}
 .alpha-05-bg  {background-color: rgba(#000, 0.05);}
 .alpha-10-bg  {background-color: rgba(#000, 0.1);}
 
+/*==== Dividers ====*/
+.divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
+.divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
+
+/*==== Radius ====*/
+.radius-sm   {border-radius: 4px;}
+.radius-md   {border-radius: 6px;}
+.radius-lg   {border-radius: 8px;}
+.radius-xl   {border-radius: 10px;}
+.radius-xxl  {border-radius: 15px;}
+.radius-none {border-radius: 0;}
+.radius-circle {border-radius: 50%;}
+
 /*==== Assets ====*/
 .postion-ab  {position: absolute;}
 .postion-rv  {position: relative;}
-
-/*==== Buttons Options ====*/
-.btn {
-    --f-size : #{REM(15)};
-    --f-size-xs : #{REM(13)};
-    --f-size-sm : #{REM(14)};
-    --f-size-lg : #{REM(17)};
-    --f-weight : var(--medium-weight);
-}
 
 /*==== Modals Assets ====*/
 .px-modal {
@@ -201,48 +190,6 @@ iframe {
             color: var(--danger-color);
         }
     }
-}
-
-/*==== Forms Assets ====*/
-.form-ui {
-    &.none-border {
-        /*==== Forms Compnents ====*/
-        --forms-border : 0 none;
-        --forms-shadow : unset;
-    }
-
-    &.gray-form {
-        /*==== Forms Compnents ====*/
-        --forms-bg     : #F5F5F5;
-        &:not(.none-border) {--forms-border : 1px solid #f1f1f1;}
-    }
-
-    &.dark-form {
-        /*==== Forms Compnents ====*/
-        --forms-bg     : var(--dark-color);
-        --forms-color  : #FFFF;
-        --forms-border : 0 none;
-        --forms-shadow : inset 3px 3px 5px rgba(#000, 0.1), inset -3px -3px 5px rgba(#c2c2c2, 0.10);
-        .control-icon::before {color: var(--primary-color);}
-    }
-    
-    &.gpy-none {--forms-gutter : 0;}
-    
-    &.small-spaces {
-        --forms-gutter : 15px;
-        textarea {height: REM(80);}
-    }
-}
-
-/*==== Select Theme ====*/
-.form-ui select, select.form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-        appearance: none;
-    background-size: 10px;
-    background-repeat: no-repeat;
-    background-image: url('../img/select.svg');
-    background-position: $direction-end calc(var(--forms-padding) - 3px) center;
 }
 
 /*==== Viewport Animations ====*/

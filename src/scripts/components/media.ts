@@ -100,6 +100,19 @@ PhenixElements.prototype.multimedia = function (options?:{
         if (src || gradient)  {
             //====> Media Handler <====//
             let mediaHandle = () => {
+                //====> Gradient Validation <====//
+                let multiple = false;
+                if (gradient) {
+                    //=== Replace white Space ===//
+                    gradient = gradient.replace(' ','');
+                    //=== for Hex Colors ===//
+                    if (gradient.includes('#')) multiple = gradient.includes(',') ? true : false;
+                    //=== for RGB Colors ===//
+                    else if (gradient.includes('rgb')) multiple = gradient.includes('),') ? true : false;
+                    //=== for CSS Variables ===//
+                    else if (gradient.includes('var')) multiple = gradient.includes('),') ? true : false;
+                }
+
                 //====> De-Activate Loader <====//
                 if (lazy) {
                     element.classList.remove('px-loader');
@@ -129,14 +142,14 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Check for Repeat <====//
                     gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
                     //===> Set the Gradient <===//
-                    if(gradient.includes(',')) {
+                    if(multiple) {
                         element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient})`;
                     //===> Set As Color if it Single Value <===//
                     } else element.style.backgroundColor = `${gradient}`;
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }
-    
+
                 //====> Mixed Type <====//
                 else if (type == 'mixed-bg') {
                     //===> Set Background <===//
@@ -146,7 +159,10 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Check for Repeat <====//
                     gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
                     //===> Set the Gradient <===//
-                    element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient}), ${currentBg}`;
+                    if(multiple) {
+                        element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient}), ${currentBg}`;
+                    //===> Set As Color if it Single Value <===//
+                    } else element.style.backgroundImage = `linear-gradient(${gradient},${gradient}), ${currentBg}`;
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }

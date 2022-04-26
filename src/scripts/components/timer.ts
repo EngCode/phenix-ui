@@ -16,13 +16,12 @@
 /*====> Phenix Object <====*/
 import Phenix, { PhenixElements } from "..";
 
-/*====> Timer Counter [un-tested] <====*/
+/*====> Timer Counter <====*/
 PhenixElements.prototype.timer = function (options?:{
         type?:string,    //===> Timer Type [countdown, stopwatch]
         time?:string,    //===> Time = Hour:Minutes
         date?:string,    //===> Date = Year-Month-Day
         message?:string, //===> Time End Message
-        callback?:any,   //===> Callback Function When timer is finshed
     }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
@@ -32,6 +31,10 @@ PhenixElements.prototype.timer = function (options?:{
             date = element.getAttribute('data-date')?.replace(/:/g, "/") || options?.date.replace(/:/g, "/") || '',
             message = element.getAttribute('data-message') || options?.message || 'Time is up.',
             elementPds = Phenix(element);
+
+        //====> Create Custom Event <====//
+        const start_event = new Event('timerStart'),
+              end_event = new Event('timerEnd');
         //====> Countdown Mode<====//
         if (type == 'countdown') {
             //====> Timer Markup Elements <====//
@@ -44,7 +47,10 @@ PhenixElements.prototype.timer = function (options?:{
 
             //====> Convert Date <====//
             if(date.split("-")[0].length < 4) date = date.split(/\D/).reverse().join('-');
-    
+
+            //====> Fire Starting Event <====//
+            setTimeout(() => element.dispatchEvent(start_event), 200);
+
             //====> Time Loop <====//
             let stringDate = new Date(`${date}T${time}`).getTime(),
                 update = setInterval(function () {
@@ -68,7 +74,8 @@ PhenixElements.prototype.timer = function (options?:{
                         clearInterval(update);
                         element.innerHTML = `<p class="timer-message reset-block">${message}</p>`;
                         element.classList.add('px-timer-ended');
-                        options?.callback ? options.callback : '';
+                        //====> Fire Ending Event <====//
+                        element.dispatchEvent(end_event);
                     }
                 }, 1000);
         }
@@ -82,9 +89,11 @@ PhenixElements.prototype.timer = function (options?:{
                     hours   : time_unites.length >= 3 ? element.querySelector('.hours')   || elementPds.insert('append', `<span data-label="hours" class="hours">00</span>`) : '',
                     minutes : time_unites.length >= 2 ? element.querySelector('.minutes') || elementPds.insert('append', `<span data-label="minutes" class="minutes">00</span>`) : '',
                     seconds : element.querySelector('.seconds') || elementPds.insert('append', `<span data-label="seconds" class="seconds">00</span>`),
-                },
+                };
+            //====> Fire Starting Event <====//
+            setTimeout(() => element.dispatchEvent(start_event), 200);
             //====> Time Loop <====//
-            update = setInterval(function () {
+            let update = setInterval(function () {
                 //====> Increase Seconds <====//
                 ++total_seconds;
                 //====> Increase Seconds <====//
@@ -114,7 +123,8 @@ PhenixElements.prototype.timer = function (options?:{
                     clearInterval(update);
                     element.innerHTML = `<p class="timer-message reset-block">${message}</p>`;
                     element.classList.add('px-timer-ended');
-                    options?.callback ? options.callback : '';
+                    //====> Fire Ending Event <====//
+                    element.dispatchEvent(end_event);
                 }
             }, 1000);
         }

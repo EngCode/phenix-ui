@@ -35,15 +35,20 @@ PhenixElements.prototype.utilities = function (options?:{
                 //====> Restore Placeholder <===//
                 Phenix(control).on('blur', event => control.setAttribute('placeholder', holder));
             });
-        }
 
-        //====> Accessibility <====//
-        if (type === 'accessibility' || 'all') {
-            //====> Buttons Accessibility <====//
-            Phenix('.btn, .remove-item').setAttributes({
-                "tabindex": 0,
-                "role":"button",
-                "aria-pressed":"false",
+            //===> Form Controls Group <===//
+            Phenix('.form-ui, .px-form').forEach((form:HTMLElement) => {
+                //===> Get the Controls Size <====//
+                let size = form.getAttribute('data-size') || '';
+
+                //===> for Each Form <====//
+                form.querySelectorAll('input, select, textarea').forEach(controler => {
+                    //====> Get the controler type <====//
+                    let type = controler.getAttribute('type');
+                    //====> if has no such class names or type <====//
+                    if (!controler.matches('.btn' || '.form-control'))
+                        type !== 'submit' || 'button' || 'radio' || 'checkbox' ? controler.classList.add('form-control', size) : '';
+                });
             });
         }
 
@@ -83,6 +88,17 @@ PhenixElements.prototype.utilities = function (options?:{
             //====> H1 Fix <====//
             let headline = document.querySelector('h1');
             if(headline !== null) Phenix('body').insert('prepend', `<h1 class="hidden">${document.title}</h1>`);
+
+            //====> Dynamic Word Coloring <====//
+            Phenix('body:not(.wp-admin) .colored-word').forEach((title:HTMLElement) => {
+                //====> Setup Properties <====//
+                var titleContent = title.innerHTML,
+                    word_array = titleContent.split(/[ ]+/),
+                    lastword  = word_array.splice(-1);
+                //====> Return Title <====//
+                let theResult = `${word_array} <span class="primary-color">${lastword}</span>`;
+                title.innerHTML = theResult.replace(/,/g, ' ');
+            });
         }
 
         //====> Viewport Utilities <====//
@@ -93,16 +109,13 @@ PhenixElements.prototype.utilities = function (options?:{
                 let animation = element.getAttribute('data-animation'),
                     delay = parseInt(element.getAttribute('data-delay')) || 0,
                     duation = parseInt(element.getAttribute('data-duration')) || 1000,
+                    //====> if the Element in view Show it <====//
                     isInView = () => {
-                        //====> if the Element in view <====//
-                        if (Phenix(element).inView()) {
-                            //====> Active View Status <====//
-                            Phenix(element).addClass('view-active').css({
-                                "animation-name" : animation,
-                                "animation-duration" : duation,
-                                "animation-delay" : delay,
-                            });
-                        }
+                        if (Phenix(element).inView()) Phenix(element).addClass('view-active').css({
+                            "animation-name" : animation,
+                            "animation-duration" : `${duation}ms`,
+                            "animation-delay" : `${delay}ms`,
+                        });
                     };
                 //====> Scrolling Spy <====//
                 isInView();

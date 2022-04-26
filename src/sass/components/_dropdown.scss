@@ -1,60 +1,22 @@
 /**======> Referance By Comment <======
- * ===> 01 - Dropdown 
- * ===> 02 - CSS Options
- * ===> 03 - Standard
- * ===> 04 - 
- * ===> 05 - 
- * ===> 06 - Hover & Active
+ * ===> 01 - Dropdown Hover 
+ * ===> 02 - Dropdown List
 */
 
-/*==== Utlites ====*/
-@import '../assets/mixin';
-
-/*======== Dropdown ========*/
+/*==== Dropdown Hover  ====*/
 .px-dropdown {
-    position: relative;
     @extend %inline-block;
-    /*======== Dropdown List ========*/
-    .dropdown-list {
-        /*==== CSS Options ====*/
-        --color : var(--gray-color);
-        --color-hvr : var(--primary-color);
-        --background : white;
-        --space-around : #{REM(15)};
-        --space-in : 0;
-        --f-size : 0.85em;
-        --height : 28px;
-        /*==== Reset ====*/
-        list-style: none;
-        margin: 0;
-        position: absolute;
-        top: 100%;
-        #{$direction-start}: 0;
-        min-width: REM(190);
-        display: none;
-        width: 100%;
-        /*==== Theme ====*/
-        color: var(--color);
-        background-color: var(--background);
-        padding: var(--space-around);
-        z-index: var(--dropdown-index);
-        font-size: var(--f-size);
-        line-height: var(--height);
-        box-shadow: 3px 3px 15px rgba(#000, 0.1);
-        border-radius: 6px;
-        /*==== Links ====*/
-        a {
-            color: inherit;
-            &:focus, &:active {outline: 0 none;}
-        }
-        > a {display: block;}
-        /*====  ====*/
-        li:hover {
-            @extend %fast-motion;
-            color: var(--color-hvr);
-        }
-    }
+    &[data-hover]:hover .px-dropdown-list {display: block!important;}
+}
 
-    /*======== Show the Dropdown ========*/
-    &.px-active, &[data-event="hover"]:hover .dropdown-list {display: block;}
+/*==== Dropdown List ====*/
+.px-dropdown-list {
+    min-width: 100%;
+    /*==== items ====*/
+    li {
+        padding: #{REM(8)} 15px;
+        border-bottom: 1px solid rgba(#000, 0.1);
+    }
+    /*==== links ====*/
+    a {color: inherit;}
 }

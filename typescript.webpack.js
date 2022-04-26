@@ -1,5 +1,4 @@
 /*jslint es6 */
-
 const path = require('path');
 
 module.exports = {
@@ -7,13 +6,13 @@ module.exports = {
     entry: path.join(__dirname, '/src/scripts/index.ts'),
     devtool: "source-map",
     output: {
-        filename: 'phenix.js',
-        path: path.join(__dirname, '/dist/js/'),
+        filename: 'js/phenix.js',
+        path: path.join(__dirname, '/dist/'),
+        globalObject: 'this',
         library: {
             type: 'umd',
             name: 'Phenix',
-        },
-        globalObject: 'this'
+        }
     },
     module: {
         rules: [

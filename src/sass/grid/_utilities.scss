@@ -58,6 +58,8 @@
     .flow#{$infix}-columns {flex-flow: column;}
     /*=== Reversed Stacked ===*/
     .flow#{$infix}-columns-reverse {flex-flow: column-reverse;}
+    /*=== No-Wrap ===*/
+    .flow#{$infix}-nowrap  {flex-wrap: nowrap;}
 
     /*==== Ordering ====*/
     @for $i from 0 through $order-limit { 

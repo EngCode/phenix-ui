@@ -138,17 +138,22 @@ PhenixElements.prototype.viewport = function (property:string) {
 
 //====> Copyrights <====//
 PhenixElements.prototype.copyrights = function (project_name) {
-  console.log(`🔥🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥🔥
+    //===> Name Resolve <===//
+    let name = project_name;
+    while (name.length < 25) name += ` `;
+    //====> Print Copyrights <====//
+console.log(`🔥🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥🔥
 🔥                                       🔥
-🔥  - Name    : ${project_name || 'Project Untitlted'}        🔥
+🔥  - Name    : ${name || 'Project Name'}🔥
 🔥  - System  : Phenix Design System     🔥
 🔥  - Front   : PDS UI/UX Framework      🔥
 🔥  - Auther  : Abdullah Ramadan         🔥
-🔥  - Version : PDS v0.5 Alpha           🔥
+🔥  - Version : PDS v0.7 Alpha           🔥
 🔥  - Website : phenixthemes.com         🔥
 🔥  - Docs    : design.phenixthemes.com  🔥
 🔥  - Contact : +2-01122974539           🔥
 🔥                                       🔥
 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥💥🐦`, "color: #FB955D;font-weight: 600");
+    //===> Return Phenix <===//
     return this;
 };

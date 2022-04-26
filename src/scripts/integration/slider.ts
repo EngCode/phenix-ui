@@ -6,8 +6,9 @@
  * ===> 02 - 
 */
 
-/*====> Phenix and Splide <====*/
+/*====> Phenix Query <====*/
 import Phenix, { PhenixElements } from "..";
+/*====> Splide JS for The Slider Core <====*/
 import Splide from '@splidejs/splide';
 
 /*====> Phenix Slider <====*/

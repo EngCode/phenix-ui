@@ -1,10 +1,12 @@
 /**======> Referance By Comment <======
  * ===> 01 - Buttons 
- * ===> 02 - CSS Options
+ * ===> 02 - Options
  * ===> 03 - Standard
- * ===> 04 - 
- * ===> 05 - 
- * ===> 06 - Hover & Active
+ * ===> 04 - Button Sizes
+ * ===> 05 - Circle & Outline
+ * ===> 06 - Icons for Button
+ * ===> 07 - Prime Colors
+ * ===> 08 - Assets Colors
 */
 
 /*==== Utlites ====*/
@@ -12,310 +14,103 @@
 
 /*======== Buttons ========*/
 .btn {
-    /*==== CSS Options ====*/
-    --height : #{REM(42)};
-    --height-xs : #{REM(30)};
-    --height-sm : #{REM(36)};
-    --height-lg : #{REM(52)};
-    --color  : var(--dark-color);
-    --background  : var(--primary-offwhite);
+    /*==== Options ====*/
     --radius : 4px;
-    --f-size : #{REM(13)};
-    --f-size-xs : #{REM(12)};
-    --f-size-sm : #{REM(12)};
-    --f-size-lg : #{REM(16)};
-    --f-weight : var(--medium-weight);
-    --space-in : #{REM(20)};
-    --space-in-xs : #{REM(10)};
-    --space-in-sm : #{REM(15)};
-    --space-in-lg : #{REM(30)};
-    
+    --padding : #{REM(20)};
+    --text-weight : var(--medium-weight);
+    /*==== Size Options ====*/
+    --height : #{REM(42)};
+    --text-size : #{REM(15)};
+    --border-size : 0;
+    /*==== Colors Options ====*/
+    --color : var(--dark-color);
+    --background : var(--primary-offwhite);
+    --border-color : transparent;
+
     /*==== Standard ====*/
-    @extend %inline-block;
+    border : var(--border-size) solid var(--border-color);
+    color  : var(--color);
+    height : var(--height);
+    text-align  : center;
+    font-size   : var(--text-size);
+    font-weight : var(--text-weight);
+    line-height : var(--height);
+    border-radius : var(--radius);
+    background-color : var(--background);
     @extend %fast-motion;
-    @include padding-inline(var(--space-in), 'both');
-    height:var(--height);
-    line-height: var(--height);
-    color:var(--color);
-    background-color:var(--background);
-    font-size: var(--f-size);
-    font-weight: var(--f-weight);
-    border-radius: var(--radius);
-    text-align: center;
-    border: unset;
+    @extend %inline-block;
+    @include padding-inline(var(--padding), 'both');
+    /*==== Align inner Elements ====*/
+    *, &::before, &::after {@extend %inline-block;}
 
-    //======> Outline Theme <======//
-    &.outline{ 
-        background-color : transparent;
-        color:var(--xspography-color);
-        line-height: calc(var(--height));
-        border: 2px solid rgba(0,0,0, 0.1);
-    }
-
-    //===== Small Button ====//
+    //===== Button Sizes  ====//
     &.tiny {
-        font-size: var(--f-size-xs);
-        height: var(--height-xs);
-        line-height: var(--height-xs);
-        @include padding-inline(var(--space-in-xs), 'both');
-
-        /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-xs));}
+        --height : #{REM(30)};
+        --text-size : #{REM(13)};
     }
 
-    //===== Small Button ====//
     &.small {
-        height: var(--height-sm);
-        line-height: calc(var(--height-sm));
-        font-size: var(--f-size-sm);
-        @include padding-inline(var(--space-in-sm), 'both');
-        /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-sm));}
+        --height : #{REM(36)};
+        --text-size : #{REM(14)};
     }
 
-    //===== Large Button ====//
     &.large {
-        height: var(--height-lg);
-        line-height: var(--height-lg);
-        font-size: var(--f-size-lg);
-        font-weight: var(--strong-weight);
-        @include padding-inline(var(--space-in-lg), 'both');
-        /*==== Outline Mode ====*/
-        &.outline {line-height: calc(var(--height-lg));}
+        --height : #{REM(52)};
+        --text-size : #{REM(17)};
     }
 
-    //===== Circle Button ====//
-    &.circle {border-radius:50%;}
-
-    //===== Square Button ====//
     &.square {
         width: var(--height);
         @include padding-inline(0, 'both');
-        &.tiny {width: var(--height-xs);}
-        &.small{width: var(--height-sm);}
-        &.large{width: var(--height-lg);}
     }
 
-    //===== Icons ====//
-    &.btn-icon {
-        /*==== Icon ====*/
-        &::before {
-            margin-#{$direction-end}: REM(8);
-            line-height: inherit;
-            height: inherit;
-        }
+    //===== Circle & Outline ====//
+    &.circle {border-radius:50%;}
 
-        /*==== Labeled Mode ====*/
-        &.labeled {
-            overflow: hidden;
-            &:not(.icon-after) {padding-#{$direction-start}: 0;}
-            /*==== Icon ====*/
-            &::before {
-                background-color: rgba(0,0,0, 0.1);
-                text-align: center;
-                margin-#{$direction-end}: var(--space-in);
-                width: var(--height);
-            }
-
-            /*==== Outline BG ====*/
-            &.outline:not(:hover)::before {
-                background-color: transparent;
-                border-#{$direction-end}-width: 1px;
-                border-#{$direction-end}-sxsle: solid;
-                border-color: inherit;
-            }
-
-            /*==== Sizes ====*/
-            &.tiny::before {
-                width:var(--height-xs);
-                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-xs);}
-            }
-
-            &.small::before {
-                width:var(--height-sm);
-                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-sm);}
-            }
-
-            &.large::before {
-                width: var(--height-lg);
-                &:not(.icon-after) {margin-#{$direction-end}: var(--space-in-lg);}
-            }
-        }
+    &.outline {
+        --height : calc(var(--height) - 4px);
+        --border-size  : 2px;
+        --border-color : rgba(0,0,0, 0.1);
+        --background : transparent;
     }
 
-    //===== Icons After ====//
-    &.icon-after {
-        /*==== Icon ====*/
-        &::before {
-            float:$direction-end;
-            margin-#{$direction-start}: REM(8);
-            margin-#{$direction-end} : auto;
-        }
-
-        /*==== Labeled Mode ====*/
-        &.labeled {
-            overflow: hidden;
-            padding-#{$direction-end}: 0;
-            /*==== Icon ====*/
-            &::before {margin-#{$direction-start}: var(--space-in);}
-
-            /*==== Sizes ====*/
-            &.tiny::before { margin-#{$direction-start}: var(--space-in-xs); }
-            &.small::before { margin-#{$direction-start}: var(--space-in-sm); }
-            &.large::before { margin-#{$direction-start}: var(--space-in-lg); }
-        }
+    //===== Icons for Button ====//
+    &.btn-icon::before {
+        line-height: inherit;
+        @include margin-inline(calc(var(--padding) / 2) ,'end');
     }
 
-    //==== Button Colors ====//
-    &.primary {
-        background-color: var(--primary-color);
-        color: var(--primary-reverse);
-        &:hover {background-color:var(--primary-hover);}
-        /*==== Outline Mode ====*/
-        &.outline {
-            background-color: transparent;
-            border-color: var(--primary-color);
-            color:var(--primary-color);
-            &:hover {
-                background-color: var(--primary-color);
-                color: var(--primary-reverse);
-            }
-        }
+    &.btn-icon-end::before {
+        line-height: inherit;
+        float: $direction-end;
+        @include margin-inline(calc(var(--padding) / 2) ,'start');
     }
 
-    &.secondary {
-        color:var(--secondary-reverse);
-        background-color: var(--secondary-color);
-        &:hover {background-color: var(--secondary-hover);}
-        /*==== Outline Mode ====*/
-        &.outline {
-            color:var(--secondary-color);
-            border-color: var(--secondary-color);
-            background-color: transparent;
-            &:hover {
-                color: var(--secondary-reverse);
-                background-color: var(--secondary-color);
-            }
-        }
+    //==== Colors Maker ====//
+    @mixin make-color($prefix, $hover, $text:'dark-reverse') {
+        --color  : var(#{'--'+$text});
+        --background : var(#{'--'+$prefix+'-color'});
+        --border-color : var(#{'--'+$prefix+'-color'});
+        &:hover {--background : var(#{'--'+$prefix+'-'+$hover});}
     }
 
-    &.success {
-        color: white;
-        background-color: var(--success-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--success-color);
-            border-color: var(--success-color);
-            background-color: transparent;
-            &:hover {
-                color: white;
-                background-color: var(--success-color);
-            }
-        }
-    }
+    //==== Prime Colors ====//
+    &.primary { @include make-color('primary','hover','primary-reverse'); }
+    &.secondary { @include make-color('secondary','hover','secondary-reverse'); }
 
-    &.danger {
-        color: white;
-        background-color: var(--danger-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--danger-color);
-            border-color: var(--danger-color);
-            background-color: transparent;
-            &:hover {
-                color: white;
-                background-color: var(--danger-color);
-            }
-        }
-    }
-    
-    &.warning {
-        color: var(--dark-color);
-        background-color: var(--warning-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--warning-color);
-            border-color: var(--warning-color);
-            background-color: transparent;
-            &:hover {
-                color: var(--dark-color);
-                background-color: var(--warning-color);
-            }
-        }
-    }
-    
-    &.info {
-        color: white;
-        background-color: var(--info-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--info-color);
-            border-color: var(--info-color);
-            background-color: transparent;
-            &:hover {
-                color: white;
-                background-color: var(--info-color);
-            }
-        }
-    }
-    
-    &.gray {
-        color: white;
-        background-color: var(--gray-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--gray-color);
-            border-color: var(--gray-color);
-            background-color: transparent;
-            &:hover {
-                color: white;
-                background-color: var(--gray-color);
-            }
-        }
-    }
-    
-    &.dark {
-        color: white;
-        background-color: var(--dark-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--dark-color);
-            border-color: var(--dark-color);
-            background-color: transparent;
-            &:hover {
-                color: white;
-                background-color: var(--dark-color);
-            }
-        }
-    }
-    
+    //==== Assets Colors ====//
+    &.info { @include make-color('info','color'); }
+    &.gray { @include make-color('gray','color'); }
+    &.dark { @include make-color('dark','color'); }
+    &.success { @include make-color('success','color'); }
+    &.danger { @include make-color('danger','color'); }
+    &.warning { @include make-color('warning','color'); }
+    &.disabled, &[disabled], &:disabled { @include make-color('disable',''); }
+
+    /*==== White Button ====*/
     &.light {
-        color: var(--dark-color);
-        background-color: white;
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: white;
-            border-color: white;
-            background-color: transparent;
-            &:hover {
-                color: var(--dark-color);
-                background-color: white;
-            }
-        }
-    }
-    
-    &.disabled, &[disabled], &:disabled {
-        color: var(--gray-color);
-        background-color: var(--disable-color);
-        /*==== Outline Mode ====*/
-        &.outline {
-            color: var(--disable-color);
-            border-color: var(--disable-color);
-            background-color: transparent;
-            &:hover {
-                color: var(--gray-color);
-                background-color: var(--disable-color);
-            }
-        }
+        --color : var(--dark-color);
+        --background   : white;
+        --border-color : white;
     }
 }

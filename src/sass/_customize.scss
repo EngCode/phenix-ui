@@ -11,25 +11,30 @@
 /*==== Design Options ====*/
 :root {
     /*==== Global ====*/
-    --body-bg : var(--primary-offwhite);
+    --body-bg : #f1f1f1;
     --icons-font: "Font Awesome 5";
 
     /*==== Primary Color ====*/
-    --primary-color   : #375523;
-    --primary-hover   : #4a7c24;
+    --primary-color   : #00C4FF;
+    --primary-hover   : #1A69F4;
     --primary-reverse : #FFFFFF;
-    --primary-offwhite: #F5F7F4;
-    --offwhite-border : #d0e4da;
+    --primary-offwhite: #e1eef7;
+    --offwhite-border : #d0d9e4;
 
     /*==== Secondary Color ====*/
-    --secondary-color   : #343A40;
-    --secondary-hover   : #20272e;
-    --secondary-reverse : #FFFF;
+    --secondary-color   : #F8C35B;
+    --secondary-hover   : #FB955D;
+    --secondary-reverse : #FFFFFF;
 
-    /*==== Gradiens ====*/
-    --primary-gradient   : var(--primary-hover), var(--primary-color);
+    /*==== Gradients ====*/
+    --primary-gradient   : var(--primary-color), var(--primary-hover);
     --secondary-gradient : var(--secondary-color), var(--secondary-hover);
-    --blue-gradient      : #54AEFC, #3289E9, #5848D2;
+    --warning-gradient   : #FFD500, #F49D1A;
+    --danger-gradient    : #FD875B, #F9515A, #F96AAC;
+    --water-gradient     : #00C4FF, #1A69F4;
+    --ice-gradient       : #54AEFC, #3289E9, #5848D2;
+    --fire-gradient      : #FFD500, #FAA10B, #F4291A;
+    --purple-gradient    : #8772F7, #5F48DD;
 
     /*=== Assets Colors ====*/
     --links-color   :#2a94eb;
@@ -69,13 +74,13 @@
 
 /*==== Integration ====*/
 @import 'integration/wordpress';  //===> WordPress Integration
+@import 'integration/splide';    //===> Spldie Slider
 /*==== Animations Modules ====*/
 @import 'animations/fading';
 /*==== Components Modules ====*/
 @import 'components/navbar';    //===> Phenix Navbar
-@import 'components/buttons';   //===> Buttons
 @import 'components/dropdown';  //===> Buttons
-@import 'components/slider';    //===> Spldie Slider
+@import 'components/buttons';   //===> Buttons
 @import 'components/accordion'; //===> Accordion
 @import 'components/labels';    //===> Labels & Badges
 @import 'components/modals';    //===> Popups & Modals
@@ -92,3 +97,6 @@
 @import 'utilities/visibility'; //===> Visibility Utilities
 @import 'utilities/sizes';      //===> Sizing Utilities
 @import 'utilities/force';      //===> CSS Forced Assets
+
+/*==== Fix Button Height ====*/
+.btn {line-height: calc(var(--height) - 2px);}

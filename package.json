@@ -45,18 +45,21 @@
     }
   ],
   "scripts": {
+    "phenix-start": "concurrently --kill-others \"pnpm run phenix-sass\" \"pnpm run phenix-ts && size-limit\"",
     "phenix-ts": "pnpx webpack --config typescript.webpack.js --watch",
     "phenix-sass": "pnpx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "phenix-start": "concurrently --kill-others \"pnpm run phenix-sass\" \"pnpm run phenix-ts && size-limit\""
+    "js-gzip": "gzipper compress ./dist/js/ ./dist/js/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
+    "css-gzip": "gzipper compress ./dist/css/ ./dist/css/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
+    "px-gzipper": "del *.gz.* /a /s && pnpm run css-gzip && pnpm run js-gzip"
   },
   "devDependencies": {
-    "concurrently": "^6.4.0",
+    "concurrently": "^6.5.1",
     "node-sass": "^7.0.1",
     "ts-loader": "^7.0.5",
-    "typescript": "^3.9.7",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.4"
+    "typescript": "^3.9.10",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
     "@splidejs/splide": "^3.6.12"

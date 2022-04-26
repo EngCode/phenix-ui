@@ -12,29 +12,63 @@
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="Sitename Goes Here">
     <link rel="shortcut icon" type="image/png"  href="img/fevicon.png">
+    <!-- FontAwesome -->
+    <link href="css/fontawsome.css" rel="stylesheet" />
     <!-- Required CSS Files -->
     <link href="css/phenix.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Container -->
-<div class="container-sm">
-    <br /><br />
-    <!-- ... -->
 
-    <!-- ... -->
-    <br /><br /><br /><br />
+<!-- Grid -->
+<div class="row">
+    <!-- Column -->
+    <div class="col mb-20">
+        <!-- Option Control -->
+        <label class="option-control" data-type="switch">
+            Switch
+            <input type="checkbox" name="check-1">
+            <span class="switch"></span>
+            Example
+        </label>
+        <!-- Option Control -->
+    </div>
+    <!-- Column -->
+    <div class="col mb-20">
+        <!-- Option Control -->
+        <label class="option-control" data-type="switch">
+            Another
+            <input type="checkbox" name="check-1" checked>
+            <span class="switch"></span>
+            Switch
+        </label>
+        <!-- Option Control -->
+    </div>
+    <!-- Column -->
+    <div class="col mb-20">
+        <!-- Option Control -->
+        <label class="option-control me-10" data-type="button">
+            <input type="checkbox" name="radio-2">
+            <span class="switch btn outline">Button</span>
+        </label>
+        <!-- Option Control -->
+        <label class="option-control me-10" data-type="button">
+            <input type="checkbox" name="radio-2" checked>
+            <span class="switch btn outline">Options</span>
+        </label>
+        <!-- Option Control -->
+        <label class="option-control me-10" data-type="button">
+            <input type="checkbox" name="radio-2">
+            <span class="switch btn outline">Example</span>
+        </label>
+        <!-- Option Control -->
+    </div>
+    <!-- // Column -->
 </div>
-<!-- // Container -->
+<!-- // Grid -->
 
-<!-- Required JS Files -->
-<script src="js/phenix.js"></script>
-<!-- Docs Script -->
-<script>
-    //======> D.O.M is Ready <=======//
-    Phenix(document).ready((event) => {
-        //====> Build Timer's <====//
-        Phenix('.timer-demo').timer();
-    });
-</script>
+
+
+    <!-- Required JS Files -->
+    <script src="js/phenix.js"></script>
 </body>
 </html>

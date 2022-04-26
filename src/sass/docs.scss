@@ -135,6 +135,8 @@ html {line-height: 1.5;}
 .mb-20 {margin-bottom: 20px;}
 .mb-30 {margin-bottom: 30px;}
 .mb-40 {margin-bottom: 40px;}
+.radius-g  {border-radius: 4px;}
+.radius-gl {border-radius: 8px;}
 
 /*==== Header ====*/
 .main-header {
@@ -178,6 +180,7 @@ html {line-height: 1.5;}
     background-color: #fff;
     overflow-y: auto;
     padding: 0 !important;
+    z-index: 100;
     @extend %sticky-element;
     /*==== Size ====*/
     @include large() {height: calc(100vh - #{$header-height})};
@@ -208,7 +211,7 @@ html {line-height: 1.5;}
             padding-right: 15px;
             border-radius: 5px;
             background-color: #F6F6F6;
-            height: 36px;
+            height: REM(36);
             font-size: 13px;
             @include large() {
                 height: 40px;
@@ -276,6 +279,7 @@ html {line-height: 1.5;}
             }
             /*==== Submenus ====*/
             ul {
+                display: none;
                 font-size: 14px;
                 line-height: 25px;
                 color: var(--gray-color);
@@ -288,6 +292,7 @@ html {line-height: 1.5;}
             /*==== Active ====*/
             &.px-item-active {
                 color: var(--primary-color);
+                .submenu {display: block;}
                 > a::before {
                     content: '\f07c';
                     font-weight: 600;
@@ -295,6 +300,18 @@ html {line-height: 1.5;}
             }
         }
     }
+
+    /*==== Responsive ====*/
+    @include medium('down') {
+        background-color: var(--primary-color);
+        .menus-wraper {
+            padding-top: 15px;
+            padding-bottom: 30px;
+            background-color: #fff;
+            overflow-y: scroll;
+            max-height: calc(100vh - (60px + 64px));
+        }
+    };
 }
 
 /*==== Page Secitons ====*/
@@ -346,18 +363,13 @@ html {line-height: 1.5;}
     //====> Space Fix <====//
     padding: 15px;
     @include large() {padding: 30px!important;}
-
-    ul {
+    .docs-list {
         margin-right: 25px;
         margin-left: 25px;
         margin-top: 0;
         padding-left: 0;
         padding-right: 0;
         line-height: 1.4;
-        li {margin-bottom: 5px;}
-    }
-
-    .docs-list {
         li {margin-bottom: 10px;}
     }
 

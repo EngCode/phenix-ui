@@ -23,16 +23,17 @@ Phenix(document).ready(ready => {
         Phenix('.wpcf7-form br').forEach((space:HTMLElement) => space.remove());
         Phenix('.wpcf7-form[dir],.wpcf7-form [dir]').forEach((element:HTMLElement) => element.removeAttribute('dir'));
 
+        //====> Adminbar Fix <====//
+        if (document.querySelector('#wpadminbar')) Phenix('body').css({ 'padding-top' : '32px' });
+
+        //====> H1 Fix <====//
+        if(document.querySelector('h1') !== null) 
+            Phenix('.main-header').insert('append', `<h1 class="hidden">${document.title}</h1>`);
+
         //====> Copyrights Protection <====//
         // Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
         // Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
-
-        //====> H1 Fix <====//
-        let headline = document.querySelector('h1');
-        if(headline !== null) Phenix('.main-header').insert('append', `<h1 class="hidden">${document.title}</h1>`);
     }
     /*====> for Admin Panel <====*/
-    else {
-        console.log('!Hello There Greeting from Phenix Themes.');
-    }
+    else {}
 });

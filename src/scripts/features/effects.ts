@@ -49,7 +49,7 @@ PhenixElements.prototype.slideUp = function (duration?, delay?) {
             });
 
             //====> After Animation : Hide the Element <====//
-            window.setTimeout(() => Phenix(element).css({"display" : 'none'}, true), timespeed);
+            window.setTimeout(() => Phenix(element).css({"display" : 'none'}), timespeed);
         }
     });
 
@@ -140,7 +140,7 @@ PhenixElements.prototype.fadeOut = function (duration?, delay?) {
             });
 
             //====> After Animation : Hide the Element & Clear inline-style <====//
-            window.setTimeout(() => Phenix(element).css({"display" : 'none'}, true), timespeed);
+            window.setTimeout(() => Phenix(element).css({"display" : 'none'}), timespeed);
         }
     });
 
