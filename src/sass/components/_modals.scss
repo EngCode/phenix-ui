@@ -177,3 +177,18 @@
         .close-modal:not(.btn),h3,p {color:var(--dark-reverse);}
     }
 }
+
+/*==== Modals Assets ====*/
+.px-modal {
+    /*==== Close ====*/
+    .close-modal {
+        position: absolute;
+        top: -4px;
+        #{$direction-end}: -4px;
+        font-size: 14px;
+        &.outline {
+            background-color: inherit;
+            color: var(--danger-color);
+        }
+    }
+}

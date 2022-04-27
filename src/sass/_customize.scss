@@ -96,7 +96,6 @@
 @import 'utilities/main';       //===> Custom Utilities
 @import 'utilities/visibility'; //===> Visibility Utilities
 @import 'utilities/sizes';      //===> Sizing Utilities
-@import 'utilities/force';      //===> CSS Forced Assets
 
 /*==== Fix Button Height ====*/
 .btn {line-height: calc(var(--height) - 2px);}

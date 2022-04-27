@@ -1,9 +1,8 @@
 /**======> Referance By Comment <======
- * ===> 01 - Custom Resets
- * ===> 02 - Hidden Overflow
- * ===> 03 - Scrollable Overflow
- * ===> 04 - Float Elements
- * ===> 05 - Overlay
+ * ===> 01 - Hidden Overflow
+ * ===> 02 - Scrollable Overflow
+ * ===> 03 - Float Elements
+ * ===> 04 - Overlay Layer
  * ===> 05 - View-Port Status [JS Assets]
  * ===> 06 - Dynamic Backgrounds [JS Assets]
  * ===> 07 - Sticky Elements [JS Assets]
@@ -13,7 +12,7 @@
  * ===> 11 - 
  * ===> 12 - 
  * ===> 13 - 
- * ===> 14 - 
+ * ===> 14 - Directions
  * ===> 15 - View-Port Detector [JS Assets]
 */
 
@@ -35,7 +34,7 @@
 .float-end   { float: $direction-end; }
 .clear-after::after,.clear-fix { @extend %clear-after,:after; }
 
-/*==== Overlay ====*/
+/*==== Overlay Layer ====*/
 .overlay-dark {
     @extend %overlay;
     &::before {background-color: #000;}
@@ -116,7 +115,7 @@
     &-4x3 {--ratio-size: 75%;}
     &-3x4 {--ratio-size: 125%;}
     /*==== Wide 3x1 ====*/
-    &-3x1 {--ratio-size: 55%;}
+    &-3x1 {--ratio-size: 33.3%;}
 }
 
 /*==== Lazy Loader ====*/
@@ -150,21 +149,6 @@
 .postion-ab  {position: absolute;}
 .postion-rv  {position: relative;}
 
-/*==== Modals Assets ====*/
-.px-modal {
-    /*==== Close ====*/
-    .close-modal {
-        position: absolute;
-        top: -4px;
-        #{$direction-end}: -4px;
-        font-size: 14px;
-        &.outline {
-            background-color: inherit;
-            color: var(--danger-color);
-        }
-    }
-}
-
 /*==== Viewport Animations ====*/
 .view-status {
     -webkit-animation-duration: 1s;
@@ -172,3 +156,7 @@
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
 }
+
+/*==== Directions ====*/
+.ltr { direction: ltr; }
+.rtl { direction: rtl; }

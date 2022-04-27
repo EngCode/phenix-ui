@@ -285,4 +285,9 @@
     background-image: linear-gradient(var(--grade-rotation), var(--blue-gradient));
 }
 
-.transparent {background-color: transparent;}
+/*==== Colors/Backgrounds ====*/
+.color-inherit {color: inherit;}
+.color-transparent {color: transparent;}
+
+.background-inherit {background-color: inherit;}
+.background-transparent, .transparent-bg {background-color: transparent;}
