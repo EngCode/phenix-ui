@@ -3,6 +3,10 @@
  * ===> 02 - Standard Form Reset
  * ===> 03 - Select Reset
  * ===> 04 - Checkboxs and Radio Buttons Reset
+ * ===> 05 - Responsive REM Base
+ * ===> 06 - Page Defaults
+ * ===> 07 - Typography
+ * ===> 08 - Reset Classes
 */
 
 /*==== Vieport for IE+ ====*/
@@ -12,33 +16,30 @@
 *, *:before, *:after {box-sizing: border-box;}
 
 /*==== Display Resets ====*/
-article,aside,footer,header,nav,
-section,figcaption,figure,main,details,menu {display: block;}
-
-audio, video, canvas {display: inline-block;}
-
 summary {display: list-item;}
-
-template, [hidden], audio:not([controls]) {display: none;}
+[hidden] { display: none !important; }
+audio, video, canvas {display: inline-block;}
+template, audio:not([controls]) {display: none;}
+article,aside,footer,header,nav, section,figcaption,figure,main,details,menu {display: block;}
 
 /*==== Margins ====*/
 figure,h1,h2,h3,h4,h5,h6,p {margin: 0;}
 
 /*==== Font ====*/
-b,strong {font-weight: var(--strong-weight);}
+b, strong {font-weight: var(--strong-weight);}
 small {font-size: 0.8rem;}
 dfn {font-style: italic;}
-
-pre,code,kbd,samp {
+pre, code, kbd, samp {
     font-family: inherit;
     font-size: 1rem;
 }
 
 /*==== Links Reset ====*/
 a {
-    -webkit-text-decoration-skip: objects;
-        text-decoration: none;
+    text-decoration: none;
     color: var(--links-color);
+    -webkit-text-decoration-skip: objects;
+            text-decoration-skip: objects;
 }
 
 /*==== Others ====*/
@@ -54,8 +55,8 @@ mark {
 
 /*==== Sub-Text ====*/
 sub,sup {
-    font-size: 0.75rem;
     line-height: 0;
+    font-size: 0.75rem;
     position: relative;
     vertical-align: baseline;
 }
@@ -93,7 +94,7 @@ fieldset {padding: 0.35rem 0.75rem 0.625rem;}
 textarea {overflow: auto;}
 [type="checkbox"],[type="radio"] {padding: 0;}
 
-button,[type="button"],[type="reset"],[type="submit"] {
+button,[type="button"],[type="reset"],[type="submit"],[role="button"] {
     -webkit-appearance: button;
     cursor: pointer;
 }
@@ -134,7 +135,7 @@ button,input,optgroup, select,textarea {
     margin: 0;
 }
 
-//==== Select Reset ====//
+/*==== Select Reset ====*/
 select,keygen{
     option { padding: 0 0.9375rem; }
 
@@ -159,8 +160,33 @@ input {
     }
 }
 
-/*==== Custom Resets ====*/
-[hidden] { display: none !important; }
+/*==== Responsive REM Base ====*/
+:root {
+    --current-rem : var(--rem-xs);
+    /*==== Small Screens ====*/
+    @include small() {--current-rem : var(--rem-sm)}
+    /*==== Medium Screens ====*/
+    @include medium() {--current-rem : var(--rem-md)}
+    /*==== Large Screens ====*/
+    @include large() {--current-rem : var(--rem-lg)}
+    /*==== xLarge Screens ====*/
+    @include xlarge() {--current-rem : var(--rem-xl)}
+}
+
+/*==== Page Defaults ====*/
+html {
+    font-size: var(--current-rem);
+    line-height: var(--line-height);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    direction: $direction;
+    background: var(--body-bg);
+    font-family: var(--primary-font), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 iframe {
     max-width: 100%;
@@ -169,7 +195,31 @@ iframe {
 
 hr {opacity: 0.3;}
 
-.reset-block, .reset { @extend %reset-space; }
-.reset-list { @extend %reset-list; }
-.reset-all {all: unset;}
-.no-border {border: 0 none;}
+/*==== Typography ====*/
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+    margin-bottom: 1rem;
+    font-family: var(--primary-font);
+    font-weight: var(--strong-weight);
+}
+
+p {margin-bottom: .5rem;}
+
+/*==== Headine Sizes ====*/
+h1,.h1 {font-size: REM(32);}
+h2,.h2 {font-size: REM(28);}
+h3,.h3 {font-size: REM(25);}
+h4,.h4 {font-size: REM(22);}
+h5,.h5 {font-size: REM(18);}
+h6,.h6 {font-size: REM(16);}
+
+/*==== Lists ====*/
+ul {
+    margin-top: 0;
+    padding: 0 REM(15);
+}
+
+/*==== Reset Classes ====*/
+.reset-all  {all: unset;}
+.no-border  {border: 0 none;}
+.reset-list {@extend %reset-list;}
+.reset-block, .reset {@extend %reset-space;}

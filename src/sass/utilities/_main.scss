@@ -20,33 +20,6 @@
 /*==== SASS Selectors ====*/
 @import './../assets/selectors';
 
-/*==== Responsive REM Base ====*/
-:root {
-    --current-rem : var(--rem-xs);
-    /*==== Small Screens ====*/
-    @include small() {--current-rem : var(--rem-sm)}
-    /*==== Medium Screens ====*/
-    @include medium() {--current-rem : var(--rem-md)}
-    /*==== Large Screens ====*/
-    @include large() {--current-rem : var(--rem-lg)}
-    /*==== xLarge Screens ====*/
-    @include xlarge() {--current-rem : var(--rem-xl)}
-}
-
-html {
-    font-size: var(--current-rem);
-    line-height: var(--line-height);
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    direction: $direction;
-    background: var(--body-bg);
-    font-family: var(--primary-font);
-}
-
 /*==== Hidden Overflow ====*/
 .overflow-hidden   { overflow:   hidden; }
 .overflow-y-hidden { overflow-y: hidden; }

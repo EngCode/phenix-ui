@@ -9,24 +9,6 @@
  * ===> 08 - Blocks Quotes
 */
 
-/*==== Typography Settings ====*/
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-family: var(--primary-font);
-    font-weight: var(--strong-weight);
-}
-
-p {margin-bottom: .5rem;}
-
-/*==== Headine Sizes ====*/
-h1,.h1 {font-size: REM(32);}
-h2,.h2 {font-size: REM(28);}
-h3,.h3 {font-size: REM(25);}
-h4,.h4 {font-size: REM(22);}
-h5,.h5 {font-size: REM(18)}
-h6,.h6 {font-size: REM(16);}
-
 /*==== Display Headlines ====*/
 @include large() {
     .display-h0 {font-size: REM(50);}
@@ -41,32 +23,21 @@ h6,.h6 {font-size: REM(16);}
     @include xlarge() { font-size: REM(20); }
 }
 
-.medium-text {
-    font-size: 1rem;
-}
-
-.small-text {
-    font-size: 0.875rem;
-}
-
-/*==== Lists ====*/
-ul {
-    margin-top: 0;
-    padding: 0 REM(15);
-}
+.small-text {font-size: 0.875rem;}
 
 /*==== Text Utilities ====*/
-.tx-uppercase{text-transform: uppercase;}
-.tx-capitalize{text-transform: capitalize;}
-.tx-line-through{text-decoration:line-through;}
+.tx-uppercase  {text-transform: uppercase;}
+.tx-underline  {text-decoration: underline;}
+.tx-capitalize {text-transform: capitalize;}
+.tx-line-through {text-decoration: line-through;}
 
 /*==== Text Alignment ====*/
-.tx-align-start{text-align: start;}
-.tx-align-end{text-align:end;}
-.tx-align-right{text-align: right;}
-.tx-align-left{text-align: left;}
-.tx-align-center{text-align: center;}
-.tx-align-justify{text-align:justify;}
+.tx-align-end   {text-align:end;}
+.tx-align-left  {text-align: left;}
+.tx-align-right {text-align: right;}
+.tx-align-start {text-align: start;}
+.tx-align-center  {text-align: center;}
+.tx-align-justify {text-align:justify;}
 .tx-nowrap {@extend %nowrap;}
 
 /*==== Font Weight ====*/
@@ -75,8 +46,10 @@ ul {
 .normal-weight {font-weight: var(--normal-weight);}
 
 /*==== Line Height ====*/
-.lineheight-1 {line-height: 1;}
+.lineheight-100 {line-height: 1;}
+.lineheight-120 {line-height: 1.2;}
 .lineheight-130 {line-height: 1.3;}
 .lineheight-150 {line-height: 1.5;}
 .lineheight-160 {line-height: 1.6;}
-
+.lineheight-170 {line-height: 1.7;}
+.lineheight-180 {line-height: 1.8;}
