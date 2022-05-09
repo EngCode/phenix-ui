@@ -11,9 +11,9 @@
 @import '../assets/mixin';
 
 %container {
-    --container-padding: #{REM(15)};
     position: relative;
     @include margin_inline(auto);
+    --container-padding: #{REM(15)};
 }
 
 /*==== Containers ====*/

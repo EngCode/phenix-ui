@@ -53,10 +53,7 @@
 }
 
 /*==== Table Responsive ====*/
-.responsive-table, .responsive-sm-table{
-    overflow: auto;
-    // border-radius: 8px 8px 0 0;
-}
+.responsive-table, .responsive-sm-table {overflow: auto;}
 
 @include medium('down') { 
     .responsive-table .table {width:970px;}

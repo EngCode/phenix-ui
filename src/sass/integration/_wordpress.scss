@@ -55,3 +55,10 @@
 	margin-right: auto;
 }
 
+/*==== Table Block ====*/
+.wp-block-table {
+	@include margin-inline(0);
+	@extend .responsive-table;
+	@include medium('down') { table {width:970px;} }
+}
+

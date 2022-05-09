@@ -74,28 +74,31 @@
 
 /*==== Integration ====*/
 @import 'integration/wordpress';  //===> WordPress Integration
-@import 'integration/splide';    //===> Spldie Slider
+@import 'integration/splide';    //===> Splide Slider
+
 /*==== Animations Modules ====*/
 @import 'animations/fading';
+
 /*==== Components Modules ====*/
-@import 'components/navbar';    //===> Phenix Navbar
-@import 'components/dropdown';  //===> Buttons
 @import 'components/buttons';   //===> Buttons
-@import 'components/accordion'; //===> Accordion
-@import 'components/labels';    //===> Labels & Badges
+@import 'components/dropdown';  //===> Dropdown
+@import 'components/navbar';    //===> Phenix Navbar
 @import 'components/modals';    //===> Popups & Modals
 @import 'components/tables';    //===> Tables & Datatables
 @import 'components/tabs';      //===> Panels & Tabs
+@import 'components/accordion'; //===> Accordion
+
 /*==== Form Components ====*/
 @import 'form/form-controls';
+
 /*==== Utilities Modules ====*/
-@import 'utilities/typography'; //===> Typography Utilites
-@import 'utilities/padding';    //===> Padding Utilites
+@import 'utilities/main';       //===> Custom Utilities
+@import 'utilities/sizes';      //===> Sizing Utilities
 @import 'utilities/margin';     //===> Margin Utilites
 @import 'utilities/colors';     //===> CSS Coloring System
-@import 'utilities/main';       //===> Custom Utilities
+@import 'utilities/padding';    //===> Padding Utilites
+@import 'utilities/typography'; //===> Typography Utilites
 @import 'utilities/visibility'; //===> Visibility Utilities
-@import 'utilities/sizes';      //===> Sizing Utilities
 
-/*==== Fix Button Height ====*/
+/*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}

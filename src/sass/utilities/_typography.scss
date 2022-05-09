@@ -1,13 +1,20 @@
 /**======> Referance By Comment <======
- * ===> 01 - Typography Settings
- * ===> 02 - Headine Sizes
- * ===> 03 - Paragraph Sizes
- * ===> 04 - Text Utilities
- * ===> 05 - Text Alignment
- * ===> 06 - Default Lists
- * ===> 07 - Data Lists
- * ===> 08 - Blocks Quotes
+ * ===> 01 - Headine Sizes
+ * ===> 02 - Paragraph Sizes
+ * ===> 03 - Text Utilities
+ * ===> 04 - Text Alignment
+ * ===> 05 - Default Lists
+ * ===> 06 - Data Lists
+ * ===> 07 - Blocks Quotes
 */
+
+/*==== Headine Sizes ====*/
+h1,.h1 {font-size: REM(32);}
+h2,.h2 {font-size: REM(28);}
+h3,.h3 {font-size: REM(25);}
+h4,.h4 {font-size: REM(23);}
+h5,.h5 {font-size: REM(20);}
+h6,.h6 {font-size: REM(17);}
 
 /*==== Display Headlines ====*/
 @include large() {
@@ -16,14 +23,6 @@
     .display-h2 {font-size: REM(36);}
     .display-h3 {font-size: REM(32);}
 };
-
-/*==== Text Sizes ====*/
-.large-text {
-    font-size: REM(18);
-    @include xlarge() { font-size: REM(20); }
-}
-
-.small-text {font-size: 0.875rem;}
 
 /*==== Text Utilities ====*/
 .tx-uppercase  {text-transform: uppercase;}
@@ -53,3 +52,19 @@
 .lineheight-160 {line-height: 1.6;}
 .lineheight-170 {line-height: 1.7;}
 .lineheight-180 {line-height: 1.8;}
+
+/*==== Text Sizes ====*/
+.fs-12 {font-size: 12px;}
+.fs-13 {font-size: 13px;}
+.fs-14 {font-size: REM(14);}
+.fs-15 {font-size: REM(15);}
+.fs-16 {font-size: REM(16);}
+.fs-17 {font-size: REM(17);}
+.fs-18 {font-size: REM(18);}
+.fs-19 {font-size: REM(19);}
+.fs-20 {font-size: REM(20);}
+.small-text {font-size: 0.875rem;}
+.large-text {
+    font-size: REM(18);
+    @include xlarge() { font-size: REM(20); }
+}

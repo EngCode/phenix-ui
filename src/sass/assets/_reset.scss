@@ -197,25 +197,27 @@ hr {opacity: 0.3;}
 
 /*==== Typography ====*/
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     font-family: var(--primary-font);
     font-weight: var(--strong-weight);
 }
 
-p {margin-bottom: .5rem;}
-
-/*==== Headine Sizes ====*/
-h1,.h1 {font-size: REM(32);}
-h2,.h2 {font-size: REM(28);}
-h3,.h3 {font-size: REM(25);}
-h4,.h4 {font-size: REM(22);}
-h5,.h5 {font-size: REM(18);}
-h6,.h6 {font-size: REM(16);}
+p {margin-bottom: 1rem;}
 
 /*==== Lists ====*/
-ul {
+ul, ol {
     margin-top: 0;
-    padding: 0 REM(15);
+    @include padding-inline(REM(25));
+}
+
+dl {
+    margin-bottom: REM(25);
+    dt {@extend .strong-weight;}
+    dd {
+        margin-bottom: .5rem;
+        @include margin-inline(0);
+        @include padding-inline(REM(15));
+    }
 }
 
 /*==== Reset Classes ====*/
