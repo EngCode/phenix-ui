@@ -3,9 +3,8 @@
  * ===> 02 - Paragraph Sizes
  * ===> 03 - Text Utilities
  * ===> 04 - Text Alignment
- * ===> 05 - Default Lists
- * ===> 06 - Data Lists
- * ===> 07 - Blocks Quotes
+ * ===> 05 - Font Weight
+ * ===> 06 - Text Sizes
 */
 
 /*==== Headine Sizes ====*/
@@ -54,16 +53,26 @@ h6,.h6 {font-size: REM(17);}
 .lineheight-180 {line-height: 1.8;}
 
 /*==== Text Sizes ====*/
-.fs-12 {font-size: 12px;}
-.fs-13 {font-size: 13px;}
-.fs-14 {font-size: REM(14);}
-.fs-15 {font-size: REM(15);}
-.fs-16 {font-size: REM(16);}
-.fs-17 {font-size: REM(17);}
-.fs-18 {font-size: REM(18);}
-.fs-19 {font-size: REM(19);}
-.fs-20 {font-size: REM(20);}
+@mixin make-font-sizes($infix:'') {
+    .fs#{$infix}-12 {font-size: 12px;}
+    .fs#{$infix}-13 {font-size: 13px;}
+    .fs#{$infix}-14 {font-size: REM(14);}
+    .fs#{$infix}-15 {font-size: REM(15);}
+    .fs#{$infix}-16 {font-size: REM(16);}
+    .fs#{$infix}-17 {font-size: REM(17);}
+    .fs#{$infix}-18 {font-size: REM(18);}
+    .fs#{$infix}-19 {font-size: REM(19);}
+    .fs#{$infix}-20 {font-size: REM(20);}
+}
+
+@include make-font-sizes();
+
+@include small('down') {
+    @include make-font-sizes('-sm');
+};
+
 .small-text {font-size: 0.875rem;}
+
 .large-text {
     font-size: REM(18);
     @include xlarge() { font-size: REM(20); }

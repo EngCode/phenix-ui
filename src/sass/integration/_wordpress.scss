@@ -57,8 +57,10 @@
 
 /*==== Table Block ====*/
 .wp-block-table {
+	overflow-x: auto;
 	@include margin-inline(0);
-	@extend .responsive-table;
-	@include medium('down') { table {width:970px;} }
+	@include medium('down') {
+		table {width:970px;}
+	}
 }
 

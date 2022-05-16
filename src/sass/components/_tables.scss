@@ -1,115 +1,87 @@
 /**======> Referance By Comment <======
  * ===> 01 - Tables CSS
- * ===> 02 - Table Columns
- * ===> 03 - Table Head
- * ===> 04 - Striped and Bordered
- * ===> 05 - Striped BG
- * ===> 06 - Table Responsive
- * ===> 07 - Data Tables Navigation
- * ===> 08 - Data Table Pagination
+ * ===> 02 - Options
+ * ===> 03 - Baseline
+ * ===> 04 - Columns
 */
 
-/*==== Tables Options ====*/
-:root {
-    --table-background : #FFFFFF;
-    --table-head-bg    : #f4f4f4;
+/*==== Tables CSS ====*/
+.table {
+    /*==== Options ====*/
+    --table-background : inherit;
+    --table-head-bg    : inherit;
     --table-striped    : #f4f4f4;
     --table-border     : 1px solid rgba(0,0,0, 0.1);
     --table-padding    : 15px;
     --table-radius     : 5px;
-}
 
-/*==== Tables CSS ====*/
-.table {
-    /*==== Setup ====*/
-    width:100%;
+    /*==== Baseline ====*/
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    /*==== Table Columns ====*/
-    td, th{border-bottom: var(--table-border);}
-    th {@include padding-block(calc( var(--table-padding) / 1.5 ));}
-    td {@include padding-block(calc( var(--table-padding) / 2 ));}
 
-    /*==== Striped and Bordered ====*/
-    &.bordered, &.striped {
-        background-color: var(--table-background);
+    /*==== Row ====*/
+    tr {border-bottom: var(--table-border);}
+    
+    /*==== Columns [Cells] ====*/ 
+    td, th {
+        @include padding-inline(#{calc(var(--table-padding)/3)});
+    }
+
+    td {
+        @include padding-block(calc( var(--table-padding) / 2.25 ));
+    }
+    
+    /*==== Head Column ====*/
+    th {
+        text-align: inherit;
+        @include padding-block(calc( var(--table-padding) / 1.5 ));
+    }
+
+    /*==== Striped Mode ====*/
+    &.striped tbody tr:nth-child(even) {
+        background-color: var(--table-striped);
+    }
+
+    /*==== Bordered ====*/
+    &.bordered {
+        border: var(--table-border);
+        /*==== Row Reset ====*/
+        tr {border-bottom: 0 none;}
+
+        /*==== Columns [Cells] ====*/
         td, th {
-            border-bottom: 0 none;
+            border: var(--table-border);
             @include padding-inline(var(--table-padding));
         }
     }
 
-    /*==== Striped BG ====*/
-    &.striped tbody tr:not([class*="-bg"]):nth-child(even) {background:var(--table-striped);}
-
-    /*==== Bordered Table ====*/
-    &.bordered {
-        border: var(--table-border);
-        /*==== Columns ====*/
-        td, th {border: var(--table-border);}
-        /*==== Head ====*/
-        thead tr:not([class*="-bg"]) {background:var(--table-head-bg);}
-    }
+    /*==== Borderless ====*/
+    &.borderless tr {border-bottom: 0 none;}
 }
 
 /*==== Table Responsive ====*/
-.responsive-table, .responsive-sm-table {overflow: auto;}
+@mixin make-table-responsive($infix:'', $size: 1024px) {
+    .table-responsive#{$infix} .table {
+        width: #{$size};
+        overflow-x: auto;
+    }
+}
+
+@include make-table-responsive('', 1100px);
+
+@include xlarge('down') { 
+    @include make-table-responsive('-xl', 1400px);
+}
+
+@include large('down') { 
+    @include make-table-responsive('-lg', 1200px);
+}
 
 @include medium('down') { 
-    .responsive-table .table {width:970px;}
+    @include make-table-responsive('-md', 1024px);
 }
 
 @include small('down') { 
-    .responsive-sm-table .table {width:768px;}
+    @include make-table-responsive('-sm', 768px);
 }
-
-/*==== Data Table ====*/
-.px-sortable {
-    cursor: pointer;
-    
-    &:not(.hide-sorting) .sort-icon {
-        color:inherit;
-        opacity: 0.5;
-        &::before{top:0;}
-    }
-
-    &.active .sort-icon{opacity: 1;}
-}
-
-/*==== Data Table Pagination ====*/
-.px-datatable-pagi {
-    margin-top: -REM(30)/1.5;
-    margin-bottom: REM(30);
-    border-radius: 0 0 8px 8px;
-    /*==== info ====*/
-    p {
-        margin: 0;
-        font-size: 13px;
-        line-height: 24px;
-        height: 28px;
-        color: var(--gray-color);
-    }
-    /*==== Pagination ====*/
-    .pagination.small li {
-        cursor: pointer;
-        margin-bottom: 0;
-        width: auto;
-        padding: 0 5px;
-        height: 28px;
-        line-height: 24px;
-        text-align: center;
-        background-color: transparent;
-        border: 0 none;
-        font-size: 13px;
-        font-weight: var(--medium-weight);
-        &.active, &:hover {
-            background-color: transparent;
-            color: var(--primary-hover);
-        }
-    }
-}
-
-.hide-sorting .sort-icon {display: none;}
-/*====  ====*/
-// .dataTables_wrapper 
-

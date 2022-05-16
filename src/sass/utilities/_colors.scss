@@ -23,76 +23,58 @@
 }
 
 /*==== Assets Borders ====*/
-.primary-border{border-color: var(--primary-color);}
-.secondary-border{border-color: var(--secondary-color);}
-.success-border{border-color: var(--success-color);}
-.danger-border {border-color: var(--danger-color);}
-.warning-border{border-color: var(--warning-color);}
-.light-border{border-color: var(--dark-reverse);}
-.info-border {border-color: var(--info-color);}
-.gray-border {border-color: var(--gray-color);}
-.dark-border {border-color: var(--dark-color);}
-.white-border{border-color: white;}
+.primary-border   {border-color: var(--primary-color);}
+.secondary-border {border-color: var(--secondary-color);}
+.success-border   {border-color: var(--success-color);}
+.danger-border    {border-color: var(--danger-color);}
+.warning-border   {border-color: var(--warning-color);}
+.light-border     {border-color: var(--dark-reverse);}
+.info-border      {border-color: var(--info-color);}
+.gray-border      {border-color: var(--gray-color);}
+.dark-border      {border-color: var(--dark-color);}
+.white-border     {border-color: white;}
 
 /*==== Brands Borders ====*/
-.facebook-border{border-color: var(--facebook-color);}
-.twitter-border {border-color: var(--twitter-color);}
-.youtube-border {border-color: var(--youtube-color);}
-.linkedin-border{border-color: var(--linkedin-color);}
-.behance-border {border-color: var(--behance-color);}
-.dribbble-border{border-color: var(--dribbble-color);}
-.flicker-border {border-color: var(--flicker-color);}
-.snapchat-border{border-color: var(--snapchat-color);}
-.instagram-border{border-color: var(--instagram-color);}
-.whatsapp-border {border-color: var(--whatsapp-color);}
-.pinterest-border{border-color: var(--pinterest-color);}
-.google-red-border{border-color: var(--google-red);}
+.facebook-border  {border-color: var(--facebook-color);}
+.twitter-border   {border-color: var(--twitter-color);}
+.youtube-border   {border-color: var(--youtube-color);}
+.linkedin-border  {border-color: var(--linkedin-color);}
+.behance-border   {border-color: var(--behance-color);}
+.dribbble-border  {border-color: var(--dribbble-color);}
+.flicker-border   {border-color: var(--flicker-color);}
+.snapchat-border  {border-color: var(--snapchat-color);}
+.instagram-border {border-color: var(--instagram-color);}
+.whatsapp-border  {border-color: var(--whatsapp-color);}
+.pinterest-border {border-color: var(--pinterest-color);}
 
 /*==== Assets Colors ====*/
-.primary-color{color: var(--primary-color);}
+.primary-color   {color: var(--primary-color);}
 .secondary-color {color: var(--secondary-color);}
-.success-color{color: var(--success-color);}
-.danger-color {color: var(--danger-color);}
-.warning-color{color: var(--warning-color);}
-.info-color {color: var(--info-color);}
-.gray-color {color: var(--gray-color);}
-.dark-color {color: var(--dark-color);}
-.white-color{color: white;}
+.success-color   {color: var(--success-color);}
+.danger-color    {color: var(--danger-color);}
+.warning-color   {color: var(--warning-color);}
+.info-color      {color: var(--info-color);}
+.gray-color      {color: var(--gray-color);}
+.dark-color      {color: var(--dark-color);}
+.white-color     {color: white;}
 
 /*==== Brands Colors ====*/
-.facebook-color {color: var(--facebook-color);}
-.twitter-color {color: var(--twitter-color);}
-.google-red-color {color: var(--google-red);}
-.youtube-color {color: var(--youtube-color);}
+.facebook-color  {color: var(--facebook-color);}
+.twitter-color   {color: var(--twitter-color);}
+.youtube-color   {color: var(--youtube-color);}
 .instagram-color {color: var(--instagram-color);}
-.snapchat-color {color: var(--snapchat-color);}
-.whatsapp-color {color: var(--whatsapp-color);}
+.snapchat-color  {color: var(--snapchat-color);}
+.whatsapp-color  {color: var(--whatsapp-color);}
 .pinterest-color {color: var(--pinterest-color);}
-.linkedin-color {color: var(--linkedin-color);}
-.behance-color {color: var(--behance-color);}
-.dribbble-color {color: var(--dribbble-color);}
-.flicker-color {color: var(--flicker-color);}
+.linkedin-color  {color: var(--linkedin-color);}
+.behance-color   {color: var(--behance-color);}
+.dribbble-color  {color: var(--dribbble-color);}
+.flicker-color   {color: var(--flicker-color);}
 
 /*==== Assets Backgrounds ====*/
-.parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-}
-
-.primary-bg-offwhite {
-    background-color: var(--primary-offwhite);
-    &.bordered {border: 1px solid var(--offwhite-border);}
-}
-
-.primary-bg {
-    background-color: var(--primary-color);
-    color: var(--dark-reverse);
-}
-
-.secondary-bg {
-    background-color: var(--secondary-color);
-    color: var(--dark-reverse);
-}
+.primary-bg   {background-color: var(--primary-color);}
+.secondary-bg {background-color: var(--secondary-color);}
+.primary-bg-offwhite {background-color: var(--primary-offwhite);}
 
 .success-bg {
     background-color: var(--success-color);
@@ -285,9 +267,14 @@
     background-image: linear-gradient(var(--grade-rotation), var(--blue-gradient));
 }
 
-/*==== Colors/Backgrounds ====*/
+/*==== Assets ====*/
 .color-inherit {color: inherit;}
 .color-transparent {color: transparent;}
 
 .background-inherit {background-color: inherit;}
 .background-transparent, .transparent-bg {background-color: transparent;}
+
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+}
