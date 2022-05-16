@@ -33,6 +33,7 @@
 .border-gray      {border-color: var(--gray-color);}
 .border-dark      {border-color: var(--dark-color);}
 .border-white     {border-color: white;}
+.border-alpha {border: 1px solid rgba(#000, 0.1);}
 
 /*==== Brands Borders ====*/
 .border-facebook  {border-color: var(--facebook-color);}
@@ -82,6 +83,8 @@
 .bg-gray {background-color: var(--gray-color);}
 .bg-dark {background-color: var(--dark-color);}
 .bg-white {background-color: white;}
+.bg-alpha-05  {background-color: rgba(#000, 0.05);}
+.bg-alpha-10  {background-color: rgba(#000, 0.1);}
 
 /*==== Brands Backgrounds ====*/
 .bg-facebook {background-color: var(--facebook-color);}

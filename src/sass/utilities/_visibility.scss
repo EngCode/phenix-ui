@@ -1,7 +1,8 @@
 /**======> Referance By Comment <======
  * ===> 01 - Screen Reader Only
- * ===> 02 - Display
- * ===> 03 - Hidden
+ * ===> 02 - Visibility
+ * ===> 03 - Display
+ * ===> 04 - Hidden
 */
 
 /*==== Screen Reader Only ====*/
@@ -18,9 +19,15 @@
     border-width: 0;
 }
 
+/*==== Visibility ====*/
+.visibility-hidden {visibility: hidden;}
+.visibility-visible {visibility: visible;}
+.visibility-collapse {visibility: collapse;}
+
 /*==== Display ====*/
 .inline-block  {display: inline-block;}
 .display-block {display: block;}
+.display-grid {display: grid;}
 .flexbox { @extend %flexbox; }
 
 .fluid, .line-break {
