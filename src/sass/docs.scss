@@ -10,6 +10,7 @@ $direction-reverse: rtl;
 $direction-start: left;
 $direction-end: right;
 
+.white-bg {background-color: #fff;}
 /*========== Loading Fonts ==========*/
 @font-face {
     font-family: 'BioSans';
@@ -171,7 +172,7 @@ html {line-height: 1.5;}
         top: 0;
         left: 0;
         right: 0;
-        z-index: 9999;
+        z-index: var(--header-index);
     }
 }
 
