@@ -16,7 +16,7 @@ PhenixElements.prototype.animations = function (options?:{
     duration?:number,  //===> Animation Duration
     delay?:number,     //===> Animation Delay
     animateCSS?:boolean, //===> Animations Library
-    logical_directions?:boolean, //===> Directions Resolver
+    directionFix?:boolean, //===> Directions Resolver
 }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:any) => {
@@ -24,35 +24,44 @@ PhenixElements.prototype.animations = function (options?:{
         let animation = element.getAttribute('data-animation') || options?.animation || '',
             duration  = parseInt(element.getAttribute('data-duration')) || options?.duration || 1000,
             delay     = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
-            directionFix = options?.logical_directions || true,
+            directionFix = options?.directionFix || true,
             thirdParty = options?.animateCSS || true;
 
         //====> Animations Loader <====//
         if (thirdParty && !document.querySelector('#px-animations')) {
-            Phenix('head').insert('append', `<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" id="px-animations" />`);
+            Phenix('head').insert('append', `<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.css" rel="stylesheet" id="px-animations" />`);
         }
+
+        //====> Directions Resolve <====//
+        if (directionFix) {
+            //====> LTR <====//
+            if (Phenix(document).direction() === 'ltr') {
+                if (animation.includes('Start')) animation = animation.replace('Start', 'Left');
+                else if (animation.includes('End')) animation.replace('End', 'Right');
+                //====> RTL <====//
+            } else {
+                if (animation.includes('Start')) animation = animation.replace('Start', 'Right');
+                else if (animation.includes('End')) animation.replace('End', 'Left');
+            }
+        }
+
+        //====> Hide the Element <====//
+        Phenix(element).addClass('visibility-hidden');
 
         //====> if the Element in view Show it <====//
         let isInView = () => {
-            //====> Directions Resolve <====//
-            if (directionFix && animation.includes('Start' || 'End')) {
-                //====> LTR <====//
-                if (Phenix(document).direction() === 'ltr') {
-                    animation.replace('Start', 'Left');
-                    animation.replace('End', 'Right');
-                    //====> RTL <====//
-                } else {
-                    animation.replace('Start', 'Right');
-                    animation.replace('End', 'Left');
-                }
-            }
-
             //====> Animate <====//
-            if (Phenix(element).inView()) Phenix(element).addClass('view-active').css({
-                "animation-name" : `${animation}`,
-                "animation-duration" : `${duration}ms`,
-                "animation-delay" : `${delay}ms`,
-            });
+            if (Phenix(element).inView()) {
+                //====> Show the Element <====//
+                Phenix(element).removeClass('visibility-hidden');
+
+                //====> Animations CSS <====//
+                Phenix(element).addClass('view-active').css({
+                    "animation-name" : `${animation}`,
+                    "animation-duration" : `${duration}ms`,
+                    "animation-delay" : `${delay}ms`,
+                });
+            }
         };
 
         //====> First Activation <====//
