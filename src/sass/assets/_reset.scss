@@ -212,9 +212,13 @@ ul, ol {
 
 dl {
     margin-bottom: REM(25);
-    dt {@extend .strong-weight;}
+    dt {
+        @extend .strong-weight;
+        + dd {margin-top: .25rem;}
+        &:not(:first-child) {margin-top: .5rem;}
+    }
+
     dd {
-        margin-bottom: .5rem;
         @include margin-inline(0);
         @include padding-inline(REM(15));
     }

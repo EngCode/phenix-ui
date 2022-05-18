@@ -80,13 +80,13 @@
 @import 'animations/fading';
 
 /*==== Components Modules ====*/
+@import 'components/accordion'; //===> Accordion
 @import 'components/buttons';   //===> Buttons
 @import 'components/dropdown';  //===> Dropdown
 @import 'components/navbar';    //===> Phenix Navbar
 @import 'components/modals';    //===> Popups & Modals
 @import 'components/tables';    //===> Tables & Datatables
 @import 'components/tabs';      //===> Panels & Tabs
-@import 'components/accordion'; //===> Accordion
 
 /*==== Form Components ====*/
 @import 'form/form-controls';

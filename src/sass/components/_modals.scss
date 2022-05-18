@@ -90,91 +90,52 @@
 }
 
 /*======== Call to Action Theme ========*/
-.cta-modal {
-    /*======== CTA Content ========*/
-    .modal-content {
-        padding:1.875rem;
+.cta-modal .modal-content {
+    padding:1.875rem;
+    text-align: center;
+
+    /*==== Close Button ====*/
+    .close-modal:not(.btn) {
+        position: absolute;
+        top:15px;
+        #{$direction-end}:15px;
+        font-size:14px;
+        line-height: 1.875rem;
+        height: 1.875rem;
+        color:var(--danger-color);
         text-align: center;
-
-        /*==== Close Button ====*/
-        .close-modal:not(.btn) {
-            position: absolute;
-            top:15px;
-            #{$direction-end}:15px;
-            font-size:14px;
-            line-height: 1.875rem;
-            height: 1.875rem;
-            color:var(--danger-color);
-            text-align: center;
-            width:1.875rem;
-        }
-
-        /*==== Content ====*/
-        .large-icon{
-            display: inline-block;
-            font-size:4.375rem;
-            margin-bottom: 0.625rem;
-            line-height: 1;
-        }
-
-        h3 {
-            font-size:1.375rem;
-            margin-bottom: 5px;
-            color:var(--component-color);
-        }
-
-        .rating-control {
-            margin-bottom: 0.625rem;
-            .rate-icon {font-size:1.8rem;vertical-align: middle;}
-            .text {font-size:1.25rem;vertical-align: middle;}
-        }
-
-        .social-btns {
-            margin-bottom: 5px;
-            .btn{margin: 5px}
-        }
-
-        /*==== Action Footer ====*/
-        .modal-footer{
-            border:0 none;
-            padding:0;
-        }
+        width:1.875rem;
     }
 
-    /*======== Colors Style : Dark ========*/
-    &.dark .modal-content {
-        background: var(--dark-color);
-        color: var(--dark-reaverse);
-        /* Dismissal Button Style Reverse */
-        .close-modal:not(.btn),h3,p {color: var(--dark-reaverse);}
+    /*==== Content ====*/
+    .large-icon{
+        display: inline-block;
+        font-size:4.375rem;
+        margin-bottom: 0.625rem;
+        line-height: 1;
     }
 
-    /*======== Colors Style : Success ========*/
-    &.success .modal-content {
-        background: var(--success-color);
-        color: var(--dark-reverse);
-        .close-modal:not(.btn),h3,p {color:var(--dark-reverse);}
+    h3 {
+        font-size:1.375rem;
+        margin-bottom: 5px;
+        color:var(--component-color);
     }
 
-    /*======== Colors Style : Danger ========*/
-    &.danger .modal-content {
-        background: var(--danger-color);
-        color: var(--dark-reverse);
-        .close-modal:not(.btn),h3,p {color:var(--dark-reverse);}
+    .rating-control {
+        margin-bottom: 0.625rem;
+        .rate-icon {font-size:1.8rem;vertical-align: middle;}
+        .text {font-size:1.25rem;vertical-align: middle;}
     }
 
-    /*======== Colors Style : Warning ========*/
-    &.warning .modal-content {
-        background: var(--warning-color);
-        color: var(--light-reverse);
-        .close-modal:not(.btn),h3,p {color:var(--light-reverse);}
+    .social-btns {
+        margin-bottom: 5px;
+        .btn{margin: 5px}
     }
 
-    /*======== Colors Style : information ========*/
-    &.info .modal-content {
-        background: var(--info-color);
-        color: var(--dark-reverse);
-        .close-modal:not(.btn),h3,p {color:var(--dark-reverse);}
+    /*==== Action Footer ====*/
+    .modal-footer{
+        border:0 none;
+        padding:0;
     }
 }
 
@@ -191,4 +152,25 @@
             color: var(--danger-color);
         }
     }
+}
+
+/*======== Lightbox Mode ========*/
+#lightbox-modal .modal-content {
+    @extend %flexbox;
+    @extend .align-center;
+    width:auto;
+    max-width: 90%;
+    background-color: transparent;
+    //====> Slider <====//
+    .item {
+        background-repeat: no-repeat;
+        background-position: center;
+        img {
+            max-height: calc(100vh - 30px);
+            display: block;
+            margin: auto;
+        }
+    }
+    //====> Arrows Controls <====//
+    .tns-controls button {opacity: 1;}
 }
