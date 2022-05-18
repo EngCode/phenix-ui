@@ -19,12 +19,13 @@
     --primary-hover   : #1A69F4;
     --primary-reverse : #FFFFFF;
     --primary-offwhite: #e1eef7;
-    --offwhite-border : #d0d9e4;
+    --offwhite-border : #a8c2e0;
 
     /*==== Secondary Color ====*/
     --secondary-color   : #F8C35B;
     --secondary-hover   : #FB955D;
     --secondary-reverse : #FFFFFF;
+    --secondary-offwhite: #fddfa8;
 
     /*==== Gradients ====*/
     --primary-gradient   : var(--primary-color), var(--primary-hover);
@@ -99,6 +100,7 @@
 @import 'utilities/padding';    //===> Padding Utilites
 @import 'utilities/visibility'; //===> Visibility Utilities
 @import 'utilities/colors';     //===> CSS Coloring System
+@import 'utilities/borders';    //===> CSS Borders
 
 /*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}

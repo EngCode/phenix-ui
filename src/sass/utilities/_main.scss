@@ -129,19 +129,6 @@
 /*==== Assets ====*/
 .tx-icon::before {margin-#{$direction-end}: 7px;}
 
-/*==== Dividers ====*/
-.divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
-.divider-y, .divider-t {border-top: 1px solid rgba(#000, 0.1);}
-
-/*==== Radius ====*/
-.radius-sm   {border-radius: 4px;}
-.radius-md   {border-radius: 6px;}
-.radius-lg   {border-radius: 8px;}
-.radius-xl   {border-radius: 10px;}
-.radius-xxl  {border-radius: 15px;}
-.radius-none {border-radius: 0;}
-.radius-circle {border-radius: 50%;}
-
 /*==== Assets ====*/
 .postion-ab  {position: absolute;}
 .postion-rv  {position: relative;}
