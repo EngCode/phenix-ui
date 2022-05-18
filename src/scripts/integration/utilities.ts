@@ -100,28 +100,6 @@ PhenixElements.prototype.utilities = function (options?:{
                 title.innerHTML = theResult.replace(/,/g, ' ');
             });
         }
-
-        //====> Viewport Utilities <====//
-        if (type === 'viewport' || 'all') {
-            //====> Watched Elements <====//
-            Phenix('.view-status').forEach((element:HTMLElement) => {
-                //====> Animations Data <====//
-                let animation = element.getAttribute('data-animation'),
-                    delay = parseInt(element.getAttribute('data-delay')) || 0,
-                    duation = parseInt(element.getAttribute('data-duration')) || 1000,
-                    //====> if the Element in view Show it <====//
-                    isInView = () => {
-                        if (Phenix(element).inView()) Phenix(element).addClass('view-active').css({
-                            "animation-name" : animation,
-                            "animation-duration" : `${duation}ms`,
-                            "animation-delay" : `${delay}ms`,
-                        });
-                    };
-                //====> Scrolling Spy <====//
-                isInView();
-                Phenix(window).on('scroll', isInView);
-            });
-        }
     });
 
     //====> Return Phenix Query <====//

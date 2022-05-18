@@ -252,12 +252,12 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         //====> for Each CSS Property <====//
         for (const [key, value] of Object.entries(style)) {
             //====> Convert Property[String] To Object Name[Key] <====//
-            let property = key.replace(/(-[a-z])/, prop => prop.replace("-", "").toUpperCase());
-            
+            // let property = key.replace(/(-[a-z])/, prop => prop.replace("-", "").toUpperCase());
+
             //====> Style Elements <====//
             this.forEach((element:HTMLElement) => {
-                // console.log(element);
-                element.style[property] = value
+                element.style.setProperty(key, value);
+                // element.style[property] = value
             });
         }
 
@@ -513,7 +513,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> Define Other Features <====*/
     counter; multimedia; timer;
     sticky; smothScroll; scrollSpy;
-    design; themes;
+    design; themes; animations;
 
     /*====> Define Components <====*/
     dropdown; tabs; accordion;
@@ -549,6 +549,7 @@ export default Phenix;
 import './features/get-info';  //==> Info Grapers
 import './features/effects';   //==> UI Effects
 import './features/counter';   //==> Animated Counter
+import './features/animations'; //==> View-port Animations
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus

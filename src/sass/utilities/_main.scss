@@ -9,8 +9,7 @@
  * ===> 08 - Phenix Media
  * ===> 09 - Aspect Ratio
  * ===> 10 - Lazy Loader
- * ===> 11 - Viewport Detector
- * ===> 12 - Assets
+ * ===> 11 - Assets
 */
 
 /*==== SASS Selectors ====*/
@@ -135,16 +134,6 @@
        object-fit: contain;
     background-size: auto 100%;
     background-color: #F1F2F3;
-}
-
-/*==== Viewport Detector ====*/
-.view-status {
-    visibility: hidden;
-    -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-    &.view-active { visibility: visible; }
 }
 
 /*==== Assets ====*/

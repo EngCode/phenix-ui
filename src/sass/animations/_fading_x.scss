@@ -3,7 +3,6 @@
     0% {opacity: 0;}
     100% {opacity: 1;}
 }
-
 @keyframes fadeIn {
     0% {opacity: 0;}
     100% {opacity: 1;}
@@ -107,45 +106,44 @@
     }
 }
 
-@-webkit-keyframes fadeInRight {
-    0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
-    100% {opacity: 1;transform: none;}
-}
-
-@keyframes fadeInRight {
-    0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
-    100% {opacity: 1;transform: none;}
-}
-
-@-webkit-keyframes fadeOutRight {
-    0% {opacity: 1;transform: none;}
-    100% {opacity: 0;transform: translate3d(-30%, 0, 0);}
-}
-
-@keyframes fadeOutRight {
-    0% {opacity: 1;transform: none;}
-    100% {opacity: 0;transform: translate3d(-30%, 0, 0);}
-}
-
-
-@-webkit-keyframes fadeInLeft {
-    0% {opacity: 0;transform: translate3d(30%, 0, 0);}
-    100% {opacity: 1;transform: none;}
-}
-
-@keyframes fadeInLeft {
-    0% {opacity: 0;transform: translate3d(30%, 0, 0);}
-    100% {opacity: 1;transform: none;}
-}
-
-@-webkit-keyframes fadeOutLeft {
-    0% {opacity: 1;transform: none;}
-    100% {opacity: 0;transform: translate3d(30%, 0, 0);}
-}
-
-@keyframes fadeOutLeft {
-    0% {opacity: 1;transform: none;}
-    100% {opacity: 0;transform: translate3d(30%, 0, 0);}
+@if ( $direction = 'ltr' ) {   
+    @-webkit-keyframes fadeInEnd {
+        0% {opacity: 0;transform: translate3d(30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }   
+    @keyframes fadeInEnd {
+        0% {opacity: 0;transform: translate3d(30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+    
+    @-webkit-keyframes fadeInStart {
+        0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+    
+    @keyframes fadeInStart {
+        0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+} @else {  
+    @-webkit-keyframes fadeInEnd {
+        0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }  
+    @keyframes fadeInEnd {
+        0% {opacity: 0;transform: translate3d(-30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+    
+    @-webkit-keyframes fadeInStart {
+        0% {opacity: 0;transform: translate3d(30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+    
+    @keyframes fadeInStart {
+        0% {opacity: 0;transform: translate3d(30%, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
 }
 
 /*======== Flashing ========*/
