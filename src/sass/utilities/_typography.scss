@@ -15,13 +15,26 @@ h4,.h4 {font-size: REM(23);}
 h5,.h5 {font-size: REM(20);}
 h6,.h6 {font-size: REM(17);}
 
-/*==== Display Headlines ====*/
-@include large() {
-    .display-h0 {font-size: REM(50);}
-    .display-h1 {font-size: REM(42);}
-    .display-h2 {font-size: REM(36);}
-    .display-h3 {font-size: REM(32);}
-};
+/*==== Font Sizes ====*/
+@mixin make-font-sizes($infix:'') {
+    .fs#{$infix}-12 {font-size: 12px;}
+    .fs#{$infix}-13 {font-size: 13px;}
+    .fs#{$infix}-14 {font-size: REM(14);}
+    .fs#{$infix}-15 {font-size: REM(15);}
+    .fs#{$infix}-16 {font-size: REM(16);}
+    .fs#{$infix}-17 {font-size: REM(17);}
+    .fs#{$infix}-18 {font-size: REM(18);}
+    .fs#{$infix}-19 {font-size: REM(19);}
+    .fs#{$infix}-20 {font-size: REM(20);}
+    .fs#{$infix}-20 {font-size: REM(20);}
+    /*==== Display Headlines ====*/
+    .display#{$infix}-h1 {font-size: REM(62);}
+    .display#{$infix}-h2 {font-size: REM(52);}
+    .display#{$infix}-h3 {font-size: REM(48);}
+    .display#{$infix}-h4 {font-size: REM(44);}
+    .display#{$infix}-h5 {font-size: REM(40);}
+    .display#{$infix}-h6 {font-size: REM(36);}
+}
 
 /*==== Text Utilities ====*/
 .tx-uppercase  {text-transform: uppercase;}
@@ -53,27 +66,23 @@ h6,.h6 {font-size: REM(17);}
 .lineheight-180 {line-height: 1.8;}
 
 /*==== Text Sizes ====*/
-@mixin make-font-sizes($infix:'') {
-    .fs#{$infix}-12 {font-size: 12px;}
-    .fs#{$infix}-13 {font-size: 13px;}
-    .fs#{$infix}-14 {font-size: REM(14);}
-    .fs#{$infix}-15 {font-size: REM(15);}
-    .fs#{$infix}-16 {font-size: REM(16);}
-    .fs#{$infix}-17 {font-size: REM(17);}
-    .fs#{$infix}-18 {font-size: REM(18);}
-    .fs#{$infix}-19 {font-size: REM(19);}
-    .fs#{$infix}-20 {font-size: REM(20);}
-}
-
-@include make-font-sizes();
-
-@include small('down') {
-    @include make-font-sizes('-sm');
-};
-
 .small-text {font-size: 0.875rem;}
 
 .large-text {
     font-size: REM(18);
     @include xlarge() { font-size: REM(20); }
 }
+
+@include make-font-sizes();
+
+@include medium() {
+    @include make-font-sizes('-xl');
+};
+
+@include large() {
+    @include make-font-sizes('-lg');
+};
+
+@include xlarge() {
+    @include make-font-sizes('-md');
+};

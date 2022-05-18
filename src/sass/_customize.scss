@@ -93,12 +93,12 @@
 
 /*==== Utilities Modules ====*/
 @import 'utilities/main';       //===> Custom Utilities
+@import 'utilities/typography'; //===> Typography Utilites
 @import 'utilities/sizes';      //===> Sizing Utilities
 @import 'utilities/margin';     //===> Margin Utilites
-@import 'utilities/colors';     //===> CSS Coloring System
 @import 'utilities/padding';    //===> Padding Utilites
-@import 'utilities/typography'; //===> Typography Utilites
 @import 'utilities/visibility'; //===> Visibility Utilities
+@import 'utilities/colors';     //===> CSS Coloring System
 
 /*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}
