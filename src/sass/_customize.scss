@@ -64,7 +64,7 @@
     /*==== Index Order ====*/
     --header-index : 999991;
     --modal-index  : 999999;
-    --dropdown-index : 999999;
+    --dropdown-index : 999998;
 
     /*==== Directions [do not edit] ====*/
     --direction: #{$direction};
@@ -98,9 +98,9 @@
 @import 'utilities/sizes';      //===> Sizing Utilities
 @import 'utilities/margin';     //===> Margin Utilites
 @import 'utilities/padding';    //===> Padding Utilites
-@import 'utilities/visibility'; //===> Visibility Utilities
 @import 'utilities/colors';     //===> CSS Coloring System
 @import 'utilities/borders';    //===> CSS Borders
+@import 'utilities/visibility'; //===> Visibility Utilities
 
 /*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}
