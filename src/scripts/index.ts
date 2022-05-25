@@ -546,10 +546,11 @@ const Phenix = (selector?:any) => {
 export default Phenix;
 
 /*====> Import Features <====*/
-import './features/get-info';  //==> Info Grapers
-import './features/effects';   //==> UI Effects
-import './features/counter';   //==> Animated Counter
+import './features/get-info';   //==> Info Grapers
+import './features/effects';    //==> UI Effects
+import './features/counter';    //==> Animated Counter
 import './features/animations'; //==> View-port Animations
+import './features/validation'; //==> Form Validation
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus

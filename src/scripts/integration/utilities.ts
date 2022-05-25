@@ -121,19 +121,24 @@ PhenixElements.prototype.notfications = function (options?:{
         error_alert = `<div class="px-item pdy-10 pdx-20 fs-14 danger-bg mb-10">${message}</div>`,
         normal_alert = `<div class="px-item pdy-10 pdx-20 fs-14 dark-bg mb-10">${message}</div>`,
         success_alert = `<div class="px-item pdy-10 pdx-20 fs-14 success-bg mb-10">${message}</div>`;
+    
     //====> Create Notifcation Area <====//
     if(!document.querySelector('.px-notfis')) notfications = Phenix('body').insert('append', '<div class="px-notfis"></div>');
+    
     //====> Apply Notifcations <====//
     if (type === 'error') current = Phenix(notfications).insert('append', error_alert);
     else if (type === 'success') current = Phenix(notfications).insert('append', success_alert);
     else current = Phenix(notfications).insert('append', normal_alert);
+    
     //====> Show Notifcations <====//
     Phenix(notfications).fadeIn();
+
     //====> Hide Notifcations <====//
     setTimeout(()=> {
         Phenix(notfications).fadeOut();
-        setTimeout(() => current ? current.remove() : '', 500)
+        setTimeout(() => current ? current.remove() : '', 500);
     }, duration);
+
     //====> Return Phenix <====//
     return this;
 };

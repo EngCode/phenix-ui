@@ -81,6 +81,11 @@
                 @extend %fast-motion;
                 color: var(--color-hvr);
             }
+            /*==== Level-3 ====*/
+            .submenu {
+                top: 0;
+                #{$direction-start}: 100%;
+            }
         }
 
         /*==== Hover & Active ====*/
@@ -90,7 +95,7 @@
         }
 
         /*==== Submenu ====*/
-        &:hover, &.px-menu-active {
+        &:hover, &.px-menu-active, li:hover {
             > .submenu, > .megamenu {display: block;}
         }
     }
