@@ -1,22 +1,2 @@
-/**======> Referance By Comment <======
- * ===> Accordion List
- * ======> Accordion Item
- * ======> Accordion Title
- * ======> Title Arrow || Plus
- * ======> unActive Mode
- * ======> Active Mode
- * ======> Torando Theme
- * =========> Accordion Item
- * =========> Accordion Title
- * =========> Title Arrow || Plus
- * =========> Items Divider
- * =========> Active Mode
-*/
 
-/*======= Accordion List =======*/
-.accordion .accordion-item {
-    /*==== Accordion Title ====*/
-    .accordion-title{cursor: pointer;}
-    /*==== unActive Mode ====*/
-    &:not(.active) .accordion-content {display: none;}
-}
+

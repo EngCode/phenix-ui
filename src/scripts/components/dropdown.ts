@@ -105,7 +105,7 @@ PhenixElements.prototype.dropdown = function (options?:{
         //====> Divide Positions <====//
         position = position.replace(' ','').split(',');
 
-        //====> Define Tagets <====//
+        //====> Define Targets <====//
         let the_target = Phenix(dropdown_target),
             page_dir   = Phenix(document).direction();
 
@@ -118,19 +118,19 @@ PhenixElements.prototype.dropdown = function (options?:{
 
         //====> Target Position [Top] <====//
         if(position[0] === "top") the_target.css({"bottom" : "100%"});
-        
+
         //====> Target Position [Bottom] <====//
         else the_target.css({"top" : "100%"});
-        
+
         //====> Target Position [Center] <====//
         if (position[1] === "center") the_target.css({
             "left" : "50%",
             "transform" : "translateX(-50%)"
         });
-        
+
         //===> Target Position [End] <====//
         else if (position[1] === "end") page_dir == 'ltr' ? the_target.css({"right" : 0}) : the_target.css({"left": 0});
-        
+
         //===> Target Position [Start] <====/
         else page_dir == 'ltr' ? the_target.css({"left" : 0}) : the_target.css({"right" : 0});
     });

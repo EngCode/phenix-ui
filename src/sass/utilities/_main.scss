@@ -63,6 +63,11 @@
 .bx-shadow-dp-4 {box-shadow: 10px 10px 20px rgba(#000, 0.1);}
 .bx-shadow-dp-5 {box-shadow: 0 0 30px rgba(#000, 0.1);}
 
+/*==== Transtions ====*/
+.transtion-fast {@extend %fast-motion;}
+.transtion-smooth {@extend %smooth-motion;}
+.transtion-slow {@extend %slow-motion;}
+
 /*==== Sticky Elements ====*/
 .is-sticky {
     top:0;
@@ -138,6 +143,8 @@
 
 /*==== Assets ====*/
 .tx-icon::before {margin-#{$direction-end}: 7px;}
+.mouse-pointer {cursor: pointer;}
+.mouse-normal {cursor: none;}
 
 /*==== Background X ====*/
 .bg-animated-x {

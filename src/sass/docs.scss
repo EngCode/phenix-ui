@@ -464,6 +464,7 @@ html {line-height: 1.5;}
         padding: 8px 15px;
         background-color: rgba(#000, 0.06);
         border: 1px solid #dadada;
+        &:last-child {min-width: 100px;}
     }
 }
 
@@ -719,6 +720,12 @@ body.rtl {
         padding: 20px;
         color: var(--danger-color);
     }
+}
+
+//*==== Change Headline Color When its Activated ====*/
+.px-accordion .accordion-btn.px-collapse-active {
+    color: var(--primary-color);
+    background-color: var(--primary-offwhite);
 }
 
 

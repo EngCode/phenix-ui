@@ -516,7 +516,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     design; themes; animations;
 
     /*====> Define Components <====*/
-    dropdown; tabs; accordion;
+    dropdown; tabs; collapse;
     popup; lightbox; menu; datatable;
     validation; uploader; progress;
     select; repeater; rating;
@@ -551,6 +551,7 @@ import './features/effects';    //==> UI Effects
 import './features/counter';    //==> Animated Counter
 import './features/animations'; //==> View-port Animations
 import './features/validation'; //==> Form Validation
+import './features/collapse'; //==> Accordions
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus
@@ -560,7 +561,6 @@ import './components/dropdown';  //==> Dropddown
 import './components/tabs';      //==> Tabs System
 import './components/popup';     //==> Popups
 import './components/uploader';  //==> File Uploader
-import './components/accordion'; //==> Accordions
 import './components/datatable'; //==> Data-Tables
 
 /*====> Integration <====*/

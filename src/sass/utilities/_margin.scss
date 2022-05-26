@@ -4,6 +4,7 @@
 
 /*==== Margin All ====*/
 @mixin make_margin($infix:'') {
+    .mg#{$infix}-0   { margin: 0; }
     .mg#{$infix}-5   { margin: #{REM(05)}; }
     .mg#{$infix}-10  { margin: #{REM(10)}; }
     .mg#{$infix}-15  { margin: #{REM(15)}; }
@@ -24,6 +25,7 @@
 
 /*==== Margin Top ====*/
 @mixin make_margin_top($infix:'') {
+    .mt#{$infix}-0   { @include margin-block(0, 'start');}
     .mt#{$infix}-5   { @include margin-block(#{REM(05)}, 'start');}
     .mt#{$infix}-10  { @include margin-block(#{REM(10)}, 'start');}
     .mt#{$infix}-15  { @include margin-block(#{REM(15)}, 'start');}
@@ -36,6 +38,7 @@
 
 /*==== Margin Bottom ====*/
 @mixin make_margin_bottom($infix:'') {
+    .mb#{$infix}-0   { @include margin-block(0, 'end');}
     .mb#{$infix}-5   { @include margin-block(#{REM(05)}, 'end');}
     .mb#{$infix}-10  { @include margin-block(#{REM(10)}, 'end');}
     .mb#{$infix}-15  { @include margin-block(#{REM(15)}, 'end');}
@@ -48,6 +51,7 @@
 
 /*==== Margin Start ====*/
 @mixin make_margin_start($infix:'') {
+    .ms#{$infix}-0   { @include margin-inline(0, 'start');}
     .ms#{$infix}-5   { @include margin-inline(#{REM(05)}, 'start');}
     .ms#{$infix}-10  { @include margin-inline(#{REM(10)}, 'start');}
     .ms#{$infix}-15  { @include margin-inline(#{REM(15)}, 'start');}
@@ -60,6 +64,7 @@
 
 /*==== Margin End ====*/
 @mixin make_margin_end($infix:'') {
+    .me#{$infix}-0   { @include margin-inline(0, 'end');}
     .me#{$infix}-5   { @include margin-inline(#{REM(05)}, 'end');}
     .me#{$infix}-10  { @include margin-inline(#{REM(10)}, 'end');}
     .me#{$infix}-15  { @include margin-inline(#{REM(15)}, 'end');}
