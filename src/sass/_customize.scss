@@ -38,25 +38,24 @@
     --purple-gradient    : #8772F7, #5F48DD;
 
     /*=== Assets Colors ====*/
-    --links-color   :#2a94eb;
-    --info-color    :#17c0db;
-    --gray-color    :#868e96;
-    --dark-color    :#343a40;
-    --success-color :#22b544;
-    --danger-color  :#de3131;
-    --warning-color :#f4bb0e;
-    --disable-color :#ebebeb;
+    --links-color   : var(--primary-color);
+    --info-color    : #17c0db;
+    --gray-color    : #868e96;
+    --dark-color    : #343a40;
+    --success-color : #22b544;
+    --danger-color  : #de3131;
+    --warning-color : #f4bb0e;
+    --disable-color : #ebebeb;
 
     /*=== Assets Lighter ====*/
-    --info-light    :#a6eaf5;
-    --gray-light    :#d9dde1;
-    --dark-light    :#343a40;
-    --success-light :#c1eecc;
-    --danger-light  :#fbbbbb;
-    --warning-light :#ffdd75;
+    --info-light    : #a6eaf5;
+    --gray-light    : #d9dde1;
+    --dark-light    : #343a40;
+    --success-light : #c1eecc;
+    --danger-light  : #fbbbbb;
+    --warning-light : #ffdd75;
 
     /*==== Typography Colors ====*/
-    --headlines-color  : #1c1c1c;
     --typography-color : #555;
     --light-reverse    : #000;
     --dark-reverse     : #FFF;
@@ -78,13 +77,13 @@
 @import 'integration/splide';    //===> Splide Slider
 
 /*==== Components Modules ====*/
-@import 'components/accordion'; //===> Accordion
-@import 'components/buttons';   //===> Buttons
-@import 'components/dropdown';  //===> Dropdown
-@import 'components/navbar';    //===> Phenix Navbar
-@import 'components/modals';    //===> Popups & Modals
-@import 'components/tables';    //===> Tables & Datatables
-@import 'components/tabs';      //===> Panels & Tabs
+@import 'components/breadcrumb'; //===> Breadcrumb
+@import 'components/buttons';    //===> Buttons
+@import 'components/dropdown';   //===> Dropdown
+@import 'components/navbar';     //===> Phenix Navbar
+@import 'components/modals';     //===> Popups & Modals
+@import 'components/tables';     //===> Tables & Datatables
+@import 'components/tabs';       //===> Panels & Tabs
 
 /*==== Form Components ====*/
 @import 'form/form-controls';

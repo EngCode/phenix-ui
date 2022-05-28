@@ -728,4 +728,13 @@ body.rtl {
     background-color: var(--primary-offwhite);
 }
 
+/*===> Custom Angle Arrow Example <===*/
+.px-breadcrumb.custom-angle {--divider-icon : '>';}
+
+/*===> Custom Double Arrow Example <===*/
+.px-breadcrumb.custom-arrows {--divider-icon : '»';}
+
+/*===> Custom Font-Icon Example <===*/
+.px-breadcrumb.custom-icon {--divider-icon : '\f101';}
+
 
