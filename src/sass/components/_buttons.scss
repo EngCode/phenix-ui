@@ -15,7 +15,6 @@
 /*======== Buttons ========*/
 .btn {
     /*==== Options ====*/
-    --radius : 4px;
     --padding : #{REM(20)};
     --text-weight : var(--medium-weight);
     /*==== Size Options ====*/
@@ -35,15 +34,19 @@
     font-size   : var(--text-size);
     font-weight : var(--text-weight);
     line-height : var(--height);
-    border-radius : var(--radius);
     background-color : var(--background);
     @extend %fast-motion;
     @extend %inline-block;
     @include padding-inline(var(--padding), 'both');
-    /*==== Align inner Elements ====*/
-    *, &::before, &::after {@extend %inline-block;}
 
-    //===== Button Sizes  ====//
+    /*==== icons preset ====*/
+    &::before {
+        margin-top: -1px;
+        line-height: inherit;
+        @extend %inline-block;
+    }
+
+    /*===== Button Sizes  ===*/
     &.tiny {
         --height : #{REM(30)};
         --text-size : #{REM(13)};
@@ -56,7 +59,14 @@
 
     &.large {
         --height : #{REM(52)};
+        --padding   : #{REM(25)};
         --text-size : #{REM(17)};
+    }
+
+    &.xlarge {
+        --height    : #{REM(62)};
+        --padding   : #{REM(35)};
+        --text-size : #{REM(19)};
     }
 
     &.square {
@@ -64,48 +74,64 @@
         @include padding-inline(0, 'both');
     }
 
-    //===== Circle & Outline ====//
-    &.circle {border-radius:50%;}
-
+    /*===== Outline ===*/
     &.outline {
         --border-size  : 2px;
         --border-color : rgba(0,0,0, 0.1);
-        --background : transparent;
         line-height : calc(var(--height) - 4px);
     }
 
-    //===== Icons for Button ====//
-    &.btn-icon::before {
-        line-height: inherit;
-        @include margin-inline(calc(var(--padding) / 2) ,'end');
+    /*===== Icons for Button ===*/
+    &.btn-icon {
+        /*==== icon ====*/
+        &::before {@include margin-inline(calc(var(--padding) / 2) ,'end');}
+
+        /*==== Labeled ====*/
+        &.labeled {padding-#{$direction-start}: 0;}
     }
 
-    &.btn-icon-end::before {
-        line-height: inherit;
-        float: $direction-end;
-        @include margin-inline(calc(var(--padding) / 2) ,'start');
+    &.btn-icon-end {
+        /*==== icon ====*/
+        &::before {
+            float: $direction-end;
+            @include margin-inline(calc(var(--padding) / 2) ,'start');
+        }
+        /*==== Labeled ====*/
+        &.labeled {padding-#{$direction-end}: 0;}
     }
 
-    //==== Colors Maker ====//
+    &.labeled::before {
+        width: var(--height);
+        height: var(--height);
+        background-color: rgba(#000, 0.1);
+    }
+
+    /*==== Colors Maker ===*/
     @mixin make-color($prefix, $hover, $text:'dark-reverse') {
         --color  : var(#{'--'+$text});
         --background : var(#{'--'+$prefix+'-color'});
         --border-color : var(#{'--'+$prefix+'-color'});
         &:hover {--background : var(#{'--'+$prefix+'-'+$hover});}
+        /*==== Outline ====*/
+        &.outline {--color: var(#{'--'+$prefix+'-color'});}
+        &.outline:hover {
+            --color: var(#{'--'+$text});
+            --background: var(#{'--'+$prefix+'-color'});
+        }
     }
 
-    //==== Prime Colors ====//
+    /*==== Prime Colors ===*/
     &.primary { @include make-color('primary','hover','primary-reverse'); }
     &.secondary { @include make-color('secondary','hover','secondary-reverse'); }
 
-    //==== Assets Colors ====//
+    /*==== Assets Colors ===*/
     &.info { @include make-color('info','color'); }
     &.gray { @include make-color('gray','color'); }
     &.dark { @include make-color('dark','color'); }
     &.success { @include make-color('success','color'); }
     &.danger { @include make-color('danger','color'); }
     &.warning { @include make-color('warning','color'); }
-    &.disabled, &[disabled], &:disabled { @include make-color('disable',''); }
+    &.disabled,&[disabled],&:disabled {@include make-color('disable', 'color', 'gray-color');}
 
     /*==== White Button ====*/
     &.light {
@@ -113,4 +139,7 @@
         --background   : white;
         --border-color : white;
     }
+
+    /*===== Outline ====*/
+    &.outline {--background : transparent;}
 }

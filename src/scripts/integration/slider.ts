@@ -6,10 +6,13 @@
  * ===> 02 - 
 */
 
+
 /*====> Phenix Query <====*/
 import Phenix, { PhenixElements } from "..";
 /*====> Splide JS for The Slider Core <====*/
+// / <reference path="splide.d.ts"/>
 import Splide from '@splidejs/splide';
+// declare module "Splide";
 
 /*====> Phenix Slider <====*/
 PhenixElements.prototype.slider = function (options?:{
