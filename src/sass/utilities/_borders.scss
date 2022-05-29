@@ -20,7 +20,7 @@
 
 /*==== Dividers ====*/
 .divider-b, .divider-y {border-bottom: 1px solid rgba(#000, 0.1);}
-.divider-t, .divider-u {border-top: 1px solid rgba(#000, 0.1);}
+.divider-t, .divider-y {border-top: 1px solid rgba(#000, 0.1);}
 .divider-s, .divider-x {border-#{$direction-start}: 1px solid rgba(#000, 0.1);}
 .divider-e, .divider-x {border-#{$direction-end}: 1px solid rgba(#000, 0.1);}
 

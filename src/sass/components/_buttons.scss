@@ -50,9 +50,11 @@
     &.tiny {
         --height : #{REM(30)};
         --text-size : #{REM(13)};
+        --padding   : #{REM(15)};
     }
 
     &.small {
+        --padding   : #{REM(20)};
         --height : #{REM(36)};
         --text-size : #{REM(14)};
     }
@@ -132,7 +134,7 @@
     &.danger  { @include make-color('danger','color'); }
     &.warning { @include make-color('warning','color', 'dark-color'); }
     &.disabled,&[disabled],&:disabled {@include make-color('disable', 'color', 'gray-color');}
-    
+
     /*==== White Button ====*/
     &.light {
         --color : var(--dark-color);
