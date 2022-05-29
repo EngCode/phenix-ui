@@ -30,7 +30,8 @@
     /*==== Gradients ====*/
     --primary-gradient   : var(--primary-color), var(--primary-hover);
     --secondary-gradient : var(--secondary-color), var(--secondary-hover);
-    --warning-gradient   : #FFD500, #F49D1A;
+    --success-gradient   : #22B567, #00A186;
+    --warning-gradient   : #FAD934, #F49D1A;
     --danger-gradient    : #FD875B, #F9515A, #F96AAC;
     --water-gradient     : #00C4FF, #1A69F4;
     --ice-gradient       : #54AEFC, #3289E9, #5848D2;
@@ -39,21 +40,21 @@
 
     /*=== Assets Colors ====*/
     --links-color   : var(--primary-color);
-    --info-color    : #17c0db;
+    --info-color    : #816CF3;
     --gray-color    : #868e96;
     --dark-color    : #343a40;
-    --success-color : #22b544;
-    --danger-color  : #de3131;
-    --warning-color : #f4bb0e;
+    --success-color : #22B567;
+    --danger-color  : #DE3131;
+    --warning-color : #FAD934;
     --disable-color : #ebebeb;
 
     /*=== Assets Lighter ====*/
-    --info-light    : #a6eaf5;
+    --info-light    : #CECCF9;
     --gray-light    : #d9dde1;
     --dark-light    : #343a40;
-    --success-light : #c1eecc;
+    --success-light : #C1EED9;
     --danger-light  : #fbbbbb;
-    --warning-light : #ffdd75;
+    --warning-light : #FFE875;
 
     /*==== Typography Colors ====*/
     --typography-color : #555;
@@ -78,7 +79,7 @@
 
 /*==== Components Modules ====*/
 @import 'components/breadcrumb'; //===> Breadcrumb
-@import 'components/buttons';    //===> Buttons
+@import 'components/buttons';    //===> Buttons & Badges
 @import 'components/dropdown';   //===> Dropdown
 @import 'components/navbar';     //===> Phenix Navbar
 @import 'components/modals';     //===> Popups & Modals

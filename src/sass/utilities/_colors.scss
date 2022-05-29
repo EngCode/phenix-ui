@@ -108,16 +108,20 @@
 .bg-offwhite-lavenderblush {background-color: #FFF0F5;}
 
 /*==== Gradients ====*/
-.bg-grade-primary,.bg-grade-secondary,.bg-grade-warning,.bg-grade-danger,
-.bg-grade-water,.bg-grade-ice,.bg-grade-fire,.bg-grade-purple {--gradeient-rotation : 0;}
-.bg-grade-primary   {background-image: linear-gradient(var(--gradeient-rotation) ,var(--primary-gradient));}
-.bg-grade-secondary {background-image: linear-gradient(var(--gradeient-rotation) ,var(--secondary-gradient));}
-.bg-grade-warning   {background-image: linear-gradient(var(--gradeient-rotation) ,var(--warning-gradient));}
-.bg-grade-danger    {background-image: linear-gradient(var(--gradeient-rotation) ,var(--danger-gradient));}
-.bg-grade-water     {background-image: linear-gradient(var(--gradeient-rotation) ,var(--water-gradient));}
 .bg-grade-ice       {background-image: linear-gradient(var(--gradeient-rotation) ,var(--ice-gradient));}
 .bg-grade-fire      {background-image: linear-gradient(var(--gradeient-rotation) ,var(--fire-gradient));}
+.bg-grade-water     {background-image: linear-gradient(var(--gradeient-rotation) ,var(--water-gradient));}
+.bg-grade-danger    {background-image: linear-gradient(var(--gradeient-rotation) ,var(--danger-gradient));}
 .bg-grade-purple    {background-image: linear-gradient(var(--gradeient-rotation) ,var(--purple-gradient));}
+.bg-grade-primary   {background-image: linear-gradient(var(--gradeient-rotation) ,var(--primary-gradient));}
+.bg-grade-warning   {background-image: linear-gradient(var(--gradeient-rotation) ,var(--warning-gradient));}
+.bg-grade-success   {background-image: linear-gradient(var(--gradeient-rotation) ,var(--success-gradient));}
+.bg-grade-secondary {background-image: linear-gradient(var(--gradeient-rotation) ,var(--secondary-gradient));}
+
+/*==== Gradients Rotation ====*/
+.bg-grade-primary,.bg-grade-secondary,.bg-grade-warning,.bg-grade-danger,
+.bg-grade-water,.bg-grade-ice,.bg-grade-fire,.bg-grade-purple,.bg-grade-success {--gradeient-rotation : 0;}
+
 /*==== Gradients Rotations ====*/
 .bg-grade-45   {--gradeient-rotation : 45deg;}
 .bg-grade-90   {--gradeient-rotation : 90deg;}
