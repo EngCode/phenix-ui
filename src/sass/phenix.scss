@@ -15,14 +15,19 @@ $direction-end: right;
 /*==== Font Options ====*/
 :root {
     //==== Font Families ====//
-    --primary-font: 'BioSans';
-    --secondary-font: 'BioSans';
+    --primary-font: 'Fira Sans';
+    --secondary-font: 'Fira Sans';
 
     //==== Font Weight ====//
-    --normal-weight: 400;
-    --medium-weight: 500;
-    --bold-weight  : 600;
-    --strong-weight: 700;
+    --thin-weight   : 100;
+    --xlight-weight : 200;
+    --light-weight  : 300;
+    --normal-weight : 400;
+    --medium-weight : 500;
+    --bold-weight   : 600;
+    --strong-weight : 700;
+    --xbold-weight  : 800;
+    --black-weight  : 900;
 
     /*==== Responsive REM:Base ====*/
     --rem-xl : 16px; //===> xLarge Screens and Up

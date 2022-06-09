@@ -213,7 +213,7 @@ ul, ol {
 dl {
     margin-bottom: REM(25);
     dt {
-        @extend .strong-weight;
+        @extend .weight-strong;
         + dd {margin-top: .25rem;}
         &:not(:first-child) {margin-top: .5rem;}
     }

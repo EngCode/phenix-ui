@@ -52,10 +52,15 @@ h6,.h6 {font-size: REM(17);}
 .tx-nowrap {@extend %nowrap;}
 
 /*==== Font Weight ====*/
-.strong-weight {font-weight: var(--strong-weight);}
-.bold-weight   {font-weight: var(--bold-weight);}
-.medium-weight {font-weight: var(--medium-weight);}
-.normal-weight {font-weight: var(--normal-weight);}
+.weight-thin   {font-weight: var(--thin-weight);}
+.weight-light  {font-weight: var(--light-weight);}
+.weight-xlight {font-weight: var(--xlight-weight);}
+.weight-medium {font-weight: var(--medium-weight);}
+.weight-bold   {font-weight: var(--bold-weight);}
+.weight-strong {font-weight: var(--strong-weight);}
+.weight-xbold  {font-weight: var(--xbold-weight);}
+.weight-black  {font-weight: var(--black-weight);}
+.weight-normal  {font-weight: var(--normal-weight);}
 
 /*==== Line Height ====*/
 .lineheight-100 {line-height: 1;}

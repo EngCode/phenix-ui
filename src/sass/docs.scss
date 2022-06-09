@@ -11,25 +11,7 @@ $direction-start: left;
 $direction-end: right;
 
 .white-bg {background-color: #fff;}
-/*========== Loading Fonts ==========*/
-@font-face {
-    font-family: 'BioSans';
-    src: url('../webfonts/biosans-regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'BioSans';
-    src: url('../webfonts/biosans-semibold.woff2') format('woff2');
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: 'BioSans';
-    src: url('../webfonts/biosans-bold.woff2') format('woff2');
-    font-weight: 700;
-}
 
 /*==== SASS Selectors ====*/
 %reset {
@@ -78,38 +60,7 @@ $direction-end: right;
 
 /*==== Colors Options ====*/
 :root {
-    //==== Font Families ====//
-    --primary-font: 'BioSans';
-    --secondary-font: 'BioSans';
-
-    //==== Font Weight ====//
-    --normal-weight: 400;
-    --medium-weight: 600;
-    --strong-weight: 700;
-
-    /*==== Body Background ====*/
-    --body-bg : #F5F5F5;
-
-    /*==== Primary Color ====*/
-    --primary-color   : #0C97F9;
-    --primary-hover   : #1A69F4;
-    --primary-reverse : #FFFFFF;
-
-    /*==== Secondary Color ====*/
-    --secondary-color   : #F9AF5B;
-    --secondary-hover   : #F8C35B;
-    --secondary-reverse : #FFFFFF;
-
     --wp-color : #8772F7;
-
-    //=== Assets text colors ====//
-    --links-color   :#0C97F9;
-
-    /*==== Typography Colors ====*/
-    --headlines-color  : #1c1c1c;
-    --typography-color : #555;
-    --light-reverse    : #000;
-    --dark-reverse     : #FFF;
 }
 
 /*==== Page Options ====*/
@@ -124,6 +75,11 @@ html {line-height: 1.5;}
 @include xlarge() {
     .mxw-xl-275 {max-width: 275px;}
 };
+
+.strong-weight {font-weight: var(--strong-weight);}
+.bold-weight   {font-weight: var(--bold-weight);}
+.medium-weight {font-weight: var(--medium-weight);}
+.normal-weight {font-weight: var(--normal-weight);}
 
 .wp-color {color: var(--wp-color);}
 .tx-align-center {text-align: center;}
@@ -287,7 +243,7 @@ html {line-height: 1.5;}
                 font-weight: normal;
                 margin-left: 25px;
                 margin-bottom: 5px;
-                .px-item-active,li:hover {color: var(--headlines-color);}
+                .px-item-active,li:hover {color: var(--dark-color);}
                 @include xlarge() {margin-left: 30px;}
             }
             /*==== Active ====*/
@@ -737,4 +693,6 @@ body.rtl {
 /*===> Custom Font-Icon Example <===*/
 .px-breadcrumb.custom-icon {--divider-icon : '\f101';}
 
-
+@include large() {
+    .megamenu-example > ul > li {padding-top: 6px;padding-bottom: 6px;}
+};

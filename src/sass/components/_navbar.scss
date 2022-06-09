@@ -73,15 +73,15 @@
         color: var(--color);
         font-weight : normal;
         min-height: var(--height);
-        line-height: var(--height);
         box-shadow: var(--box-shadow);
         z-index: var(--dropdown-index);
         background-color: var(--background);
-        @include padding-block(var(--space-in));
+        @include padding-block(#{calc(var(--space-in)/1.5)});
         border-radius: 0 0 var(--radius) var(--radius);
         /*==== items ====*/
-        li {
+        &:not(.megamenu) li {
             position: relative;
+            line-height: var(--height);
             @include padding-inline(var(--space-in));
             ul {border-radius: var(--radius);}
         }

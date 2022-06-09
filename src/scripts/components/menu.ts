@@ -133,7 +133,7 @@ PhenixElements.prototype.menu = function (options?:{
     
                     //====> Clean Markup <====//
                     Phenix(`#${menu_id} [id]`).forEach((element:HTMLElement) => element.removeAttribute('id'));
-                    Phenix(`#${menu_id} .menu-wraper > *`).removeClass('flexbox');
+                    Phenix(`#${menu_id} .menu-wrapper > *`).removeClass('flexbox');
     
                     /*====> Active Submenus <====*/
                     submenus_handle(Phenix(`#${menu_id} .submenu-item > a`));
