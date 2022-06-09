@@ -131,7 +131,7 @@
 
     /*==== Show Submenu ====*/
     .px-menu-active, &[data-hover] li:hover {
-        > .submenu, > .megamenu {display: block!important;}
+        > .submenu, > .megamenu {display: block;}
     }
 }
 

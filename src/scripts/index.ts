@@ -552,7 +552,8 @@ import './features/effects';    //==> UI Effects
 import './features/counter';    //==> Animated Counter
 import './features/animations'; //==> View-port Animations
 import './features/validation'; //==> Form Validation
-import './features/collapse'; //==> Accordions
+import './features/collapse';   //==> Collapse Toggle
+import './features/notifications'; //==> Notifications
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus

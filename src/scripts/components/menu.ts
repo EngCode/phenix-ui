@@ -52,7 +52,7 @@ PhenixElements.prototype.menu = function (options?:{
         //====> Marking Submenus <====//
         submenus.forEach((submenu_item:any) => {
             submenu_item.classList.add('submenu');
-            submenu_item.style.display = 'none';
+            if (Phenix(submenu_item).getCSS('display') !== 'none') submenu_item.style.display = 'none';
             //===> Mark the Parent <====//
             let submenu_toggle = submenu_item.parentNode;
             submenu_toggle.classList.add('submenu-item');
