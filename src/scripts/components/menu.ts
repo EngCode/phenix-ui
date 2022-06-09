@@ -18,13 +18,12 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Menu Builder <====*/
 PhenixElements.prototype.menu = function (options?:{
-    type?:string,        //===> Menu Type [navigation, dropdown]
     menu_id?:string,     //===> Menu CSS ID
     hover?:boolean,      //===> Dropdown on Hover [Disktop only]
-    active?:string ,     //===> Menu CSS Active Class [px-active]
     sub_active?:string,  //===> Submenus CSS Active Class [px-submenu-active]
     mobile?:string,      //===> Responsive Mode [dropdown, custom]
     effect?:string,      //===> Dropdown Effect [slide, fade, custom]
+    arrow?:string,       //===> Dropdown Arrow icon class names
 }) {
     //====> Loop Through Phenix Query <====//
     this.forEach(menu => {
@@ -32,25 +31,45 @@ PhenixElements.prototype.menu = function (options?:{
         let inline = attr => menu.getAttribute(attr);
 
         /*====> Default Options <====*/
-        let menu_type = inline('data-type') || options?.type || 'navigation',
-            menu_id = inline('data-id') || options?.menu_id || null,
+        let menu_id = inline('data-id') || options?.menu_id || null,
             hover = inline('data-hover') || options?.hover || false,
-            active = inline('data-active') || options?.active || 'px-menu-active',
             sub_active = inline('data-sub-active') || options?.sub_active || 'px-submenu-active',
-            effect = inline('data-effect') || options?.effect || 'slide',
+            effect = inline('data-effect') || options?.effect,
+            arrow  = inline('data-arrow') || options?.arrow?.split(" "),
             responsive = inline('data-mobile') || options?.mobile || 'dropdown';
 
         //====> Dropdown Submenus <====//
-        let submenus = menu.querySelectorAll('li > ul, li > .megamenu'),
+        let submenus  = menu.querySelectorAll('li > ul, li > .megamenu'),
             dropdowns = [];
 
         //====> Dropdown Default Effect <====//
-        if (menu_type === 'dropdown') !effect ? effect = 'slide' : null;
+        if (responsive === 'dropdown') {
+            !effect ? effect = 'slide' : null;
+        }
+        
+        menu.setAttribute('data-effect', effect);
 
         //====> Marking Submenus <====//
         submenus.forEach((submenu_item:any) => {
             submenu_item.classList.add('submenu');
-            submenu_item.parentNode.classList.add('submenu-item');
+            submenu_item.style.display = 'none';
+            //===> Mark the Parent <====//
+            let submenu_toggle = submenu_item.parentNode;
+            submenu_toggle.classList.add('submenu-item');
+            //===> set arrow icons <===//
+            let arrow_icon = arrow?.split(' ');
+
+            if (arrow_icon) {
+                let toggle_btn = submenu_toggle;
+                if (toggle_btn.querySelector(':scope > a')) toggle_btn = toggle_btn.querySelector(':scope > a');
+                
+                //===> Add Classes <===//
+                toggle_btn.classList.add('arrow-icon');
+                for (let index = 0; index < arrow_icon.length; index++) {
+                    let iconname = arrow_icon[index];              
+                    toggle_btn.classList.add(iconname);
+                }
+            }
             //===> Megamenu Fix <===//
             if(submenu_item.classList.contains('megamenu')) {
                 submenu_item.parentNode.style.position = 'static';
@@ -90,6 +109,7 @@ PhenixElements.prototype.menu = function (options?:{
 
         /*====> Active Submenus <====*/
         if(!hover) submenus_handle(dropdowns);
+
         /*====> Media Query Check <====*/
         else if (hover && Phenix(document).viewport('width') < 1100) window.addEventListener('resize', resized => {
             if (Phenix(document).viewport('width') < 1100) submenus_handle(dropdowns);
@@ -105,9 +125,9 @@ PhenixElements.prototype.menu = function (options?:{
                 if (!document.querySelector(`#${menu_id}`)) {
                     //====> Create the Menu into the Body <====//
                     Phenix(document.body).insert('append', 
-                        `<nav id="${menu_id}" class="px-custom-menu">
-                            <div class="menu-wraper">${menu.innerHTML}</div>
-                            <a href="#${menu_id}" class="menu-toggle" tabindex="0" role="button" aria-pressed="false"></a>
+                        `<nav id="${menu_id}" ${effect? 'data-effect="'+effect+'"' : ''} class="px-custom-menu">
+                            <div class="menu-wrapper">${menu.innerHTML}</div>
+                            <a href="#${menu_id}" class="menu-toggle" data-id="${menu_id}" tabindex="0" role="button" aria-pressed="false"></a>
                         </nav>`
                     );
     
@@ -119,28 +139,29 @@ PhenixElements.prototype.menu = function (options?:{
                     submenus_handle(Phenix(`#${menu_id} .submenu-item > a`));
                 }
             }
-
-            /*====> Toggle Button <====*/
-            Phenix('.menu-toggle').on('click', click => {
-                //===> Disable Default Behavor <===//
-                click.preventDefault();
-                //===> Dropdown Data <===//
-                let trigger = click.target,
-                    target  = trigger.getAttribute('data-id');
-
-                //===> Define Target <====//
-                if (target) target = `#${target}`;
-                else target = trigger.getAttribute('href');
-                target = document.querySelector(target);
-
-                //===> Toggle Menu <====//
-                target.classList.toggle(active);
-                if (effect === 'slide') {
-                    if (effect === 'slide') Phenix(target).slideToggle();
-                    else if (effect === 'fade') Phenix(target).fadeToggle();
-                }
-            });
         }
+    });
+    
+
+    /*====> Toggle Button <====*/
+    Phenix(`.menu-toggle`).on('click', click => {
+        //===> Disable Default Behavor <===//
+        click.preventDefault();
+        //===> Dropdown Data <===//
+        let trigger = click.target,
+            target  = trigger.getAttribute('data-id');
+
+        //===> Define Target <====//
+        if (target) target = `#${target}`;
+        else target = trigger.getAttribute('href');
+        target = document.querySelector(target);
+
+        //===> Toggle Menu <====//
+        target.classList.toggle('.px-menu-active');
+        let effect = target.getAttribute('data-effect');
+        console.log(effect);
+        if (effect === 'slide') Phenix(target).slideToggle();
+        else if (effect === 'fade') Phenix(target).fadeToggle(500,0,'flex');
     });
 
     //====> Return Phenix Query <====//

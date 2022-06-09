@@ -19,7 +19,7 @@
     --text-weight : var(--medium-weight);
     /*==== Size Options ====*/
     --height : #{REM(42)};
-    --text-size : #{REM(15)};
+    --text-size : #{REM(16)};
     --border-size : 0;
     /*==== Colors Options ====*/
     --color : var(--dark-color);
@@ -48,27 +48,27 @@
 
     /*===== Button Sizes  ===*/
     &.tiny {
-        --height : #{REM(30)};
-        --text-size : #{REM(13)};
+        --height    : #{REM(30)};
         --padding   : #{REM(15)};
+        --text-size : #{REM(13)};
     }
 
     &.small {
+        --height    : #{REM(36)};
         --padding   : #{REM(20)};
-        --height : #{REM(36)};
         --text-size : #{REM(14)};
     }
 
     &.large {
-        --height : #{REM(52)};
+        --height    : #{REM(52)};
         --padding   : #{REM(25)};
-        --text-size : #{REM(17)};
+        --text-size : #{REM(22)};
     }
 
     &.xlarge {
         --height    : #{REM(62)};
         --padding   : #{REM(35)};
-        --text-size : #{REM(19)};
+        --text-size : #{REM(26)};
     }
 
     &.square {

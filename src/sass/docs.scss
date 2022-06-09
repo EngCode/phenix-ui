@@ -293,7 +293,7 @@ html {line-height: 1.5;}
             /*==== Active ====*/
             &.px-item-active {
                 color: var(--primary-color);
-                .submenu {display: block;}
+                .submenu {display: block!important;}
                 > a::before {
                     content: '\f07c';
                     font-weight: 600;

@@ -366,19 +366,20 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
                 //===> for [images, iframe] <===//
                 if (element.matches('img'||'iframe')) {
-                    element.setAttribute('data-lazyload', source);
-                    element.setAttribute('src', spiner);
+                    // element.setAttribute('data-lazyload', source);
+                    // element.setAttribute('src', spiner);
                     element.classList.add('px-loading')
                 }
 
                 //===> for [video, audio] <===//
                 else if (playable && !preloaded) element.setAttribute('preload', 'none');
+                element.setAttribute('loading', 'lazy');
 
                 //====> Keep Watching Element While Scrolling <====//
                 document.addEventListener('scroll', event => {
                     //====> if its in view-point set the original source <====//
                     if (element.matches('img'||'iframe') && Phenix(element).inView() && !element.matches('.px-loaded')) {
-                        element.setAttribute('src', source);
+                        // element.setAttribute('src', source);
                         element.classList.remove('px-loading');
                         element.classList.add('px-loaded');
                     };

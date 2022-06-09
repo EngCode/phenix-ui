@@ -24,11 +24,31 @@
 .divider-s, .divider-x {border-#{$direction-start}: 1px solid rgba(#000, 0.1);}
 .divider-e, .divider-x {border-#{$direction-end}: 1px solid rgba(#000, 0.1);}
 
-/*==== Radius ====*/
-.border-r-sm   {border-radius: 4px;}
-.border-r-md   {border-radius: 6px;}
-.border-r-lg   {border-radius: 8px;}
-.border-r-xl   {border-radius: 10px;}
-.border-r-xxl  {border-radius: 15px;}
-.border-r-none {border-radius: 0;}
-.border-r-circle {border-radius: 50%;}
+/*==== Radius Utilties ====*/
+.radius-sm, .radius-md, .radius-lg, .radius-xl, .radius-xxl, .radius-none, .radius-circle, .radius-height {
+    --radius : 0;
+    border-radius: var(--radius);
+}
+
+/*==== Radius Sizes ====*/
+.radius-sm     {--radius: 4px;}
+.radius-md     {--radius: 6px;}
+.radius-lg     {--radius: 8px;}
+.radius-xl     {--radius: 10px;}
+.radius-xxl    {--radius: 15px;}
+.radius-circle {--radius: 50%;}
+.radius-height {--radius: var(--height);}
+
+/*==== Radius Position ====*/
+.radius-top     {border-radius: var(--radius) var(--radius) 0 0;}
+.radius-bottom  {border-radius: 0 0 var(--radius) var(--radius);}
+
+.radius-start {
+    @if ($direction == 'ltr') {border-radius: var(--radius) 0 0 var(--radius);} 
+    @else {border-radius: 0 var(--radius) var(--radius) 0;} 
+}
+
+.radius-end {
+    @if ($direction == 'ltr') {border-radius: 0 var(--radius) var(--radius) 0;} 
+    @else {border-radius: var(--radius) 0 0 var(--radius);} 
+}

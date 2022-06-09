@@ -17,7 +17,6 @@
 
 /*==== CSS Options ====*/
 .control-icon, .form-control, .option-control {
-    --radius  : 4px;
     --padding : #{REM(15)};
     /*=== Size Options ===*/
     --height    : #{REM(42)};
@@ -54,13 +53,13 @@
     &.tiny {
         --padding   : #{REM(10)};
         --height    : #{REM(30)};
-        --text-size : #{REM(13)};
+        --text-size : #{REM(12)};
     }
 
     &.small {
         --padding   : #{REM(12)};
         --height    : #{REM(36)};
-        --text-size : #{REM(14)};
+        --text-size : #{REM(13)};
     }
 
     &.large {
@@ -96,7 +95,6 @@
 .form-control {
     height : var(--height);
     border : var(--border-size) solid var(--border-color);
-    border-radius : var(--radius);
     background-color : var(--background);
     /*=== Text ===*/
     color : var(--color);

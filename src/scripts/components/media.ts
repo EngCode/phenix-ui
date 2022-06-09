@@ -132,7 +132,7 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Set Background <===//
                     background(element, src);
                     //===> Create Image <===//
-                    if(!element.querySelector('img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="px-media-img" />`);
+                    if(!element.querySelector('img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="px-media-img" ${lazy ? 'loading="lazy"' : ''} />`);
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }

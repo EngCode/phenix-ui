@@ -26,78 +26,112 @@
     font-size: var(--font-size);
     font-weight: var(--font-weight);
     
-    /*==== Menu Items ====*/
+    /*==== General Style ====*/
+    ul {
+        @extend %reset-list;
+        /*==== items ====*/
+        li {
+            /*==== inherited ====*/
+            font-size: inherit;
+            font-weight: inherit;
+        }
+        /*==== Links ====*/
+        li > a {
+            color: inherit;
+            display: block;
+            &:focus, &:active {outline: 0 none;}
+        }
+    }
+
+    /*==== Menu Theme ====*/
     > ul > li {
-        /*==== inherited ====*/
-        font-size: inherit;
-        font-weight: inherit;
         /*==== Options ====*/
-        height: var(--height);
+        min-height: var(--height);
         line-height: var(--height);
         color: var(--color);
         background-color: var(--background);
         position: relative;
         @extend %fast-motion;
-        @include padding_inline(var(--space-in), 'both');
-        /*==== Links ====*/
-        a {
-            color: inherit;
-            &:focus, &:active {outline: 0 none;}
-        }
-
-        > a {display: block;}
-        /*==== Submenu ====*/
-        ul {@extend %reset-list;}
-        
-        .submenu, .megamenu {
-            position: absolute;
-            top: 100%;
-            #{$direction-start}: 0;
-            margin-top: -2px;
-            min-width: REM(230);
-            display: none;
-            width: 100%;
-        }
-        
-        /*==== Submenu Theme ====*/
-        .submenu {
-            /*==== CSS Options ====*/
-            --color : var(--gray-color);
-            --color-hvr : var(--primary-color);
-            --background : white;
-            --space-around : #{REM(15)};
-            --space-in : 0;
-            --f-size : 0.85em;
-            --height : 26px;
-            /*==== ... ====*/
-            color: var(--color);
-            background-color: var(--background);
-            padding: var(--space-around);
-            z-index: var(--dropdown-index);
-            font-size: var(--f-size);
-            line-height: var(--height);
-            /*====  ====*/
-            li:hover {
-                @extend %fast-motion;
-                color: var(--color-hvr);
-            }
-            /*==== Level-3 ====*/
-            .submenu {
-                top: 0;
-                #{$direction-start}: 100%;
-            }
-        }
-
+        @include padding_inline(var(--space-in));
         /*==== Hover & Active ====*/
-        &:hover, &.px-item-active {
+        &:hover, &.px-item-active, &.px-submenu-active {
             color: var(--color-hvr);
             background-color: var(--background-hvr);
         }
+    }
 
-        /*==== Submenu ====*/
-        &:hover, &.px-menu-active, li:hover {
-            > .submenu, > .megamenu {display: block;}
+    /*==== Submenu Theme ====*/
+    .submenu {
+        /*==== CSS Options ====*/
+        --height : 30px;
+        --radius : 5px;
+        --background : white;
+        --space-in : #{REM(15)};
+        --color : var(--gray-color);
+        --box-shadow : 3px 3px 8px 0 rgba(0,0,0, 0.05);
+        /*==== ... ====*/
+        color: var(--color);
+        font-weight : normal;
+        min-height: var(--height);
+        line-height: var(--height);
+        box-shadow: var(--box-shadow);
+        z-index: var(--dropdown-index);
+        background-color: var(--background);
+        @include padding-block(var(--space-in));
+        border-radius: 0 0 var(--radius) var(--radius);
+        /*==== items ====*/
+        li {
+            position: relative;
+            @include padding-inline(var(--space-in));
+            ul {border-radius: var(--radius);}
         }
+        /*==== hover ====*/
+        li:hover {
+            @extend %fast-motion;
+            color: var(--color-hvr);
+        }
+    }
+
+    .arrow-icon::before {
+        line-height: inherit;
+        float: $direction-end;
+        margin-#{$direction-start}: 8px;
+    }
+
+    /*==== Submenu Perpare ====*/
+    @include large() {
+        &[data-hover] {
+            .submenu, .megamenu {
+                top: 100%;
+                width: 100%;
+                display: none;
+                margin-top: -2px;
+                position: absolute;
+                min-width: REM(190);
+                #{$direction-start}: 0;
+                /*==== Level-3+ ====*/
+                .submenu {top: 0;#{$direction-start}: 100%;}
+            }
+            
+            &.px-vertical {
+                .submenu, .megamenu {
+                    top: 0;
+                    #{$direction-start}: 100%;
+                    border-radius: var(--radius);
+                }
+            }
+        }
+    };
+
+    &:not([data-hover]) .submenu {
+        box-shadow: unset;
+        background-color: inherit;
+        @include padding-block(calc(var(--space-in)/2));
+    }
+
+    /*==== Show Submenu ====*/
+    .px-menu-active, &[data-hover] li:hover {
+        > .submenu, > .megamenu {display: block!important;}
     }
 }
 
@@ -118,9 +152,8 @@
     @extend .align-center-x;
     /*==== Activated ====*/
     &.px-menu-active {
+        opacity: 1;
         @extend %flexbox;
-        -webkit-animation: fadeIn 300ms linear forwards 50ms;
-                animation: fadeIn 300ms linear forwards 50ms;
     }
     /*==== Menu Toggle ====*/
     .menu-toggle {
@@ -133,8 +166,8 @@
         background-color: #000;
         opacity: 0.7;
     }
-    /*==== Menu Wraper ====*/
-    .menu-wraper {
+    /*==== Menu wrapper ====*/
+    .menu-wrapper {
         background-color: #fff;
         padding: REM(15) REM(25);
         position: relative;
@@ -143,6 +176,12 @@
         max-height: 95vh;
         overflow-y: auto;
         border-radius: 5px;
+        /*==== Submenu Arrow ====*/
+        .arrow-icon::before {
+            line-height: inherit;
+            float: $direction-end;
+        }
+
         /*==== Menu ====*/
         > ul {
             font-size: 12px;
@@ -151,6 +190,7 @@
             li > a {
                 color: inherit;
                 display: block;
+                &:focus, &:active {outline: 0 none;}
             }
             /*==== Items ====*/
             > li {
@@ -182,16 +222,5 @@
                 border-radius: 4px;
             }
         }
-        /*==== Submenu Arrows ====*/
-        .submenu-item > a::after {
-            opacity: 0.5;
-            content: '\f107';
-            line-height: inherit;
-            float: $direction-end;
-            @extend %inline-block;
-            font-family: var(--icons-font);
-        }
-
-        .submenu-active > a::after {content: '\f068';}
     }
 }

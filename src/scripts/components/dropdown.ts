@@ -13,7 +13,7 @@
 /*====> Phenix Object <====*/
 import Phenix, { PhenixElements } from "..";
 
-/*====> Dropdown [Un-Tested] <====*/
+/*====> Dropdown <====*/
 PhenixElements.prototype.dropdown = function (options?:{
     toggle?:string,   //====> Toggle Button Class Name : px-toggle
     target?:string,   //====> Target to Toggle (add/remove) Active Class
