@@ -136,6 +136,7 @@ PhenixElements.prototype.menu = function (options?:{
                     Phenix(`#${menu_id} .menu-wrapper > *`).removeClass('flexbox');
     
                     /*====> Active Submenus <====*/
+                    effect = 'slide';
                     submenus_handle(Phenix(`#${menu_id} .submenu-item > a`));
                 }
             }
