@@ -1,0 +1,50 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Overflow
+ * ===> 02 - Float Elements
+ * ===> 03 - Overlay Layer
+ * ===> 04 - Position
+ * ===> 05 - Directions
+ * ===> 06 - zIndex
+ * ===> 07 - Sticky Elements
+ * ===> 08 - Phenix Media
+ * ===> 09 - Aspect Ratio
+ * ===> 10 - Lazy Loader
+ * ===> 11 - Assets
+*/
+
+/*==== SASS Selectors ====*/
+@import './../assets/selectors';
+
+/*==== Position ====*/
+.postion-ab  {position: absolute;}
+.postion-rv  {position: relative;}
+.postion-fx  {position: fixed;}
+.postion-st  {position: -webkit-sticky;position: sticky;}
+/*==== Top ====*/
+.postion-top-0 {top: REM(0);}
+.postion-top-10 {top: REM(10);}
+.postion-top-15 {top: REM(15);}
+.postion-top-20 {top: REM(20);}
+.postion-top-25 {top: REM(25);}
+.postion-top-30 {top: REM(30);}
+/*==== Bottom ====*/
+.postion-bottom-0 {bottom: REM(0);}
+.postion-bottom-10 {bottom: REM(10);}
+.postion-bottom-15 {bottom: REM(15);}
+.postion-bottom-20 {bottom: REM(20);}
+.postion-bottom-25 {bottom: REM(25);}
+.postion-bottom-30 {bottom: REM(30);}
+/*==== Start ====*/
+.postion-start-0 {#{$direction-start}: REM(0);}
+.postion-start-10 {#{$direction-start}: REM(10);}
+.postion-start-15 {#{$direction-start}: REM(15);}
+.postion-start-20 {#{$direction-start}: REM(20);}
+.postion-start-25 {#{$direction-start}: REM(25);}
+.postion-start-30 {#{$direction-start}: REM(30);}
+/*==== End ====*/
+.postion-end-0 {#{$direction-end}: REM(0);}
+.postion-end-10 {#{$direction-end}: REM(10);}
+.postion-end-15 {#{$direction-end}: REM(15);}
+.postion-end-20 {#{$direction-end}: REM(20);}
+.postion-end-25 {#{$direction-end}: REM(25);}
+.postion-end-30 {#{$direction-end}: REM(30);}

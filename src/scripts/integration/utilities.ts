@@ -3,13 +3,8 @@
  * ===> 02 - Phenix Utilities
  * ===> 03 - Form Utilities
  * ===> 04 - Placeholder Handler
- * ===> 05 - Accessibility
- * ===> 06 - Buttons Accessibility
- * ===> 00 - Global Utilities
- * ===> 00 - Item Remover
- * ===> 00 - Responsive Multimedia
- * ===> 00 - Viewport Utilities
- * ===> 00 - Notficationss
+ * ===> 05 - Global Utilities
+ * ===> 06 - Item Remover
 */
 
 /*====> Phenix Object <====*/
