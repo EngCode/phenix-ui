@@ -24,7 +24,7 @@
     /*==== Secondary Color ====*/
     --secondary-color   : #F8C25B;
     --secondary-hover   : #FB955D;
-    --secondary-reverse : #FFFFFF;
+    --secondary-reverse : #000000;
     --secondary-offwhite: #fddfa8;
 
     /*==== Gradients ====*/
@@ -82,7 +82,6 @@
 @import 'components/buttons';    //===> Buttons & Badges
 @import 'components/dropdown';   //===> Dropdown
 @import 'components/navbar';     //===> Phenix Navbar
-@import 'components/modals';     //===> Popups & Modals
 @import 'components/tables';     //===> Tables & Datatables
 @import 'components/tabs';       //===> Panels & Tabs
 
@@ -102,3 +101,7 @@
 
 /*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}
+
+/*==== Backdrop [Overlay] Opacity ====*/
+.overlay-dark::before {opacity: 0.75;}
+

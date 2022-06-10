@@ -20,7 +20,7 @@ PhenixElements.prototype.notifications = function (options?:{
         duration = options?.duration || 3000,
         notfications = document.querySelector('.px-notfications'),
         background = 'bg-primary color-white',
-        item_position = 'postion-bottom-0 postion-start-0',
+        item_position = 'position-bottom-0 position-start-0',
         css_classes = 'px-item pdy-10 pdx-15 fs-14 mb-10 radius-sm';
     
     //====> Figure Position <=====//
@@ -49,7 +49,7 @@ PhenixElements.prototype.notifications = function (options?:{
 
     //====> Create Notifcation Area <====//
     if(!document.querySelector('.px-notfications')) {
-        notfications = Phenix('body').insert('append', `<div class="px-notfications postion-fx postion-bottom-0 postion-start-0 hidden z-index-modal pd-15 ${options?.position ? 'flexbox h-100vh col-12' : ''}" style="pointer-events: none"></div>`);
+        notfications = Phenix('body').insert('append', `<div class="px-notfications position-fx position-bottom-0 position-start-0 hidden z-index-modal pd-15 ${options?.position ? 'flexbox h-100vh col-12' : ''}" style="pointer-events: none"></div>`);
     }
 
     //====> Change Background <====//

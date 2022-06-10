@@ -126,7 +126,7 @@ PhenixElements.prototype.fadeOut = function (duration?, delay?) {
     //====> Loop Through Phenix Elements <====//
     this.forEach((element:HTMLElement) => {
         //====> if the target is Visible <====//
-        if (getComputedStyle(element).display !== 'none') {
+        if (getComputedStyle(element)?.display !== 'none') {
             //====> Animation Data <====//
             let timespeed = duration || 300,
                 keyframes = [{opacity: 1}, {opacity : 0}];

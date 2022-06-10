@@ -86,7 +86,7 @@ PhenixElements.prototype.inView = function (options?:{
     let element:any = this[0],
         flow:string = flowOn || options?.flow,
         scrollPosition = window.scrollY || window.pageYOffset,
-        targetPostion = element.getBoundingClientRect().top + scrollPosition,
+        targetPosition = element.getBoundingClientRect().top + scrollPosition,
 
         //===> ViewPoint Position <====//
         viewport = {
@@ -95,15 +95,15 @@ PhenixElements.prototype.inView = function (options?:{
         };
 
         //====> Into Calc <====//
-        if (options?.into && options?.into > 0) targetPostion = targetPostion + options?.into;
+        if (options?.into && options?.into > 0) targetPosition = targetPosition + options?.into;
 
         //====> Offset Calc <====//
-        else if (options?.offset && options?.offset > 0) targetPostion = targetPostion - options?.offset;
+        else if (options?.offset && options?.offset > 0) targetPosition = targetPosition - options?.offset;
 
         //===> Target Data <====//
         let target = {
-            top: targetPostion,
-            bottom: targetPostion + element.clientHeight
+            top: targetPosition,
+            bottom: targetPosition + element.clientHeight
         },
 
         //===> inBetween Odds <====//
