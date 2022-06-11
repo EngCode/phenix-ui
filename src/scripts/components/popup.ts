@@ -88,6 +88,8 @@ PhenixElements.prototype.popup = function (options?:{
             document.body.classList.remove('overflow-hidden');
             //====> Fire Event <====//
             popup.dispatchEvent(hidden);
+            //===> Cleanup Lightbox <===//
+            popup.querySelectorAll('.px-lightbox-media, .lighbox-slider').forEach(element => element.remove());
         };
 
         //=====> Lightbox Mode <=====//
@@ -99,9 +101,6 @@ PhenixElements.prototype.popup = function (options?:{
             Phenix('.px-lightbox').on('click', isClicked => {
                 //===> Prevent Default <===//
                 isClicked.preventDefault();
-
-                //===> Cleanup Lightbox <===//
-                popup.querySelectorAll('.px-lightbox-media, .lighbox-slider').forEach(element => element.remove());
 
                 //===> Get the Media URL <===//
                 let thumbnail = isClicked.target,
@@ -117,10 +116,46 @@ PhenixElements.prototype.popup = function (options?:{
                 let lightbox_group = thumbnail.getAttribute('data-group'),
                     lightbox_wrapper = popup.querySelector('.modal-content');
 
+                //===> Media Type Handler <===//
+                let media_type = (url, trigger) => {
+                    //===> Get Media Type <===//
+                    let media_type = trigger.getAttribute('data-media');
+
+                    //===> Video Type <===//
+                    if (media_type === 'video') {
+                        //===> Width Fix <===//
+                        lightbox_wrapper.classList.add('col-11', 'w-max-768');
+                        //===> Return Video <===//
+                        return `<div class="px-media ratio-16x9 px-lightbox-media" data-type="html">
+                            <video src="${url}" autoplay controls></video>
+                        </div>`;
+                    }
+
+                    //===> Embed Type <===//
+                    else if (media_type === 'embed') {
+                        //===> Width Fix <===//
+                        lightbox_wrapper.classList.add('col-11', 'w-max-768');
+
+                        //===> Cleanup URL <===//
+                        if (url.includes('youtube.com')) url = url.replace('watch?v=', 'embed/');
+                        else if (url.includes('vimeo.com')) url = url.replace('vimeo.com', 'player.vimeo.com/video');
+
+                        //===> Create iframe <===//
+                        return `<div class="px-media ratio-16x9 px-lightbox-media">
+                            <iframe src="${url}" loading="lazy" frameborder="0" allowfullscreen></iframe>
+                        </div>`;
+                    }
+
+                    //===> Image Type <===//
+                    else {
+                        return `<img src="${url}" alt="Full Size Image" class="px-lightbox-media" />`;
+                    }
+                }
+
                 //===> if Single Media <===//
                 if (!lightbox_group) {
                     //===> Create the Media Element if Not Exist <===//
-                    Phenix(lightbox_wrapper).insert('append', `<img src="${media_url}" alt="Full Size Image" class="px-lightbox-media" />`);
+                    Phenix(lightbox_wrapper).insert('append', media_type(media_url, thumbnail));
                 }
 
                 //===> Group Mode <===//
@@ -135,17 +170,14 @@ PhenixElements.prototype.popup = function (options?:{
 
                         //===> Insert the Current Item as First <===//
                         if (item === thumbnail) {
-                            Phenix(slider_wrapper).insert('prepend', `<div class="px-item">
-                                <img src="${media_url}" alt="Full Size Image" class="fluid" />
-                            </div>`);
+                            Phenix(slider_wrapper).insert('prepend', `<div class="px-item">${media_type(media_url, item)}</div>`);
                         } else {
-                            Phenix(slider_wrapper).insert('append', `<div class="px-item">
-                                <img src="${media_url}" alt="Full Size Image" class="fluid" />
-                            </div>`);
+                            Phenix(slider_wrapper).insert('append', `<div class="px-item">${media_type(media_url, item)}</div>`);
                         }
                     });
 
                     lightbox_wrapper.classList.add('w-max-1100');
+                    lightbox_wrapper.querySelectorAll('.px-item .px-lightbox-media').forEach(element => element.classList.add('w-fluid'));
 
                     //===> Activate the Slider <===//
                     popup.addEventListener('modal-showed', event => {
