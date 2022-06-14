@@ -13,27 +13,17 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Tabs Panels [Un-Tested] <====*/
 PhenixElements.prototype.tabs = function (options?:{
-        active?:string,       //====> Default Active Tab number Default : first-child;
-        active_class?:string, //====> Active Class Name : px-active
-        navigation?:string,   //====> Tabs menu/buttons Wraper Selector
-
-        //====> Hide/Show Toggle Effect [fade, slide] <====//
-        effect?:{
-            type?:string,
-            duration?:number,
-            delay?:number,
-            display?:string,
-        },
-    }) {
-    //====> Default Options <====//
-    let active = options?.active || 0,
-        active_class = options?.active_class || 'px-active',
-        navigation   = options?.navigation   || '.tabs-buttons';
-
+    active?:number,     //===> Show Tab # on Initial
+    navigation?:string, //===> Navigation Selector
+    hash_url?:boolean,  //===> Show Tab from URL #ID
+}) {
     //====> Loop Through Phenix Query <====//
     this.forEach(tabs => {
-        //====> Get Tabs Buttons <====//
-        let buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab]');
+        //====> Options Data <====//
+        let active =  parseInt(tabs.getAttribute('data-active')) || options?.active || 0,
+            navigation   = options?.navigation || '.tabs-navigation',
+            active_class = 'active',
+            buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab]');
 
         //====> Loog Throgh Buttons <====//
         buttons.forEach((button:HTMLElement, index:number) => {
@@ -41,7 +31,7 @@ PhenixElements.prototype.tabs = function (options?:{
             if (index === active) {
                 //====> Active Button <====//
                 button.classList.add(active_class);
-                let active_btn =  button.getAttribute('data-tab' || 'href');
+                let active_btn = button.getAttribute('data-tab' || 'href');
                 //====> Active Tab <====//
                 Phenix(`#${active_btn.replace(/#/g, "")}`).addClass(active_class);
             }
@@ -68,7 +58,6 @@ PhenixElements.prototype.tabs = function (options?:{
                 }
             });
         });
-
     });
 
     //====> Return Phenix Elements <====//

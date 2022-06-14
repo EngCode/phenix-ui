@@ -181,7 +181,7 @@ PhenixElements.prototype.popup = function (options?:{
 
                     //===> Activate the Slider <===//
                     popup.addEventListener('modal-showed', event => {
-                        Phenix('.lighbox-slider').slider();
+                        Phenix('.lighbox-slider').slider({ autoplay: false });
                     });
                 }
 

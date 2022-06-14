@@ -24,59 +24,41 @@
 <body>
 <div class="container-md pdy-75">
 
-<!-- Images Lightbox -->
-<div class="lightbox-triggers mb-30">
-    <!-- Lighbox Image -->
-    <a class="px-lightbox" href="https://via.placeholder.com/1024x570.webp?text=Single%20Pecture">
-        <img src="https://via.placeholder.com/250x250.webp?text=Example" alt="" width="150" class="me-15">
-    </a>
-    <!-- Lighbox with Group -->
-    <img src="https://via.placeholder.com/250x250.webp?text=Example G1" alt="" width="150" class="px-lightbox me-15" data-group="lightbox-group" data-src="https://via.placeholder.com/1024x570.webp?text=Pecture%2001%20in%20Group%20of%203"> 
-    <!-- LightBox with Group -->
-    <a class="px-lightbox" data-group="lightbox-group" href="https://via.placeholder.com/1024x570.webp?text=Pecture%2002%20in%20Group%20of%203">
-        <img src="https://via.placeholder.com/250x250.webp?text=Example G2" alt="" width="150" class="me-15">
-    </a>
-    <!-- Lighbox with Group -->
-    <a class="px-lightbox" data-group="lightbox-group" href="https://via.placeholder.com/1024x570.webp?text=Pecture%2003%20in%20Group%20of%203">
-        <img src="https://via.placeholder.com/250x250.webp?text=Example G3" alt="" width="150" class="me-15">
-    </a>
-
-    <div class="pdy-5"></div>
-
-    <!-- Lighbox Image -->
-    <a class="px-lightbox" href="https://via.placeholder.com/1024x570.webp?text=Another%20Single%20Pecture">
-        <img src="https://via.placeholder.com/250x250.webp?text=Example" alt="" width="150" class="me-15">
-    </a>
-    <!-- Lighbox Video -->
-    <a class="px-lightbox" data-media="video" href="https://www.w3schools.com/html/mov_bbb.mp4">
-        <img src="https://via.placeholder.com/250x250.webp?text=Video" alt="" width="150" class="me-15">
-    </a>
-    <!-- Lighbox Embed -->
-    <a class="px-lightbox" data-media="embed" href="https://youtube.com/watch?v=NpEaa2P7qZI">
-        <img src="https://via.placeholder.com/250x250.webp?text=Embed" alt="" width="150" class="me-15">
-    </a>
-</div>
-<!-- // Images Lightbox -->
-
-<!-- Lightbox Popup -->
-<div class="px-modal hidden align-center" id="px-lightbox" data-type="lightbox">
-    <!-- Container -->
-    <div class="modal-content bg-white radius-sm">
-        <!-- Close Button -->
-        <button class="modal-close far fa-times btn square ms-15 radius-circle tiny danger position-ab position-top-10 position-end-10"></button>
-        
-        <!-- Lightbox Media will be here -->
+<!-- Tabs Wrapper -->
+<div class="px-tabs" data-active="0" data-hash="0" data-navigation=".tabs-navigation">
+    <!-- Tabs Navigation -->
+    <ul class="tabs-navigation">
+        <li data-tab="tab-1">Tab #1</li>
+        <li><a href="#tab-2">Tab #2</a></li>
+        <li data-tab="tab-3">Tab #3</li>
+    </ul>
+    <!-- Panels Group -->
+    <div class="tabs-panels">
+        <!-- Panel -->
+        <div class="tab-panel" id="tab-1">This Tab Number 3 with ID of #tab-3</div>
+        <!-- Panel -->
+        <div class="tab-panel" id="tab-2">This Tab Number 3 with ID of #tab-3</div>
+        <!-- Panel -->
+        <div class="tab-panel" id="tab-3">This Tab Number 3 with ID of #tab-3</div>
+        <!-- // Panel -->
     </div>
-    <!-- Container -->
+    <!-- // Panels Group -->
 </div>
-<!-- // Lightbox Popup -->
+<!-- // Tabs Wrapper -->
 
 </div>
+
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
-    <script>
-        //====> Popups <====//
-        Phenix('.px-modal').popup();
+
+    <!-- JS Demo for Posts -->
+    <script defer>
+        //======> D.O.M is Ready <=======//
+        Phenix(document).ready((event) => {
+            //====> Tabs <====//
+            Phenix('.px-tabs').tabs();
+        });
     </script>
+    <!-- JS Demo for Posts -->
 </body>
 </html>
