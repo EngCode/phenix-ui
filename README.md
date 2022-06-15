@@ -36,7 +36,7 @@
 
 ### Introduction
 
-**[Phenix DS](https://design.phenixthemes.com/about-phenix/ "About Phenix")** is lightweight user-interface framework build for simple structure, fast execution, and performance is number One concern in mind it was build for personal use and later published as open-source project for web community benefits,
+**[Phenix DS](https://design.phenixthemes.com/about-phenix/ "About Phenix")** is lightweight user-interface framework build for simple structure, fast execution, and performance is number One concern in mind it was build for personal use and later published as open-source project for web community benefits.
 
 ---
 
@@ -180,7 +180,7 @@ the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.c
 
 ```
 <!-- Phenix JS -->
-<script src="https://cdn.jsdelivr.net/npm/phenix-ui@1.0/dist/js/phenix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.0/dist/js/phenix.js"></script>
 ```
 
 ---
