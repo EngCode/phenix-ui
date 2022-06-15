@@ -11,7 +11,7 @@
 /*====> Phenix Object <====*/
 import Phenix, { PhenixElements } from "..";
 
-/*====> Tabs Panels [Un-Tested] <====*/
+/*====> Tabs Panels <====*/
 PhenixElements.prototype.tabs = function (options?:{
     active?:number,     //===> Show Tab # on Initial
     navigation?:string, //===> Navigation Selector

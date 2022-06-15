@@ -7,6 +7,10 @@
  * ===> 06 - Text Sizes
 */
 
+/*==== Font Families ====*/
+.primary-font {font-family: var(--primary-font);}
+.secondary-font {font-family: var(--secondary-font);}
+
 /*==== Headine Sizes ====*/
 h1,.h1 {font-size: REM(32);}
 h2,.h2 {font-size: REM(28);}
