@@ -21,40 +21,89 @@ PhenixElements.prototype.tabs = function (options?:{
     this.forEach(tabs => {
         //====> Options Data <====//
         let active =  parseInt(tabs.getAttribute('data-active')) || options?.active || 0,
-            navigation   = options?.navigation || '.tabs-navigation',
-            active_class = 'active',
-            buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab]');
+            navigation = options?.navigation || '.tabs-navigation',
+            hash_url = options?.hash_url || tabs.getAttribute('data-hash'),
+            panels  = tabs.querySelectorAll('.tab-panel'),
+            buttons = tabs.querySelector(navigation).querySelectorAll('[data-tab], [href^="#"]');
 
-        //====> Loog Throgh Buttons <====//
-        buttons.forEach((button:HTMLElement, index:number) => {
+        //====> Create Custom Event <====//
+        const showed = new Event('tab-showed'),
+              hidden = new Event('tab-hidden');
+
+        //====> Hide All Tabs <====//
+        panels.forEach((panel, index) => {
             //====> Default Activation <====//
             if (index === active) {
-                //====> Active Button <====//
-                button.classList.add(active_class);
-                let active_btn = button.getAttribute('data-tab' || 'href');
-                //====> Active Tab <====//
-                Phenix(`#${active_btn.replace(/#/g, "")}`).addClass(active_class);
+                panel.classList.add('active');
+                panel.classList.remove('hidden');
+                //====> Fire Event <====//
+                panel.dispatchEvent(showed);
+            } else {
+                panel.classList.add('hidden');
             }
-            //====> When Click on a Tab-Button <====//
+        });
+
+        //====> Loop Throgh Buttons <====//
+        buttons.forEach((button:HTMLElement, index:number) => {
+            //====> Default Activation <====//
+            if (index === active) button.classList.add('active');
+
+            //====> Tab Clicked <====//
             Phenix(button).on('click', clicked => {
                 //====> Prevent Default Behavor <====//
                 clicked.preventDefault();
-    
-                //====> Tab Data <====//
-                let tab_btn  = button,
-                    panel_id = tab_btn.getAttribute('data-tab' || 'href'),
-                    panel_element = Phenix(`#${panel_id.replace(/#/g, "")}`);
-    
-                //====> if Panels Exist <====//
-                if (panel_element.length > 0) {
-                    //====> Active Panel & Button <====//
-                    let other_panel = panel_element.addClass(active_class).siblings(),
-                        other_btns = Phenix(tab_btn).addClass(active_class).siblings();
 
-                    //====> Get Other Buttons <====//
-                    Phenix(other_btns).removeClass(active_class);
-                    //====> De-Activate Siblings <====//
-                    Phenix(other_panel).removeClass(active_class);
+                //====> Get the Panel ID <====//
+                let button = clicked.target,
+                    tab_id = button.getAttribute('data-tab');
+
+                if (!tab_id && button.hasAttribute('href')) {
+                    tab_id = button.getAttribute('href')?.replace('#','');
+                    button = button.parentNode;
+                }
+
+                //====> Active the Button <====//
+                Phenix(button).addClass('active').siblings()?.forEach(sibling => sibling.classList.remove('active'));
+
+                //====> Active the Panel and Get its Siblings <====//
+                Phenix(`#${tab_id}`).fadeIn().addClass('active').removeClass('hidden').siblings('.tab-panel')?.forEach(panel => {
+                    //====> Fire Event <====//
+                    document.querySelector(`#${tab_id}`).dispatchEvent(showed);
+
+                    //====> if the siblign is active <====//
+                    if (panel.classList.contains('active')) {
+                        //===> Deactivate the Panel <===//
+                        let the_panel:any = Phenix(panel).removeClass('active').addClass('hidden')[0];
+                        the_panel.style.display = null;
+                        //====> Fire Event <====//
+                        panel.dispatchEvent(hidden);
+                    }
+                });
+            });
+        });
+
+        //====> Active By URL <====//
+        if (hash_url !== '0' || 'false') window.addEventListener('load', () => {
+            let tab_id = window.location.hash.substr(1);
+            //====> Active the Panel and Get its Siblings <====//
+            Phenix(`#${tab_id}`).fadeIn().addClass('active').removeClass('hidden').siblings('.tab-panel')?.forEach(panel => {
+                //====> Fire Event <====//
+                document.querySelector(`#${tab_id}`).dispatchEvent(showed);
+                //====> if the siblign is active <====//
+                if (panel.classList.contains('active')) {
+                    //===> Deactivate the Panel <===//
+                    let the_panel:any = Phenix(panel).removeClass('active').addClass('hidden')[0];
+                    the_panel.style.display = null;
+                    //===> Active the Panel Button <===//
+                    Phenix(`[data-tab="${tab_id}"], [href="#${tab_id}"]`).forEach((button:any) => {
+                        //====> get this button <====//
+                        let target = button;
+                        if (button.hasAttribute('href')) target = button.parentNode;
+                        //====> Active the Button <====//
+                        Phenix(target).addClass('active').siblings()?.forEach(sibling => sibling.classList.remove('active'));
+                    });
+                    //====> Fire Event <====//
+                    panel.dispatchEvent(hidden);
                 }
             });
         });

@@ -18,7 +18,7 @@
 /*====> Phenix Object <====*/
 import Phenix, { PhenixElements } from "..";
 
-/*====> Popups Modals [Un-Tested] <====*/
+/*====> Popups Modals <====*/
 PhenixElements.prototype.popup = function (options?:{
     type:string;        //===> the type of the popup as modal or lightbox
     hash_url?:boolean;  //===> Show the Modal if called from url
