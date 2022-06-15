@@ -17,14 +17,11 @@
 </p>
 <p align="center">
 <a href="https://github.com/EngCode/phenix-ui/issues/new?assignees=-&labels=bug&template=bug_report.yml">Report bug</a>
-
 <a href="https://github.com/EngCode/phenix-ui/issues/new?assignees=&labels=feature&template=feature_request.yml">Request feature</a>
-
 <a href="https://phenixthemes.com/">Themes</a>
-
 <a href="https://blog.phenixthemes.com/">Blog</a>
-
 </p>
+
 <p align="center">
   <img src="https://img.shields.io/badge/build-v0.6.0-blue.svg" alt="" />
   <img src="https://img.shields.io/github/languages/code-size/EngCode/phenix-ui.svg" alt="" />
