@@ -12,7 +12,7 @@
 <h2 align="center">Phenix Design System</h2>
 
 <p align="center">
-  Simple, Effective, and powerful user-interface framework for faster and easier web development and today performance.
+  Simple, Effective, and powerful user-interface framework for faster and easier web development with today performance.
   <br> <br>
 
 <a href="https://design.phenixthemes.com/installation/"><strong>Explore Phenix docs »</strong></a> <br/>
