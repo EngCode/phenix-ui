@@ -1,5 +1,3 @@
-</div>
-
 <div>
 <p align="center">
   <a href="https://design.phenixthemes.com">
@@ -10,7 +8,7 @@
 <h2 align="center">Phenix Design System</h2>
 
 <p align="center">
-  Simple, Effective, and powerful user-interface framework for faster and easier web development with today performance.
+  Simple, Effective, and powerful user-interface framework for faster and easier web development.
 </p>
 <p align="center">
   <a href="https://design.phenixthemes.com/installation/"><strong>Explore Phenix docs »</strong></a>
@@ -32,6 +30,8 @@
 </p>
 </div>
 
+---
+
 ### Introduction
 
 **[Phenix DS](https://design.phenixthemes.com/about-phenix/ "About Phenix")** is lightweight user-interface framework build for simple structure, fast execution, and performance is number One concern in mind it was build for personal use and later published as open-source project for web community benefits.
@@ -42,42 +42,42 @@
 
 <div>
 <ul style="list-style:none;padding:0;margin:0">
-    <li>✅ CSS **100kb**</li>
-    <li>✅ JavaScript **92kb** for now</li>
-    <li>✅ Builded with **Sass** and **TypeScript**</li>
-    <li>✅ Built-In Powerful **JavaScript plugins**</li>
-    <li>✅ Build Anything with **CSS Utilities**</li>
-    <li>✅ Flexbox **Grid System**</li>
-    <li>✅ **Masonry Grid** Mode</li>
-    <li>✅ **RTL & LTR** Fully-Support</li>
-    <li>✅ **CSS Variable** for Design System</li>
-    <li>✅ **Responsive** for 5 Breakpoints</li>
-    <li>✅ **DOM Manipulation** methods</li>
-    <li>✅ **DOM Traversing** methods</li>
-    <li>✅ Javascript **Media Query**</li>
-    <li>✅ **Live Event** Listener</li>
-    <li>✅ DOM Javascript **UI Effects**</li>
-    <li>✅ Responsive **Multimedia**</li>
-    <li>✅ Javascript **Time Counter**</li>
-    <li>✅ **Dropdown** Buttons and Menu's</li>
-    <li>✅ View-Port **Animations**</li>
-    <li>✴️ Design **Theme Switcher**</li>
-    <li>✴️ **API Connection** Handler</li>
-    <li>✅ **Standard Form Controls**</li>
-    <li>✴️ **Advanced Form Controls**</li>
-    <li>✅ **Easy Form Validation**</li>
-    <li>✴️ Advanced **Datatables**</li>
-    <li>✅ **CSS Utilities** to build freely</li>
-    <li>✅ Responsive **Navigation Menu**</li>
-    <li>✅ Responsive **Megamenu**</li>
-    <li>✅ **Notifications** System</li>
-    <li>✅ Advanced **Popup Modals**</li>
-    <li>✅ Simple **Tabs & Panels**</li>
+    <li>✅ CSS 100kb</li>
+    <li>✅ JavaScript 92kb for now</li>
+    <li>✅ Builded with Sass and TypeScript</li>
+    <li>✅ Built-In Powerful JavaScript plugins</li>
+    <li>✅ Build Anything with CSS Utilities</li>
+    <li>✅ Flexbox Grid System</li>
+    <li>✅ Masonry Grid Mode</li>
+    <li>✅ RTL & LTR Fully-Support</li>
+    <li>✅ CSS Variable for Design System</li>
+    <li>✅ Responsive for 5 Breakpoints</li>
+    <li>✅ DOM Manipulation methods</li>
+    <li>✅ DOM Traversing methods</li>
+    <li>✅ Javascript Media Query</li>
+    <li>✅ Live Event Listener</li>
+    <li>✅ DOM Javascript UI Effects</li>
+    <li>✅ Responsive Multimedia</li>
+    <li>✅ Javascript Time Counter</li>
+    <li>✅ Dropdown Buttons and Menu's</li>
+    <li>✅ View-Port Animations</li>
+    <li>✴️ Design Theme Switcher</li>
+    <li>✴️ API Connection Handler</li>
+    <li>✅ Standard Form Controls</li>
+    <li>✴️ Advanced Form Controls</li>
+    <li>✅ Easy Form Validation</li>
+    <li>✴️ Advanced Datatables</li>
+    <li>✅ CSS Utilities to build freely</li>
+    <li>✅ Responsive Navigation Menu</li>
+    <li>✅ Responsive Megamenu</li>
+    <li>✅ Notifications System</li>
+    <li>✅ Advanced Popup Modals</li>
+    <li>✅ Simple Tabs & Panels</li>
     <li>✴️ Tooltip & Popovers</li>
-    <li>✴️ Shape Shifter **Progress Bars**</li>
+    <li>✴️ Shape Shifter Progress Bars</li>
     <li>✴️ Advanced HTML Multimedia Players</li>
     <li>✅ Lazy-Loading for Everything</li>
-    <li>✅ JavaScript **Data attributes** API</li>
+    <li>✅ JavaScript Data attributes API</li>
     <li>✅ CSS Animations on Dimand</li>
 </ul>
 </div>
