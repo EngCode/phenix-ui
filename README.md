@@ -97,8 +97,6 @@
 #08 - [upgrade] Typography CSS Utilites
 ```
 
----
-
 --------------------
 
 #### Browser Support
@@ -111,7 +109,7 @@
 
 #### [Documentation](https://design.phenixthemes.com)
 
-you can visit the offical website of phenix design system and read the dpcumentation to master the frameowork : [design.phenixthemes.com](https://design.phenixthemes.com).
+you can visit the offical website of phenix design system and read the documentation to master the frameowork : [design.phenixthemes.com](https://design.phenixthemes.com).
 
 ---
 
