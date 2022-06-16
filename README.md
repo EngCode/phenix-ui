@@ -42,8 +42,8 @@
 
 <div>
 <ul style="list-style:none;padding:0;margin:0">
-    <li>✅ CSS 100kb</li>
-    <li>✅ JavaScript 92kb for now</li>
+    <li>✅ CSS 100kb and 17KB Gzipped</li>
+    <li>✅ JavaScript 92kb and 27KB Gzipped</li>
     <li>✅ Builded with Sass and TypeScript</li>
     <li>✅ Built-In Powerful JavaScript plugins</li>
     <li>✅ Build Anything with CSS Utilities</li>
