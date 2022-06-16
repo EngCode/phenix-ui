@@ -86,23 +86,18 @@
 
 #### Changelog Update v0.6.0
 
-1. [upgrade] Masonry Grid Mode
+```
+#01 - [upgrade] Masonry Grid Mode
+#02 - [new] Collapse Javascript
+#03 - [upgrade] Re-Build Accordion with Collapse
+#04 - [new] Multi-level Dropdowns and Megamenu
+#05 - [new] CSS Animations on Dimand
+#06 - [upgrade] Add Media Lightbox for Popups.
+#07 - [new] Notifications and Toasts
+#08 - [upgrade] Typography CSS Utilites
+```
 
-2. [new] Collapse Javascript
-
-3. [upgrade] Re-Build Accordion with Collapse
-
-4. [upgrade] Refactor Tabs Component
-
-5. [new] Multi-level Dropdowns and Megamenu
-
-6. [new] CSS Animations on Dimand
-
-7. [upgrade] Add Media Lightbox for Popups.
-
-8. [new] Notifications and Toasts
-
-9. [upgrade] Typography CSS Utilites
+---
 
 --------------------
 
@@ -187,7 +182,7 @@ the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.c
 
 ---
 
-#### Credits
+### Credits
 
 this project was created in 2016 under the code-name **[Tornado UI](https://tornado.phenixthemes.com/)** until 2022 the name was changed to fit the new personal-business brand **[Phenix Themes](https://phenixthemes.com/ "https://phenixthemes.com")**.
 
@@ -196,6 +191,6 @@ this project was created in 2016 under the code-name **[Tornado UI](https://tor
 
 --------------------
 
-#### License
+### License
 
 Copyright (c) 2016-present, [Abdullah Ramadan](https://www.facebook.com/Eng.AbdallahPS). Licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
