@@ -98,6 +98,7 @@
 @import 'utilities/colors';     //===> CSS Coloring System
 @import 'utilities/borders';    //===> CSS Borders
 @import 'utilities/visibility'; //===> Visibility Utilities
+@import 'utilities/plugins';    //===> Phenix Plugins Assets
 
 /*==== Fix Button Text ====*/
 .btn {line-height: calc(var(--height) - 2px);}

@@ -1,4 +1,5 @@
 <div>
+
 <p align="center">
   <a href="https://design.phenixthemes.com">
     <img src="https://design.phenixthemes.com/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/pds-icon.svg" alt="Phenix Design logo" width="175" height="162">
@@ -82,22 +83,35 @@
 </ul>
 </div>
 
---------------------
+---
+
+#### Changelog Update v0.7.0
+
+```
+01 - [new] Animations on Dimand Types
+02 - [new] Progress Bars
+03 - [new] Advanced Select
+04 - [new] Phenix Repeater
+05 - [new] Phenix Uploader
+06 - [new] Rating Controller
+```
+
+---
 
 #### Changelog Update v0.6.0
 
 ```
-#01 - [upgrade] Masonry Grid Mode
-#02 - [new] Collapse Javascript
-#03 - [upgrade] Re-Build Accordion with Collapse
-#04 - [new] Multi-level Dropdowns and Megamenu
-#05 - [new] CSS Animations on Dimand
-#06 - [upgrade] Add Media Lightbox for Popups.
-#07 - [new] Notifications and Toasts
-#08 - [upgrade] Typography CSS Utilites
+01 - [upgrade] Masonry Grid Mode
+02 - [new] Collapse Javascript
+03 - [upgrade] Re-Build Accordion with Collapse
+04 - [new] Multi-level Dropdowns and Megamenu
+05 - [new] CSS Animations on Dimand
+06 - [upgrade] Add Media Lightbox for Popups.
+07 - [new] Notifications and Toasts
+08 - [upgrade] Typography CSS Utilites
 ```
 
---------------------
+-----------------------
 
 #### Browser Support
 
@@ -149,22 +163,22 @@ or you can use it as JavaScript module by  import Phenix from `"./node_modules/
 
 ---
 
-#### CDN CSS
+### CDN CSS
 
 the next piece of code will load ******[Phenix D.S](https://design.phenixthemes.com/ "Home")****** Stylesheet **“LTR”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
 
 ```
 <!-- Phenix CSS LTR -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.0/dist/css/phenix.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/css/phenix.css" rel="stylesheet" />
 ```
 
-#### Right-to-Left (RTL) Version
+### Right-to-Left (RTL) Version
 
 if your document language is right-to-left you can use ****[Phenix D.S](https://design.phenixthemes.com/ "Home")**** Stylesheet **“RTL”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
 
 ```
 <!-- Phenix CSS RTL -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.0/dist/css/phenix-rtl.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/css/phenix-rtl.css" rel="stylesheet" />
 ```
 
 ---
@@ -175,7 +189,7 @@ the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.c
 
 ```
 <!-- Phenix JS -->
-<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.0/dist/js/phenix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/js/phenix.js"></script>
 ```
 
 ---

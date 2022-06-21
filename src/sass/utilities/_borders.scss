@@ -25,19 +25,20 @@
 .divider-e, .divider-x {border-#{$direction-end}: 1px solid rgba(#000, 0.1);}
 
 /*==== Radius Utilties ====*/
-.radius-sm, .radius-md, .radius-lg, .radius-xl, .radius-xxl, .radius-none, .radius-circle, .radius-height {
+.radius-sm, .radius-md, .radius-lg, .radius-xl, .radius-xxl, .radius-none, .radius-circle, .radius-height, .radius-rounded {
     --radius : 0;
     border-radius: var(--radius);
 }
 
 /*==== Radius Sizes ====*/
-.radius-sm     {--radius: 4px;}
-.radius-md     {--radius: 6px;}
-.radius-lg     {--radius: 8px;}
-.radius-xl     {--radius: 10px;}
-.radius-xxl    {--radius: 15px;}
-.radius-circle {--radius: 50%;}
-.radius-height {--radius: var(--height);}
+.radius-sm      {--radius: 4px;}
+.radius-md      {--radius: 6px;}
+.radius-lg      {--radius: 8px;}
+.radius-xl      {--radius: 10px;}
+.radius-xxl     {--radius: 15px;}
+.radius-circle  {--radius: 50%;}
+.radius-height  {--radius: var(--height);}
+.radius-rounded {--radius: 62px;}
 
 /*==== Radius Position ====*/
 .radius-top     {border-radius: var(--radius) var(--radius) 0 0;}

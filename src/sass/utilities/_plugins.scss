@@ -1,0 +1,123 @@
+/**======> Referance By Comment <======
+ * ===> 01 - Progress
+ * ===> 02 - Sticky
+ * ===> 03 - Multi-Media
+ * ===> 04 - Aspect Ratio
+ * ===> 05 - Lazy Loader
+ * ===> 06 - Background X
+*/
+
+/*==== Progress ====*/
+.px-progress {
+    /*==== Label Basic ====*/
+    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;}
+
+    /*==== Label Before ====*/
+    &[data-label]::before {
+        content: attr(data-label);
+        @extend .position-center;
+    }
+
+    /*==== Inverted Label ====*/
+    .px-progress-bar[data-label]::before {
+        top: 0;
+        left: 0;
+        color: #FFF;
+        width: var(--width);
+        content: attr(data-label);
+    }
+
+    /*==== Value Label ====*/
+    &[data-label="value"]::before {content: attr(data-value) "%";}
+    .px-progress-bar[data-label="value"]::before {content: attr(data-value) "%";}
+}
+
+/*==== Sticky ====*/
+.is-sticky {
+    top:0;
+    z-index: var(--header-index);
+    /*==== Absolute ====*/
+    &[data-sticky="absolute"] {position: fixed;}
+    /*==== Native ====*/
+    [data-sticky="inner"].is-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+/*==== Multi-Media ====*/
+.px-media {
+    /*==== ....====*/
+    display: block;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    /*==== elements ====*/
+    video, iframe, .px-media-img {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border-radius: inherit;
+        -o-object-fit: cover;
+           object-fit: cover;
+    }
+
+    /*==== Custom Mode ====*/
+    .px-media-element {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        @extend %position-center;
+    }
+
+    /*==== image type ====*/
+    .px-media-img {opacity: 0;}
+}
+
+/*==== Aspect Ratio ====*/
+[class*="ratio"] {
+    --ratio-size : initial;
+    padding-bottom: var(--ratio-size);
+}
+
+.ratio {
+    --ratio-size : 60%;
+    /*==== Square 1x1 ====*/
+    &-1x1  {--ratio-size: 100%;}
+    /*==== FHD 16x9 ====*/
+    &-16x9 {--ratio-size: 56.3%;}
+    /*==== Landscape 21x9 ====*/
+    &-21x9 {--ratio-size: 42.9%;}
+    /*==== Classic 4x3 ====*/
+    &-4x3 {--ratio-size: 75%;}
+    &-3x4 {--ratio-size: 125%;}
+    /*==== Wide 3x1 ====*/
+    &-3x1 {--ratio-size: 33.3%;}
+}
+
+/*==== Lazy Loader ====*/
+.px-loader {
+    -o-object-fit: contain;
+       object-fit: contain;
+    background-size: auto 100%;
+    background-color: #F1F2F3;
+}
+
+/*==== Background X ====*/
+.bg-animated-x {
+    background-repeat: repeat-x;
+    -webkit-animation: background_x 60s linear infinite;
+            animation: background_x 60s linear infinite;
+}
+
+@-webkit-keyframes background_x {
+    from {background-position: 0 0;}
+    to {background-position: 100% 0;}
+}
+
+@keyframes background_x {
+    from {background-position: 0 0;}
+    to {background-position: 100% 0;}
+}
