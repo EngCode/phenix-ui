@@ -101,7 +101,7 @@ PhenixElements.prototype.animations = function (options?:{
     });
 
     //====> Animations Loader <====//
-    let thirdParty = this[0].options?.animateCSS || true;
+    let thirdParty = options?.animateCSS || true;
 
     if (thirdParty && !document.querySelector('#px-animations')) {
         //===> Create Script Element <===//
@@ -114,12 +114,14 @@ PhenixElements.prototype.animations = function (options?:{
         //===> Append Script <===//
         document.head.appendChild(animations_loader);
         //====> When Loaded Run Sliders <====//
-        animations_loader.addEventListener("load", () => viewPort_Handler());
+        animations_loader.addEventListener("load", () => viewPort_Handler);
 
         //====> When Error Re-Load <====//
         animations_loader.addEventListener("error", () => {
             animations_loader.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.css");
         });
+    } else {
+        viewPort_Handler;
     }
 
     //====> Return Phenix Elements <====//

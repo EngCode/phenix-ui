@@ -10,8 +10,6 @@
 /*====> Phenix Query <====*/
 import Phenix, { PhenixElements } from "..";
 /*====> Splide JS for The Slider Core <====*/
-// <reference path="splide.d.ts"/>
-// import type Splide from '@splidejs/splide';
 declare var Splide: any;
 
 /*====> Phenix Slider <====*/
@@ -151,7 +149,7 @@ PhenixElements.prototype.slider = function (options?:{
         document.body.appendChild(splide_loader);
     
         //====> When Loaded Run Sliders <====//
-        splide_loader.addEventListener("load", () => slider_handler());
+        splide_loader.addEventListener("load", slider_handler);
     
         //====> When Error Re-Load <====//
         splide_loader.addEventListener("error", (ev) => {
@@ -159,9 +157,7 @@ PhenixElements.prototype.slider = function (options?:{
         });
 
     //====> if Al-ready loaded run the sliders <====//
-    } else {
-        slider_handler();
-    }
+    } else slider_handler;
 
     //====> Return Phenix Elements <====//
     return this;

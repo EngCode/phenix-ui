@@ -22,9 +22,9 @@ the Final Release for the First Version of Phenix Design System.
 01 - [new] Phenix Data-Tables
 02 - [new] Tooltip & Popovers
 03 - [new] Offcanvas Components
-04 - [new] Carousel Slider
 05 - [new] Element Remover
 06 - [new] Range Slider
+07 - [new] Slider three.js Animations
 ```
 
 ---
@@ -41,6 +41,7 @@ the Final Release for the First Version of Phenix Design System.
 07 - [update] Counter Lazyloading
 08 - [update] Timer Lazyloading
 09 - [new] CSS Layout Groups
+10 - [new] Carousel Slider Optimizing
 ```
 
 ---
