@@ -55,7 +55,17 @@ PhenixElements.prototype.progress = function (options?:{
             if (typeof(color) === "string") Phenix(progressBar).css({"background-color" : color});
 
             //====> Set Progress <====//
-            if (!lazy) setProgress(progressBar);
+            if (!lazy) {
+                setProgress(progressBar);
+            } else {
+                //===> First View <===//
+                if (Phenix(progress).inView()) setProgress(progressBar);
+
+                //===> Hidden View <===//
+                window.addEventListener('scroll', scrolling => {
+                    if (Phenix(progress).inView()) setProgress(progressBar);
+                });
+            }
         }
     });
 

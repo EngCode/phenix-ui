@@ -4,10 +4,3 @@
  * License  : MIT
  * Copyright: 2022 Abdullah.Ramadan
  */
-
-/*!
- * Splide.js
- * Version  : 3.6.12
- * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
- */

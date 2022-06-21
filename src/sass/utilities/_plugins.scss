@@ -20,10 +20,10 @@
 
     /*==== Inverted Label ====*/
     .px-progress-bar[data-label]::before {
-        top: 0;
-        left: 0;
         color: #FFF;
         width: var(--width);
+        @extend .position-top-0;
+        @extend .position-start-0;
         content: attr(data-label);
     }
 

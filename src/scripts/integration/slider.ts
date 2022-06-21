@@ -10,9 +10,9 @@
 /*====> Phenix Query <====*/
 import Phenix, { PhenixElements } from "..";
 /*====> Splide JS for The Slider Core <====*/
-// / <reference path="splide.d.ts"/>
-import Splide from '@splidejs/splide';
-// declare module "Splide";
+// <reference path="splide.d.ts"/>
+// import type Splide from '@splidejs/splide';
+declare var Splide: any;
 
 /*====> Phenix Slider <====*/
 PhenixElements.prototype.slider = function (options?:{
@@ -28,8 +28,8 @@ PhenixElements.prototype.slider = function (options?:{
     breakpoints?:any;
     direction?:string;
 }) {
-    //====> Phenix Elements <====//
-    this.forEach((slider:HTMLElement) => {
+    //====> Sliders Activator <====//
+    let slider_handler = () => this.forEach((slider:HTMLElement) => {
         /*====> Get Inline Options <====*/
         let inline = attr => slider.getAttribute(attr),
             currentClasses = slider.classList;
@@ -138,6 +138,30 @@ PhenixElements.prototype.slider = function (options?:{
             });
         });
     });
+
+    //====> Load Splid JS <====//
+    if (!document.querySelector('#splidejs-phenix')) {
+        //===> Create Script Element <===//
+        let splide_loader = document.createElement("script");
+        //===> Set ID <===//
+        splide_loader.setAttribute('id', 'splidejs-phenix')
+        //===> Set Source <===//
+        splide_loader.setAttribute("src", "https://design.phenixthemes.com/splide/dist/js/splide.min.js");
+        //===> Append Script <===//
+        document.body.appendChild(splide_loader);
+    
+        //====> When Loaded Run Sliders <====//
+        splide_loader.addEventListener("load", () => slider_handler());
+    
+        //====> When Error Re-Load <====//
+        splide_loader.addEventListener("error", (ev) => {
+            splide_loader.setAttribute("src", "https://design.phenixthemes.com/splide/dist/js/splide.min.js");
+        });
+
+    //====> if Al-ready loaded run the sliders <====//
+    } else {
+        slider_handler();
+    }
 
     //====> Return Phenix Elements <====//
     return this;
