@@ -29,9 +29,9 @@ PhenixElements.prototype.animations = function (options?:{
         if (element === window.document) return;
 
         //====> Get Options Data <====//
-        let animation = element.getAttribute('data-animation') || options?.animation || '',
-            duration  = parseInt(element.getAttribute('data-duration')) || options?.duration || 1000,
-            delay  = parseInt(element.getAttribute('data-delay'))  || options?.delay || 0,
+        let animation = element.getAttribute('data-animation') || options?.animation || 'fadeIn',
+            duration  = parseInt(element.getAttribute('data-duration')) || options?.duration,
+            delay  = parseInt(element.getAttribute('data-delay'))  || options?.delay,
             flow   = parseInt(element.getAttribute('data-flow'))   || options?.flow || false,
             offset = parseInt(element.getAttribute('data-offset')) || options?.offset || false,
             into   = parseInt(element.getAttribute('data-into'))   || options?.into  || false,
@@ -67,11 +67,9 @@ PhenixElements.prototype.animations = function (options?:{
                 Phenix(element).removeClass('visibility-hidden');
         
                 //====> Animations CSS <====//
-                Phenix(element).addClass('view-active').css({
-                    "animation-name" : `${animation}`,
-                    "animation-duration" : `${duration}ms`,
-                    "animation-delay" : `${delay}ms`,
-                });
+                element.classList.add('view-active', animation)
+                if (delay) element.style.setProperty('--animate-delay', `${delay}ms`);
+                if (duration) element.style.setProperty('--animate-duration', `${duration}ms`);
             }
 
             //====> Check for View <====//
@@ -115,7 +113,7 @@ PhenixElements.prototype.animations = function (options?:{
             package_url = `https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/animations/${package_name}.css`;
 
         //===> Set Attributes <===//
-        animations_loader.setAttribute('id', 'px-animations'+id);
+        animations_loader.setAttribute('id', `px-animations${id}`);
         animations_loader.setAttribute('rel', 'stylesheet');
 
         //===> Set Source <===//
@@ -138,9 +136,8 @@ PhenixElements.prototype.animations = function (options?:{
 
     //====> Load Packages one by one <====//
     else {
-        thirdParty.forEach(animate_package => {
-            animation_loader(animate_package, `-${animate_package}`);
-        });
+        thirdParty.forEach(animate_package => animation_loader(animate_package, `-${animate_package}`));
+        animation_loader('utilities', '-utilities');
     }
 
     //====> Return Phenix Elements <====//
