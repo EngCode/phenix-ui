@@ -85,7 +85,7 @@
 
 ---
 
-#### Changelog Update v0.7.0
+#### Changelog Update v0.7.0 {WIP}
 
 ```
 01 - [new] Animations on Dimand Types
