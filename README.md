@@ -79,7 +79,7 @@
     <li>✴️ Advanced HTML Multimedia Players</li>
     <li>✅ Lazy-Loading for Everything</li>
     <li>✅ JavaScript Data attributes API</li>
-    <li>✅ CSS Animations on Dimand</li>
+    <li>✅ CSS Animations on Demand</li>
 </ul>
 </div>
 
@@ -94,6 +94,8 @@
 04 - [new] Rating Controller
 07 - [new] CSS Layout Groups
 08 - [update] Carousel Slider Optimizing
+09 - [update] Counter Lazyloading
+10 - [update] Timer Lazyloading
 ```
 
 ---
@@ -109,10 +111,8 @@
 06 - [upgrade] Add Media Lightbox for Popups.
 07 - [new] Notifications and Toasts
 08 - [upgrade] Typography CSS Utilites
-09 - [update] Animations on Dimand Types
+09 - [update] Animations on Demand Demand Demand Types
 10 - [new] Progress Bars
-11 - [update] Counter Lazyloading
-12 - [update] Timer Lazyloading
 ```
 
 -----------------------
