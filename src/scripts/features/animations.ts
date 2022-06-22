@@ -25,6 +25,9 @@ PhenixElements.prototype.animations = function (options?:{
 }) {
     //====> Loop Through Phenix Elements <====//
     let viewPort_Handler = this.forEach((element:any, index) => {
+        //====> if its the Main Document Return Nothing <====//
+        if (element === window.document) return;
+
         //====> Get Options Data <====//
         let animation = element.getAttribute('data-animation') || options?.animation || '',
             duration  = parseInt(element.getAttribute('data-duration')) || options?.duration || 1000,
@@ -54,7 +57,7 @@ PhenixElements.prototype.animations = function (options?:{
         }
 
         //====> Hide the Element <====//
-        Phenix(element).addClass('visibility-hidden');
+        element.classList.add('visibility-hidden', 'animated');
 
         //====> if the Element in view Show it <====//
         let isInView = () => {
@@ -70,6 +73,7 @@ PhenixElements.prototype.animations = function (options?:{
                     "animation-delay" : `${delay}ms`,
                 });
             }
+
             //====> Check for View <====//
             if (Phenix(element).inView({
                 offset : offset,
@@ -101,10 +105,11 @@ PhenixElements.prototype.animations = function (options?:{
 
     //====> Animations Loader <====//
     let thirdParty:any = options?.animateCSS || 'all';
-    if (thirdParty && typeof(thirdParty) === "string") thirdParty = [options?.animateCSS];
 
     //====> Loading Handler <====//
     let animation_loader = (package_name, id) => {
+        if (document.querySelector(`#px-animations${id}`)) return;
+
         //===> Create Script Element <===//
         let animations_loader = document.createElement("link"),
             package_url = `https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/animations/${package_name}.css`;
