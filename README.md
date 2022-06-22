@@ -75,7 +75,7 @@
     <li>✅ Advanced Popup Modals</li>
     <li>✅ Simple Tabs & Panels</li>
     <li>✴️ Tooltip & Popovers</li>
-    <li>✴️ Shape Shifter Progress Bars</li>
+    <li>✅ Shape Shifter Progress Bars</li>
     <li>✴️ Advanced HTML Multimedia Players</li>
     <li>✅ Lazy-Loading for Everything</li>
     <li>✅ JavaScript Data attributes API</li>
