@@ -23,7 +23,6 @@ PhenixElements.prototype.animations = function (options?:{
     offset:number,  //====> Decrease Target Position By [number]
     lazyloading:boolean, //====> to Animate Element after Another
 }) {
-
     //====> Loop Through Phenix Elements <====//
     let viewPort_Handler = this.forEach((element:any, index) => {
         //====> Get Options Data <====//
@@ -101,27 +100,42 @@ PhenixElements.prototype.animations = function (options?:{
     });
 
     //====> Animations Loader <====//
-    let thirdParty = options?.animateCSS || true;
+    let thirdParty:any = options?.animateCSS || 'all';
+    if (thirdParty && typeof(thirdParty) === "string") thirdParty = [options?.animateCSS];
 
-    if (thirdParty && !document.querySelector('#px-animations')) {
+    //====> Loading Handler <====//
+    let animation_loader = (package_name, id) => {
         //===> Create Script Element <===//
-        let animations_loader = document.createElement("link");
+        let animations_loader = document.createElement("link"),
+            package_url = `https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/animations/${package_name}.css`;
+
         //===> Set Attributes <===//
-        animations_loader.setAttribute('id', 'px-animations');
+        animations_loader.setAttribute('id', 'px-animations'+id);
         animations_loader.setAttribute('rel', 'stylesheet');
+
         //===> Set Source <===//
-        animations_loader.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.css");
+        animations_loader.setAttribute("href", package_url);
+
         //===> Append Script <===//
         document.head.appendChild(animations_loader);
+
         //====> When Loaded Run Sliders <====//
         animations_loader.addEventListener("load", () => viewPort_Handler);
-
+    
         //====> When Error Re-Load <====//
-        animations_loader.addEventListener("error", () => {
-            animations_loader.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.compat.css");
+        animations_loader.addEventListener("error", () => animations_loader.setAttribute("href", package_url));
+    }
+    
+    //====> Load All Animations <====//
+    if (thirdParty.includes('all')) {
+        animation_loader('all', '');
+    }
+
+    //====> Load Packages one by one <====//
+    else {
+        thirdParty.forEach(animate_package => {
+            animation_loader(animate_package, `-${animate_package}`);
         });
-    } else {
-        viewPort_Handler;
     }
 
     //====> Return Phenix Elements <====//

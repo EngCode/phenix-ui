@@ -1,6 +1,6 @@
 {
   "name": "phenix-ui",
-  "version": "0.6.0",
+  "version": "0.6.5",
   "description": "Phenix Design System User Interface / Front-End Framework - Extended From 'Tornado UI v2'.",
   "author": "Abdullah.Ramadan <elampratorabdallah14@gmail.com> (https://phenixthemes.com)",
   "license": "MIT",
@@ -40,7 +40,7 @@
   },
   "size-limit": [
     {
-      "limit": "100 kB",
+      "limit": "75 kB",
       "path": "dist/js/phenix.js"
     }
   ],
@@ -50,7 +50,8 @@
     "phenix-sass": "pnpx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
     "js-gzip": "gzipper compress ./dist/js/ ./dist/js/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
     "css-gzip": "gzipper compress ./dist/css/ ./dist/css/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
-    "px-gzipper": "del *.gz.* /a /s && pnpm run css-gzip && pnpm run js-gzip"
+    "px-gzipper": "del *.gz.* /a /s && pnpm run css-gzip && pnpm run js-gzip",
+    "animate-sass": "pnpx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",

@@ -144,7 +144,7 @@ PhenixElements.prototype.slider = function (options?:{
         //===> Set ID <===//
         splide_loader.setAttribute('id', 'splidejs-phenix')
         //===> Set Source <===//
-        splide_loader.setAttribute("src", "https://design.phenixthemes.com/splide/dist/js/splide.min.js");
+        splide_loader.setAttribute("src", "https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/splide.min.js");
         //===> Append Script <===//
         document.body.appendChild(splide_loader);
     
@@ -153,7 +153,7 @@ PhenixElements.prototype.slider = function (options?:{
     
         //====> When Error Re-Load <====//
         splide_loader.addEventListener("error", (ev) => {
-            splide_loader.setAttribute("src", "https://design.phenixthemes.com/splide/dist/js/splide.min.js");
+            splide_loader.setAttribute("src", "https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/splide.min.js");
         });
 
     //====> if Al-ready loaded run the sliders <====//
