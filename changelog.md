@@ -41,6 +41,7 @@ the Final Release for the First Version of Phenix Design System.
 07 - [update] Counter Lazyloading
 08 - [update] Timer Lazyloading
 09 - [new] CSS Layout Groups
+10 - [Doc] Carousel Slider
 ```
 
 ---

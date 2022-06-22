@@ -94,6 +94,7 @@
 06 - [update] Counter Lazyloading
 07 - [update] Timer Lazyloading
 08 - [update] Responsive Form Controls Sizes
+09 - [Doc] Carousel Slider
 ```
 
 ---
