@@ -10,7 +10,7 @@
 /*==== Progress Bars ====*/
 .px-progress {
     /*==== Label Basic ====*/
-    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;line-height: 1;}
+    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;}
 
     /*==== Label Before ====*/
     &[data-label]::before {
@@ -24,7 +24,7 @@
     .px-progress-bar[data-label]::before {
         color: #FFF;
         width: var(--width);
-        @extend .position-top-0;
+        @extend .position-center-y;
         @extend .position-start-0;
         content: attr(data-label);
     }
@@ -38,7 +38,7 @@
 
     //====> Radial Mode <====//
     &[data-type="radial"] {
-        /*====  ====*/
+        /*==== Label ====*/
         &[data-label]::before {
             top: 100%;
             transform: translateY(-150%);
@@ -53,7 +53,6 @@
 
 /*==== Sticky ====*/
 .is-sticky {
-    top:0;
     z-index: var(--header-index);
     /*==== Absolute ====*/
     &[data-sticky="absolute"] {position: fixed;}
@@ -126,9 +125,10 @@
 
 /*==== Background X ====*/
 .bg-animated-x {
+    --duration : 60s;
     background-repeat: repeat-x;
-    -webkit-animation: background_x 60s linear infinite;
-            animation: background_x 60s linear infinite;
+    -webkit-animation: background_x var(--duration) linear infinite;
+            animation: background_x var(--duration) linear infinite;
 }
 
 @-webkit-keyframes background_x {

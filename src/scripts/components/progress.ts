@@ -71,7 +71,7 @@ PhenixElements.prototype.progress = function (options?:{
         };
 
         //====> Wrapper Properties <====//
-        progress.classList.add('position-rv', 'tx-align-center');
+        progress.classList.add('position-rv', 'tx-align-center', 'lineheight-1');
         progress.setAttribute('data-type', type);
 
         //====> Bar Mode <====//

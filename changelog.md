@@ -32,7 +32,7 @@ the Final Release for the First Version of Phenix Design System.
 ### Changelog Update v0.7.0
 
 ```
-01 - [new] Animations on Dimand Types
+01 - [update] Animations on Dimand Types
 02 - [new] Progress Bars
 03 - [new] Advanced Select
 04 - [new] Phenix Repeater
@@ -41,7 +41,7 @@ the Final Release for the First Version of Phenix Design System.
 07 - [update] Counter Lazyloading
 08 - [update] Timer Lazyloading
 09 - [new] CSS Layout Groups
-10 - [new] Carousel Slider Optimizing
+10 - [update] Carousel Slider Optimizing
 ```
 
 ---
