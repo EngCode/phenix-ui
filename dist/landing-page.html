@@ -22,25 +22,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container pdy-75">
-        <!-- Grid -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <!-- Main Label -->
-                <label class="mb-5 fs-13">Updated Progress</label>
-                <!-- Progress -->
-                <div id="progress-controlled" class="px-progress fs-12 radius-sm mb-15" data-value="0" data-label="value"></div>
-                <!-- Buttons -->
-                <div class="flexbox align-between">
-                    <button class="btn primary tiny radius-sm" id="decrease-progress">Decrease</button>
-                    <button class="btn primary tiny radius-sm" id="increase-progress">Increase</button>
-                </div>
-            </div>
-            <!-- // Column -->
-        </div>
-        <!-- // Grid -->
+<div class="container pdy-75">
+<!-- Grid -->
+<div class="row">
+    <!-- Column -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <!--Label -->
+        <label class="mb-5 fs-13">Labeled with Value</label>
+        <!-- Progress -->
+        <div id="progress-controlled" class="px-progress fs-12 radius-sm mb-15" data-value="0" data-label="value"></div>
+
+        <!-- Buttons -->
+        <button class="btn primary tiny radius-sm" id="decrease-progress">Decrease</button>
+        <button class="btn primary tiny radius-sm" id="increase-progress">Increase</button>
     </div>
+    <!-- Column -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <!-- Label -->
+        <label class="mb-5 fs-13">Colorful Progress</label>
+        <!-- Progress -->
+        <div id="progress-colorful" class="px-progress fs-12 radius-sm mb-15" data-value="15" data-label="value" data-color="var(--warning-color)"></div>
+        <!-- Buttons -->
+        <div class="flexbox align-between align-center">
+            <button class="btn primary tiny radius-sm" id="decrease-colorful">Decrease</button>
+            <span class="fs-12">increase to change colors</span>
+            <button class="btn primary tiny radius-sm" id="increase-colorful">Increase</button>
+        </div>
+    </div>
+    <!-- // Column -->
+</div>
+<!-- Gird -->
+</div>
 
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
@@ -52,28 +64,60 @@
         //====> Build Progress <====//
         Phenix('.px-progress').progress();
 
-        //====> .Increase. <====//
-        Phenix('#increase-progress').on('click', clicked => {
-            //===> Current Value <===//
-            let progress = document.querySelector('#progress-controlled'),
-                current = parseInt(progress.getAttribute('data-value'));
-            //===> Increase  the Value <===//
-            progress.setAttribute('data-value', current+5);
+        //====> Changes Updater <====//
+        let progress_updater = (progress, value) => {
+            //===> Convert to Number <===//
+            let new_value = parseInt(value);
+
+            //===> Change the Value <===//
+            progress.setAttribute('data-value', new_value);
+
+            //===> Change to Red <===//
+            if (new_value > 0 && new_value < 20) progress.setAttribute('data-color', 'var(--danger-color)');
+
+            //===> Change to Yellow <===//
+            if (new_value > 15 && new_value < 50) progress.setAttribute('data-color', 'var(--warning-color)');
+
+            //===> Change to Blue <===//
+            if (new_value > 45 && new_value < 65) progress.setAttribute('data-color', 'var(--primary-color)');
+
+            //===> Change to Purple <===//
+            if (new_value > 60 && new_value < 90) progress.setAttribute('data-color', 'var(--info-color)');
+            
+            //===> Change to Green <===//
+            if (new_value > 90) progress.setAttribute('data-color', 'var(--success-color)');
+
+            //===> Change Label When is Complete <===//
+            if (new_value == 100) {
+                progress.setAttribute('data-label', 'Completed');
+            } else {
+                progress.setAttribute('data-label', 'value');
+            }
+
             //===> Update Progress <===//
             Phenix(progress).progress();
+        }
+
+        //====> .Increase. <====//
+        Phenix('#increase-colorful').on('click', clicked => {
+            //===> Current Value <===//
+            let progress = document.querySelector('#progress-colorful'),
+                current = parseInt(progress.getAttribute('data-value')),
+                inceased_value = current < 100 ? current+5 : current;
+
+            //===> Update Progress <===//
+            progress_updater(progress, inceased_value);
         });
 
         //====> .Decrease. <====//
-        Phenix('#decrease-progress').on('click', clicked => {
+        Phenix('#decrease-colorful').on('click', clicked => {
             //===> Current Value <===//
-            let progress = document.querySelector('#progress-controlled'),
-                current = parseInt(progress.getAttribute('data-value'));
-
-            //===> Decrease the Value <===//
-            progress.setAttribute('data-value', current-5);
+            let progress = document.querySelector('#progress-colorful'),
+                current = parseInt(progress.getAttribute('data-value')),
+                deceased_value = current > 5 ? current-5 : current;
 
             //===> Update Progress <===//
-            Phenix(progress).progress();
+            progress_updater(progress, deceased_value);
         });
     });
 </script>

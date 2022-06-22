@@ -29,9 +29,13 @@ PhenixElements.prototype.progress = function (options?:{
         let setProgress = (bar) => {
             //====> Get Current Value <====//
             let value = parseInt(progress.getAttribute('data-value')) || options?.value || 0;
-            //====> Set the Value <====//
-            bar.style.width = `${value}%`;
-            bar.setAttribute('data-value', value);
+            //====> Set Bar Data <====//
+            if (type === 'bar') {
+                bar.style.width = `${value}%`;
+                bar.style.backgroundColor = color;
+                bar.setAttribute('data-value', value);
+                bar.setAttribute('data-label', label);
+            }
         };
 
         //====> Wrapper Properties <====//
@@ -42,12 +46,14 @@ PhenixElements.prototype.progress = function (options?:{
         if (type === 'bar') {
             //====> get the bar <====//
             let progressBar = progress.querySelector('.px-progress-bar');
+            //====> Create the bar if not existed <====// 
             if (!progressBar) {
                 //====> Add Progress Bar <====//
                 Phenix(progress).insert('append', `<span class="px-progress-bar display-block transtion-fast overflow-hidden position-rv" data-value="${value}" ${label ? `data-label="${label}"`: null} style="width:0;height:100%"></span>`);
                 progressBar = progress.querySelector('.px-progress-bar'); 
             }
 
+            //====> Setup the Progress <====//
             if (!progress.classList.contains('px-progress-bar-js')) {
                 //====> Base Background <====//
                 progress.classList.add('bg-alpha-10', 'overflow-hidden', 'px-progress-bar-js');
@@ -55,9 +61,6 @@ PhenixElements.prototype.progress = function (options?:{
                 progress.style.lineHeight = `calc(${size}px)`;
                 progress.style.setProperty('--width', `${progress.clientWidth}px`);
 
-                //====> Set Color <====//
-                if (typeof(color) === "string") Phenix(progressBar).css({"background-color" : color});
-    
                 //====> Set Progress <====//
                 if (!lazy) {
                     setProgress(progressBar);
@@ -79,6 +82,3 @@ PhenixElements.prototype.progress = function (options?:{
     //====> Return Phenix Elements <====//
     return this;
 }
-
-
-

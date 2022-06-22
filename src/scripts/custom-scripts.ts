@@ -10,7 +10,6 @@
 
 /*====> Import Phenix <====*/
 import Phenix from '.';
-import Splide from '@splidejs/splide';
 
 //======> D.O.M is Ready [for you] <=======//
 Phenix(document).ready((event:any) => { /*--> Your Code <--*/}).utilities('all');
