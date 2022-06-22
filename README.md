@@ -94,6 +94,10 @@
 04 - [new] Phenix Repeater
 05 - [new] Phenix Uploader
 06 - [new] Rating Controller
+07 - [update] Counter Lazyloading
+08 - [update] Timer Lazyloading
+09 - [new] CSS Layout Groups
+10 - [new] Carousel Slider Optimizing
 ```
 
 ---

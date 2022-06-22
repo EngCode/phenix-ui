@@ -28,30 +28,14 @@
             <!-- Column -->
             <div class="col-12 col-md-6 col-lg-4">
                 <!-- Main Label -->
-                <label class="mb-5 fs-13">Default Progress Bar</label>
+                <label class="mb-5 fs-13">Updated Progress</label>
                 <!-- Progress -->
-                <div class="px-progress fs-12 mb-30" data-value="20"></div>
-            </div>
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <!-- Main Label -->
-                <label class="mb-5 fs-13">Labeled with Value</label>
-                <!-- Progress -->
-                <div class="px-progress fs-12 radius-sm mb-30" data-value="40" data-size="20" data-label="value"></div>
-            </div>
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-6">
-                <!-- Main Label -->
-                <label class="mb-5 fs-13">Custom Label</label>
-                <!-- Progress -->
-                <div class="px-progress fs-12 radius-rounded mb-30" data-value="50" data-size="20" data-label="Loading"></div>
-            </div>
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-6">
-                <!-- Main Label -->
-                <label class="mb-5 fs-13">Custom Label</label>
-                <!-- Progress -->
-                <div class="px-progress reverse fs-12 radius-rounded mb-30" data-value="50" data-size="20" data-label="Loading"></div>
+                <div id="progress-controlled" class="px-progress fs-12 radius-sm mb-15" data-value="0" data-label="value"></div>
+                <!-- Buttons -->
+                <div class="flexbox align-between">
+                    <button class="btn primary tiny radius-sm" id="decrease-progress">Decrease</button>
+                    <button class="btn primary tiny radius-sm" id="increase-progress">Increase</button>
+                </div>
             </div>
             <!-- // Column -->
         </div>
@@ -61,16 +45,38 @@
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
 
-    <!-- JS Demo for Posts -->
-    <script defer>
-        //======> D.O.M is Ready <=======//
-        Phenix(document).ready((event) => {
-            //====> Progress <====//
-            Phenix('.px-progress').progress();
+<!-- JS Demo for Posts -->
+<script defer>
+    //======> D.O.M is Ready <=======//
+    Phenix(document).ready((event) => {
+        //====> Build Progress <====//
+        Phenix('.px-progress').progress();
 
-            
+        //====> .Increase. <====//
+        Phenix('#increase-progress').on('click', clicked => {
+            //===> Current Value <===//
+            let progress = document.querySelector('#progress-controlled'),
+                current = parseInt(progress.getAttribute('data-value'));
+            //===> Increase  the Value <===//
+            progress.setAttribute('data-value', current+5);
+            //===> Update Progress <===//
+            Phenix(progress).progress();
         });
-    </script>
-    <!-- JS Demo for Posts -->
+
+        //====> .Decrease. <====//
+        Phenix('#decrease-progress').on('click', clicked => {
+            //===> Current Value <===//
+            let progress = document.querySelector('#progress-controlled'),
+                current = parseInt(progress.getAttribute('data-value'));
+
+            //===> Decrease the Value <===//
+            progress.setAttribute('data-value', current-5);
+
+            //===> Update Progress <===//
+            Phenix(progress).progress();
+        });
+    });
+</script>
+<!-- JS Demo for Posts -->
 </body>
 </html>

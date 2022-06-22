@@ -2,34 +2,39 @@
  * ===> 01 - Splide CSS
 */
 
-/*==== Loading Animation ====*/
 @-webkit-keyframes splide-loading {
-    0% {transform: rotate(0)}
-    to {transform: rotate(1turn)}
-}
-@keyframes splide-loading {
-    0% {transform: rotate(0)}
-    to {transform: rotate(1turn)}
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
 }
 
-/*==== Drag Support ====*/
-.splide--draggable>.splide__slider > .splide__track,
-.splide--draggable>.splide__track {
+@keyframes splide-loading {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.splide__track--draggable {
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
          user-select: none
 }
 
-/*==== Fading Effect ====*/
-.splide--fade > .splide__slider > .splide__track > .splide__list,
-.splide--fade > .splide__track > .splide__list,
-.splide--ttb.is-active > .splide__slider > .splide__track > .splide__list,
-.splide--ttb.is-active>.splide__track>.splide__list {display: block}
+.splide__track--fade>.splide__list {
+    display: block
+}
 
-/*==== Sliding Effect ====*/
-.splide--fade > .splide__slider > .splide__track > .splide__list > .splide__slide,
-.splide--fade > .splide__track > .splide__list > .splide__slide {
+.splide__track--fade>.splide__list>.splide__slide {
     left: 0;
     opacity: 0;
     position: absolute;
@@ -37,14 +42,19 @@
     z-index: 0
 }
 
-.splide--fade > .splide__slider > .splide__track > .splide__list > .splide__slide.is-active,
-.splide--fade > .splide__track > .splide__list > .splide__slide.is-active {
+.splide__track--fade>.splide__list>.splide__slide.is-active {
     opacity: 1;
     position: relative;
     z-index: 1
 }
 
-.splide--rtl {direction: rtl}
+.splide--rtl {
+    direction: rtl
+}
+
+.splide__track--ttb>.splide__list {
+    display: block
+}
 
 .splide__container {
     box-sizing: border-box;
@@ -57,9 +67,7 @@
     display: flex;
     height: 100%;
     margin: 0 !important;
-    padding: 0 !important;
-    transform-style: preserve-3d;
-    &.row {flex-wrap: nowrap;}
+    padding: 0 !important
 }
 
 .splide.is-initialized:not(.is-active) .splide__list {display: block}
@@ -81,18 +89,14 @@
     pointer-events: auto
 }
 
-.splide__progress__bar {
-    width: 0
-}
+.splide__progress__bar {width: 0}
 
 .splide {
-    outline: none;
     position: relative;
     visibility: hidden
 }
 
-.splide.is-initialized,
-.splide.is-rendered {
+.splide.is-initialized,.splide.is-rendered {
     visibility: visible
 }
 
@@ -103,13 +107,10 @@
     flex-shrink: 0;
     list-style-type: none !important;
     margin: 0;
-    outline: none;
     position: relative
 }
 
-.splide__slider {
-    position: relative
-}
+.splide__slide img {vertical-align: bottom}
 
 .splide__spinner {
     -webkit-animation: splide-loading 1s linear infinite;
@@ -129,13 +130,26 @@
     width: 20px
 }
 
+.splide__sr {
+    clip: rect(0 0 0 0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px
+}
+
+.splide__toggle.is-active .splide__toggle__play,.splide__toggle__pause {display: none}
+
+.splide__toggle.is-active .splide__toggle__pause {display: inline}
+
 .splide__track {
     overflow: hidden;
     position: relative;
     z-index: 0
 }
-
-.splide .splide__arrows {position: absolute;}
 
 /*==== Phenix Slider ====*/
 .px-slider {

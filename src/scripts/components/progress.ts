@@ -19,11 +19,11 @@ PhenixElements.prototype.progress = function (options?:{
     this.forEach((progress:any) => {
         //====> Get Progress Data <====//
         let type = progress.getAttribute('data-type') || options?.type || 'bar',
-            color = progress.getAttribute('data-color') || options?.color || 'var(--primary-color)',
-            value = parseInt(progress.getAttribute('data-value')) || options?.value || 0,
+            color = options?.color || progress.getAttribute('data-color') || 'var(--primary-color)',
+            value = options?.value || parseInt(progress.getAttribute('data-value')) || 0,
             label = progress.getAttribute('data-label') || options?.label,
-            size  = progress.getAttribute('data-size') || options?.size || 16,
-            lazy  = progress.getAttribute('data-lazy') || options?.lazyloading;
+            size  = progress.getAttribute('data-size')  || options?.size || 16,
+            lazy  = progress.getAttribute('data-lazy')  || options?.lazyloading;
 
         //====> Set Progress <====//
         let setProgress = (bar) => {
@@ -31,6 +31,7 @@ PhenixElements.prototype.progress = function (options?:{
             let value = parseInt(progress.getAttribute('data-value')) || options?.value || 0;
             //====> Set the Value <====//
             bar.style.width = `${value}%`;
+            bar.setAttribute('data-value', value);
         };
 
         //====> Wrapper Properties <====//
@@ -39,32 +40,38 @@ PhenixElements.prototype.progress = function (options?:{
 
         //====> Bar Mode <====//
         if (type === 'bar') {
-            //====> Base Background <====//
-            progress.classList.add('bg-alpha-10', 'overflow-hidden', 'px-progress-bar-js');
-            progress.style.height = `${size}px`;
-            progress.style.lineHeight = `calc(${size}px)`;
-            progress.style.setProperty('--width', `${progress.clientWidth}px`);
-
-            //====> Add Progress Bar <====//
-            Phenix(progress).insert('append', `<span class="px-progress-bar display-block transtion-fast overflow-hidden position-rv" data-value="${value}" ${label ? `data-label="${label}"`: null} style="width:0;height:100%"></span>`);
-
-            //====> get the bar and the label <====//
+            //====> get the bar <====//
             let progressBar = progress.querySelector('.px-progress-bar');
+            if (!progressBar) {
+                //====> Add Progress Bar <====//
+                Phenix(progress).insert('append', `<span class="px-progress-bar display-block transtion-fast overflow-hidden position-rv" data-value="${value}" ${label ? `data-label="${label}"`: null} style="width:0;height:100%"></span>`);
+                progressBar = progress.querySelector('.px-progress-bar'); 
+            }
 
-            //====> Set Color <====//
-            if (typeof(color) === "string") Phenix(progressBar).css({"background-color" : color});
+            if (!progress.classList.contains('px-progress-bar-js')) {
+                //====> Base Background <====//
+                progress.classList.add('bg-alpha-10', 'overflow-hidden', 'px-progress-bar-js');
+                progress.style.height = `${size}px`;
+                progress.style.lineHeight = `calc(${size}px)`;
+                progress.style.setProperty('--width', `${progress.clientWidth}px`);
 
-            //====> Set Progress <====//
-            if (!lazy) {
-                setProgress(progressBar);
-            } else {
-                //===> First View <===//
-                if (Phenix(progress).inView()) setProgress(progressBar);
-
-                //===> Hidden View <===//
-                window.addEventListener('scroll', scrolling => {
+                //====> Set Color <====//
+                if (typeof(color) === "string") Phenix(progressBar).css({"background-color" : color});
+    
+                //====> Set Progress <====//
+                if (!lazy) {
+                    setProgress(progressBar);
+                } else {
+                    //===> First View <===//
                     if (Phenix(progress).inView()) setProgress(progressBar);
-                });
+    
+                    //===> Hidden View <===//
+                    window.addEventListener('scroll', scrolling => {
+                        if (Phenix(progress).inView()) setProgress(progressBar);
+                    });
+                }
+            } else {
+                setProgress(progressBar);
             }
         }
     });
@@ -72,3 +79,6 @@ PhenixElements.prototype.progress = function (options?:{
     //====> Return Phenix Elements <====//
     return this;
 }
+
+
+
