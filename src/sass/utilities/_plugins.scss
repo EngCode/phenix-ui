@@ -7,15 +7,17 @@
  * ===> 06 - Background X
 */
 
-/*==== Progress ====*/
+/*==== Progress Bars ====*/
 .px-progress {
     /*==== Label Basic ====*/
-    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;}
+    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;line-height: 1;}
 
     /*==== Label Before ====*/
     &[data-label]::before {
+        width: 100%;
+        #{$direction-start}: 0;
         content: attr(data-label);
-        @extend .position-center;
+        @extend .position-center-y;
     }
 
     /*==== Inverted Label ====*/
@@ -30,6 +32,23 @@
     /*==== Value Label ====*/
     &[data-label="value"]::before {content: attr(data-value) "%";}
     .px-progress-bar[data-label="value"]::before {content: attr(data-value) "%";}
+
+    //====> Circle Mode <====//
+    &[data-type="circle"] svg path {transition: stroke-dasharray 850ms ease-in-out;}
+
+    //====> Radial Mode <====//
+    &[data-type="radial"] {
+        /*====  ====*/
+        &[data-label]::before {
+            top: 100%;
+            transform: translateY(-150%);
+        }
+        /*==== SVG ====*/
+        svg path {
+            transition: stroke-dashoffset 850ms ease-in-out;
+            transform: scale(1.19) translateY(-8%) translateX(-8%);
+        }
+    }
 }
 
 /*==== Sticky ====*/
