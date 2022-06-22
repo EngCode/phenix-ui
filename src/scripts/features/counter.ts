@@ -31,6 +31,7 @@ PhenixElements.prototype.counter = function (options?:{
             delay    = parseInt(element.getAttribute('data-delay')) || options?.delay  || 0,
             steps    = parseInt(element.getAttribute('data-steps')) || options?.steps  || 10,
             reverse  = element.getAttribute('data-reverse') || options?.reverse || false,
+            lazyloading = element.getAttribute('data-lazy') || options?.lazyloading,
             counting = element.classList.contains('counting');
 
         //====> Counter Data <===//
@@ -66,10 +67,24 @@ PhenixElements.prototype.counter = function (options?:{
             else if (reverse) Math.round(count) === 0 ? clearInterval(interval) : null;
         };
 
-        //====> Start Counting <===//
-        setTimeout(function() {
-            interval = setInterval(runCounter.bind(this), steps);
-        }.bind(this), delay);
+        //====> Counter Handler <====//
+        let counter_handler = () => {
+            setTimeout(function() {
+                interval = setInterval(runCounter.bind(this), steps);
+            }.bind(this), delay);
+        }
+
+        //====> Run Counter <====//
+        if (lazyloading) {
+            //===> First View <===//
+            if (Phenix(element).inView()) counter_handler();
+            //===> Hidden View <===//
+            window.addEventListener('scroll', scrolling => {
+                Phenix(element).inView() ? counter_handler() : null
+            });
+        } else {
+            counter_handler();
+        };
     });
 
     //====> Return Phenix Elements <====//
