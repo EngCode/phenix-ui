@@ -41,12 +41,11 @@ the Final Release for the First Version of Phenix Design System.
 07 - [update] Counter Lazyloading
 08 - [update] Timer Lazyloading
 09 - [new] CSS Layout Groups
-10 - [update] Carousel Slider Optimizing
 ```
 
 ---
 
-#### Changelog Update v0.6.0
+#### Changelog Update v0.6.5
 
 ```
 01 - [upgrade] Masonry Grid Mode
@@ -57,6 +56,9 @@ the Final Release for the First Version of Phenix Design System.
 06 - [upgrade] Add Media Lightbox for Popups.
 07 - [new] Notifications and Toasts
 08 - [upgrade] Typography CSS Utilites
+09 - [update] Animations on Demand Demand Demand Types
+10 - [new] Progress Bars
+11 - [update] Carousel Slider Optimizing
 ```
 
 ---

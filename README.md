@@ -1,5 +1,3 @@
-
-
 <p align="center">
   <a href="https://design.phenixthemes.com">
     <img src="https://design.phenixthemes.com/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/pds-icon.svg" alt="Phenix Design logo" width="175" height="162">
@@ -92,10 +90,10 @@
 02 - [new] Phenix Repeater
 03 - [new] Phenix Uploader
 04 - [new] Rating Controller
-07 - [new] CSS Layout Groups
-08 - [update] Carousel Slider Optimizing
-09 - [update] Counter Lazyloading
-10 - [update] Timer Lazyloading
+05 - [new] CSS Layout Groups
+06 - [update] Counter Lazyloading
+07 - [update] Timer Lazyloading
+08 - [update] Responsive Form Controls Sizes
 ```
 
 ---
@@ -113,6 +111,7 @@
 08 - [upgrade] Typography CSS Utilites
 09 - [update] Animations on Demand Demand Demand Types
 10 - [new] Progress Bars
+11 - [update] Carousel Slider Optimizing
 ```
 
 -----------------------
