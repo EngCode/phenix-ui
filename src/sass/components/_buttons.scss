@@ -12,6 +12,34 @@
 /*==== Utlites ====*/
 @import '../assets/mixin';
 
+/*==== Make Sizes ====*/
+@mixin make_button_sizes ($infix:'') {
+    /*=== Sizes ===*/
+    &.tiny#{$infix} {
+        --height    : #{REM(30)};
+        --padding   : #{REM(15)};
+        --text-size : #{REM(13)};
+    }
+
+    &.small#{$infix} {
+        --height    : #{REM(36)};
+        --padding   : #{REM(20)};
+        --text-size : #{REM(14)};
+    }
+
+    &.large#{$infix} {
+        --height    : #{REM(52)};
+        --padding   : #{REM(25)};
+        --text-size : #{REM(22)};
+    }
+
+    &.xlarge#{$infix} {
+        --height    : #{REM(62)};
+        --padding   : #{REM(35)};
+        --text-size : #{REM(26)};
+    }
+}
+
 /*==== Buttons ====*/
 .btn {
     /*==== Options ====*/
@@ -39,6 +67,29 @@
     @extend %inline-block;
     @include padding-inline(var(--padding), 'both');
 
+    /*=== Sizes ===*/
+    @include make_button_sizes();
+
+    /*==== xLarge Screen ====*/
+    @include xlarge(){
+        @include make_button_sizes('-xl');
+    };
+
+    /*==== Large Screen ====*/
+    @include large(){
+        @include make_button_sizes('-lg');
+    };
+
+    /*==== Medium Screen ====*/
+    @include medium(){
+        @include make_button_sizes('-md');
+    };
+
+    /*==== Medium Screen ====*/
+    @include small(){
+        @include make_button_sizes('-sm');
+    };
+
     /*==== icons preset ====*/
     &::before {
         margin-top: -1px;
@@ -47,29 +98,7 @@
     }
 
     /*===== Button Sizes  ===*/
-    &.tiny {
-        --height    : #{REM(30)};
-        --padding   : #{REM(15)};
-        --text-size : #{REM(13)};
-    }
 
-    &.small {
-        --height    : #{REM(36)};
-        --padding   : #{REM(20)};
-        --text-size : #{REM(14)};
-    }
-
-    &.large {
-        --height    : #{REM(52)};
-        --padding   : #{REM(25)};
-        --text-size : #{REM(22)};
-    }
-
-    &.xlarge {
-        --height    : #{REM(62)};
-        --padding   : #{REM(35)};
-        --text-size : #{REM(26)};
-    }
 
     &.square {
         width: var(--height);
