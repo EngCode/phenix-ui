@@ -204,6 +204,7 @@ this project was created in 2016 under the code-name **[Tornado UI](https://tor
 
 - [Abdullah Ramadan](https://www.facebook.com/Eng.AbdallahPS) - Phenix Founder
 - Naotoshi Fujita - [SplideJS]([](https://github.com/Splidejs/splide)) Creator
+- Daniel Eden - [Animate.css](https://animate.style/) Creator
 
 --------------------
 
