@@ -66,6 +66,10 @@
     @extend %fast-motion;
     @extend %inline-block;
     @include padding-inline(var(--padding), 'both');
+    a {
+        color : inherit;
+        display: block;
+    }
 
     /*==== icons preset ====*/
     &::before {
@@ -73,8 +77,6 @@
         line-height: inherit;
         @extend %inline-block;
     }
-
-    
     
     /*===== Button Sizes  ===*/
     @include make_button_sizes();

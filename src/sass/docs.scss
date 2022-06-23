@@ -102,27 +102,6 @@ html {line-height: 1.5;}
     min-height: $header-height;
     padding: 0 REM(20);
     @include small('down') {padding: 0 15px};
-
-    /*==== Select ====*/
-    select {
-        @extend %inline-block;
-        @extend %select-theme;
-        height: 32px;
-        background-color: #fcfcfc;
-        border: 1px solid rgba(#000, 0.1);
-        margin: 0 10px;
-        border-radius: 5px;
-        width: 70px;
-        padding: 0 8px;
-        font-size: 13px;
-    }
-    /*==== Action Buttons ====*/
-    .icon-btn {
-        @extend %inline-block;
-        color: #D9DDE1;
-        font-size: 25px;
-    }
-
     &.is-sticky {
         position: fixed;
         top: 0;
@@ -400,7 +379,11 @@ html {line-height: 1.5;}
     code {font-size: 1em;}
 
     /*==== Table ====*/
-    table {border-radius: 5px;}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 5px;
+    }
 
     /*==== Table Note ====*/
     figcaption {
@@ -564,15 +547,17 @@ html {line-height: 1.5;}
     display: block;
     text-align: center;
     background-color: #fcfcfc;
-    margin: -15px -12px;
+    // margin: -15px -12px;
     margin-top: auto;
     font-size: 15px;
     padding: 8px 15px;
-    @include large() {
-        margin: -30px -46px;
-        margin-top: auto;
-    }
+    // @include large() {
+    //     margin: -30px;
+    //     margin-top: auto;
+    // }
 }
+
+.post-card p {max-height: 84px;}
 
 /*==== Grid Example ====*/
 .grid-example {

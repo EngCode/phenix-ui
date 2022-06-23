@@ -136,8 +136,8 @@ PhenixElements.prototype.animations = function (options?:{
 
     //====> Load Packages one by one <====//
     else {
+        if (thirdParty === Array) thirdParty.push('utilities');
         thirdParty.forEach(animate_package => animation_loader(animate_package, `-${animate_package}`));
-        animation_loader('utilities', '-utilities');
     }
 
     //====> Return Phenix Elements <====//

@@ -141,8 +141,8 @@ PhenixElements.prototype.slider = function (options?:{
 
         //====> Add Options <====//
         if (start) slider_options.start = start;
-        if (controls) slider_options.arrows = true;
-        if (pagination) slider_options.pagination = true;
+        if (!controls) slider_options.arrows = false;
+        if (!pagination) slider_options.pagination = false;
 
         //====> Splide Active <====//
         let the_slider = new Splide(sliderWraper, slider_options).mount();
