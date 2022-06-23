@@ -44,7 +44,7 @@
 .btn {
     /*==== Options ====*/
     --padding : #{REM(20)};
-    --text-weight : var(--medium-weight);
+    --text-weight : var(--normal-weight);
     /*==== Size Options ====*/
     --height : #{REM(42)};
     --text-size : #{REM(16)};
@@ -67,7 +67,16 @@
     @extend %inline-block;
     @include padding-inline(var(--padding), 'both');
 
-    /*=== Sizes ===*/
+    /*==== icons preset ====*/
+    &::before {
+        margin-top: -1px;
+        line-height: inherit;
+        @extend %inline-block;
+    }
+
+    
+    
+    /*===== Button Sizes  ===*/
     @include make_button_sizes();
 
     /*==== xLarge Screen ====*/
@@ -89,16 +98,6 @@
     @include small(){
         @include make_button_sizes('-sm');
     };
-
-    /*==== icons preset ====*/
-    &::before {
-        margin-top: -1px;
-        line-height: inherit;
-        @extend %inline-block;
-    }
-
-    /*===== Button Sizes  ===*/
-
 
     &.square {
         width: var(--height);
@@ -142,7 +141,7 @@
         --color  : var(#{'--'+$text});
         --background : var(#{'--'+$prefix+'-color'});
         --border-color : var(#{'--'+$prefix+'-color'});
-        &:hover {--background : var(#{'--'+$prefix+'-'+$hover});}
+        &:hover,&.active,&.px-active, &.is-active {--background : var(#{'--'+$prefix+'-'+$hover});}
         /*==== Outline ====*/
         &.outline {--color: var(#{'--'+$prefix+'-color'});}
         &.outline:hover {
