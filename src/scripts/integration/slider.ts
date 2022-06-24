@@ -32,6 +32,7 @@ PhenixElements.prototype.slider = function (options?:{
     isNavigation?:boolean;
     sync?:string
     pauseOnHover?:boolean;
+    intersection?:boolean;
 }) {
     //====> Sliders Activator <====//
     let slider_handler = () => this.forEach((slider:HTMLElement) => {
@@ -53,6 +54,7 @@ PhenixElements.prototype.slider = function (options?:{
                 duration = parseInt(inline('data-duration')) || options?.duration || 6000,
                 autoplay = inline('data-autoplay') || options?.autoplay,
                 pauseOnHover = inline('data-pause-hover') || options?.pauseOnHover,
+                intersection = inline('data-intersection') || options?.intersection,
                 controls = inline('data-controls') || options?.controls,
                 pagination = inline('data-pagination') || options?.pagination,
                 start = parseInt(inline('data-start')) || options?.start,
@@ -174,12 +176,14 @@ PhenixElements.prototype.slider = function (options?:{
             console.log(pauseOnHover !== 'true' || '1');
             if (pauseOnHover) pauseOnHover !== 'true' || '1' ? slider_options.pauseOnHover = false : null;
             if (autoplay) autoplay !== 'false' || '0' ? slider_options.autoplay = true : null;
+            if (intersection) intersection !== 'false' || '0' ? slider_options.intersection = true : null;
 
             return {
                 track  : slider_track,
                 list   : slider_list,
                 slides : slider_list.children,
                 sync : sync,
+                intersection : intersection,
                 options: slider_options
             }
         }
@@ -241,8 +245,9 @@ PhenixElements.prototype.slider = function (options?:{
         the_slider.on(['inactive'], function(data) {
             let video = data.slide.querySelector('video'),
                 iframe = data.slide.querySelector('iframe');
+
             //====> Played Video <====//
-            if (video) !video.paused ? video.pause() : null;
+            if (video) video.playing ? video.pause() : null;
 
             //====> Played iFrame <====//
             if (iframe) {
@@ -267,22 +272,36 @@ PhenixElements.prototype.slider = function (options?:{
         the_slider.on('pagination:updated', () => slider.dispatchEvent(pagination_updated));
 
         //====> Run Sync Sliders <====//
-        if (current_slider.sync) {
-            //====> Synced Create <====//
-            let sync_selector = document.querySelector(`${current_slider.sync}`),
-                synced_slider = slider_creator(sync_selector);
-                sync_selector.classList.add('px-slider');
+        let mount_slider = () => {
+            if (current_slider.sync) {
+                //====> Synced Create <====//
+                let sync_selector = document.querySelector(`${current_slider.sync}`),
+                    synced_slider = slider_creator(sync_selector);
+                    sync_selector.classList.add('px-slider');
+    
+                //====> Synced Splide <====//
+                let synced_splide = new Splide(sync_selector, synced_slider.options);
+                
+                //====> Run Both <====//
+                the_slider.sync(synced_splide);
+                the_slider.mount();
+                synced_splide.mount();
+            } else {
+                //====> Run the Slider <====//
+                the_slider.mount();
+            }
+        };
 
-            //====> Synced Splide <====//
-            let synced_splide = new Splide(sync_selector, synced_slider.options);
-            
-            //====> Run Both <====//
-            the_slider.sync(synced_splide);
-            the_slider.mount();
-            synced_splide.mount();
+        //====> Intersection Sliders <====//
+        if (current_slider.intersection) {
+            //===> First View <===//
+            if (Phenix(slider).inView()) mount_slider();
+            //===> Hidden View <===//
+            window.addEventListener('scroll', scrolling => {
+                Phenix(slider).inView() ? mount_slider() : null
+            });
         } else {
-            //====> Run the Slider <====//
-            the_slider.mount();
+            mount_slider();
         }
     });
 
