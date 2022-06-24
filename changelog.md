@@ -70,7 +70,8 @@ the Final Release for the First Version of Phenix Design System.
 this project was created in 2016 under the code-name **[Tornado UI](https://tornado.phenixthemes.com/)** until 2022 the name was changed to fit the new personal-business brand **[Phenix Themes](https://phenixthemes.com/ "https://phenixthemes.com")**.
 
 - [Abdullah Ramadan](https://www.facebook.com/Eng.AbdallahPS) - Phenix Founder
-- Naotoshi Fujita - [SplideJS]([](https://github.com/Splidejs/splide)) Creator
+- Naotoshi Fujita - [SplideJS](%5B%5D(https://github.com/Splidejs/splide)) Creator
+- Daniel Eden - [Animate.css](https://animate.style/) Creator
 
 ### License
 

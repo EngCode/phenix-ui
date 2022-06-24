@@ -43,6 +43,38 @@ PhenixElements.prototype.slider = function (options?:{
             //====> Already Exist <====//
             if (currentClasses.contains('splide') || currentClasses.contains('splide__list')) return;
 
+            //====> Default Options <====//
+            let type = inline('data-type') || options?.type || "loop",
+                focus = inline('data-focus') || options?.focus || 0,
+                items = parseInt(inline('data-items')) || options?.items || 1,
+                steps = parseInt(inline('data-steps')) || options?.steps || 1,
+                speed = parseInt(inline('data-speed')) || options?.speed || 700,
+                duration = parseInt(inline('data-duration')) || options?.duration || 6000,
+                autoplay = inline('data-autoplay') || options?.autoplay || true,
+                controls = inline('data-controls') || options?.controls,
+                pagination = inline('data-pagination') || options?.pagination,
+                start = parseInt(inline('data-start')) || options?.start,
+                isNavigation = parseInt(inline('data-is-navigation')) || options?.isNavigation,
+                sync = inline('data-sync') || options?.sync,
+                breakpoints = options?.breakpoints || {},
+                direction = inline('data-direction') || options?.direction || Phenix(document).direction();
+
+            //====> Vertical Mode Fix <====//
+            let verticalFix = (slides) => {
+                if (direction == 'ttb') {
+                    let first_item = slider.children[0],
+                        margin = parseInt(getComputedStyle(first_item).getPropertyValue('margin-bottom')),
+                        first_height = first_item.clientHeight;
+                    //====> Height Marign Fallback <====//
+                    if(margin === 0) margin = parseInt(getComputedStyle(first_item).getPropertyValue('margin-top'));
+                    if (margin > 0) first_height = (first_height + margin - 1);
+
+                    return first_height*slides;
+                }
+            },
+
+            heightCalc = verticalFix(items);
+
             //====> Create Markup <====//
             let slider_track   = document.createElement("div"),
                 slider_list    = document.createElement("div"),
@@ -67,42 +99,26 @@ PhenixElements.prototype.slider = function (options?:{
             slider.appendChild(slider_track);
             slider_track.appendChild(slider_list);
 
-            //====> Default Options <====//
-            let type = inline('data-type') || options?.type || "loop",
-                focus = inline('data-focus') || options?.focus || 0,
-                items = parseInt(inline('data-items')) || options?.items || 1,
-                steps = parseInt(inline('data-steps')) || options?.steps || 1,
-                speed = parseInt(inline('data-speed')) || options?.speed || 700,
-                duration = parseInt(inline('data-duration')) || options?.duration || 6000,
-                autoplay = inline('data-autoplay') || options?.autoplay || true,
-                controls = inline('data-controls') || options?.controls,
-                pagination = inline('data-pagination') || options?.pagination,
-                start = parseInt(inline('data-start')) || options?.start,
-                isNavigation = parseInt(inline('data-is-navigation')) || options?.isNavigation,
-                sync = inline('data-sync') || options?.sync,
-                breakpoints = options?.breakpoints || {},
-                direction = inline('data-direction') || options?.direction || Phenix(document).direction();
-
             //====> Inline Responsive <====//
             inline('data-sm') ? breakpoints[570] = { 
                 //===> Small Screens <===//
                 perPage: inline('data-sm') || items,
-                // height: verticalFix(inline('data-sm') || items),
+                height: verticalFix(inline('data-sm') || items),
             } : '';
             //===> Medium Screens <===//
             inline('data-md') ? breakpoints[760] = {
                 perPage: inline('data-md') || items,
-                // height: verticalFix(inline('data-md') || items),
+                height: verticalFix(inline('data-md') || items),
             } : ''; 
             //===> Large Screens <===//
             inline('data-lg') ? breakpoints[1170] = {
                 perPage: inline('data-lg') || items,
-                // height: verticalFix(inline('data-md') || items),
+                height: verticalFix(inline('data-md') || items),
             } : '';
             //===> xLarge Screens <===//
             inline('data-xl') ? breakpoints[1400] = {
                 perPage: inline('data-xl') || items,
-                // height: verticalFix(inline('data-md') || items),
+                height: verticalFix(inline('data-md') || items),
             } : '';
 
             //====> Custom Classes <====//
@@ -152,11 +168,13 @@ PhenixElements.prototype.slider = function (options?:{
             if (!pagination) slider_options.pagination = false;
             if (isNavigation) slider_options.isNavigation = true;
             if (sync) slider_options.sync = true;
+            if (direction == 'ttb') slider_options.height = heightCalc;
+            if (direction == 'ttb') slider_options.autoHeight = true;
 
             return {
                 track  : slider_track,
                 list   : slider_list,
-                slides : current_slides,
+                slides : slider_list.children,
                 sync : sync,
                 options: slider_options
             }
