@@ -26,6 +26,7 @@ the Final Release for the First Version of Phenix Design System.
 06 - [new] Range Slider
 07 - [new] Slider three.js Animations
 08 - [new] Dynamic Colored Words
+09 - [new] Slider Grid & Intersection Addons
 ```
 
 ---

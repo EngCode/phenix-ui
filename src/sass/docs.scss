@@ -681,3 +681,7 @@ body.rtl {
 @include large() {
     .megamenu-example > ul > li {padding-top: 6px;padding-bottom: 6px;}
 };
+
+/*==== Make the Current Active Slide More Visible then other Thumbnails ====*/
+#thumbnails-example .px-item {transition: opacity 300ms linear;}
+#thumbnails-example .px-item:not(.is-active) {opacity: 0.35;}

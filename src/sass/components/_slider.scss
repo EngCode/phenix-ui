@@ -17,6 +17,8 @@
 
     /*==== Arrows ====*/
     .px-slider-controls {
+        pointer-events: none;
+        > * {pointer-events: all;}
         /*==== Directions Fix ====*/
         @if ($direction == 'rtl') {
             .px-next svg {transform: rotate(180deg);}
@@ -32,4 +34,7 @@
         /*==== Buttons ====*/
         button svg {fill: var(--color);}
     }
+
+    /*==== Pagiantion ====*/
+    .px-slider-pagination .px-slider-page:not(.is-active) {opacity: 0.5;}
 }
