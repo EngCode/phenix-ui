@@ -12,15 +12,24 @@
 .secondary-font {font-family: var(--secondary-font);}
 
 /*==== Headine Sizes ====*/
-h1,.h1 {font-size: REM(32);}
-h2,.h2 {font-size: REM(28);}
-h3,.h3 {font-size: REM(25);}
-h4,.h4 {font-size: REM(23);}
-h5,.h5 {font-size: REM(20);}
-h6,.h6 {font-size: REM(17);}
+h1 {font-size: REM(32);}
+h2 {font-size: REM(28);}
+h3 {font-size: REM(25);}
+h4 {font-size: REM(23);}
+h5 {font-size: REM(20);}
+h6 {font-size: REM(17);}
 
 /*==== Font Sizes ====*/
 @mixin make-font-sizes($infix:'') {
+    /*==== Headine Sizes ====*/
+    .h1#{$infix} {font-size: REM(32);}
+    .h2#{$infix} {font-size: REM(28);}
+    .h3#{$infix} {font-size: REM(25);}
+    .h4#{$infix} {font-size: REM(23);}
+    .h5#{$infix} {font-size: REM(20);}
+    .h6#{$infix} {font-size: REM(17);}
+
+    /*==== Headine Sizes ====*/
     .fs#{$infix}-12 {font-size: 12px;}
     .fs#{$infix}-13 {font-size: 13px;}
     .fs#{$infix}-14 {font-size: REM(14);}

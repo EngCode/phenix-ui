@@ -90,8 +90,6 @@ html {line-height: 1.5;}
 .main-header {
     /*==== Component Options ====*/
     border-bottom: 1px solid #F1F1F1;
-    min-height: $header-height;
-    padding: 0 REM(20);
     @include small('down') {padding: 0 15px};
     &.is-sticky {
         position: fixed;
@@ -688,3 +686,7 @@ body.rtl {
         background-color: var(--primary-color);
     }
 }
+
+/*====  ====*/
+.px-primary-shadow {text-shadow: 3px 3px 0 rgba(13, 150, 249, 0.33);}
+

@@ -16,6 +16,7 @@
     <link href="css/fontawsome.css" rel="stylesheet" />
     <!-- Required CSS Files -->
     <link href="css/phenix.css" rel="stylesheet" />
+    <link href="css/docs.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
 </head>
 <body>
     <!-- Main Header -->
-    <header class="main-header row align-between align-center-y white-bg gpx-0" data-sticky="absolute">
+    <header class="position-ab main-header pdx-20 pdy-10 row align-between align-center-y white-bg gpx-0" data-sticky="absolute">
         <!-- Logo -->
         <a href="http://localhost/phenix-system" class="logo">
             <img src="http://localhost/phenix-system/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/phenix-design-x.svg" alt="Phenix Design System" width="180">
@@ -44,6 +45,41 @@
     </header>
     <!-- // Main Header -->
 
+    <!-- Hero Section -->
+    <div class="px-media ratio-x overflow-hidden" data-src="img/background.jpg">
+        <div class="container-xl position-none">
+            <!-- Grid -->
+            <div class="row h-min-100vh align-center-y pdy-50 pd-lg-50">
+                <!-- Content -->
+                <div class="col-12 col-md-7 col-lg-6">
+                    <!-- image -->
+                    <img src="img/icons.svg" alt="" class="col-12 col-md-10 col-lg-9 mb-25 view-status" data-animation="fadeInUp">
+                    <!-- Titles -->
+                    <div class="view-status" data-animation="fadeInUp">
+                        <h2 class="px-primary-shadow mb-10 mb-md-15 mb-lg-20 display-md-h2 display-lg-h1 weight-strong lineheight-100 color-primary">Phenix Design System</h2>
+                        <h3 class="h5 h4-md h2-lg weight-normal lineheight-100 mb-15 mb-md-20">Utilities Based Front-End Framework</h3>
+                    </div>
+                    <!-- Description -->
+                    <p class="fs-14 fs-lg-17 mb-30 view-status color-gray" data-animation="fadeInUp">Simple, Effective, and powerful user-interface framework for faster and easier web development with today performance, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.</p>
+                    <!-- Buttons Group -->
+                    <div class="flexbox">
+                        <a href="https://github.com/EngCode/phenix-ui/releases" class="view-status btn me-15 secondary radius-sm fs-15 w-min-150" target="_blank" data-animation="fadeInStart"> <i class="inline-block me-5 far fa-download fs-13"></i> Download</a>
+                        <a href="https://design.phenixthemes.com/installation" class="view-status btn me-15 primary radius-sm fs-15 w-min-200" data-animation="fadeInStart">Read Documentation</a>
+                        <a href="https://github.com/EngCode/phenix-ui" target="_blank" class="view-status btn me-15 dark radius-sm fs-15 w-min-120" data-animation="fadeInStart"> <i class="inline-block me-5 fab fa-github fs-13"></i> Github</a>
+                    </div>
+                    <!-- // Buttons Group -->
+                </div>
+                <!-- Media -->
+                <div class="hidden-sm-down col-md-5 col-lg-6 position-ab position-bottom-0 position-end-0">
+                    <img src="img/media.png" alt="" class="fluid view-status" data-animation="fadeInEnd">
+                </div>
+                <!-- // Media -->
+            </div>
+            <!-- // Grid -->
+        </div>
+    </div>
+    <!-- // Hero Section -->
+
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
 
@@ -51,7 +87,13 @@
     <script defer>
         //======> D.O.M is Ready <=======//
         Phenix(document).ready((event) => {
-
+            //====> Activate Plugins <====//
+            Phenix('.px-media').multimedia();
+            //====> View-Port Animations <====//
+            Phenix('.view-status').animations({
+                lazyloading: true,
+                duration: 500,
+            });
         });
     </script>
     <!-- // JS Scripts -->
