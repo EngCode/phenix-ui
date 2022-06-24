@@ -172,7 +172,9 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Get the Current iFrame <===//
                     let iframe = element.querySelector('iframe');
                     //===> Create View <===//
-                    if (!iframe) Phenix(element).insert('append', `<iframe src="${src}" frameborder="0" ${lazy ? 'loading="lazy"' : ''} allowfullscreen></iframe>`);
+                    if (!iframe) {
+                        Phenix(element).insert('append', `<iframe src="${src}" frameborder="0" ${lazy ? 'loading="lazy"' : ''} allowfullscreen></iframe>`);
+                    }
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }

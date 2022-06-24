@@ -23,63 +23,43 @@
 </head>
 <body>
 
-    <div class="container pdy-75">
-        <!-- Grid -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-5 mb-30">
-                <!-- Vertical Carousel -->
-                <div class="px-slider" data-direction="ttb" data-items="3">
-                    <!-- Card Block -->
-                    <div class="mb-20 post-card">
-                        <div class="pd-20 bg-white border-1 radius-sm border-alpha-10">
-                            <!-- Content -->
-                            <h4 class="fs-16">Slide #01 Card</h4>
-                            <p class="fs-12 mb-0 overflow-hidden">Learn how to build with Phenix CSS Utilities and Javascript Methods.</p>
-                        </div>
-                    </div>
-                    <!-- Card Block -->
-                    <div class="mb-20 post-card">
-                        <div class="pd-20 bg-white border-1 radius-sm border-alpha-10">
-                            <!-- Content -->
-                            <h4 class="fs-16">Slide #01 Card</h4>
-                            <p class="fs-12 mb-0 overflow-hidden">Learn how to build with Phenix CSS Utilities and Javascript Methods.</p>
-                        </div>
-                    </div>
-                    <!-- Card Block -->
-                    <div class="mb-20 post-card">
-                        <div class="pd-20 bg-white border-1 radius-sm border-alpha-10">
-                            <!-- Content -->
-                            <h4 class="fs-16">Slide #01 Card</h4>
-                            <p class="fs-12 mb-0 overflow-hidden">Learn how to build with Phenix CSS Utilities and Javascript Methods.</p>
-                        </div>
-                    </div>
-                    <!-- Card Block -->
-                    <div class="mb-20 post-card">
-                        <div class="pd-20 bg-white border-1 radius-sm border-alpha-10">
-                            <!-- Content -->
-                            <h4 class="fs-16">Slide #01 Card</h4>
-                            <p class="fs-12 mb-0 overflow-hidden">Learn how to build with Phenix CSS Utilities and Javascript Methods.</p>
-                        </div>
-                    </div>
-                    <!-- // Card Block -->
-                </div>
-                <!-- // Vertical Carousel -->
+    <div class="container-sm pdy-100">
+        <!-- Multimedia Slider -->
+        <div class="px-slider" data-controls="1">
+            <!-- item -->
+            <div class="px-item">
+                <!-- Normal Image -->
+                <img src="http://via.placeholder.com/610x345?text=Regular Image" alt="" class="fluid">
             </div>
-            <!-- Column -->
-            <div class="col-12 col-md-6 col-lg-7">
-                <!-- Vertical Slider -->
-                <div class="px-slider mb-30" data-controls="1" data-direction="ttb">
-                    <div class="px-item pdy-100 pdx-30 tx-align-center bg-alpha-05">Slide #01 Testing</div>
-                    <div class="px-item pdy-100 pdx-30 tx-align-center bg-alpha-05">Slide #02 Testing</div>
-                    <div class="px-item pdy-100 pdx-30 tx-align-center bg-alpha-05">Slide #03 Testing</div>
-                    <div class="px-item pdy-100 pdx-30 tx-align-center bg-alpha-05">Slide #04 Testing</div>
+            <!-- item -->
+            <div class="px-item" data-media="1">
+                <!-- Aspect Ratio Video -->
+                <div class="px-media ratio-16x9" data-type="video">
+                    <video src="https://phenixthemes.com/sample.mp4" controls></video>
                 </div>
-                <!-- // Vertical Slider -->
+                <!-- // Aspect Ratio Video -->
             </div>
-            <!-- // Column -->
+            <!-- item -->
+            <div class="px-item" data-media="1">
+                <!-- Aspect Ratio Embed -->
+                <div class="px-media ratio-16x9" data-type="iframe">
+                    <iframe src="https://www.youtube.com/embed/rId62CdFGg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <!-- // Aspect Ratio Embed -->
+            </div>
+            <!-- item -->
+            <div class="px-item">
+                <!-- Aspect Ratio Element -->
+                <div class="px-media ratio-16x9" data-src="http://via.placeholder.com/720x480?text=Mixed Media" data-type="mixed-bg" data-gradient="rgba(0,196,255, 0.5), rgba(26,105,244, 0.5)"></div>
+            </div>
+            <!-- item -->
+            <div class="px-item">
+                <!-- Aspect Ratio Element -->
+                <div class="px-media ratio-16x9" data-src="http://via.placeholder.com/720x480?text=Media Background" data-gradient="rgba(0,196,255, 0.5), rgba(26,105,244, 0.5)"></div>
+            </div>
+            <!-- // item -->
         </div>
-        <!-- // Grid -->
+        <!-- // Multimedia Slider -->
     </div>
 
     <!-- Required JS Files -->
@@ -91,6 +71,9 @@
         Phenix(document).ready((event) => {
             //====> Activate Sliders <====//
             Phenix('.px-slider').slider();
+
+            //====> Activate Multimedia <====//
+            Phenix('[data-src]').multimedia();
         });
     </script>
     <!-- // JS Scripts -->

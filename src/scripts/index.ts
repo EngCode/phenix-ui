@@ -21,13 +21,14 @@
  * ===> 13 - Event Handler
  * ===> 14 - Resources Lazy-Loader
  * ===> 15 - Media Query Method
- * ===> 16 - Define Info Grapers
- * ===> 17 - Define UI Effects
- * ===> 18 - Define Other Features
- * ===> 19 - Include Features
- * ===> 20 - Integration
- * ===> 21 - Phenix Selecting Method
- * ===> 22 - Your Custom Script [JS]
+ * ===> 16 - Service Worker
+ * ===> 17 - Define Info Grapers
+ * ===> 18 - Define UI Effects
+ * ===> 19 - Define Other Features
+ * ===> 20 - Include Features
+ * ===> 21 - Integration
+ * ===> 22 - Phenix Selecting Method
+ * ===> 23 - Your Custom Script [JS]
 */
 
 /*====> Phenix Object <====*/
@@ -71,7 +72,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this;
     }
 
-    /*====> Get Ancestor [Parent, Parents Until] <====*/
+    /*====> Get Ancestor <====*/
     ancestor(target?) {
         //====> Define Ancestor Arrays <====//
         let ancestors = [];
@@ -350,7 +351,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         }
     }
 
-    /*====> Resources Lazy-Loader [un-tested] <====*/
+    /*====> Resources Lazy-Loader <====*/
     lazyLoading() {
         //====> Element Data <====//
         let spiner = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
@@ -404,7 +405,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this;
     }
 
-    /*====> Media Query [un-tested] <====*/
+    /*====> Media Query <====*/
     mediaQuery(breakpoint:any, fn_callback?:any, mobile_first?:boolean) {
         /*==== Breakpoints Points ====*/
         let xsmall_end = 485, /*===> Max xSmall breakpoint Width */

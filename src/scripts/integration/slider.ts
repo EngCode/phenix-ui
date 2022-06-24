@@ -31,6 +31,7 @@ PhenixElements.prototype.slider = function (options?:{
     page?:string;
     isNavigation?:boolean;
     sync?:string
+    pauseOnHover?:boolean;
 }) {
     //====> Sliders Activator <====//
     let slider_handler = () => this.forEach((slider:HTMLElement) => {
@@ -50,7 +51,8 @@ PhenixElements.prototype.slider = function (options?:{
                 steps = parseInt(inline('data-steps')) || options?.steps || 1,
                 speed = parseInt(inline('data-speed')) || options?.speed || 700,
                 duration = parseInt(inline('data-duration')) || options?.duration || 6000,
-                autoplay = inline('data-autoplay') || options?.autoplay || true,
+                autoplay = inline('data-autoplay') || options?.autoplay,
+                pauseOnHover = inline('data-pause-hover') || options?.pauseOnHover,
                 controls = inline('data-controls') || options?.controls,
                 pagination = inline('data-pagination') || options?.pagination,
                 start = parseInt(inline('data-start')) || options?.start,
@@ -140,7 +142,6 @@ PhenixElements.prototype.slider = function (options?:{
                 type : type,
                 focus: focus,
                 speed: speed,
-                autoplay: autoplay,
                 interval: duration,
                 perPage: items,
                 perMove: steps,
@@ -161,7 +162,7 @@ PhenixElements.prototype.slider = function (options?:{
                     page      : `splide__pagination__page px-slider-page ${page_class}`, // each button
                 },
             };
-
+            
             //====> Add Options <====//
             if (start) slider_options.start = start;
             if (!controls) slider_options.arrows = false;
@@ -170,6 +171,9 @@ PhenixElements.prototype.slider = function (options?:{
             if (sync) slider_options.sync = true;
             if (direction == 'ttb') slider_options.height = heightCalc;
             if (direction == 'ttb') slider_options.autoHeight = true;
+            console.log(pauseOnHover !== 'true' || '1');
+            if (pauseOnHover) pauseOnHover !== 'true' || '1' ? slider_options.pauseOnHover = false : null;
+            if (autoplay) autoplay !== 'false' || '0' ? slider_options.autoplay = true : null;
 
             return {
                 track  : slider_track,
@@ -187,7 +191,7 @@ PhenixElements.prototype.slider = function (options?:{
         //====> Integration <====//
         let slider_integration = () => {
             //====> Multimedia Integration <====//
-            let media_elements = slider.querySelectorAll('.px-media, [data-src]');
+            let media_elements = slider.querySelectorAll('[data-src]');
             Phenix(media_elements).multimedia();
     
             //====> Lazyloading Integration <====//
@@ -228,9 +232,23 @@ PhenixElements.prototype.slider = function (options?:{
             pagination_updated = new CustomEvent('pagination:updated', {detail: events_data});  //===> Fired whenever status of pagination is updated.
 
         //====> Integration Phenix <====//
-        the_slider.on(['mounted','refresh', 'updated', 'move'], function(data) {
+        the_slider.on(['mounted'], function(data) {
             //====> Mounted Run Integration <====//
             slider_integration();
+        });
+
+        //====> Stop Played Media <====//
+        the_slider.on(['inactive'], function(data) {
+            let video = data.slide.querySelector('video'),
+                iframe = data.slide.querySelector('iframe');
+            //====> Played Video <====//
+            if (video) !video.paused ? video.pause() : null;
+
+            //====> Played iFrame <====//
+            if (iframe) {
+                let source = iframe.getAttribute('src');
+                iframe.setAttribute('src', source);
+            };
         });
 
         //====> Dispatch Events <====//

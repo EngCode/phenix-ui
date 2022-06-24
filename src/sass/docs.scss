@@ -676,3 +676,15 @@ body.rtl {
 /*==== Make the Current Active Slide More Visible then other Thumbnails ====*/
 #thumbnails-example .px-item {transition: opacity 300ms linear;}
 #thumbnails-example .px-item:not(.is-active) {opacity: 0.35;}
+.has-text-align-center {text-align: center;}
+
+/*==== Coloring the Current Active Card ====*/
+#news-thumbnails .post-card {
+
+    .bg-white {transition: all 300ms linear;}
+
+    &.is-active .bg-white {
+        color: #FFF;
+        background-color: var(--primary-color);
+    }
+}
