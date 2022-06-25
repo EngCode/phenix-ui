@@ -173,9 +173,8 @@ PhenixElements.prototype.slider = function (options?:{
             if (sync) slider_options.sync = true;
             if (direction == 'ttb') slider_options.height = heightCalc;
             if (direction == 'ttb') slider_options.autoHeight = true;
-            console.log(pauseOnHover !== 'true' || '1');
             if (pauseOnHover) pauseOnHover !== 'true' || '1' ? slider_options.pauseOnHover = false : null;
-            if (autoplay) autoplay !== 'false' || '0' ? slider_options.autoplay = true : null;
+            if (!autoplay) autoplay !== 'true' || '1' ? slider_options.autoplay = true : null;
             if (intersection) intersection !== 'false' || '0' ? slider_options.intersection = true : null;
 
             return {

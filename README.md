@@ -78,6 +78,7 @@
     <li>✅ Lazy-Loading for Everything</li>
     <li>✅ JavaScript Data attributes API</li>
     <li>✅ CSS Animations on Demand</li>
+    <li>✅ Slider/Carousel on Demand</li>
 </ul>
 </div>
 
