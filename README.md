@@ -10,7 +10,7 @@
   Simple, Effective, and powerful user-interface framework for faster and easier web development.
 </p>
 <p align="center">
-  <a href="https://design.phenixthemes.com/installation/"><strong>Explore Phenix docs »</strong></a>
+  <a href="https://design.phenixthemes.com"><strong>Explore Phenix docs »</strong></a>
 </p>
 <p align="center">
 <a href="https://github.com/EngCode/phenix-ui/issues/new?assignees=-&labels=bug&template=bug_report.yml">Report bug</a>
