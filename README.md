@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/build-v0.6.0-blue.svg" alt="" />
+  <img src="https://img.shields.io/badge/build-v0.6.5-blue.svg" alt="" />
   <img src="https://img.shields.io/github/languages/code-size/EngCode/phenix-ui.svg" alt="" />
   <img src="https://img.shields.io/github/repo-size/EngCode/phenix-ui.svg" alt="" />
   <img src="https://img.shields.io/github/issues/EngCode/phenix-ui.svg" alt="" />
