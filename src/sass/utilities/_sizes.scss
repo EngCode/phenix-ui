@@ -16,9 +16,11 @@
     .w#{$infix}-200 {width: 200px;}
     .w#{$infix}-225 {width: 225px;}
     .w#{$infix}-250 {width: 250px;}
+    .w#{$infix}-275 {width: 275px;}
+    .w#{$infix}-300 {width: 300px;}
+    .w#{$infix}-320 {width: 320px;}
     .w#{$infix}-auto {width: auto;}
-    .w#{$infix}-fluid, .fluid#{$infix} {width: 100%;}
-
+    .w#{$infix}-fluid, .fluid#{$infix}, .line-break#{$infix} {width: 100%;}
 }
 
 @include make-width-sizes();

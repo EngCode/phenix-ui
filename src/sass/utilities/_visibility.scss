@@ -6,8 +6,7 @@
 */
 
 /*==== Screen Reader Only ====*/
-.visually-hidden,
-.visually-hidden-focusable:not(:focus):not(:focus-within) {
+.visually-hidden, .visually-hidden-focusable:not(:focus):not(:focus-within) {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -19,20 +18,19 @@
     border-width: 0;
 }
 
-/*==== Visibility ====*/
-.visibility-hidden {visibility: hidden;}
-.visibility-visible {visibility: visible;}
-.visibility-collapse {visibility: collapse;}
-
-/*==== Display ====*/
-.inline-block  {display: inline-block;}
-.display-block {display: block;}
-.display-grid {display: grid;}
 .flexbox { @extend %flexbox; }
 
-.fluid, .line-break {
-    width: 100%;
-    display: block
+@mixin make-visibility ($infix:'') {
+    /*==== Visibility ====*/
+    .visibility#{$infix}-hidden {visibility: hidden;}
+    .visibility#{$infix}-visible {visibility: visible;}
+    .visibility#{$infix}-collapse {visibility: collapse;}
+    
+    /*==== Display ====*/
+    .inline-block#{$infix}  {display: inline-block;}
+    .display#{$infix}-block {display: block;}
+    .display#{$infix}-grid  {display: grid;}
+    .display#{$infix}-flex  {display: flex;}
 }
 
 /*==== Hidden ====*/
