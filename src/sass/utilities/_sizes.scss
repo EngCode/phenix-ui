@@ -8,16 +8,16 @@
 
 /*==== Width's ====*/
 @mixin make-width-sizes($infix:'') {
-    .w-#{$infix}50 {width: 50px;}
-    .w-#{$infix}75 {width: 75px;}
-    .w-#{$infix}100 {width: 100px;}
-    .w-#{$infix}125 {width: 125px;}
-    .w-#{$infix}150 {width: 150px;}
-    .w-#{$infix}200 {width: 200px;}
-    .w-#{$infix}225 {width: 225px;}
-    .w-#{$infix}250 {width: 250px;}
-    .w-#{$infix}auto {width: auto;}
-    .w-#{$infix}fluid, .fluid {width: 100%;}
+    .w#{$infix}-50 {width: 50px;}
+    .w#{$infix}-75 {width: 75px;}
+    .w#{$infix}-100 {width: 100px;}
+    .w#{$infix}-125 {width: 125px;}
+    .w#{$infix}-150 {width: 150px;}
+    .w#{$infix}-200 {width: 200px;}
+    .w#{$infix}-225 {width: 225px;}
+    .w#{$infix}-250 {width: 250px;}
+    .w#{$infix}-auto {width: auto;}
+    .w#{$infix}-fluid, .fluid#{$infix} {width: 100%;}
 
 }
 
