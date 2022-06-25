@@ -687,6 +687,45 @@ body.rtl {
     }
 }
 
-/*====  ====*/
+/*==== Ladning Page ====*/
 .px-primary-shadow {text-shadow: 3px 3px 0 rgba(13, 150, 249, 0.33);}
+.px-tx-shadow {text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);}
 
+.wait-for-it {
+    background-size: 30% auto;
+    background-position: 65% 35%;
+    background-repeat: no-repeat;
+    @include small('down') {background-size: 75% auto;}
+}
+
+.hero-section .view-status {
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+@include medium() {
+    .you-in-control-before {padding-bottom: 150px;}
+};
+
+@include large() {
+    .you-in-control-before {padding-bottom: 175px;}
+};
+
+@include xlarge() {
+    .you-in-control-before {padding-bottom: 200px;}
+};
+
+.key-features {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    @include small('down') {
+        background-size: 75% auto;
+    };
+    ul li i {
+        width: 1em;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

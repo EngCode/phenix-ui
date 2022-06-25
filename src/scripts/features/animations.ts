@@ -22,6 +22,7 @@ PhenixElements.prototype.animations = function (options?:{
     into:number,    //====> Increase Target Position By [number]
     offset:number,  //====> Decrease Target Position By [number]
     lazyloading:boolean, //====> to Animate Element after Another
+    lazygroup:any,      //====> Define the group fo each lazyloading group
 }) {
     //====> Loop Through Phenix Elements <====//
     let viewPort_Handler = this.forEach((element:any, index) => {
@@ -31,10 +32,11 @@ PhenixElements.prototype.animations = function (options?:{
         //====> Get Options Data <====//
         let animation = element.getAttribute('data-animation') || options?.animation || 'fadeIn',
             duration  = parseInt(element.getAttribute('data-duration')) || options?.duration,
-            delay  = parseInt(element.getAttribute('data-delay'))  || options?.delay,
-            flow   = parseInt(element.getAttribute('data-flow'))   || options?.flow || false,
             offset = parseInt(element.getAttribute('data-offset')) || options?.offset || false,
-            into   = parseInt(element.getAttribute('data-into'))   || options?.into  || false,
+            flow = parseInt(element.getAttribute('data-flow')) || options?.flow || false,
+            into = parseInt(element.getAttribute('data-into')) || options?.into || false,
+            lazy = parseInt(element.getAttribute('data-lazy')) || options?.lazyloading,
+            lazygroup = parseInt(element.getAttribute('data-lazy-group')) || options?.lazygroup || true,
             directionFix = options?.directionFix || true;
 
         //====> Directions Resolve <====//
@@ -58,41 +60,47 @@ PhenixElements.prototype.animations = function (options?:{
 
         //====> Hide the Element <====//
         element.classList.add('visibility-hidden', 'animated');
+        //====> Set Duration <====//
+        element.setAttribute('data-duration', duration);
 
         //====> if the Element in view Show it <====//
         let isInView = () => {
+            //====> Get Options <=====//
+            let delay = parseInt(element.getAttribute('data-delay')) || options?.delay;
+
+            //====> Animations CSS <====//
+            if (delay) element.style.animationDelay = `${delay}ms`;
+            if (duration) element.style.animationDuration = `${duration}ms`;
+
             //====> Animate Method <====//
             let animate = () => {
                 //====> Show the Element <====//
                 Phenix(element).removeClass('visibility-hidden');
-        
-                //====> Animations CSS <====//
+                //====> Animations Classes <====//
                 element.classList.add('view-active', animation)
-                if (delay) element.style.setProperty('--animate-delay', `${delay}ms`);
-                if (duration) element.style.setProperty('--animate-duration', `${duration}ms`);
             }
 
             //====> Check for View <====//
-            if (Phenix(element).inView({
-                offset : offset,
-                into   : into,
-                flow   : flow,
-            })) {
-                //====> Animate One After the Other <====//
-                if (options?.lazyloading) {
-                    let prev_element = index-1;
-                    //====> Listen for Animation Ends <====//
-                    if (index > 0) {
-                        this[prev_element].addEventListener('animationend', () => animate());
-                    } else {
-                        animate();
-                    }
-                //====> Animate When Ever it Shows <====//
-                } else {
-                    animate();
-                }
-            }
+            if (Phenix(element).inView({offset:offset, into: into, flow: flow})) animate();
         };
+
+        //====> Lazyloading <====//
+        if (lazy) {
+            let group = Phenix(element).ancestor('[data-lazy-group]'),
+                current_delay = 0;
+    
+            group?.querySelectorAll('[data-animation]:not([data-delay])').forEach((item, index) => {
+                let prev_item = index-1;
+    
+                if (item !== element) {
+                    if (!item.style.animationDelay) {
+                        current_delay += (parseInt(item.getAttribute('data-duration')) || options?.duration)
+                        item.setAttribute('data-delay', current_delay);
+                        item.style.animationDelay = `${current_delay}ms`;
+                    }
+                }
+            });
+        }
 
         //====> First Activation <====//
         isInView();

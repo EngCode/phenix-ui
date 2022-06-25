@@ -102,7 +102,7 @@ h6 {font-size: REM(17);}
 @include make-font-sizes();
 
 @include medium() {
-    @include make-font-sizes('-xl');
+    @include make-font-sizes('-md');
 };
 
 @include large() {
@@ -110,5 +110,5 @@ h6 {font-size: REM(17);}
 };
 
 @include xlarge() {
-    @include make-font-sizes('-md');
+    @include make-font-sizes('-xl');
 };
