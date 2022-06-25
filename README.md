@@ -96,6 +96,7 @@
 07 - [update] Timer Lazyloading
 08 - [update] Responsive Form Controls Sizes
 09 - [Doc] Carousel Slider
+10 - [update] Border Utilities
 ```
 
 ---
