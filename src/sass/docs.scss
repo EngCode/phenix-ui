@@ -729,3 +729,7 @@ body.rtl {
         vertical-align: middle;
     }
 }
+
+@include small('down') {
+    .tx-align-sm-center {text-align: center;}
+};

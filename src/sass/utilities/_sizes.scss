@@ -7,16 +7,33 @@
 */
 
 /*==== Width's ====*/
-.w-50 {width: 50px;}
-.w-75 {width: 75px;}
-.w-100 {width: 100px;}
-.w-125 {width: 125px;}
-.w-150 {width: 150px;}
-.w-200 {width: 200px;}
-.w-225 {width: 225px;}
-.w-250 {width: 250px;}
-.w-auto {width: auto;}
-.w-fluid, .fluid {width: 100%;}
+@mixin make-width-sizes($infix:'') {
+    .w-#{$infix}50 {width: 50px;}
+    .w-#{$infix}75 {width: 75px;}
+    .w-#{$infix}100 {width: 100px;}
+    .w-#{$infix}125 {width: 125px;}
+    .w-#{$infix}150 {width: 150px;}
+    .w-#{$infix}200 {width: 200px;}
+    .w-#{$infix}225 {width: 225px;}
+    .w-#{$infix}250 {width: 250px;}
+    .w-#{$infix}auto {width: auto;}
+    .w-#{$infix}fluid, .fluid {width: 100%;}
+
+}
+
+@include make-width-sizes();
+
+@include medium() {
+    @include make-width-sizes('-md');
+};
+
+@include large() {
+    @include make-width-sizes('-lg');
+};
+
+@include xlarge() {
+    @include make-width-sizes('-xl');
+};
 
 /*==== Max Width's ====*/
 .w-max-2560 {max-width: 2560px;}
