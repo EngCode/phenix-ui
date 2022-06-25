@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://design.phenixthemes.com">
-    <img src="https://design.phenixthemes.com/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/pds-icon.svg" alt="Phenix Design logo" width="175" height="162">
+    <img src="https://design.phenixthemes.com/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/phenix-design-icon.svg" alt="Phenix Design logo" width="175" height="162">
   </a>
 </p>
 
