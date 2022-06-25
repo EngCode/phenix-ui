@@ -7,20 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="The Description of This Page Goes Right Here and its !Important" />
     <meta name="keywords" content="phenix, phenix themes, phenix design, phenix wordporess, wordporess, themes, web design, web development, templates, responsive, gutenberg, plugins, javascript, sass, css4, next generation, utilities, typescript, bootstrap" />
-    <title>Phenix Design System v0.6.5 - Front-End Framework</title>
+    <title>Phenix Themes - Online Websites Templates Store</title>
     <!-- Other Meta Tags -->
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="Sitename Goes Here">
     <link rel="shortcut icon" type="image/png"  href="img/fevicon.png">
-    <!-- FontAwesome -->
+    <!-- Font Awesome -->
     <link href="css/fontawsome.css" rel="stylesheet" />
     <!-- Required CSS Files -->
     <link href="css/phenix.css" rel="stylesheet" />
+    <link href="css/docs.css" rel="stylesheet" />
 </head>
 <body>
+    <!--  -->
     
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
+    
+    <!-- JS Scripts -->
+    <script defer>
+        //======> D.O.M is Ready <=======//
+        Phenix(document).ready((event) => {
+            //====> Activate Plugins <====//
+            Phenix('.px-media').multimedia();
+        });
+        </script>
+    <!-- // JS Scripts -->
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
