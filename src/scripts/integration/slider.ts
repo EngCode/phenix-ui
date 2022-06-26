@@ -147,6 +147,7 @@ PhenixElements.prototype.slider = function (options?:{
                 interval: duration,
                 perPage: items,
                 perMove: steps,
+                autoplay: autoplay,
                 pauseOnHover: false,
                 mediaQuery: 'min',
                 direction: direction,
@@ -173,8 +174,8 @@ PhenixElements.prototype.slider = function (options?:{
             if (sync) slider_options.sync = true;
             if (direction == 'ttb') slider_options.height = heightCalc;
             if (direction == 'ttb') slider_options.autoHeight = true;
-            if (pauseOnHover) pauseOnHover !== 'true' || '1' ? slider_options.pauseOnHover = false : null;
-            if (!autoplay) autoplay !== 'true' || '1' ? slider_options.autoplay = true : null;
+            if (pauseOnHover) slider_options.pauseOnHover = pauseOnHover;
+            if(!autoplay) slider_options.autoplay = true;
             if (intersection) intersection !== 'false' || '0' ? slider_options.intersection = true : null;
 
             return {

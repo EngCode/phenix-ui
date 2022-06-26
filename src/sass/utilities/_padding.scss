@@ -3,6 +3,7 @@
 
 /*==== Padding All ====*/
 @mixin make_padding($infix:'') {
+    .pd#{$infix}-0   { padding: #{REM(0)}; }
     .pd#{$infix}-5   { padding: #{REM(05)}; }
     .pd#{$infix}-10  { padding: #{REM(10)}; }
     .pd#{$infix}-15  { padding: #{REM(15)}; }
@@ -17,6 +18,7 @@
 
 /*==== Padding Top ====*/
 @mixin make_padding_top($infix:'') {
+    .pdt#{$infix}-0   { @include padding-block(#{REM(0)}, 'start');}
     .pdt#{$infix}-5   { @include padding-block(#{REM(05)}, 'start');}
     .pdt#{$infix}-10  { @include padding-block(#{REM(10)}, 'start');}
     .pdt#{$infix}-15  { @include padding-block(#{REM(15)}, 'start');}
@@ -31,6 +33,7 @@
 
 /*==== Padding Bottom ====*/
 @mixin make_padding_bottom($infix:'') {
+    .pdb#{$infix}-0   { @include padding-block(#{REM(0)}, 'end');}
     .pdb#{$infix}-5   { @include padding-block(#{REM(05)}, 'end');}
     .pdb#{$infix}-10  { @include padding-block(#{REM(10)}, 'end');}
     .pdb#{$infix}-15  { @include padding-block(#{REM(15)}, 'end');}
@@ -45,6 +48,7 @@
 
 /*==== Padding Start ====*/
 @mixin make_padding_start($infix:'') {
+    .pds#{$infix}-0   { @include padding-inline(#{REM(0)}, 'start');}
     .pds#{$infix}-5   { @include padding-inline(#{REM(05)}, 'start');}
     .pds#{$infix}-10  { @include padding-inline(#{REM(10)}, 'start');}
     .pds#{$infix}-15  { @include padding-inline(#{REM(15)}, 'start');}
@@ -59,6 +63,7 @@
 
 /*==== Padding End ====*/
 @mixin make_padding_end($infix:'') {
+    .pde#{$infix}-0   { @include padding-inline(#{REM(0)}, 'end');}
     .pde#{$infix}-5   { @include padding-inline(#{REM(05)}, 'end');}
     .pde#{$infix}-10  { @include padding-inline(#{REM(10)}, 'end');}
     .pde#{$infix}-15  { @include padding-inline(#{REM(15)}, 'end');}
@@ -73,6 +78,7 @@
 
 /*==== Padding X ====*/
 @mixin make_padding_x($infix:'') {
+    .pdx#{$infix}-0   { @include padding-inline(#{REM(0)});}
     .pdx#{$infix}-5   { @include padding-inline(#{REM(05)});}
     .pdx#{$infix}-10  { @include padding-inline(#{REM(10)});}
     .pdx#{$infix}-15  { @include padding-inline(#{REM(15)});}
@@ -87,6 +93,7 @@
 
 /*==== Padding Y ====*/
 @mixin make_padding_y($infix:'') {
+    .pdy#{$infix}-0   { @include padding-block(#{REM(0)});}
     .pdy#{$infix}-5   { @include padding-block(#{REM(05)});}
     .pdy#{$infix}-10  { @include padding-block(#{REM(10)});}
     .pdy#{$infix}-15  { @include padding-block(#{REM(15)});}
@@ -108,15 +115,15 @@
 @include make_padding_x();
 @include make_padding_y();
 
-/*==== xLarge Screen ====*/
-@include xlarge(){
-    @include make_padding('-xl');
-    @include make_padding_top('-xl');
-    @include make_padding_bottom('-xl');
-    @include make_padding_start('-xl');
-    @include make_padding_end('-xl');
-    @include make_padding_x('-xl');
-    @include make_padding_y('-xl');
+/*==== Medium Screen ====*/
+@include medium(){
+    @include make_padding('-md');
+    @include make_padding_top('-md');
+    @include make_padding_bottom('-md');
+    @include make_padding_start('-md');
+    @include make_padding_end('-md');
+    @include make_padding_x('-md');
+    @include make_padding_y('-md');
 };
 
 /*==== Large Screen ====*/
@@ -130,13 +137,13 @@
     @include make_padding_y('-lg');
 };
 
-/*==== Medium Screen ====*/
-@include medium(){
-    @include make_padding('-md');
-    @include make_padding_top('-md');
-    @include make_padding_bottom('-md');
-    @include make_padding_start('-md');
-    @include make_padding_end('-md');
-    @include make_padding_x('-md');
-    @include make_padding_y('-md');
+/*==== xLarge Screen ====*/
+@include xlarge(){
+    @include make_padding('-xl');
+    @include make_padding_top('-xl');
+    @include make_padding_bottom('-xl');
+    @include make_padding_start('-xl');
+    @include make_padding_end('-xl');
+    @include make_padding_x('-xl');
+    @include make_padding_y('-xl');
 };

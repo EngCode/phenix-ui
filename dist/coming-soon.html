@@ -11,15 +11,125 @@
     <!-- Other Meta Tags -->
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="Sitename Goes Here">
-    <link rel="shortcut icon" type="image/png"  href="img/fevicon.png">
-    <!-- Font Awesome -->
-    <link href="css/fontawsome.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png"  href="img/px-fevicon.png">
     <!-- Required CSS Files -->
     <link href="css/phenix.css" rel="stylesheet" />
     <link href="css/docs.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-font : "Roboto";
+            --secondary-font : "Roboto";
+        }
+
+        /* Title and Border Color */
+        .title-spaces {letter-spacing: 1rem;}
+        .border-white {border-color: rgba(255,255,255, 0.20);}
+        
+        /* Logo Reset */
+        .px-logo .px-media {
+            background-size: auto;
+            background-position: left bottom;
+            background-repeat: no-repeat;
+            
+        }
+
+        .px-logo-icon .normal {animation: logo-y 3s ease-in-out 2s forwards;}
+        .px-logo-text .normal {animation: logo-x 3s ease-in-out 2s forwards;transform: translateY(-0.5px);}
+
+        /* Fill-Animations */
+        @keyframes logo-x {
+            from {width: 0%;}
+            to   {width: 62%;}
+        }
+
+        @keyframes logo-y {
+            from {height: 0%;}
+            to   {height: 75%;}
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 480px) {
+            .px-logo {max-width: 360px;}
+            .px-logo-icon .normal {background-size: 100% auto;}
+            .px-logo-text .normal {background-size: 360px 100%;}
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 360px) {
+            .px-logo {max-width: 280px;}
+            .px-logo-icon .normal {background-size: 100% auto;}
+            .px-logo-text .normal {background-size: 280px 100%;}
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 320px) {
+            .px-logo {max-width: 260px;}
+            .px-logo-icon .normal {background-size: 100% auto;}
+            .px-logo-text .normal {background-size: 260px 100%;}
+        }
+    </style>
+    <!-- // Custom CSS -->
 </head>
 <body>
-    <!--  -->
+    <!-- Coming Soon -->
+    <div class="px-media" data-src="img/background.jpg">
+        <!-- Container -->
+        <div class="container flexbox align-center h-min-100vh pdy-75">
+            <!-- Content Wrapper -->
+            <div class="col-12 w-max-640 color-white tx-align-center">
+                <!-- Phenix Logo -->
+                <div class="px-logo mb-30 mgx-auto">
+                    <!-- Logo Icon -->
+                    <div class="inline-block px-logo-icon position-rv mb-30">
+                        <img src="img/px-icon-outline.svg" alt="Phenix Logo Icon Outline" class="outline">
+                        <span class="px-media position-ab position-start-0 position-bottom-0 normal fluid" data-src="img/px-icon.svg"></span>
+                    </div>
+                    <!-- Divider -->
+                    <div class="fluid"></div>
+                    <!-- Logo Text -->
+                    <div class="inline-block px-logo-text position-rv">
+                        <img src="img/px-text-outline.svg" alt="Phenix Logo Outline" class="outline">
+                        <span class="px-media position-ab position-start-0 position-top-0 normal h-100" data-src="img/px-text.svg"></span>
+                    </div>
+                    <!-- // Logo Text -->
+                </div>
+                <!-- Headline -->
+                <h1 class="title-spaces lineheight-130 tx-uppercase display-md-h2 display-lg-h1 weight-normal mb-15">Coming Soon</h1>
+                <!-- Contact Info -->
+                <div class="flexbox align-between align-center-y mb-30">
+                    <!-- Mail/Whatsapp -->
+                    <ul class="reset-list flexbox align-center-y lineheight-180">
+                        <li class="pdx-10"><a class="tx-icon fab fa-whatsapp color-whatsapp" href="https://wa.me/01122974539" target="_blank"> +201122974539</a></li>
+                        <li class="pdx-10"><a class="tx-icon far fa-envelope color-secondary" href="mailto:elampratorabdallah14@gmail.com" target="_blank"> elampratorabdallah14@gmail.com</a></li>
+                    </ul>
+                    <!-- Line -->
+                    <hr class="w-50 hidden-sm-down border-reset border-bottom-1" style="border-color: rgba(255,255,255, 0.20);">
+                    <!-- Social -->
+                    <ul class="reset-list flexbox">
+                        <li><a href="https://m.me/Eng.AbdallahPS" class="btn small fs-16 color-primary bg-transparent square fab fa-facebook-messenger" target="_blank"></a></li>
+                        <li><a href="https://twitter.com/EngAbdallahPS" class="btn small fs-16 color-primary bg-transparent square fab fa-twitter" target="_blank"></a></li>
+                        <li><a href="https://www.behance.net/Eng-Abdallah" class="btn small fs-16 color-primary bg-transparent square fab fa-behance" target="_blank"></a></li>
+                    </ul>
+                    <!-- // Social -->
+                </div>
+                <!-- Links -->
+                <ul class="reset-list flexbox mgx-auto align-center-x fs-16 tx-uppercase color-white" style="max-width:500px">
+                    <li class="pdb-10 pdx-10 color-gray"><a class="color-inherit" href="javascript:void(0)" target="_blank">WordPress Themes</a></li>
+                    <li class="pdb-10 pdx-10"><a class="color-inherit" href="https://design.phenixthemes.com" target="_blank">Design System</a></li>
+                    <li class="pdb-10 pdx-10"><a class="color-inherit" href="https://wa.me/01122974539" target="_blank">Web Development</a></li>
+                    <li class="col-12 hidden-sm-down border-reset border-bottom-1 border-solid border-white"></li>
+                </ul>
+                <!-- // Links -->
+            </div>
+            <!-- // Content Wrapper -->
+        </div>
+        <!-- Container -->
+    </div>
+    <!-- // Coming Soon -->
     
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
@@ -34,9 +144,9 @@
     </script>
     <!-- // JS Scripts -->
 
+    <!-- Font Awesome -->
+    <link href="css/fontawsome.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </body>
 </html>

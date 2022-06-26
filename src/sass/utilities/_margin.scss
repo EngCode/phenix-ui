@@ -34,6 +34,8 @@
     .mt#{$infix}-30  { @include margin-block(#{REM(30)}, 'start');}
     .mt#{$infix}-40  { @include margin-block(#{REM(40)}, 'start');}
     .mt#{$infix}-50  { @include margin-block(#{REM(50)}, 'start');}
+    .mt#{$infix}-75  { @include margin-block(#{REM(75)}, 'start');}
+    .mt#{$infix}-100  { @include margin-block(#{REM(100)}, 'start');}
 }
 
 /*==== Margin Bottom ====*/
@@ -47,6 +49,8 @@
     .mb#{$infix}-30  { @include margin-block(#{REM(30)}, 'end');}
     .mb#{$infix}-40  { @include margin-block(#{REM(40)}, 'end');}
     .mb#{$infix}-50  { @include margin-block(#{REM(50)}, 'end');}
+    .mb#{$infix}-75  { @include margin-block(#{REM(75)}, 'end');}
+    .mb#{$infix}-100  { @include margin-block(#{REM(100)}, 'end');}
 }
 
 /*==== Margin Start ====*/
@@ -108,15 +112,15 @@
 @include make_margin_x();
 @include make_margin_y();
 
-/*==== xLarge Screen ====*/
-@include xlarge(){
-    @include make_margin('-xl');
-    @include make_margin_top('-xl');
-    @include make_margin_bottom('-xl');
-    @include make_margin_start('-xl');
-    @include make_margin_end('-xl');
-    @include make_margin_x('-xl');
-    @include make_margin_y('-xl');
+/*==== Medium Screen ====*/
+@include medium(){
+    @include make_margin('-md');
+    @include make_margin_top('-md');
+    @include make_margin_bottom('-md');
+    @include make_margin_start('-md');
+    @include make_margin_end('-md');
+    @include make_margin_x('-md');
+    @include make_margin_y('-md');
 };
 
 /*==== Large Screen ====*/
@@ -130,14 +134,13 @@
     @include make_margin_y('-lg');
 };
 
-/*==== Medium Screen ====*/
-@include medium(){
-    @include make_margin('-md');
-    @include make_margin_top('-md');
-    @include make_margin_bottom('-md');
-    @include make_margin_start('-md');
-    @include make_margin_end('-md');
-    @include make_margin_x('-md');
-    @include make_margin_y('-md');
+/*==== xLarge Screen ====*/
+@include xlarge(){
+    @include make_margin('-xl');
+    @include make_margin_top('-xl');
+    @include make_margin_bottom('-xl');
+    @include make_margin_start('-xl');
+    @include make_margin_end('-xl');
+    @include make_margin_x('-xl');
+    @include make_margin_y('-xl');
 };
-

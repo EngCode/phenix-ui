@@ -31,7 +31,7 @@ PhenixElements.prototype.animations = function (options?:{
 
         //====> Get Options Data <====//
         let animation = element.getAttribute('data-animation') || options?.animation || 'fadeIn',
-            duration  = parseInt(element.getAttribute('data-duration')) || options?.duration,
+            duration  = parseInt(element.getAttribute('data-duration')) || options?.duration || 700,
             offset = parseInt(element.getAttribute('data-offset')) || options?.offset || false,
             flow = parseInt(element.getAttribute('data-flow')) || options?.flow || false,
             into = parseInt(element.getAttribute('data-into')) || options?.into || false,

@@ -53,6 +53,18 @@ h6 {font-size: REM(17);}
     .display#{$infix}-h4 {font-size: REM(44);}
     .display#{$infix}-h5 {font-size: REM(40);}
     .display#{$infix}-h6 {font-size: REM(36);}
+    /*==== Text Alignment ====*/
+    .tx-align#{$infix}-end   {text-align:end;}
+    .tx-align#{$infix}-left  {text-align: left;}
+    .tx-align#{$infix}-right {text-align: right;}
+    .tx-align#{$infix}-start {text-align: start;}
+    .tx-align#{$infix}-center  {text-align: center;}
+    .tx-align#{$infix}-justify {text-align:justify;}
+    .tx#{$infix}-nowrap {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 /*==== Text Utilities ====*/
@@ -60,15 +72,6 @@ h6 {font-size: REM(17);}
 .tx-underline  {text-decoration: underline;}
 .tx-capitalize {text-transform: capitalize;}
 .tx-line-through {text-decoration: line-through;}
-
-/*==== Text Alignment ====*/
-.tx-align-end   {text-align:end;}
-.tx-align-left  {text-align: left;}
-.tx-align-right {text-align: right;}
-.tx-align-start {text-align: start;}
-.tx-align-center  {text-align: center;}
-.tx-align-justify {text-align:justify;}
-.tx-nowrap {@extend %nowrap;}
 
 /*==== Font Weight ====*/
 .weight-thin   {font-weight: var(--thin-weight);}

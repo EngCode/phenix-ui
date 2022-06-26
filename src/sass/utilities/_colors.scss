@@ -51,7 +51,6 @@
     background-attachment: fixed;
     background-position: center;
 }
-
 .bg-inherit {background-color: inherit;}
 .bg-transparent {background-color: transparent;}
 .bg-primary   {background-color: var(--primary-color);}
@@ -63,11 +62,11 @@
 .bg-gray {background-color: var(--gray-color);}
 .bg-dark {background-color: var(--dark-color);}
 .bg-white {background-color: white;}
-.border-alpha-10 {border-color: rgba(#000, 0.1);}
-.border-alpha-15 {border-color: rgba(#000, 0.15);}
-.border-alpha-25 {border-color: rgba(#000, 0.25);}
-.border-alpha-50 {border-color: rgba(#000, 0.50);}
-.border-alpha-75 {border-color: rgba(#000, 0.75);}
+.bg-alpha-05  {background-color: rgba(#000, 0.05);}
+.bg-alpha-10  {background-color: rgba(#000, 0.10);}
+.bg-alpha-25  {background-color: rgba(#000, 0.25);}
+.bg-alpha-50  {background-color: rgba(#000, 0.50);}
+.bg-alpha-75  {background-color: rgba(#000, 0.75);}
 
 /*==== Brands Backgrounds ====*/
 .bg-facebook {background-color: var(--facebook-color);}
@@ -143,11 +142,11 @@
 .border-gray-light {border-color: var(--gray-light);}
 .border-dark       {border-color: var(--dark-color);}
 .border-white      {border-color: white;}
-.border-alpha-10   {border: 1px solid rgba(#000, 0.1);}
-.border-alpha-15   {border: 1px solid rgba(#000, 0.15);}
-.border-alpha-25   {border: 1px solid rgba(#000, 0.25);}
-.border-alpha-50   {border: 1px solid rgba(#000, 0.50);}
-.border-alpha-75   {border: 1px solid rgba(#000, 0.75);}
+.border-alpha-10   {border-color: rgba(#000, 0.1);}
+.border-alpha-15   {border-color: rgba(#000, 0.15);}
+.border-alpha-25   {border-color: rgba(#000, 0.25);}
+.border-alpha-50   {border-color: rgba(#000, 0.50);}
+.border-alpha-75   {border-color: rgba(#000, 0.75);}
 
 /*==== Brands Borders ====*/
 .border-facebook  {border-color: var(--facebook-color);}

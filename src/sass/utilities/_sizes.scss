@@ -98,14 +98,34 @@
 .h-100vh {height: 100vh;}
 
 /*==== Min Height's ====*/
-.h-min-25 {min-height: 25%;}
-.h-min-50 {min-height: 50%;}
-.h-min-75 {min-height: 75%;}
-.h-min-100 {min-height: 100%;}
-.h-min-25vh {min-height: 25vh;}
-.h-min-50vh {min-height: 50vh;}
-.h-min-75vh {min-height: 75vh;}
-.h-min-100vh {min-height: 100vh;}
+@mixin make-min-height($infix:'') {
+    .h#{$infix}-min-25 {min-height: 25%;}
+    .h#{$infix}-min-50 {min-height: 50%;}
+    .h#{$infix}-min-75 {min-height: 75%;}
+    .h#{$infix}-min-100 {min-height: 100%;}
+    .h#{$infix}-min-25vh {min-height: 25vh;}
+    .h#{$infix}-min-50vh {min-height: 50vh;}
+    .h#{$infix}-min-75vh {min-height: 75vh;}
+    .h#{$infix}-min-100vh {min-height: 100vh;}
+}
+
+@include make-min-height();
+
+@include small() {
+    @include make-min-height('-sm');
+};
+
+@include medium() {
+    @include make-min-height('-md');
+};
+
+@include large() {
+    @include make-min-height('-lg');
+};
+
+@include xlarge() {
+    @include make-min-height('-xl');
+};
 
 /*==== Max Height's ====*/
 .h-max-25 {max-height: 25%;}

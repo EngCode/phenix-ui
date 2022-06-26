@@ -101,6 +101,8 @@
 @include make_align();   //====> alignment
 @include make_sorting(); //====> sorting
 @include make_gap();     //====> Gutters
+/*==== No Gap Column ====*/
+.row > .col-no-gap {@include padding_inline(0);}
 
 /*==== Small Screen ====*/
 @include small() {
@@ -110,6 +112,8 @@
     @include make_sorting('-sm');
     /*==== gap/gutter ====*/
     @include make_gap('-sm');
+    /*==== No Gap Column ====*/
+    .row > .col-sm-no-gap {@include padding_inline(0);}
 }
 
 /*==== Medium Screen ====*/
@@ -120,6 +124,8 @@
     @include make_sorting('-md');
     /*==== gap/gutter ====*/
     @include make_gap('-md');
+    /*==== No Gap Column ====*/
+    .row > .col-md-no-gap {@include padding_inline(0);}
 }
 
 /*==== Large Screen ====*/
@@ -130,6 +136,8 @@
     @include make_sorting('-lg');
     /*==== gap/gutter ====*/
     @include make_gap('-lg');
+    /*==== No Gap Column ====*/
+    .row > .col-lg-no-gap {@include padding_inline(0);}
 }
 
 /*==== xLarge Screen ====*/
@@ -140,4 +148,6 @@
     @include make_sorting('-xl');
     /*==== gap/gutter ====*/
     @include make_gap('-xl');
+    /*==== No Gap Column ====*/
+    .row > .col-xl-no-gap {@include padding_inline(0);}
 }

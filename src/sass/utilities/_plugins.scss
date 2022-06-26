@@ -67,9 +67,9 @@
 .px-media {
     /*==== ....====*/
     display: block;
-    position: relative;
     background-size: cover;
     background-position: center;
+    &:not([class*="position-"]) {position: relative;}
     /*==== elements ====*/
     video, iframe, .px-media-img {
         top: 0;

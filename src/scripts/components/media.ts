@@ -155,14 +155,26 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Set Background <===//
                     background(element, src);
                     //===> Grap Current Background <===//
-                    let currentBg = element.style.backgroundImage;
+                    let currentBg = element.style.backgroundImage,
+                        orderBG   = element.getAttribute('data-bg-order');
+
                     //===> Check for Repeat <====//
                     gradient_repeat ? gradient_repeat = 'repeating-' : gradient_repeat = '';
                     //===> Set the Gradient <===//
                     if(multiple) {
-                        element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient}), ${currentBg}`;
+                        if (orderBG === 'reverse') {
+                            element.style.backgroundImage = `${currentBg}, ${gradient_repeat}${gradient_mode}-gradient(${gradient})`;
+                        } else {
+                            element.style.backgroundImage = `${gradient_repeat}${gradient_mode}-gradient(${gradient}), ${currentBg}`;
+                        }
                     //===> Set As Color if it Single Value <===//
-                    } else element.style.backgroundImage = `linear-gradient(${gradient},${gradient}), ${currentBg}`;
+                    } else {
+                        if (orderBG === 'reverse') {
+                            element.style.backgroundImage = `${currentBg}, linear-gradient(${gradient},${gradient})`;
+                        } else {
+                            element.style.backgroundImage = `linear-gradient(${gradient},${gradient}), ${currentBg}`;
+                        }
+                    }
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }
@@ -197,6 +209,14 @@ PhenixElements.prototype.multimedia = function (options?:{
                         //====> Create the View <====//
                         Phenix(element).insert('append', `<iframe src="${source}"  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
                     } 
+                    //===> Matk as Done <===//
+                    mediaDone = true;
+                }
+
+                //====> Somthing Else <====//
+                else {
+                    //===> Set Background <===//
+                    background(element, src);
                     //===> Matk as Done <===//
                     mediaDone = true;
                 }
