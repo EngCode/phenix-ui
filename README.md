@@ -97,6 +97,7 @@
 08 - [update] Responsive Form Controls Sizes
 09 - [Doc] Carousel Slider
 10 - [update] Border Utilities
+11 - [new] Clip-Path Method (https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path)
 ```
 
 ---

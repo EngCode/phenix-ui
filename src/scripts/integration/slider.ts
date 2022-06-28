@@ -176,7 +176,7 @@ PhenixElements.prototype.slider = function (options?:{
             if (direction == 'ttb') slider_options.autoHeight = true;
             if (pauseOnHover) slider_options.pauseOnHover = pauseOnHover;
             if(!autoplay) slider_options.autoplay = true;
-            if (intersection) intersection !== 'false' || '0' ? slider_options.intersection = true : null;
+            if (intersection) intersection !== 'false' || '0' ? intersection = true : null;
 
             return {
                 track  : slider_track,
@@ -273,22 +273,26 @@ PhenixElements.prototype.slider = function (options?:{
 
         //====> Run Sync Sliders <====//
         let mount_slider = () => {
-            if (current_slider.sync) {
-                //====> Synced Create <====//
-                let sync_selector = document.querySelector(`${current_slider.sync}`),
-                    synced_slider = slider_creator(sync_selector);
-                    sync_selector.classList.add('px-slider');
+            if (!current_slider.track?.classList.contains('mounted')) {
+                if (current_slider.sync) {
+                    //====> Synced Create <====//
+                    let sync_selector = document.querySelector(`${current_slider.sync}`),
+                        synced_slider = slider_creator(sync_selector);
+                        sync_selector.classList.add('px-slider');
+        
+                    //====> Synced Splide <====//
+                    let synced_splide = new Splide(sync_selector, synced_slider.options);
+                    
+                    //====> Run Both <====//
+                    the_slider.sync(synced_splide);
+                    the_slider.mount();
+                    synced_splide.mount();
+                } else {
+                    //====> Run the Slider <====//
+                    the_slider.mount();
+                }
     
-                //====> Synced Splide <====//
-                let synced_splide = new Splide(sync_selector, synced_slider.options);
-                
-                //====> Run Both <====//
-                the_slider.sync(synced_splide);
-                the_slider.mount();
-                synced_splide.mount();
-            } else {
-                //====> Run the Slider <====//
-                the_slider.mount();
+                current_slider.track?.classList.add('mounted');
             }
         };
 

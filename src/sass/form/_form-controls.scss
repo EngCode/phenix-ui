@@ -80,14 +80,9 @@
     /*=== Sizes ===*/
     @include make_control_sizes();
 
-    /*==== xLarge Screen ====*/
-    @include xlarge(){
-        @include make_control_sizes('-xl');
-    };
-
-    /*==== Large Screen ====*/
-    @include large(){
-        @include make_control_sizes('-lg');
+    /*==== Small Screen ====*/
+    @include small(){
+        @include make_control_sizes('-sm');
     };
 
     /*==== Medium Screen ====*/
@@ -95,9 +90,14 @@
         @include make_control_sizes('-md');
     };
 
-    /*==== Medium Screen ====*/
-    @include small(){
-        @include make_control_sizes('-sm');
+    /*==== Large Screen ====*/
+    @include large(){
+        @include make_control_sizes('-lg');
+    };
+
+    /*==== xLarge Screen ====*/
+    @include xlarge(){
+        @include make_control_sizes('-xl');
     };
 }
 
