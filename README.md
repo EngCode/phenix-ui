@@ -176,7 +176,7 @@ the next piece of code will load ******[Phenix D.S](https://design.phenixthemes
 
 ```
 <!-- Phenix CSS LTR -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/phenix.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.7/dist/css/phenix.css" rel="stylesheet" />
 ```
 
 ### Right-to-Left (RTL) Version
@@ -185,7 +185,7 @@ if your document language is right-to-left you can use ****[Phenix D.S](https:/
 
 ```
 <!-- Phenix CSS RTL -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/phenix-rtl.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.7/dist/css/phenix-rtl.css" rel="stylesheet" />
 ```
 
 ---
@@ -196,7 +196,7 @@ the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.c
 
 ```
 <!-- Phenix JS -->
-<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/phenix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.6.7/dist/js/phenix.js"></script>
 ```
 
 ---
