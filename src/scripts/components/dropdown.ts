@@ -50,31 +50,7 @@ PhenixElements.prototype.dropdown = function (options?:{
         dropdown_wrapper.setAttribute('data-effect', effect);
 
         //===> Dynamic Position <===//
-        let panel_element:any = dropdown_target,
-            change_position = () => {
-                if (position[0] === 'top' || 'bottom') {
-                    //=== Check for Visiblity ===//
-                    let panel_size = Math.round(panel_element.clientHeight),
-                        stickyElement = document.querySelector('[data-sticky="absolute"]')?.getBoundingClientRect().height;
-                    
-                    if (panel_size == 0) return;
-        
-                    //=== get viewport postion ===//
-                    let top = Math.round(panel_element.getBoundingClientRect().top),
-                        stickySize = Math.round(stickyElement) || 0,
-                        offsetTop = Math.round(top+stickySize-(stickySize/4)),
-                        offsetBottom = Phenix(document).viewport().height - (panel_size + offsetTop);
-    
-                    //====> to Top <====//
-                    if (offsetBottom < 0) {
-                        the_target.addClass('pos-before-y').removeClass('pos-after-y');
-                    } 
-                    //====> to Bottom <====//
-                    else {
-                        the_target.addClass('pos-after-y').removeClass('pos-before-y');
-                    }
-                }
-            };
+        let change_position = () => position[0] === 'top' || 'bottom' ? Phenix(dropdown_target).dynamicPosition() : null;
 
         //====> Hide Activated Dropdowns <====//
         const hide_others = () => {
@@ -145,31 +121,12 @@ PhenixElements.prototype.dropdown = function (options?:{
             "z-index"  : "var(--dropdown-index)",
         });
 
-        //===> Dynamic Position <===//
-        if (position[0] === 'top' || 'bottom') {
-            //====> Change Position on Scroll <====//
-            window.addEventListener('scroll', scrolling => {
-                var isScrolling;
-
-                isScrolling = setTimeout(() => {
-                    change_position();
-                    window.clearTimeout( isScrolling );
-                } ,50);
-            });
-        }
-
         //====> Target Position [Top] <====//
-        if(position[0] === "top") {
-            the_target.addClass('pos-before-y');
-            change_position();
-        }
+        if(position[0] === "top") the_target.addClass('pos-before-y');
 
         //====> Target Position [Bottom] <====//
-        else {
-            the_target.addClass('pos-after-y');
-            change_position();
-        }
-
+        else the_target.addClass('pos-after-y');
+        
         //====> Target Position [Center] <====//
         if (position[1] === "center") the_target.css({
             "left" : "50%",
@@ -182,7 +139,8 @@ PhenixElements.prototype.dropdown = function (options?:{
         //===> Target Position [Start] <====/
         else page_dir == 'ltr' ? the_target.css({"left" : 0}) : the_target.css({"right" : 0});
 
-        
+        //====> Change Position on Scroll <====//
+        window.addEventListener('scroll', scrolling => change_position());
     });
 
     //====> Return Phenix Elements <====//

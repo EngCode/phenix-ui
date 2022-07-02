@@ -46,7 +46,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     }
 
     /*====> Add Class <====*/
-    addClass(className:string) {
+    addClass(className:any) {
         //====> Add Class for Each Element <====//
         this.forEach((element:HTMLElement) => element.classList.add(className));
 
@@ -55,7 +55,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     }
 
     /*====> Remove Class <====*/
-    removeClass(className:string) {
+    removeClass(className:any) {
         //====> Add Class for Each Element <====//
         this.forEach((element:HTMLElement) => element.classList.remove(className));
 
@@ -64,7 +64,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     }
 
     /*====> Toggle Class <====*/
-    toggleClass(className:string) {
+    toggleClass(className:any) {
         //====> Toggle Class for Each Element <====//
         this.forEach((element:HTMLElement) => element.classList.toggle(className));
 
@@ -503,6 +503,35 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         //====> Return Phenix Elements <====//
         return this;
     }
+
+    /*====> Dynamic Position <====*/
+    dynamicPosition = () => {
+        //====> Event for Each Element <====//
+        this.forEach((element:HTMLElement) => {
+            //=== Check for Visiblity ===//
+            let target_element:any = Phenix(element),
+                panel_size = Math.round(target_element[0].clientHeight),
+                stickyElement = document.querySelector('[data-sticky="absolute"]')?.getBoundingClientRect().height;
+            
+            if (panel_size == 0) return;
+    
+            //=== get viewport postion ===//
+            let top = Math.round(target_element[0].getBoundingClientRect().top),
+                stickySize = Math.round(stickyElement) || 0,
+                offsetTop = Math.round(top+stickySize-(stickySize/4)),
+                offsetBottom = Phenix(document).viewport().height - (panel_size + offsetTop);
+    
+            //====> to Top <====//
+            if (offsetBottom < 0) {
+                target_element.addClass('pos-before-y').removeClass('pos-after-y');
+            }
+    
+            //====> to Bottom <====//
+            else {
+                target_element.addClass('pos-after-y').removeClass('pos-before-y');
+            }
+        });
+    };
 
     /*====> Define Info Grapers <====*/
     height; getCSS; direction;

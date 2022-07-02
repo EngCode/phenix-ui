@@ -72,33 +72,9 @@ PhenixElements.prototype.select = function (options?:{
               focus = new CustomEvent('focus',   {detail: events_data}), //===> Fired when focued on options search
               closed = new CustomEvent('closed', {detail: events_data}); //===> Fired when options list is closed
 
-        //====> Dynamic Position <====//
-        let change_position = () => {
-            //=== Check for Visiblity ===//
-            let panel_size = Math.round(options_list[0].clientHeight),
-                stickyElement = document.querySelector('[data-sticky="absolute"]')?.getBoundingClientRect().height;
-            
-            if (panel_size == 0) return;
-
-            //=== get viewport postion ===//
-            let top = Math.round(options_list[0].getBoundingClientRect().top),
-                stickySize = Math.round(stickyElement) || 0,
-                offsetTop = Math.round(top+stickySize-(stickySize/4)),
-                offsetBottom = Phenix(document).viewport().height - (panel_size + offsetTop);
-            //====> to Top <====//
-            if (offsetBottom < 0) {
-                options_list.addClass('pos-before-y').removeClass('pos-after-y');
-            } 
-            //====> to Bottom <====//
-            else {
-                options_list.addClass('pos-after-y').removeClass('pos-before-y');
-            }
-        };
-
         //====> Show Options <====//
         new_select_value.addEventListener('click', clicked => {
-            Phenix(options_list).fadeToggle();
-            change_position();
+            Phenix(options_list).fadeToggle().dynamicPosition();
         });
 
         //====> Hide Options on Blank <====//
@@ -112,14 +88,7 @@ PhenixElements.prototype.select = function (options?:{
         });
 
         //====> Change Position on Scroll <====//
-        window.addEventListener('scroll', scrolling => {
-            var isScrolling;
-
-            isScrolling = setTimeout(() => {
-                change_position();
-                window.clearTimeout( isScrolling );
-            } ,50);
-        });
+        window.addEventListener('scroll', scrolling => Phenix(options_list).dynamicPosition());
     });
 
     //====> Return Phenix <====//
