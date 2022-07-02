@@ -17,15 +17,15 @@
         width: 100%;
         #{$direction-start}: 0;
         content: attr(data-label);
-        @extend .position-center-y;
+        @extend .pos-center-y;
     }
 
     /*==== Inverted Label ====*/
     .px-progress-bar[data-label]::before {
         color: #FFF;
         width: var(--width);
-        @extend .position-center-y;
-        @extend .position-start-0;
+        @extend .pos-center-y;
+        @extend .pos-start-0;
         content: attr(data-label);
     }
 

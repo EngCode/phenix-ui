@@ -19,12 +19,62 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-    
+    <!-- Container -->
+    <div class="container-sm pdy-75">
+        <!-- Grid -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-12 col-md-6 mb-30">
+                <!-- Form Control -->
+                <select name="px-select" class="form-control px-select" data-placeholder="Select From Options">
+                    <option value="option-1">Option #01</option>
+                    <option value="option-2">Option #02</option>
+                    <option value="option-3">Option #03</option>
+                    <option value="option-4">Option #04</option>
+                    <option value="option-5">Option #05</option>
+                </select>
+                <!-- // Form Controls -->
+            </div>
+            <!-- Column -->
+            <div class="col-12 col-md-6 mb-30">
+                <!-- Form Control -->
+                <select name="px-select-2" class="form-control px-select" data-placeholder="Grouped Options">
+                    <optgroup>Options Set 01</optgroup>
+                    <option value="option-1">Option #01</option>
+                    <option value="option-2">Option #02</option>
+                    <option value="option-3">Option #03</option>
+                    <option value="option-4">Option #04</option>
+                    <option value="option-5">Option #05</option>
+                    <optgroup>Options Set 02</optgroup>
+                    <option value="option-1">Option #06</option>
+                    <option value="option-2">Option #07</option>
+                    <option value="option-3">Option #08</option>
+                    <option value="option-4">Option #09</option>
+                    <option value="option-5">Option #10</option>
+                    <optgroup>Options Set 03</optgroup>
+                    <option value="option-1">Option #11</option>
+                    <option value="option-2">Option #12</option>
+                    <option value="option-3">Option #10</option>
+                    <option value="option-4">Option #14</option>
+                    <option value="option-5">Option #15</option>
+                </select>
+                <!-- // Form Controls -->
+            </div>
+            <!-- // Column -->
+        </div>
+        <!-- // Grid -->
+    </div>
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link href="css/fontawsome.css" rel="stylesheet" />
+    <!-- Script -->
+    <script defer>
+        Phenix(document).ready(isReady => {
+            
+        });
+    </script>
 </body>
 </html>

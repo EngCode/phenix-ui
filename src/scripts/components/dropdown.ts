@@ -49,6 +49,33 @@ PhenixElements.prototype.dropdown = function (options?:{
         //====> identify the effect <====//
         dropdown_wrapper.setAttribute('data-effect', effect);
 
+        //===> Dynamic Position <===//
+        let panel_element:any = dropdown_target,
+            change_position = () => {
+                if (position[0] === 'top' || 'bottom') {
+                    //=== Check for Visiblity ===//
+                    let panel_size = Math.round(panel_element.clientHeight),
+                        stickyElement = document.querySelector('[data-sticky="absolute"]')?.getBoundingClientRect().height;
+                    
+                    if (panel_size == 0) return;
+        
+                    //=== get viewport postion ===//
+                    let top = Math.round(panel_element.getBoundingClientRect().top),
+                        stickySize = Math.round(stickyElement) || 0,
+                        offsetTop = Math.round(top+stickySize-(stickySize/4)),
+                        offsetBottom = Phenix(document).viewport().height - (panel_size + offsetTop);
+    
+                    //====> to Top <====//
+                    if (offsetBottom < 0) {
+                        the_target.addClass('pos-before-y').removeClass('pos-after-y');
+                    } 
+                    //====> to Bottom <====//
+                    else {
+                        the_target.addClass('pos-after-y').removeClass('pos-before-y');
+                    }
+                }
+            };
+
         //====> Hide Activated Dropdowns <====//
         const hide_others = () => {
             //==== Hide Others ====//
@@ -75,6 +102,8 @@ PhenixElements.prototype.dropdown = function (options?:{
             siblings = Phenix(event_target).toggleClass(active).siblings(target);
             //====> Active Button and the Target <====//
             if (siblings) {
+                //====> Change Position <====//
+                change_position();
                 //====> Active Target <====//
                 Phenix(siblings).addClass(active);
                 //====> Effect : Fade-In-Out <====//
@@ -116,11 +145,30 @@ PhenixElements.prototype.dropdown = function (options?:{
             "z-index"  : "var(--dropdown-index)",
         });
 
+        //===> Dynamic Position <===//
+        if (position[0] === 'top' || 'bottom') {
+            //====> Change Position on Scroll <====//
+            window.addEventListener('scroll', scrolling => {
+                var isScrolling;
+
+                isScrolling = setTimeout(() => {
+                    change_position();
+                    window.clearTimeout( isScrolling );
+                } ,50);
+            });
+        }
+
         //====> Target Position [Top] <====//
-        if(position[0] === "top") the_target.css({"bottom" : "100%"});
+        if(position[0] === "top") {
+            the_target.addClass('pos-before-y');
+            change_position();
+        }
 
         //====> Target Position [Bottom] <====//
-        else the_target.css({"top" : "100%"});
+        else {
+            the_target.addClass('pos-after-y');
+            change_position();
+        }
 
         //====> Target Position [Center] <====//
         if (position[1] === "center") the_target.css({
@@ -133,6 +181,8 @@ PhenixElements.prototype.dropdown = function (options?:{
 
         //===> Target Position [Start] <====/
         else page_dir == 'ltr' ? the_target.css({"left" : 0}) : the_target.css({"right" : 0});
+
+        
     });
 
     //====> Return Phenix Elements <====//

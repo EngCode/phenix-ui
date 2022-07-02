@@ -126,8 +126,8 @@ PhenixElements.prototype.slider = function (options?:{
             } : '';
 
             //====> Custom Classes <====//
-            let controls_class = 'flexbox position-ab position-center-y align-between align-center-y position-start-0 col-12',
-                pagination_class = 'position-ab position-center-x position-bottom-15',
+            let controls_class = 'flexbox position-ab pos-center-y align-between align-center-y pos-start-0 col-12',
+                pagination_class = 'position-ab pos-center-x pos-bottom-15',
                 arrow_class = inline('data-arrow') || options?.arrow || 'btn primary small square',
                 page_class  = inline('data-page') || options?.page || 'pd-5 bg-primary no-border tiny square radius-circle mx-5';
 

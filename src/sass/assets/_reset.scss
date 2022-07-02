@@ -229,3 +229,24 @@ dl {
 .no-border  {border: 0 none;}
 .reset-list {@extend %reset-list;}
 .reset-block, .reset {@extend %reset-space;}
+
+.reset-button {
+    height: auto;
+    border: 0 none;
+    text-align: inherit;
+    background-color: transparent;
+}
+
+.reset-input {
+    border: 0 none;
+    background-color: transparent;
+    &:focus {
+        outline: none;
+        border: 0 none;
+    }
+}
+
+.input-inherit {
+    height: inherit;
+    font-size: inherit;
+}

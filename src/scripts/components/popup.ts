@@ -40,7 +40,7 @@ PhenixElements.prototype.popup = function (options?:{
 
         /*=====> Backdrop Trigger <=====*/
         if (backdrop && !popup.querySelector('.backdrop-btn')) {
-            Phenix(popup).insert('append', `<button class="backdrop-btn modal-close position-ab w-fluid h-100vh position-start-0 position-top-0 bg-transparent"></button>`);
+            Phenix(popup).insert('append', `<button class="backdrop-btn modal-close position-ab w-fluid h-100vh pos-start-0 pos-top-0 bg-transparent"></button>`);
             backdrop = popup.querySelector('.backdrop-btn');
         }
 
@@ -56,8 +56,8 @@ PhenixElements.prototype.popup = function (options?:{
             'position-fx',
             'overlay-dark',
             'z-index-modal',
-            'position-top-0',
-            'position-start-0',
+            'pos-top-0',
+            'pos-start-0',
             'overflow-y-auto'
         );
 
@@ -76,6 +76,7 @@ PhenixElements.prototype.popup = function (options?:{
             //==== Open the Modal ====//
             Phenix(`#${modal_id}`).fadeIn(500, 0, 'flex').addClass('active');
             popup.classList.add('has-shown');
+            popup.classList.remove('hidden');
             //====> Fire Event <====//
             popup.dispatchEvent(showed);
         },
@@ -86,6 +87,7 @@ PhenixElements.prototype.popup = function (options?:{
             Phenix(parent).fadeOut().removeClass('active');
             //==== Restore Scroll ====//
             document.body.classList.remove('overflow-hidden');
+            popup.classList.add('hidden');
             //====> Fire Event <====//
             popup.dispatchEvent(hidden);
             //===> Cleanup Lightbox <===//

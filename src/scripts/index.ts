@@ -564,6 +564,7 @@ import './components/dropdown';  //==> Dropddown
 import './components/tabs';      //==> Tabs System
 import './components/popup';     //==> Popups
 import './components/progress';  //==> Progress
+import './components/select';    //==> Advanced Select
 import './components/uploader';  //==> File Uploader
 import './components/datatable'; //==> Data-Tables
 

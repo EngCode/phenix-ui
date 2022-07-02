@@ -136,11 +136,14 @@
 }
 
 /*==== Select Theme ====*/
-select.form-control {
+select.form-control, .reset-appearance {
     /*==== Reset ====*/
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
+}
+
+.px-select, select.form-control {
     /*==== Arrow Background ====*/
     background-repeat: no-repeat;
     background-size: calc(var(--text-size)/1.35);

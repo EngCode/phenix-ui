@@ -68,7 +68,7 @@ PhenixElements.prototype.utilities = function (options?:{
                 else if (relation === 'global' || 'none') document.querySelector(target).remove();
                 //=== Remove the Closest Target ===//
                 else if (relation === 'closest' || 'related') trigger.closest(target).remove();
-            }, true);
+            });
 
             //====> Masonry Grid <====//
             Phenix('.px-masonry').forEach((gallery:HTMLElement) => {
