@@ -312,11 +312,13 @@ PhenixElements.prototype.slider = function (options?:{
     //====> Load Splid JS <====//
     if (!document.querySelector('#splidejs-phenix')) {
         //===> Create Script Element <===//
-        let splide_loader = document.createElement("script");
+        let splide_loader = document.createElement("script"),
+            splide_url =  Phenix(document).getURL().phenixJS+'splide.min.js';
+
         //===> Set ID <===//
         splide_loader.setAttribute('id', 'splidejs-phenix')
         //===> Set Source <===//
-        splide_loader.setAttribute("src", "https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/splide.min.js");
+        splide_loader.setAttribute("src", splide_url);
         //===> Append Script <===//
         document.body.appendChild(splide_loader);
     
@@ -325,7 +327,7 @@ PhenixElements.prototype.slider = function (options?:{
     
         //====> When Error Re-Load <====//
         splide_loader.addEventListener("error", (ev) => {
-            splide_loader.setAttribute("src", "https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/splide.min.js");
+            splide_loader.setAttribute("src", splide_url);
         });
 
     //====> if Al-ready loaded run the sliders <====//

@@ -72,7 +72,7 @@
         --border-color : var(--warning-color);
     }
 
-    &[disabled], &.disable {
+    &[disabled], &.disable, &.disabled {
         --color : var(--gray-color);
         --background : var(--disable-color);
     }

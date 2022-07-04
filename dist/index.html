@@ -20,43 +20,32 @@
 </head>
 <body>
     <!-- Container -->
-    <div class="container-sm pdy-75">
+    <div class="container-md pdy-75">
         <!-- Grid -->
         <div class="row">
             <!-- Column -->
             <div class="col-12 col-md-6 mb-30">
                 <!-- Form Control -->
-                <select name="px-select" class="form-control px-select" data-placeholder="Select From Options">
-                    <option value="option-1">Option #01</option>
-                    <option value="option-2">Option #02</option>
-                    <option value="option-3">Option #03</option>
-                    <option value="option-4">Option #04</option>
-                    <option value="option-5">Option #05</option>
+                <select name="px-select" class="form-control px-select" data-search="1" data-placeholder="Multiple Options" multiple>
+                    <option class="tx-icon fab fa-windows" value="option-1">Windows</option>
+                    <option class="tx-icon fab fa-apple" value="option-2">Mac OS</option>
+                    <option class="tx-icon fab fa-ubuntu" value="option-4">Linux Ubuntu</option>
+                    <option class="tx-icon fab fa-chrome" value="option-3">Chrome OS</option>
+                    <option class="tx-icon fab fa-android" value="option-5">Android</option>
+                    <option class="tx-icon fab fa-fedora" value="option-2">Linux Fedora</option>
                 </select>
                 <!-- // Form Controls -->
             </div>
             <!-- Column -->
             <div class="col-12 col-md-6 mb-30">
                 <!-- Form Control -->
-                <select name="px-select-2" class="form-control px-select" data-placeholder="Grouped Options">
-                    <optgroup>Options Set 01</optgroup>
-                    <option value="option-1">Option #01</option>
-                    <option value="option-2">Option #02</option>
-                    <option value="option-3">Option #03</option>
-                    <option value="option-4">Option #04</option>
-                    <option value="option-5">Option #05</option>
-                    <optgroup>Options Set 02</optgroup>
-                    <option value="option-1">Option #06</option>
-                    <option value="option-2">Option #07</option>
-                    <option value="option-3">Option #08</option>
-                    <option value="option-4">Option #09</option>
-                    <option value="option-5">Option #10</option>
-                    <optgroup>Options Set 03</optgroup>
-                    <option value="option-1">Option #11</option>
-                    <option value="option-2">Option #12</option>
-                    <option value="option-3">Option #10</option>
-                    <option value="option-4">Option #14</option>
-                    <option value="option-5">Option #15</option>
+                <select name="px-select" class="form-control px-select" data-search="1" data-placeholder="Min:2 Max:4" data-min="2" data-max="4" multiple>
+                    <option class="tx-icon fab fa-windows" value="option-1">Windows</option>
+                    <option class="tx-icon fab fa-apple" value="option-2">Mac OS</option>
+                    <option class="tx-icon fab fa-ubuntu" value="option-4">Linux Ubuntu</option>
+                    <option class="tx-icon fab fa-chrome" value="option-3">Chrome OS</option>
+                    <option class="tx-icon fab fa-android" value="option-5">Android</option>
+                    <option class="tx-icon fab fa-fedora" value="option-2">Linux Fedora</option>
                 </select>
                 <!-- // Form Controls -->
             </div>
@@ -73,7 +62,10 @@
     <!-- Script -->
     <script defer>
         Phenix(document).ready(isReady => {
-            
+            //====> Activate Select <====//
+            let selects = Phenix('.px-select').select().on('change', opened => {
+                console.log(opened.detail);
+            });
         });
     </script>
 </body>

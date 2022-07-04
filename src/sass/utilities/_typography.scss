@@ -30,6 +30,7 @@ h6 {font-size: REM(17);}
     .h6#{$infix} {font-size: REM(17);}
 
     /*==== Headine Sizes ====*/
+    .fs-inherit {font-size: inherit;}
     .fs#{$infix}-12 {font-size: 12px;}
     .fs#{$infix}-13 {font-size: 13px;}
     .fs#{$infix}-14 {font-size: REM(14);}

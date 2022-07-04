@@ -531,10 +531,12 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
                 target_element.addClass('pos-after-y').removeClass('pos-before-y');
             }
         });
+
+        return this;
     };
 
     /*====> Define Info Grapers <====*/
-    height; getCSS; direction;
+    height; getCSS; direction; getURL
     inView; viewport; copyrights;
 
     /*====> Define UI Effects <====*/

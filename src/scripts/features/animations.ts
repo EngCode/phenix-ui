@@ -118,7 +118,7 @@ PhenixElements.prototype.animations = function (options?:{
 
         //===> Create Script Element <===//
         let animations_loader = document.createElement("link"),
-            package_url = `https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/animations/${package_name}.css`;
+            package_url =  `${Phenix(document).getURL().phenixCSS}animations/${package_name}.css`;
 
         //===> Set Attributes <===//
         animations_loader.setAttribute('id', `px-animations${id}`);

@@ -140,7 +140,16 @@ PhenixElements.prototype.dropdown = function (options?:{
         else page_dir == 'ltr' ? the_target.css({"left" : 0}) : the_target.css({"right" : 0});
 
         //====> Change Position on Scroll <====//
-        window.addEventListener('scroll', scrolling => change_position());
+        let isScrolling = false;
+
+        window.addEventListener('scroll', scrolling => isScrolling = true, {passive: true});
+
+        setInterval(() => {
+            if (isScrolling) {
+                isScrolling = false;
+                change_position();
+            }
+        }, 300);
     });
 
     //====> Return Phenix Elements <====//

@@ -157,3 +157,18 @@ console.log(`🔥🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥🔥
     //===> Return Phenix <===//
     return this;
 };
+
+//====> Get Current Path <====//
+PhenixElements.prototype.getURL = function (location?) {
+    //====> Current Script File <====//
+    let url = document.querySelector('script[src*="phenix"]')?.getAttribute('src'),
+        phenix_js = url.substring(0, url.lastIndexOf('/')+1);
+    //====> Return Informations <====//
+    return {
+        script : url,
+        window : window.location.href,
+        page   : window.location.pathname,
+        phenixJS : phenix_js || 'https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/js/',
+        phenixCSS : phenix_js.replace('js', 'css') || 'https://cdn.jsdelivr.net/npm/phenix-ui@0.6.5/dist/css/',
+    }
+}
