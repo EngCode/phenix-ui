@@ -69,8 +69,6 @@ PhenixElements.prototype.select = function (options?:{
                     let source = option.getAttribute('data-image');
                     //===> Clean Source [URL] <===//
                     source = encodeURI(source);
-                    //===> Clean # for CSS Benefits <===//
-                    source = source.replaceAll('#','%23');
                     //===> Set the image <===//
                     image_icon = `<img style="width:1em" alt="${option_text}" src="${source}" class="me-5">`;
                 }
@@ -78,7 +76,7 @@ PhenixElements.prototype.select = function (options?:{
                 //====> Options Headline <====//
                 if (option.matches('optgroup')) {
                     current_item = options_list.insert('append', `<li class="px-select-group bg-alpha-05 pdx-10 weight-strong ${option_classes}" data-value="${option_value}">${image_icon}${option_text}</li>`);
-                } 
+                }
                 
                 //====> Disabled Options  <====//
                 else if (option.hasAttribute('disabled')) {
@@ -97,7 +95,20 @@ PhenixElements.prototype.select = function (options?:{
 
             //====> Create Placeholder <====//
             let first_option = select.querySelector('option:first-of-type'),
-                first_label = placeholder ? placeholder : '---';
+                first_label = placeholder ? placeholder : '---',
+                first_classes = (holder) => {
+                    //===> Get Placeholder Classes <===//
+                    if (placeholder && holder) return holder;
+                    else if (first_option.classList) return first_option.classList;
+                },
+                first_image = (image, alt) => {
+                    if(placeholder && image) {
+                        //===> Clean Source [URL] <===//
+                        image = encodeURI(image);
+                        //===> Set the image <===//
+                        return `<img style="width:1em" alt="${alt}" src="${image}" class="me-5">`;
+                    } else {return '';}
+                };
 
             //====> Define [Multiple] Variables <====//
             let new_select_value, new_value_group, tag_classes, tag_remover,
@@ -137,7 +148,7 @@ PhenixElements.prototype.select = function (options?:{
                 tag_classes = 'px-selected-value inline-block lineheight-160 bg-alpha-10 mb-5 radius-sm pdy-5 pde-10 me-5 position-rv';
 
                 //===> Tag Remover <===//
-                tag_remover = `<button class="px-value-remover reset-button fs-inherit inline-block position-ab pos-center-y pos-start-0 h-100 bg-alpha-05" style="width:1.5em">
+                tag_remover = `<button type="button" class="px-value-remover reset-button fs-inherit inline-block position-ab pos-center-y pos-start-0 h-100 bg-alpha-05" style="width:1.5em">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="width:0.6em">
                         <path fill="var(--color)" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"/>
                     </svg>
@@ -151,10 +162,12 @@ PhenixElements.prototype.select = function (options?:{
             //====> Single Mode <====//
             else {
                 //===> Get First Label <===//
-                let first_label = placeholder ? placeholder : first_option.textContent;
+                let first_label = placeholder ? placeholder : first_option.textContent,
+                    holder_classes = select.getAttribute('data-holder-classes'),
+                    holder_image   = select.getAttribute('data-image');
 
                 //===> Create Placeholder <===//
-                new_select_value = new_select.insert('prepend', `<button class="reset-button h-min-100 px-select-toggle col">${first_label}</button>`);
+                new_select_value = new_select.insert('prepend', `<button type="button" class="reset-button h-min-100 px-select-toggle col ${first_classes(holder_classes)}">${first_image(holder_image,first_label)}${first_label}</button>`);
 
                 //===> Set First Option as Value <===//
                 new_select[0].setAttribute('data-value', `${first_option ? first_option.getAttribute('value') : ''}`);
@@ -168,11 +181,49 @@ PhenixElements.prototype.select = function (options?:{
 
             //====> Set Default Value <====//
             if (!multiple && select.querySelector('[selected]')) {
-                let default_value = select.querySelector('[selected]').getAttribute('value'),
-                    default_label = select.querySelector('[selected]').textContent;
+                //====> Set Value <====//
+                let selected_option = select.querySelector('[selected]'),
+                    default_value = selected_option.getAttribute('value'),
+                    default_label = selected_option.textContent;
 
                 new_select[0].setAttribute('data-value', default_value);
                 new_select_value.textContent = default_label;
+
+                //====> Change Classes <====//
+                if(selected_option.classList) {
+                    //====> Get new Classes <====//
+                    let new_classes = selected_option.classList,
+                        holder_classes = select.getAttribute('data-holder-classes')?.split(' ') || [''];
+
+                    //====> Remove Holder Classes <====//
+                    holder_classes.forEach(cl => {
+                        if (cl === '') return;
+                        new_select_value.classList.remove(cl);
+                    });
+
+                    //====> Set New Classes <====//
+                    new_select_value.classList.add(...new_classes);
+                }
+
+                //====> Change Image <====//
+                if (selected_option.getAttribute('data-image')) {
+                    //===> Get New Image <===//
+                    let new_image = encodeURI(selected_option.getAttribute('data-image')),
+                        current_image = new_select_value.querySelector('img'),
+                        holder_classes = select.getAttribute('data-holder-classes')?.split(' ') || [''];
+
+                    //====> Remove Holder Classes <====//
+                    holder_classes.forEach(cl => new_select_value.classList.remove(cl));
+
+                    //===> If Exist Change URL <====//
+                    if (current_image) {
+                        current_image.setAttribute('src', new_image);
+                        current_image.setAttribute('alt', selected_option.textContent);
+                    }
+
+                    //===> Create Image <===//
+                    else Phenix(new_select_value).insert('prepend', `<img style="width:1em" alt="${selected_option.textContent}" src="${new_image}" class="me-5">`);
+                }
             } 
             //====> For Multiple Selection <====//
             else if (multiple) {
@@ -285,14 +336,53 @@ PhenixElements.prototype.select = function (options?:{
             let set_value = (option) => {
                 option.addEventListener('click', clicked => {
                     //===> Get the Options Value <===//
-                    let value = option.getAttribute('data-value'),
+                    let prevValue = new_select[0].getAttribute('data-value'),
+                        value = option.getAttribute('data-value'),
                         label = option.textContent;
 
                     //===> Set value and label <===//
                     if (!multiple) {
+                        //====> Set Value <====//
                         select.value = value;
                         new_select_value.textContent = label;
                         new_select[0].setAttribute('data-value', value);
+
+                        //====> Original Option <====//
+                        let original_option = select.querySelector(`[value="${value}"]`);
+
+                        //====> Change Classes <====//
+                        if(original_option.classList?.length > 0) {
+                            //====> Get new Classes <====//
+                            let new_classes = select.querySelector(`[value="${value}"]`).classList,
+                                holder_classes = select.getAttribute('data-holder-classes')?.split(' ') || [''],
+                                prev_classes = select.querySelector(`[value="${prevValue}"]`)?.classList;
+
+                            //====> Remove Old Classes <====//
+                            holder_classes.concat(...prev_classes).forEach(cl => new_select_value.classList.remove(cl));
+
+                            //====> Set New Classes <====//
+                            new_select_value.classList.add(...new_classes);
+                        }
+
+                        //====> Change Image <====//
+                        if (original_option && original_option.getAttribute('data-image')) {
+                            //===> Get New Image <===//
+                            let new_image = encodeURI(original_option.getAttribute('data-image')),
+                                current_image = new_select_value.querySelector('img'),
+                                holder_classes = select.getAttribute('data-holder-classes')?.split(' ') || [''];
+
+                            //====> Remove Holder Classes <====//
+                            holder_classes.forEach(cl => new_select_value.classList.remove(cl));
+
+                            //===> If Exist Change URL <====//
+                            if (current_image) {
+                                current_image.setAttribute('src', new_image);
+                                current_image.setAttribute('alt', option.textContent);
+                            }
+
+                            //===> Create Image <===//
+                            else Phenix(new_select_value).insert('prepend', `<img style="width:1em" alt="${option.textContent}" src="${new_image}" class="me-5">`);
+                        }
                     } 
                     //===> Multiple Mode <===//
                     else {

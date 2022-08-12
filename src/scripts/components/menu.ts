@@ -160,7 +160,6 @@ PhenixElements.prototype.menu = function (options?:{
         //===> Toggle Menu <====//
         target.classList.toggle('.px-menu-active');
         let effect = target.getAttribute('data-effect');
-        console.log(effect);
         if (effect === 'slide') Phenix(target).slideToggle();
         else if (effect === 'fade') Phenix(target).fadeToggle(500,0,'flex');
     });

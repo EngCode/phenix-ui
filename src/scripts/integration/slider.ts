@@ -33,6 +33,7 @@ PhenixElements.prototype.slider = function (options?:{
     sync?:string
     pauseOnHover?:boolean;
     intersection?:boolean;
+    rewind?:boolean;
 }) {
     //====> Sliders Activator <====//
     let slider_handler = () => this.forEach((slider:HTMLElement) => {
@@ -60,6 +61,7 @@ PhenixElements.prototype.slider = function (options?:{
                 start = parseInt(inline('data-start')) || options?.start,
                 isNavigation = parseInt(inline('data-is-navigation')) || options?.isNavigation,
                 sync = inline('data-sync') || options?.sync,
+                rewind = inline('data-rewind') || options?.rewind,
                 breakpoints = options?.breakpoints || {},
                 direction = inline('data-direction') || options?.direction || Phenix(document).direction();
 
@@ -177,6 +179,7 @@ PhenixElements.prototype.slider = function (options?:{
             if (pauseOnHover) slider_options.pauseOnHover = pauseOnHover;
             if(!autoplay) slider_options.autoplay = true;
             if (intersection) intersection !== 'false' || '0' ? intersection = true : null;
+            if (rewind) rewind !== 'false' || '0' ? slider_options.rewind = true : slider_options.rewind = false;
 
             return {
                 track  : slider_track,

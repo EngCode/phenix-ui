@@ -94,7 +94,7 @@ PhenixElements.prototype.animations = function (options?:{
     
                 if (item !== element) {
                     if (!item.style.animationDelay) {
-                        current_delay += (parseInt(item.getAttribute('data-duration')) || options?.duration)
+                        current_delay += duration;
                         item.setAttribute('data-delay', current_delay/2);
                         item.style.animationDelay = `${current_delay/2}ms`;
                     }

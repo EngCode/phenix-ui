@@ -83,7 +83,7 @@ PhenixElements.prototype.popup = function (options?:{
 
         hide_modal = (trigger) => {
             //==== Close the Modal ====//
-            let parent = Phenix(trigger).ancestor('.px-modal');
+            let parent = Phenix(trigger).ancestor('.px-popup');
             Phenix(parent).fadeOut().removeClass('active');
             //==== Restore Scroll ====//
             document.body.classList.remove('overflow-hidden');

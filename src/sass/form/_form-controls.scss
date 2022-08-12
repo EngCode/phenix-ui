@@ -165,21 +165,23 @@ label,legend  {@extend %inline-block;}
 .control-icon {
     position: relative;
     color: var(--color);
-    --white-space : calc(var(--padding)*2.4);
+    --white-space : calc(var(--padding)*2.15);
     /*==== icons ====*/
     &::before {
         top: 0;
+        z-index: 3;
         position: absolute;
         #{$direction-start}: 0;
         line-height: var(--height);
         font-size: var(--text-size);
-        @include padding-inline(var(--padding));
+        @include padding-inline(var(--padding), 'start');
     }
 
     /*==== icon Position ====*/
     &.icon-end {
         /*==== White Space Fix ====*/
         .form-control {@include padding-inline(var(--white-space) ,'end');}
+        .px-select .px-select-toggle {@include padding-inline(var(--white-space)!important ,'end');}
         /*==== icon position reverse ====*/
         &::before {
             #{$direction-start}: auto;
@@ -188,7 +190,10 @@ label,legend  {@extend %inline-block;}
     }
 
     /*==== White Space Fix ====*/
-    &:not(.icon-end) .form-control {@include padding-inline(var(--white-space) ,'start');}
+    &:not(.icon-end) {
+        .form-control {@include padding-inline(var(--white-space) ,'start');}
+        .px-select .px-select-toggle {@include padding-inline(var(--white-space)!important ,'start');}
+    }
 }
 
 /*==== Options Controls ====*/

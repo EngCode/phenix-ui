@@ -15,7 +15,7 @@
     /*==== items ====*/
     li {
         padding: #{REM(8)} 15px;
-        border-bottom: 1px solid rgba(#000, 0.1);
+        &:not(:last-child) {border-bottom: 1px solid rgba(#000, 0.1);}
     }
     /*==== links ====*/
     a {color: inherit;}

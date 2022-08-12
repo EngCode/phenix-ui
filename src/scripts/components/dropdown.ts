@@ -37,6 +37,7 @@ PhenixElements.prototype.dropdown = function (options?:{
             toggle  = inline('data-toggle') || options?.toggle || '.px-toggle',
             target  = inline('data-target') || options?.target || '.px-dropdown-list',
             position  = inline('data-position') || options?.position || 'bottom, start',
+            exclude  = inline('data-exclude') || options?.exclude || '.px-toggle',
             activated = `${target}.${active}`,
             //====> Effect Options <====//
             delay  = inline('data-delay') || options?.effect?.delay || 0,
@@ -92,10 +93,10 @@ PhenixElements.prototype.dropdown = function (options?:{
         //====> Hide Dropdown on Blank <====//
         dropdown_hide = blank => {
             //====> Clicked Target <====//
-            let exclude = `${options?.exclude ? `${target} *:not([href^="#"]):not('${options?.exclude}')` : ''}`,
+            let exclude_final = `${target} *:not([href^="#"]):not(${exclude})`,
                 clicked:any = blank.target;
             //====> if the target is not the current element or any of its childerns <====//
-            if (!clicked.matches(target || exclude) && !clicked.matches(toggle) && !clicked.matches(`${toggle} *`)) hide_others();
+            if (!clicked.matches(target) && !clicked.matches(exclude_final) && !clicked.matches(toggle) && !clicked.matches(`${toggle} *`)) hide_others();
         };
 
         //====> Click to Dropdown <====//

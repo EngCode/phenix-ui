@@ -100,20 +100,36 @@
     padding-bottom: var(--ratio-size);
 }
 
-.ratio {
-    --ratio-size : 60%;
-    /*==== Square 1x1 ====*/
-    &-1x1  {--ratio-size: 100%;}
-    /*==== FHD 16x9 ====*/
-    &-16x9 {--ratio-size: 56.3%;}
-    /*==== Landscape 21x9 ====*/
-    &-21x9 {--ratio-size: 42.9%;}
-    /*==== Classic 4x3 ====*/
-    &-4x3 {--ratio-size: 75%;}
-    &-3x4 {--ratio-size: 125%;}
-    /*==== Wide 3x1 ====*/
-    &-3x1 {--ratio-size: 33.3%;}
+@mixin make_ratio($infix:'') {
+    .ratio#{$infix} {
+        --ratio-size : 60%;
+        /*==== Square 1x1 ====*/
+        &-1x1  {--ratio-size: 100%;}
+        /*==== FHD 16x9 ====*/
+        &-16x9 {--ratio-size: 56.3%;}
+        /*==== Landscape 21x9 ====*/
+        &-21x9 {--ratio-size: 42.9%;}
+        /*==== Classic 4x3 ====*/
+        &-4x3 {--ratio-size: 75%;}
+        &-3x4 {--ratio-size: 125%;}
+        /*==== Wide 3x1 ====*/
+        &-3x1 {--ratio-size: 33.3%;}
+    }
 }
+
+@include make_ratio();
+
+@include medium(){
+    @include make_ratio('-md');
+};
+
+@include large(){
+    @include make_ratio('-lg');
+};
+
+@include xlarge(){
+    @include make_ratio('-xl');
+};
 
 /*==== Lazy Loader ====*/
 .px-loader {
@@ -131,6 +147,13 @@
             animation: background_x var(--duration) linear infinite;
 }
 
+.bg-animated-y {
+    --duration : 60s;
+    background-repeat: repeat-x;
+    -webkit-animation: background_y var(--duration) linear infinite;
+            animation: background_y var(--duration) linear infinite;
+}
+
 @-webkit-keyframes background_x {
     from {background-position: 0 0;}
     to {background-position: 100% 0;}
@@ -139,4 +162,14 @@
 @keyframes background_x {
     from {background-position: 0 0;}
     to {background-position: 100% 0;}
+}
+
+@-webkit-keyframes background_y {
+    from {background-position: 0 0;}
+    to {background-position: 0 100%;}
+}
+
+@keyframes background_y {
+    from {background-position: 0 0;}
+    to {background-position: 0 100%;}
 }
