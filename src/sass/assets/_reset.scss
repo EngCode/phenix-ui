@@ -186,6 +186,8 @@ body {
     direction: $direction;
     background: var(--body-bg);
     font-family: var(--secondary-font), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
 }
 
 iframe {

@@ -1,109 +1,55 @@
 /*==== Utlites Repeaters ====*/
 @import '../assets/mixin';
 
+$padding-list : 0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100;
+
 /*==== Padding All ====*/
 @mixin make_padding($infix:'') {
-    .pd#{$infix}-0   { padding: #{REM(0)}; }
-    .pd#{$infix}-5   { padding: #{REM(05)}; }
-    .pd#{$infix}-10  { padding: #{REM(10)}; }
-    .pd#{$infix}-15  { padding: #{REM(15)}; }
-    .pd#{$infix}-20  { padding: #{REM(20)}; }
-    .pd#{$infix}-25  { padding: #{REM(25)}; }
-    .pd#{$infix}-30  { padding: #{REM(30)}; }
-    .pd#{$infix}-40  { padding: #{REM(40)}; }
-    .pd#{$infix}-50  { padding: #{REM(50)}; }
-    .pd#{$infix}-75  { padding: #{REM(75)}; }
-    .pd#{$infix}-100 { padding: #{REM(100)};}
+    @each $size in $padding-list {
+        .pd#{$infix}-#{$size} { padding: #{REM($size)}; }
+    }
 }
 
 /*==== Padding Top ====*/
 @mixin make_padding_top($infix:'') {
-    .pdt#{$infix}-0   { @include padding-block(#{REM(0)}, 'start');}
-    .pdt#{$infix}-5   { @include padding-block(#{REM(05)}, 'start');}
-    .pdt#{$infix}-10  { @include padding-block(#{REM(10)}, 'start');}
-    .pdt#{$infix}-15  { @include padding-block(#{REM(15)}, 'start');}
-    .pdt#{$infix}-20  { @include padding-block(#{REM(20)}, 'start');}
-    .pdt#{$infix}-25  { @include padding-block(#{REM(25)}, 'start');}
-    .pdt#{$infix}-30  { @include padding-block(#{REM(30)}, 'start');}
-    .pdt#{$infix}-40  { @include padding-block(#{REM(40)}, 'start');}
-    .pdt#{$infix}-50  { @include padding-block(#{REM(50)}, 'start');}
-    .pdt#{$infix}-75  { @include padding-block(#{REM(75)}, 'start');}
-    .pdt#{$infix}-100 { @include padding-block(#{REM(100)},'start');}
+    @each $size in $padding-list {
+        .pdt#{$infix}-#{$size} { @include padding-block(#{REM($size)}, 'start'); }
+    }
 }
 
 /*==== Padding Bottom ====*/
 @mixin make_padding_bottom($infix:'') {
-    .pdb#{$infix}-0   { @include padding-block(#{REM(0)}, 'end');}
-    .pdb#{$infix}-5   { @include padding-block(#{REM(05)}, 'end');}
-    .pdb#{$infix}-10  { @include padding-block(#{REM(10)}, 'end');}
-    .pdb#{$infix}-15  { @include padding-block(#{REM(15)}, 'end');}
-    .pdb#{$infix}-20  { @include padding-block(#{REM(20)}, 'end');}
-    .pdb#{$infix}-25  { @include padding-block(#{REM(25)}, 'end');}
-    .pdb#{$infix}-30  { @include padding-block(#{REM(30)}, 'end');}
-    .pdb#{$infix}-40  { @include padding-block(#{REM(40)}, 'end');}
-    .pdb#{$infix}-50  { @include padding-block(#{REM(50)}, 'end');}
-    .pdb#{$infix}-75  { @include padding-block(#{REM(75)}, 'end');}
-    .pdb#{$infix}-100 { @include padding-block(#{REM(100)},'end');}
+    @each $size in $padding-list {
+        .pdb#{$infix}-#{$size} { @include padding-block(#{REM($size)}, 'end'); }
+    }
 }
 
 /*==== Padding Start ====*/
 @mixin make_padding_start($infix:'') {
-    .pds#{$infix}-0   { @include padding-inline(#{REM(0)}, 'start');}
-    .pds#{$infix}-5   { @include padding-inline(#{REM(05)}, 'start');}
-    .pds#{$infix}-10  { @include padding-inline(#{REM(10)}, 'start');}
-    .pds#{$infix}-15  { @include padding-inline(#{REM(15)}, 'start');}
-    .pds#{$infix}-20  { @include padding-inline(#{REM(20)}, 'start');}
-    .pds#{$infix}-25  { @include padding-inline(#{REM(25)}, 'start');}
-    .pds#{$infix}-30  { @include padding-inline(#{REM(30)}, 'start');}
-    .pds#{$infix}-40  { @include padding-inline(#{REM(40)}, 'start');}
-    .pds#{$infix}-50  { @include padding-inline(#{REM(50)}, 'start');}
-    .pds#{$infix}-75  { @include padding-inline(#{REM(75)}, 'start');}
-    .pds#{$infix}-100 { @include padding-inline(#{REM(100)},'start');}
+    @each $size in $padding-list {
+        .pds#{$infix}-#{$size} { @include padding-inline(#{REM($size)}, 'start'); }
+    }
 }
 
 /*==== Padding End ====*/
 @mixin make_padding_end($infix:'') {
-    .pde#{$infix}-0   { @include padding-inline(#{REM(0)}, 'end');}
-    .pde#{$infix}-5   { @include padding-inline(#{REM(05)}, 'end');}
-    .pde#{$infix}-10  { @include padding-inline(#{REM(10)}, 'end');}
-    .pde#{$infix}-15  { @include padding-inline(#{REM(15)}, 'end');}
-    .pde#{$infix}-20  { @include padding-inline(#{REM(20)}, 'end');}
-    .pde#{$infix}-25  { @include padding-inline(#{REM(25)}, 'end');}
-    .pde#{$infix}-30  { @include padding-inline(#{REM(30)}, 'end');}
-    .pde#{$infix}-40  { @include padding-inline(#{REM(40)}, 'end');}
-    .pde#{$infix}-50  { @include padding-inline(#{REM(50)}, 'end');}
-    .pde#{$infix}-75  { @include padding-inline(#{REM(75)}, 'end');}
-    .pde#{$infix}-100 { @include padding-inline(#{REM(100)},'end');}
+    @each $size in $padding-list {
+        .pde#{$infix}-#{$size} { @include padding-inline(#{REM($size)}, 'end'); }
+    }
 }
 
 /*==== Padding X ====*/
 @mixin make_padding_x($infix:'') {
-    .pdx#{$infix}-0   { @include padding-inline(#{REM(0)});}
-    .pdx#{$infix}-5   { @include padding-inline(#{REM(05)});}
-    .pdx#{$infix}-10  { @include padding-inline(#{REM(10)});}
-    .pdx#{$infix}-15  { @include padding-inline(#{REM(15)});}
-    .pdx#{$infix}-20  { @include padding-inline(#{REM(20)});}
-    .pdx#{$infix}-25  { @include padding-inline(#{REM(25)});}
-    .pdx#{$infix}-30  { @include padding-inline(#{REM(30)});}
-    .pdx#{$infix}-40  { @include padding-inline(#{REM(40)});}
-    .pdx#{$infix}-50  { @include padding-inline(#{REM(50)});}
-    .pdx#{$infix}-75  { @include padding-inline(#{REM(75)});}
-    .pdx#{$infix}-100 { @include padding-inline(#{REM(100)});}
+    @each $size in $padding-list {
+        .pdx#{$infix}-#{$size} { @include padding-inline(#{REM($size)}); }
+    }
 }
 
 /*==== Padding Y ====*/
 @mixin make_padding_y($infix:'') {
-    .pdy#{$infix}-0   { @include padding-block(#{REM(0)});}
-    .pdy#{$infix}-5   { @include padding-block(#{REM(05)});}
-    .pdy#{$infix}-10  { @include padding-block(#{REM(10)});}
-    .pdy#{$infix}-15  { @include padding-block(#{REM(15)});}
-    .pdy#{$infix}-20  { @include padding-block(#{REM(20)});}
-    .pdy#{$infix}-25  { @include padding-block(#{REM(25)});}
-    .pdy#{$infix}-30  { @include padding-block(#{REM(30)});}
-    .pdy#{$infix}-40  { @include padding-block(#{REM(40)});}
-    .pdy#{$infix}-50  { @include padding-block(#{REM(50)});}
-    .pdy#{$infix}-75  { @include padding-block(#{REM(75)});}
-    .pdy#{$infix}-100 { @include padding-block(#{REM(100)});}
+    @each $size in $padding-list {
+        .pdy#{$infix}-#{$size} { @include padding-block(#{REM($size)}); }
+    }
 }
 
 /*==== Base Screen ====*/

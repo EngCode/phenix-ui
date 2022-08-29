@@ -6,7 +6,7 @@
 */
 
 /*==== Tables CSS ====*/
-.table {
+.table,.wp-block-table table {
     /*==== Options ====*/
     --table-background : inherit;
     --table-head-bg    : inherit;
@@ -25,7 +25,7 @@
     
     /*==== Columns [Cells] ====*/ 
     td, th {
-        @include padding-inline(#{calc(var(--table-padding)/3)});
+        @include padding-inline(#{var(--table-padding)});
     }
 
     td {

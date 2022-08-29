@@ -24,11 +24,11 @@
         a {@extend %inline-block;}
         /*====> Main-Style <====*/
         &:not(:last-child) {
-            margin-#{$direction-end}: 5px;
+            margin-#{$direction-end}: 10px;
             &::after {
                 content: var(--divider-icon);
                 @extend %inline-block;
-                margin-#{$direction-start}: 5px;
+                margin-#{$direction-start}: 10px;
             }
         }
     }
