@@ -1,9 +1,9 @@
-/*!
+/*
  * Phenix.js
  * Version  : 0.6 Beta
  * License  : MIT
  * Copyright: 2022 Abdullah.Ramadan
- */
+*/
 
 /**======> Referance By Comment <======
  * ===> 01 - Phenix Object

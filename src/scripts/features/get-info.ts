@@ -161,7 +161,7 @@ console.log(`🔥🔥🔥💥 %cDesign by Phenix Themes 💥🔥🔥🔥🔥
 //====> Get Current Path <====//
 PhenixElements.prototype.getURL = function (location?) {
     //====> Current Script File <====//
-    let url = document.querySelector('script[src*="phenix"]')?.getAttribute('src'),
+    let url = document.querySelector('script[src*="phenix.js"]')?.getAttribute('src'),
         phenix_js = url.substring(0, url.lastIndexOf('/')+1);
     //====> Return Informations <====//
     return {

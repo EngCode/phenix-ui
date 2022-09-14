@@ -91,9 +91,54 @@ PhenixElements.prototype.utilities = function (options?:{
                     word_array = titleContent.split(/[ ]+/),
                     lastword  = word_array.splice(-1);
                 //====> Return Title <====//
-                let theResult = `${word_array} <span class="primary-color">${lastword}</span>`;
+                let theResult = `${word_array} <span class="color-primary">${lastword}</span>`;
                 title.innerHTML = theResult.replace(/,/g, ' ');
             });
+        }
+
+        //====> Max Text Length <====//
+        Phenix('[data-max-text]').forEach((element:any) => {
+            //===> Element Data <===//
+            let text = element.textContent,
+                max  = parseInt(element.getAttribute('data-max-text'));
+
+            //===> check count <===//
+            if (text.length > max) element.textContent = text.slice(0, max);
+        });
+
+        //====> Images Demstions <====//
+        Phenix('img').forEach((img:any) => {
+            //===> Get Image Data <===//
+            let img_width = img.getAttribute('width') || img.style.width,
+                img_height = img.getAttribute('height') || img.style.height,
+                parent_width = img.parentNode.clientWidth,
+                parent_height = img.parentNode.clientHeight;
+            //===> Set Width and Height <===//
+            if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}px`);
+            if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}px`);
+        });
+
+        //====> Loading <====//
+        let loading_wrapper = document.querySelector('.px-loader');
+        if (loading_wrapper) {
+            //===> Disable Scroll <===//
+            document.body.classList.add('overflow-hidden');
+
+            //===> When Loading is Complete <===//
+            window.addEventListener('load', loaded => {
+                //===> Fast Loaded Fallback <===//
+                setTimeout(() => {
+                    //===> Enable Scroll <===//
+                    document.body.classList.remove('overflow-hidden');
+                    //===> Hide Loader <===//
+                    Phenix(loading_wrapper).fadeOut();
+                    //===> Remove Loader <===//
+                    setTimeout(()=> loading_wrapper.querySelector('.content-box').remove(), 1000);
+                }, 2500);
+            });
+
+            //===> When Leaving Page <===//
+            window.addEventListener('beforeunload', isLeaving => Phenix(loading_wrapper).fadeIn());
         }
     });
 
