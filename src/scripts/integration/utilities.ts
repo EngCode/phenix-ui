@@ -107,16 +107,16 @@ PhenixElements.prototype.utilities = function (options?:{
         });
 
         //====> Images Demstions <====//
-        Phenix('img').forEach((img:any) => {
-            //===> Get Image Data <===//
-            let img_width = img.getAttribute('width') || img.style.width,
-                img_height = img.getAttribute('height') || img.style.height,
-                parent_width = img.parentNode.clientWidth,
-                parent_height = img.parentNode.clientHeight;
-            //===> Set Width and Height <===//
-            if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}px`);
-            if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}px`);
-        });
+        // Phenix('img').forEach((img:any) => {
+        //     //===> Get Image Data <===//
+        //     let img_width = img.getAttribute('width') || img.style.width,
+        //         img_height = img.getAttribute('height') || img.style.height,
+        //         parent_width = img.parentNode.clientWidth,
+        //         parent_height = img.parentNode.clientHeight;
+        //     //===> Set Width and Height <===//
+        //     if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}px`);
+        //     if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}px`);
+        // });
 
         //====> Loading <====//
         let loading_wrapper = document.querySelector('.px-loader');
