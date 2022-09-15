@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "..\\..\\phenix-wp"
+		},
+		{
+			"path": "..\\..\\..\\plugins\\pds-blocks"
 		}
 	],
 	"settings": {
