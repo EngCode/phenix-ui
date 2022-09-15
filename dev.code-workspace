@@ -1,16 +1,20 @@
 {
 	"folders": [
 		{
+			"name": "phenix-sys",
 			"path": "."
 		},
 		{
+			"name": "pds-blocks",
+			"path": "..\\..\\plugins\\pds-blocks"
+		},
+		{
+			"name": "phenix-wp",
 			"path": "..\\phenix-wp"
 		},
 		{
+			"name": "phenix-docs",
 			"path": "..\\phenix-docs"
-		},
-		{
-			"path": "..\\..\\plugins\\pds-blocks"
 		}
 	],
 	"settings": {
