@@ -4,10 +4,13 @@
 			"path": "."
 		},
 		{
-			"path": "..\\..\\phenix-wp"
+			"path": "..\\phenix-wp"
 		},
 		{
-			"path": "..\\..\\..\\plugins\\pds-blocks"
+			"path": "..\\phenix-docs"
+		},
+		{
+			"path": "..\\..\\plugins\\pds-blocks"
 		}
 	],
 	"settings": {
