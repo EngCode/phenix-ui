@@ -48,9 +48,6 @@
     "phenix-start": "concurrently --kill-others \"pnpm run phenix-sass\" \"pnpm run phenix-ts && size-limit\"",
     "phenix-ts": "pnpx webpack --config typescript.webpack.js --watch",
     "phenix-sass": "pnpx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "js-gzip": "gzipper compress ./dist/js/ ./dist/js/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
-    "css-gzip": "gzipper compress ./dist/css/ ./dist/css/ --gzip --include css,js --output-file-format [filename].[compressExt].[ext] --skip-compressed",
-    "px-gzipper": "del *.gz.* /a /s && pnpm run css-gzip && pnpm run js-gzip",
     "animate-sass": "pnpx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
   },
   "devDependencies": {
