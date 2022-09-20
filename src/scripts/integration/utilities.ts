@@ -106,18 +106,24 @@ PhenixElements.prototype.utilities = function (options?:{
             if (text.length > max) element.textContent = text.slice(0, max);
         });
 
-        //====> Images Demstions <====//
-        // Phenix('img').forEach((img:any) => {
-        //     //===> Get Image Data <===//
-        //     let img_width = img.getAttribute('width') || img.style.width,
-        //         img_height = img.getAttribute('height') || img.style.height,
-        //         parent_width = img.parentNode.clientWidth,
-        //         parent_height = img.parentNode.clientHeight;
-        //     //===> Set Width and Height <===//
-        //     if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}px`);
-        //     if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}px`);
-        // });
+        //====> icons List <====//
+        Phenix('.icons-list').forEach((list:any) => {
+            let classes = list.getAttribute('data-icon').split(" ");
+            list.querySelectorAll('li').forEach(item => item.classList.add(...classes));
+        });
 
+        //====> Images Demstions <====//
+        Phenix('img').forEach((img:any) => {
+            //===> Get Image Data <===//
+            let img_width = img.getAttribute('width') || img.style.width,
+                img_height = img.getAttribute('height') || img.style.height,
+                parent_width = img.parentNode.clientWidth,
+                parent_height = img.parentNode.clientHeight;
+            //===> Set Width and Height <===//
+            if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}px`);
+            if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}px`);
+        });
+        
         //====> Loading <====//
         let loading_wrapper = document.querySelector('.px-loader');
         if (loading_wrapper) {
@@ -140,6 +146,10 @@ PhenixElements.prototype.utilities = function (options?:{
             //===> When Leaving Page <===//
             window.addEventListener('beforeunload', isLeaving => Phenix(loading_wrapper).fadeIn());
         }
+
+        //====> Copyrights Protection <====//
+        // Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
+        // Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
     });
 
     //====> Return Phenix Query <====//
