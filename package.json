@@ -45,10 +45,10 @@
     }
   ],
   "scripts": {
-    "phenix-start": "concurrently --kill-others \"pnpm run phenix-sass\" \"pnpm run phenix-ts && size-limit\"",
-    "phenix-ts": "pnpx webpack --config typescript.webpack.js --watch",
-    "phenix-sass": "pnpx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "animate-sass": "pnpx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
+    "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\"",
+    "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
+    "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
+    "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",
