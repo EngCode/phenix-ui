@@ -46,39 +46,33 @@ PhenixElements.prototype.counter = function (options?:{
 
         //====> Count Runer <===//
         const runCounter = () => {
-            //===> Check if its Already Done <===//
-            let count_done = element.classList.contains('count-done');
-            if (count_done) return;
+            //===> Round Up Values <===//
+            count = Math.round(count)
+            value = Math.round(value)
 
-            //===> Set is Counting Name <===//
+            //===> Set is Counting <===//
             if (!counting) element.classList.add('counting');
+
             //===> if [Count Down] is Activated => Decrease the Count <===//
-            if (reverse) count -= increment;
+            if (reverse && count > 0) count -= increment;
+
             //===> Otherwise Increase the Count <===//
-            else count += increment;
+            else if (count < value) count += increment;
 
             //===> Current Value <===//
             let current = `${(count).toFixed(decimal).toString().replace(decimal_regex, ',')+symbol}`;
 
             //===> if the Element is Input Control <===//
             if (input) element.value = current;
+
             //===> Otherwise <===//
             else element.innerHTML = current;
 
             //===> Clear When Count Up Reaches The Target <===//
-            if (!reverse) {
-                if(Math.round(count) === Math.round(value)) {
-                    clearInterval(interval);
-                    element.classList.add('count-done');
-                }
-            }
+            if (!reverse && count === value) clearInterval(interval);
+
             //===> Clear When Count Down Reaches Zero <===//
-            else if (reverse) {
-                if(Math.round(count) === 0) {
-                    clearInterval(interval);
-                    element.classList.add('count-done');
-                }
-            }
+            else if (reverse && count === 0) clearInterval(interval);
         };
 
         //====> Counter Handler <====//
