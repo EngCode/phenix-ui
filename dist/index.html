@@ -7,65 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="The Description of This Page Goes Right Here and its !Important" />
     <meta name="keywords" content="phenix, phenix themes, phenix design, phenix wordporess, wordporess, themes, web design, web development, templates, responsive, gutenberg, plugins, javascript, sass, css4, next generation, utilities, typescript, bootstrap" />
-    <title>Phenix Design System v0.6.5 - Front-End Framework</title>
+    <title>Phenix Design System v0.7.0 - Front-End Framework</title>
     <!-- Other Meta Tags -->
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="Sitename Goes Here">
     <link rel="shortcut icon" type="image/png"  href="img/fevicon.png">
-    <!-- Required CSS Files -->
-    <link href="css/phenix.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Required CSS Files -->
+    <link href="css/phenix.css" rel="stylesheet" />
+    <!-- Load Fonts -->
+    <link href="css/fonts.css" rel="stylesheet" />
+    <link href="css/fontawsome.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Container -->
-    <div class="container-md pdy-75">
-        <!-- Grid -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-12 col-md-6 mb-30">
-                <!-- Form Control -->
-                <select name="px-select" class="form-control px-select" data-search="1" data-placeholder="Multiple Options" multiple>
-                    <option class="tx-icon fab fa-windows" value="option-1">Windows</option>
-                    <option class="tx-icon fab fa-apple" value="option-2">Mac OS</option>
-                    <option class="tx-icon fab fa-ubuntu" value="option-4">Linux Ubuntu</option>
-                    <option class="tx-icon fab fa-chrome" value="option-3">Chrome OS</option>
-                    <option class="tx-icon fab fa-android" value="option-5">Android</option>
-                    <option class="tx-icon fab fa-fedora" value="option-2">Linux Fedora</option>
-                </select>
-                <!-- // Form Controls -->
-            </div>
-            <!-- Column -->
-            <div class="col-12 col-md-6 mb-30">
-                <!-- Form Control -->
-                <select name="px-select" class="form-control px-select" data-search="1" data-placeholder="Min:2 Max:4" data-min="2" data-max="4" multiple>
-                    <option class="tx-icon fab fa-windows" value="option-1">Windows</option>
-                    <option class="tx-icon fab fa-apple" value="option-2">Mac OS</option>
-                    <option class="tx-icon fab fa-ubuntu" value="option-4">Linux Ubuntu</option>
-                    <option class="tx-icon fab fa-chrome" value="option-3">Chrome OS</option>
-                    <option class="tx-icon fab fa-android" value="option-5">Android</option>
-                    <option class="tx-icon fab fa-fedora" value="option-2">Linux Fedora</option>
-                </select>
-                <!-- // Form Controls -->
-            </div>
-            <!-- // Column -->
-        </div>
-        <!-- // Grid -->
-    </div>
+    
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link href="css/fontawsome.css" rel="stylesheet" />
+
     <!-- Script -->
     <script defer>
         Phenix(document).ready(isReady => {
-            //====> Activate Select <====//
-            let selects = Phenix('.px-select').select().on('change', opened => {
-                console.log(opened.detail);
-            });
+            
         });
     </script>
 </body>
