@@ -11,10 +11,6 @@
 		{
 			"name": "phenix-wp",
 			"path": "..\\phenix-wp"
-		},
-		{
-			"name": "phenix-docs",
-			"path": "..\\phenix-docs"
 		}
 	],
 	"settings": {
@@ -37,7 +33,7 @@
 			
 		],
 		"git.ignoreLimitWarning": true,
-		"liveServer.settings.multiRootWorkspaceName": "Tornado-v2",
+		"liveServer.settings.multiRootWorkspaceName": "pds-blocks",
 		"liveServer.settings.port": 5501,
 	}
 }
