@@ -87,11 +87,11 @@
 #### Changelog Update v0.7.0 {WIP}
 
 ```
-01 - [new] Advanced Select
 02 - [new] Phenix Repeater
 03 - [new] Phenix Uploader
 04 - [new] Rating Controller
-05 - [new] CSS Layout Groups
+05 - [update] CSS Layout Groups
+01 - [update] Advanced Select
 06 - [update] Counter Lazyloading
 07 - [update] Timer Lazyloading
 08 - [update] Responsive Form Controls Sizes
