@@ -48,6 +48,8 @@
     "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\"",
     "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
     "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
+    "copyJS": "Xcopy C:\\xampp\\htdocs\\phenix-sys\\dist\\js\\* C:\\xampp\\htdocs\\pds-react\\mitanok\\public\\js /E /C /I /Y",
+    "copyCSS": "Xcopy C:\\xampp\\htdocs\\phenix-sys\\dist\\js\\* C:\\xampp\\htdocs\\pds-react\\mitanok\\public\\css /E /C /I /Y",
     "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
   },
   "devDependencies": {

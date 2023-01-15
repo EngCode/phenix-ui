@@ -8,10 +8,9 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Advanced Select <====*/
 PhenixElements.prototype.select = function (options?:{
+    max?:number,
     search:boolean,
     multiple:boolean,
-    min?:number,
-    max?:number,
     placeholder?:string,
     searchPlaceholder?:string,
 }) {
@@ -21,7 +20,6 @@ PhenixElements.prototype.select = function (options?:{
         let events_data:any = {},
             classes  = select.classList,
             multiple = select.hasAttribute('multiple') || options?.multiple,
-            minItems = parseInt(select.getAttribute('data-min')) || options?.min,
             maxItems = parseInt(select.getAttribute('data-max')) || options?.max,
             search = select.getAttribute('data-search') || options?.search,
             placeholder = select.getAttribute('data-placeholder') || options?.placeholder,

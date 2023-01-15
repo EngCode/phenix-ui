@@ -26,14 +26,81 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-    
+
+    <div class="container-sm pd-50">
+        <!-- Dropdown Wrapper -->
+        <div class="px-dropdown" data-position="top, end">
+            <!-- Toggle Button -->
+            <button class="px-toggle btn small secondary">
+                Bottom, End <i class="ms-5 fas fa-plus fs-12"></i>
+            </button>
+            <!-- Dropdown Target -->
+            <ul class="px-dropdown-list reset-list bg-white fs-14 w-min-200">
+                <li><a href="#">Dropdown Item No. 01</a></li>
+                <li><a href="#">Dropdown Item No. 02</a></li>
+                <li><a href="#">Dropdown Item No. 03</a></li>
+                <li><a href="#">Dropdown Item No. 04</a></li>
+                <li><a href="#">Dropdown Item No. 05</a></li>
+            </ul>
+            <!-- // Dropdown Target -->
+        </div>
+        <!-- Dropdown Wrapper -->
+        <div class="px-dropdown" data-position="bottom, start">
+            <!-- Toggle Button -->
+            <button class="px-toggle btn small secondary">
+                Bottom, End <i class="ms-5 fas fa-plus fs-12"></i>
+            </button>
+            <!-- Dropdown Target -->
+            <ul class="px-dropdown-list reset-list bg-white fs-14 w-min-200">
+                <li><a href="#">Dropdown Item No. 01</a></li>
+                <li><a href="#">Dropdown Item No. 02</a></li>
+                <li><a href="#">Dropdown Item No. 03</a></li>
+                <li><a href="#">Dropdown Item No. 04</a></li>
+                <li><a href="#">Dropdown Item No. 05</a></li>
+            </ul>
+            <!-- // Dropdown Target -->
+        </div>
+        <!-- Dropdown Wrapper -->
+        <div class="px-dropdown" data-position="bottom, end">
+            <!-- Toggle Button -->
+            <button class="px-toggle btn small secondary">
+                Bottom, End <i class="ms-5 fas fa-plus fs-12"></i>
+            </button>
+            <!-- Dropdown Target -->
+            <ul class="px-dropdown-list reset-list bg-white fs-14 w-min-200">
+                <li><a href="#">Dropdown Item No. 01</a></li>
+                <li><a href="#">Dropdown Item No. 02</a></li>
+                <li><a href="#">Dropdown Item No. 03</a></li>
+                <li><a href="#">Dropdown Item No. 04</a></li>
+                <li><a href="#">Dropdown Item No. 05</a></li>
+            </ul>
+            <!-- // Dropdown Target -->
+        </div>
+        <!-- Dropdown Wrapper -->
+        <div class="px-dropdown" data-position="top, start">
+            <!-- Toggle Button -->
+            <button class="px-toggle btn small secondary">
+                Bottom, End <i class="ms-5 fas fa-plus fs-12"></i>
+            </button>
+            <!-- Dropdown Target -->
+            <ul class="px-dropdown-list reset-list bg-white fs-14 w-min-200">
+                <li><a href="#">Dropdown Item No. 01</a></li>
+                <li><a href="#">Dropdown Item No. 02</a></li>
+                <li><a href="#">Dropdown Item No. 03</a></li>
+                <li><a href="#">Dropdown Item No. 04</a></li>
+                <li><a href="#">Dropdown Item No. 05</a></li>
+            </ul>
+            <!-- // Dropdown Target -->
+        </div>
+        <!-- // Dropdown Wrapper -->
+    </div>
     <!-- Required JS Files -->
     <script src="js/phenix.js"></script>
 
     <!-- Script -->
     <script defer>
         Phenix(document).ready(isReady => {
-            
+            Phenix(".px-dropdown").dropdown();
         });
     </script>
 </body>
