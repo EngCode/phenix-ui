@@ -46,7 +46,7 @@ PhenixElements.prototype.menu = function (options?:{
         if (responsive === 'dropdown') {
             !effect ? effect = 'slide' : null;
         }
-        
+
         menu.setAttribute('data-effect', effect);
 
         //====> Marking Submenus <====//
@@ -66,8 +66,8 @@ PhenixElements.prototype.menu = function (options?:{
                 //===> Add Classes <===//
                 toggle_btn.classList.add('arrow-icon');
                 for (let index = 0; index < arrow_icon.length; index++) {
-                    let iconname = arrow_icon[index];              
-                    toggle_btn.classList.add(iconname);
+                    let iconName = arrow_icon[index];              
+                    toggle_btn.classList.add(iconName);
                 }
             }
             //===> Megamenu Fix <===//

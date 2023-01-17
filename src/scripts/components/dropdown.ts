@@ -116,7 +116,12 @@ PhenixElements.prototype.dropdown = function (options?:{
         };
 
         //====> Click to Dropdown <====//
-        dropdown_wrapper.querySelector(toggle).addEventListener('click', dropdown_start);
+        let toggle_element = dropdown_wrapper.querySelector(toggle);
+        toggle_element.addEventListener('click', dropdown_start);
+
+        //====> Set Accessibility Options <====//
+        toggle_element.setAttribute('role', 'button');
+        toggle_element.setAttribute('tabIndex', '0');
 
         //====> De-Activate on Blank <====//
         window.addEventListener('click', dropdown_hide);

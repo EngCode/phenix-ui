@@ -24,7 +24,7 @@
 }
 
 /*==== Containers ====*/
-.container {max-width: 1200px;}
+.container, .container-xl, .container-lg {max-width: 1200px;}
 
 .container-fluid {
     width:100%;
@@ -47,12 +47,9 @@
     @include large() { max-width: 1024px; }
 }
 
-.container-xl, .container-lg {
-    max-width: 1200px;
-    @media screen and (min-width: 1500px) {
-        max-width: 1400px;
-        --container-padding : #{REM(30)};
-    }
+@media screen and (min-width: 1500px) {
+    .container-xl, .container-lg {max-width: 1400px;}
+    .container-xl, .container-lg, .container-fluid {--container-padding : #{REM(30)};}
 }
 
 /*==== Flexbox Grid ====*/
