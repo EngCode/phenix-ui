@@ -19,7 +19,7 @@ import Phenix, { PhenixElements } from "..";
 /*====> Menu Builder <====*/
 PhenixElements.prototype.menu = function (options?:{
     menu_id?:string,     //===> Menu CSS ID
-    hover?:boolean,      //===> Dropdown on Hover [Disktop only]
+    hover?:boolean,      //===> Dropdown on Hover [Desktop only]
     sub_active?:string,  //===> Submenus CSS Active Class [px-submenu-active]
     mobile?:string,      //===> Responsive Mode [dropdown, custom]
     effect?:string,      //===> Dropdown Effect [slide, fade, custom]
@@ -146,7 +146,7 @@ PhenixElements.prototype.menu = function (options?:{
 
     /*====> Toggle Button <====*/
     Phenix(`.menu-toggle`).on('click', click => {
-        //===> Disable Default Behavor <===//
+        //===> Disable Default Behavior <===//
         click.preventDefault();
         //===> Dropdown Data <===//
         let trigger = click.target,
@@ -158,10 +158,10 @@ PhenixElements.prototype.menu = function (options?:{
         target = document.querySelector(target);
 
         //===> Toggle Menu <====//
-        target.classList.toggle('.px-menu-active');
+        target.classList.toggle('px-menu-active');
         let effect = target.getAttribute('data-effect');
         if (effect === 'slide') Phenix(target).slideToggle();
-        else if (effect === 'fade') Phenix(target).fadeToggle(500,0,'flex');
+        else if (effect === 'fade') Phenix(target).fadeToggle(500, 0, 'flex');
     });
 
     //====> Return Phenix Query <====//

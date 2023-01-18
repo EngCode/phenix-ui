@@ -137,29 +137,14 @@ PhenixElements.prototype.dropdown = function (options?:{
             page_dir   = Phenix(document).direction();
 
         //====> Target CSS <====//
-        the_target.css({
-            "display"  : "none",
-            "position" : "absolute",
-            "z-index"  : "var(--dropdown-index)",
-        });
-
-        //====> Target Position [Top] <====//
-        if(position[0] === "top") the_target.addClass('pos-before-y');
-
-        //====> Target Position [Bottom] <====//
-        else the_target.addClass('pos-after-y');
+        the_target.addClass("position-ab");
+        the_target.css({"display": "none", "z-index": "var(--dropdown-index)"});
         
-        //====> Target Position [Center] <====//
-        if (position[1] === "center") the_target.css({
-            "left" : "50%",
-            "transform" : "translateX(-50%)"
-        });
+        //====> Position [X] <====//
+        the_target.addClass(`pos-${position[1] !== "center" ? `${position[1]}-0` : position[1]+"-x"}`);
 
-        //===> Target Position [End] <====//
-        else if (position[1] === "end") page_dir == 'ltr' ? the_target.css({"right": 0, "left": null}) : the_target.css({"left": 0, "right": null});
-
-        //===> Target Position [Start] <====/
-        else page_dir == 'ltr' ? the_target.css({"left": 0, "right": null}) : the_target.css({"right": 0, "left": null});
+        //====> Position [Y] <====//
+        position[0] === "top" ? the_target.addClass('pos-before-y') : the_target.addClass('pos-after-y');
 
         //====> Change Position on Scroll <====//
         let isScrolling = false;
