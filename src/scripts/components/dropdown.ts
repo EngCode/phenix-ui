@@ -127,28 +127,21 @@ PhenixElements.prototype.dropdown = function (options?:{
         window.addEventListener('click', dropdown_hide);
 
         //====> CSS Prepare <====//
-        Phenix(dropdown_wrapper).css({"position" : "relative"});
+        Phenix(dropdown_wrapper).addClass("position-rv");
 
         //====> Divide Positions <====//
         position = position.replace(' ','').split(',');
 
         //====> Define Targets <====//
         let the_target = Phenix(dropdown_target),
-            page_dir   = Phenix(document).direction();
+            isScrolling = false
 
-        //====> Target CSS <====//
-        the_target.addClass("position-ab");
-        the_target.css({"display": "none", "z-index": "var(--dropdown-index)"});
-        
-        //====> Position [X] <====//
-        the_target.addClass(`pos-${position[1] !== "center" ? `${position[1]}-0` : position[1]+"-x"}`);
-
-        //====> Position [Y] <====//
+        //====> Style Utilites <====//
+        the_target.addClass("position-ab").addClass("z-index-dropdown").addClass("hidden");
+        the_target.addClass(`pos-${position[1] !== "center" ? `${position[1]}-0` : `${position[1]}-x`}`);
         position[0] === "top" ? the_target.addClass('pos-before-y') : the_target.addClass('pos-after-y');
 
         //====> Change Position on Scroll <====//
-        let isScrolling = false;
-
         window.addEventListener('scroll', scrolling => isScrolling = true, {passive: true});
 
         setInterval(() => {
