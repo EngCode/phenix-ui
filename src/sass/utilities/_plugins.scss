@@ -145,6 +145,14 @@
     background-color: #F1F2F3;
 }
 
+/*==== Phenix Animations ====*/
+.px-animate {
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+}
+
 /*==== Background X ====*/
 .bg-animated-x {
     --duration : 60s;
@@ -160,6 +168,13 @@
             animation: background_y var(--duration) linear infinite;
 }
 
+/*==== Row Fix ====*/
+.container-fluid > .row {
+    margin-left: calc(var(--container-padding) * -1);
+    margin-right: calc(var(--container-padding) * -1);
+}
+
+/*==== Custom Animations ====*/
 @-webkit-keyframes background_x {
     from {background-position: 0 0;}
     to {background-position: 100% 0;}
