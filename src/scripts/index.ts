@@ -605,7 +605,7 @@ import './components/datatable'; //==> Data-Tables
 /*====> Integration <====*/
 import './integration/slider';    //==> Splide.js Slider
 import './integration/utilities'; //==> Phenix Utilities
-import './integration/wordpress'; //==> Wordpress Integration
+// import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/
 import './custom-scripts';
