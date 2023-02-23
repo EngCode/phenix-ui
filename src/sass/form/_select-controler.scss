@@ -1,4 +1,4 @@
-/**======> Referance By Comment <======
+/**======> Reference By Comment <======
  * ===> 01 - Tornado Select 
  * ===> 02 - CSS Options
  * ===> 03 - Standard
@@ -9,3 +9,11 @@
 
 /*==== Utlites ====*/
 @import '../assets/mixin';
+
+/*==== Phenix Select ====*/
+.px-select {
+    .px-select-search {
+        font-size: inherit;
+        max-width: calc(100% - 1.5em);
+    }
+}
