@@ -28,6 +28,7 @@
     
     /*==== Display ====*/
     .inline-block#{$infix}  {display: inline-block;}
+    .inline-flex#{$infix} {display: inline-flex;}
     .display#{$infix}-block {display: block;}
     .display#{$infix}-grid  {display: grid;}
     .display#{$infix}-flex  {display: flex;}
