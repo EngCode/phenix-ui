@@ -1,0 +1,62 @@
+{
+  "name": "phenix-ui",
+  "version": "0.6.9",
+  "description": "Phenix Design System User Interface / Front-End Framework - Extended From 'Tornado UI v2'.",
+  "author": "Abdullah.Ramadan <elampratorabdallah14@gmail.com> (https://phenixthemes.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EngCode/phenix-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EngCode/phenix-ui/issues"
+  },
+  "homepage": "https://design.phenixthemes.com",
+  "keywords": [
+    "phenix",
+    "phenix ui",
+    "tornado ui",
+    "design system",
+    "bootstrap",
+    "tailwind",
+    "framework",
+    "css",
+    "js",
+    "esNext",
+    "web",
+    "app",
+    "enviroment",
+    "webpack",
+    "sass",
+    "rtl",
+    "typescript"
+  ],
+  "main": "/dist/css/phenix.css",
+  "exports": {
+    "phenix-ts": "./src/typescript/",
+    "phenix-sass": "./src/sass/",
+    "phenix-css": "./dist/css/",
+    "phenix-js": "./dist/js/"
+  },
+  "size-limit": [
+    {
+      "limit": "75 kB",
+      "path": "dist/js/phenix.js"
+    }
+  ],
+  "scripts": {
+    "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\"",
+    "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
+    "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
+    "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
+  },
+  "devDependencies": {
+    "concurrently": "^6.5.1",
+    "node-sass": "^7.0.1",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.10",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  }
+}

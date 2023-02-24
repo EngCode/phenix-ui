@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"name": "phenix-sys",
+			"path": "."
+		},
+		{
+			"name": "pds-blocks",
+			"path": "..\\..\\plugins\\pds-blocks"
+		},
+		{
+			"name": "phenix-wp",
+			"path": "..\\phenix-wp"
+		}
+	],
+	"settings": {
+		// Sass Compile Setting
+		"liveSassCompile.settings.generateMap":true,
+		"liveSassCompile.settings.formats":[
+			/* Sass framework Minifyed */
+			{
+				"format": "compressed",
+				"extensionName": ".min.css",
+				"savePath": "/dist/css"
+			},
+			
+			/* Sass framework Minifyed */
+			{
+				"format": "compressed",
+				"extensionName": ".min.css",
+				"savePath": "/docs/assets"
+			},
+			
+		],
+		"git.ignoreLimitWarning": true,
+		"liveServer.settings.multiRootWorkspaceName": "pds-blocks",
+		"liveServer.settings.port": 5501,
+	}
+}
