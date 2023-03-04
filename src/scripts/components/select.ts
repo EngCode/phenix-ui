@@ -16,9 +16,6 @@ PhenixElements.prototype.select = function (options?:{
 }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach(select => {
-        //====> React FallBack <====//
-        if(select.tagName !== "SELECT") return;
-
         //====> Get Options <====//
         let events_data:any = {},
             classes  = select.classList,

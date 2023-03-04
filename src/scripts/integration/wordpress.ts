@@ -9,13 +9,67 @@ PDS_WP_KEY:any;
 
 /*====> D.O.M is Ready ? <====*/
 Phenix(document).ready(ready => {
+    /*====> Change Scrollbar <====*/
+    document.querySelector('html').classList.add('px-scrollbar');
+    document.querySelector('#phenix-js')?.removeAttribute('async');
+
+    /*====> Unblock Fonts <====*/
+    Phenix('#fontawesome-css, #pds-cfont-css, #theme-style-css, #phenix-css').forEach((style:HTMLElement) => style.setAttribute('media', 'all'));
+
     /*====> for Front-End <====*/
     if (!document.body.classList.contains('wp-admin')) {
-        //====> S.E.O : Headline Fix <====//
+        //====> S.E.O : Fixes <====//
+        document.body.setAttribute('itemscope', "");
+        document.body.setAttribute('itemtype', "https://schema.org/WebPage");
         if(!document.querySelector('h1')) Phenix('.main-header').insert('append', `<h1 class="hidden">${document.title}</h1>`);
+
+        //====> S.E.O : Missing Meta <====//
+        if (!document.head.querySelector('meta[name="description"]')) Phenix(document.head).insert('append', `<meta name="description" content="this is ${document.title} website with no proper description.">`);
+        if (!document.head.querySelector('meta[name="keywords"]')) Phenix(document.head).insert('append', `<meta name="description" content="${document.title}, HTML, Phenix, Abdullah, Ramadan, Web, Designer, Developer, Placeholder, Keyword, WordPress, phenixthemes.com">`);
+        
+        //====> Links do not have a discernible name <====//
+        Phenix('a:empty').forEach((link:HTMLElement) => {
+            //===> Define Data <===//
+            let elTitle:string,
+                elType = link.classList.contains('btn') ? "Button" : link.classList.contains('media') ? "Media" : "Resource";
+
+            //===> Get a Correct Title <===//
+            let parent = Phenix(link).ancestor('[class*="col"]') || Phenix(link).ancestor('[class*="row"]') || Phenix(link).ancestor('[class*="container"]');
+            if (parent && parent.querySelectorAll('h2, h3, h4, p')[0]) {
+                parent.querySelectorAll('h2, h3, h4, p').forEach(element => !elTitle && element.textContent ? elTitle = element.textContent : null);
+            } else elTitle = document.title;
+
+            //===> Set Attributes <===//
+            if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${elTitle} ${elType} Link`);
+            if(!link.getAttribute('title') || link.getAttribute('title') === "") link.setAttribute('title', `${elTitle} ${elType} Link`);
+        });
 
         //===> Contact Form 7 Fixes <===//
         if (document.querySelector(".wpcf7-form")) {
+            //===> Redirect WP7 After Submit <===//
+            if (window.location.hash.substr(1).includes('wpcf7-')) {
+                //===> ... <===//
+                let isFailed = false,
+                    theForm = document.querySelector(`#${window.location.hash.substr(1)}`);
+                
+                //===> Check Forms <===//
+                if(theForm.classList.contains('failed')) isFailed = true;
+
+                //===> Redirect <===//
+                if (isFailed === false) {
+                    console.log("is Success");
+                    window.location.href = `${PDS_WP_KEY.site ? PDS_WP_KEY.site + '/success' : "/success"}`;
+                }
+
+                //===> Show Failed Message <===//
+                else Phenix(document).notifications({
+                    type: "error",
+                    duration: "7000",
+                    position: ["center", "center"],
+                    message: Phenix(document).direction() === "ltr" ? "Something Went Wrong Please Try Again." : "لقد حدث خطأ ما يرجي اعادة المحاولة.",
+                });
+            }
+
             //===> Textarea <===//
             Phenix('.wpcf7-textarea').forEach((element:any) => {
                 element.setAttribute('cols', null);
@@ -34,17 +88,66 @@ Phenix(document).ready(ready => {
         Phenix('.current-menu-parent, .current-menu-item').addClass('px-item-active');
 
         //====> Adminbar Fix <====//
-        if (document.querySelector('#wpadminbar')) Phenix('body').css({ 'padding-top' : '32px' });
-
-        //====> Adminbar <====//
-        if (document.querySelector('#wpadminbar')) Phenix('body').css({"margin-top": "-24px","padding": "0"});
+        if (document.querySelector('#wpadminbar')) Phenix('body').css({ "padding": "0", 'padding-top' : '32px', "margin-top": "-24px"});
 
         //===> Set Logo Link <===//
         Phenix(".wp-block-phenix-logo").setAttributes({"href": PDS_WP_KEY?.site || "/"});
-    }
 
+        //===> Form Spam Protection <===//
+        let FormsSubmit = Phenix('form[action] [type="submit"]'),
+            spamInput = `<input style="left:100%; opacity: 0; visibility: hidden; z-index: -1" class="hidden position-ab" type="text" name="px-prot" value="" tabindex="-1" autocomplete="off" />`;
+
+        //===> Create Spam Inputs <===//
+        FormsSubmit.forEach(button => Phenix(button).insert('after', spamInput));
+
+        //===> Add Spam Protection Filter <===//
+        Phenix('form[action] [type="submit"]').on('click', isClicked => {
+            //===> Get Form <===//
+            let button = isClicked.target,
+                form = Phenix(button).ancestor('form'),
+                value = form.querySelector('[name="px-prot"]').value;
+
+            if(value && value !== "") form.addEventListener('submit', submit => submit.preventDefault());
+        });
+
+        //===> Extra Spam Protection <===//
+        document.querySelectorAll("form[action]").forEach((form:any) => form.addEventListener('submit', submit => {
+            let value = form.querySelector('[name="px-prot"]')?.value;
+            if(value && value !== "") submit.preventDefault();
+        }));
+    } 
+    /*====> for the Admin <====*/
+    else {
+        //===> Fix Tables Style <===//
+        Phenix('.wp-list-table .column-date, .wp-list-table .column-author').forEach((dateColumn:HTMLElement) => {
+            dateColumn.classList.add('tx-nowrap');
+            dateColumn.innerHTML = dateColumn.innerHTML.replace('<br>', ' ');
+        });
+
+        //===> Fix Tables Style <===//
+        Phenix('.wp-list-table .row-actions span').forEach((spanLink:HTMLElement) => spanLink.innerHTML = spanLink.innerHTML.replace('|', ''));
+    }
     /*====> for the Editor <====*/
     if(document.querySelector("#site-editor") || document.querySelector('body.block-editor-page')) {
+        //===> Site Editor Only <====//
+        if (document.querySelector('#site-editor')) {
+            let loadAssetTimer = setInterval(()=> {
+                //===> Load Assets in Frame <====//
+                if (window.frames['editor-canvas']) {
+                    //===> Check in the Editor <===//
+                    let frameDoc = window.frames['editor-canvas'].document,
+                        fontAwesome = document.querySelector("#fontawesome-css");
+                    //===> Load FontAwesome <===//
+                    if (!frameDoc.querySelector("#fontawesome-css") && fontAwesome) frameDoc.body.appendChild(document.importNode(fontAwesome, true));
+                    //===> Clear Timer <===//
+                    clearInterval(loadAssetTimer);
+                }
+            }, 1000);
+        }
+
+        //====> Add Design Options Classes <===//
+        document.body.classList.add('phenix-wp-design');
+
         //====> Disable Links <====//
         Phenix('.editor-styles-wrapper a[href]').on('click', clicked => clicked.preventDefault(), true);
 
@@ -55,5 +158,16 @@ Phenix(document).ready(ready => {
 
         //===> Run Files Remover <===//
         Phenix(`${reset_styles}, ${common_css}, ${block_library}`).forEach((file:HTMLElement) => file.remove());
+    }
+    /*====> for Adminbar <====*/
+    if(document.querySelector('#wpadminbar')) {
+        /*====> Remove Logo Submenu <====*/
+        document.querySelector('#wp-admin-bar-wp-logo .ab-sub-wrapper')?.remove();
+        document.querySelector('#wp-admin-bar-customize')?.remove();
+        let aboutLink = document.querySelector('#wpadminbar .ab-item[href*="about.php"]');
+        if (aboutLink) aboutLink.setAttribute('href', aboutLink.getAttribute('href').replace('about.php', 'admin.php?page=pds-dashboard'));
+
+        /*====> Fixes <====*/
+        Phenix('a.ab-item, .ab-item a').forEach((link:HTMLElement) => link.setAttribute('rel', 'noopener'));
     }
 });

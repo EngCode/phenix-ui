@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://design.phenixthemes.com">
-    <img src="https://design.phenixthemes.com/wp-content/themes/phenix-docs/_front-end/dist/img/px-logo/phenix-design-icon.svg" alt="Phenix Design logo" width="175" height="162">
+    <img src="https://phenixthemes.com/pds-docs/wp-content/uploads/sites/2/2022/09/phenix-design-icon.svg" alt="Phenix Design logo" width="175" height="162">
   </a>
 </p>
 
@@ -41,8 +41,8 @@
 
 <div>
 <ul style="list-style:none;padding:0;margin:0">
-    <li>✅ CSS 100kb and 17KB Gzipped</li>
-    <li>✅ JavaScript 60kb and 14.5KB Gzipped</li>
+    <li>✅ Core CSS 140kb and 32KB Gzipped</li>  
+    <li>✅ JavaScript 80kb and 30KB Gzipped</li>
     <li>✅ Builded with Sass and TypeScript</li>
     <li>✅ Built-In Powerful JavaScript plugins</li>
     <li>✅ Build Anything with CSS Utilities</li>
@@ -60,46 +60,54 @@
     <li>✅ Javascript Time Counter</li>
     <li>✅ Dropdown Buttons and Menu's</li>
     <li>✅ View-Port Animations</li>
-    <li>✴️ Design Theme Switcher</li>
-    <li>✴️ API Connection Handler</li>
     <li>✅ Standard Form Controls</li>
-    <li>✴️ Advanced Form Controls</li>
+    <li>✅ Advanced Select Control</li>
     <li>✅ Easy Form Validation</li>
-    <li>✴️ Advanced Datatables</li>
     <li>✅ CSS Utilities to build freely</li>
     <li>✅ Responsive Navigation Menu</li>
     <li>✅ Responsive Megamenu</li>
     <li>✅ Notifications System</li>
     <li>✅ Advanced Popup Modals</li>
     <li>✅ Simple Tabs & Panels</li>
-    <li>✴️ Tooltip & Popovers</li>
     <li>✅ Shape Shifter Progress Bars</li>
-    <li>✴️ Advanced HTML Multimedia Players</li>
     <li>✅ Lazy-Loading for Everything</li>
     <li>✅ JavaScript Data attributes API</li>
     <li>✅ CSS Animations on Demand</li>
     <li>✅ Slider/Carousel on Demand</li>
+    <li>✴️ Tooltip & Popovers</li>
+    <li>✴️ Advanced Form Controls</li>
+    <li>✴️ Advanced Datatables</li>
+    <li>✴️ Design Theme Switcher</li>
+    <li>✴️ API Connection Handler</li>
+    <li>✴️ Advanced HTML Multimedia Players</li>
 </ul>
 </div>
 
 ---
 
-#### Changelog Update v0.7.0 {WIP}
+#### Changelog Update v0.8.0 {WIP}
 
 ```
-02 - [new] Phenix Repeater
-03 - [new] Phenix Uploader
-04 - [new] Rating Controller
-05 - [update] CSS Layout Groups
-01 - [update] Advanced Select
-06 - [update] Counter Lazyloading
-07 - [update] Timer Lazyloading
-08 - [update] Responsive Form Controls Sizes
-09 - [Doc] Carousel Slider
-10 - [update] Border Utilities
-11 - [update] Position Utilities changed
-12 - [update] Dynamic Position for Dropdowns, Select
-13 - [new] Clip-Path Method (https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path)
+01 - [new] Phenix Repeater
+02 - [new] Phenix Uploader
+03 - [new] Rating Controller
+04 - [new] Clip-Path Method (https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path)
+```
+
+---
+
+#### Changelog Update v0.7.0
+
+```
+01 - [update] CSS Layout Groups
+02 - [update] Advanced Select
+03 - [update] Counter Lazyloading
+04 - [update] Timer Lazyloading
+05 - [update] Responsive Form Controls Sizes
+06 - [Doc] Carousel Slider
+07 - [update] Border Utilities
+08 - [update] Position Utilities changed
+09 - [update] Dynamic Position for Dropdowns, Select
 ```
 
 ---

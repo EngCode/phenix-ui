@@ -125,11 +125,11 @@
     /*=== Text ===*/
     color : var(--color);
     font-size : var(--text-size);
-    @extend %fast-motion;
     /*=== Space & Size ===*/
     @extend %inline-block;
     @include padding-inline(var(--padding));
     &:not([class*="col-"]):not(.inline) {width:100%;}
+    transition: color 0.3s ease, background-color 0.3s, border-color 0.3s;
 
     /*=== Focus Mode ===*/
     &:focus {outline: var(--border-size) dashed var(--primary-color);}
@@ -154,6 +154,7 @@ select.form-control, .reset-appearance {
 /*==== Textarea Theme ====*/
 textarea.form-control {
     height : auto;
+    line-height: normal;
     min-height : calc(var(--height)*2);
     @include padding-block(var(--padding));
 }
@@ -219,12 +220,11 @@ label,legend  {@extend %inline-block;}
     line-height: var(--height);
     /*==== option box ====*/
     span::before {
-        top: -1px;
-        line-height: 1;
         position : relative;
         color: var(--color);
-        @extend %fast-motion;
+        line-height: inherit;
         @extend %inline-block;
+        transition: color 0.3s ease, background-color 0.3s, border-color 0.3s;
     }
     /*==== ... ====*/
     input {
@@ -234,8 +234,10 @@ label,legend  {@extend %inline-block;}
     /*==== Checkbox & Radio ====*/
     &[data-type="checkbox"], &[data-type="radio"] {
         span::before {
+            top: -1px;
             padding: 4px;
             font-size: 0.8em;
+            line-height: 1;
             --border-color : var(--color);
             @include margin-inline(5px, 'end');
             border-radius: var(--radius);
@@ -256,13 +258,13 @@ label,legend  {@extend %inline-block;}
     /*==== Switches ====*/
     &[data-type="switch"] .switch {
         position: relative;
-        @extend %fast-motion;
-        @extend %inline-block;
-        @include margin-inline(5px);
-        background-color: var(--color);
         width: var(--height);
+        @extend %inline-block;
+        background-color: var(--color);
+        @include margin-inline(5px, 'end');
         height: calc(var(--height) / 2.15);
         border-radius: calc(var(--height) / 2.15);
+        transition: color 0.3s ease, background-color 0.3s, border-color 0.3s, inset 0.3s;
         /*==== Handle ====*/
         &::before {
             top: 50%;

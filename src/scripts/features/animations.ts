@@ -123,6 +123,8 @@ PhenixElements.prototype.animations = function (options?:{
         //===> Set Attributes <===//
         animations_loader.setAttribute('id', `px-animations${id}`);
         animations_loader.setAttribute('rel', 'stylesheet');
+        animations_loader.setAttribute('class', 'px-css-file');
+        animations_loader.setAttribute('media', 'screen and (min-width: 2500px)');
 
         //===> Set Source <===//
         animations_loader.setAttribute("href", package_url);
@@ -131,8 +133,13 @@ PhenixElements.prototype.animations = function (options?:{
         document.head.appendChild(animations_loader);
 
         //====> When Loaded Run Sliders <====//
-        animations_loader.addEventListener("load", () => viewPort_Handler);
-    
+        animations_loader.addEventListener("load", () => {
+            viewPort_Handler;
+            /*====> Unblock Fonts <====*/
+            animations_loader.setAttribute('media', 'all');
+            // document.head.querySelectorAll('.px-css-file').forEach(style => style.setAttribute('media', 'all'));
+        });
+
         //====> When Error Re-Load <====//
         animations_loader.addEventListener("error", () => animations_loader.setAttribute("href", package_url));
     }

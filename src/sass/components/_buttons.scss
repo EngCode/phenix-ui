@@ -1,4 +1,4 @@
-/**======> Referance By Comment <======
+/**======> Reference By Comment <======
  * ===> 01 - Buttons 
  * ===> 02 - Options
  * ===> 03 - Standard
@@ -63,9 +63,9 @@
     font-weight : var(--text-weight);
     line-height : var(--height);
     background-color : var(--background);
-    @extend %fast-motion;
     @extend %inline-block;
     @include padding-inline(var(--padding), 'both');
+    transition: color 0.3s ease, background-color 0.3s, border-color 0.3s;
     
     a {
         color : inherit;
@@ -73,10 +73,14 @@
     }
 
     /*==== icons preset ====*/
-    &::before {
-        margin-top: -1px;
-        line-height: inherit;
+    &::before, .icon {
+        line-height: 1;
         @extend %inline-block;
+    }
+
+    .icon {
+        top: -1px;
+        position: relative;
     }
     
     /*===== Button Sizes  ===*/
@@ -102,6 +106,7 @@
         @include make_button_sizes('-sm');
     };
 
+    /*===== Icons for Button ===*/
     &.square {
         width: var(--height);
         @include padding-inline(0, 'both');
@@ -111,13 +116,12 @@
     &.outline {
         --border-size  : 2px;
         --border-color : rgba(0,0,0, 0.1);
-        line-height : calc(var(--height) - 4px);
+        line-height : calc(var(--height) - 3px);
     }
 
-    /*===== Icons for Button ===*/
     &.btn-icon {
         /*==== icon ====*/
-        &::before {@include margin-inline(calc(var(--padding) / 2) ,'end');}
+        &::before, .icon {@include margin-inline(calc(var(--padding) / 2) ,'end');}
 
         /*==== Labeled ====*/
         &.labeled {padding-#{$direction-start}: 0;}
@@ -125,7 +129,7 @@
 
     &.btn-icon-end {
         /*==== icon ====*/
-        &::before {
+        &::before, .icon {
             float: $direction-end;
             @include margin-inline(calc(var(--padding) / 2) ,'start');
         }
@@ -133,7 +137,7 @@
         &.labeled {padding-#{$direction-end}: 0;}
     }
 
-    &.labeled::before {
+    &.labeled::before, &.labeled .icon {
         width: var(--height);
         height: var(--height);
         background-color: rgba(#000, 0.1);
@@ -178,14 +182,19 @@
     
     /*===== Outline ====*/
     &.outline {--background : transparent;}
+    
+    /*==== Mobile Only ====*/
+    &.responsive-btn, &.btn-responsive {
+        @include small('down') {
+            --padding: 0;
+            overflow: hidden;
+            width: var(--height);
+            &::before {
+                display: block;
+                line-height: inherit;
+                margin-#{$direction-end}: 0;
+            }
+        };
+    }
 }
 
-/*==== Mobile Only ====*/
-@include small('down') {
-    .btn.responsive-btn, .btn-responsive {
-        --padding: 0;
-        overflow: hidden;
-        width: var(--height);
-        &::before {display: block;margin: 0;}
-    }
-};
