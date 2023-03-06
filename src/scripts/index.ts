@@ -535,7 +535,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this;
     };
 
-    /*====> Define Informations <====*/
+    /*====> Define Information <====*/
     height; getCSS; direction; getURL
     inView; viewport; copyrights;
 
@@ -552,7 +552,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     dropdown; tabs; collapse; connect;
     popup; lightbox; menu; datatable;
     validation; uploader; progress;
-    select; repeater; rating;
+    select; repeater; rating; seo; loader;
     slider; utilities; notifications;
 }
 
@@ -580,8 +580,11 @@ const Phenix = (selector?:any) => {
 //====> Export Phenix <====//
 export default Phenix;
 
+//===> Page Loader Script <===//
+import './integration/loader';
+
 /*====> Import Features <====*/
-import './features/get-info';   //==> Info Informations
+import './features/get-info';   //==> Information
 import './features/effects';    //==> UI Effects
 import './features/counter';    //==> Animated Counter
 import './features/animations'; //==> View-port Animations

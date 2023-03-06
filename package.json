@@ -1,6 +1,6 @@
 {
   "name": "phenix-ui",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Phenix Design System User Interface / Front-End Framework - Extended From 'Tornado UI v2'.",
   "author": "Abdullah.Ramadan <elampratorabdallah14@gmail.com> (https://phenixthemes.com)",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\"",
     "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
     "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
-    "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed --source-map false"
+    "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",
