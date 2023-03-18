@@ -537,7 +537,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
     /*====> Define Information <====*/
     height; getCSS; direction; getURL
-    inView; viewport; copyrights;
+    inView; viewport; copyrights; init;
 
     /*====> Define UI Effects <====*/
     slideUp; slideDown; slideToggle;

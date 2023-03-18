@@ -103,14 +103,18 @@
 .mouse-normal {cursor: none;}
 .mouse-pointer {cursor: pointer;}
 .links-inherit a {color: inherit;}
+.mouse-no-events {pointer-events: none;}
 .tx-icon::before {margin-#{$direction-end}: 7px;}
 
 /*==== Custom Scrollbar ====*/
 .px-scrollbar {
+    --scrollbar-color : var(--gray-color);
+    --scrollbar-thumb : var(--dark-color);
+
     scrollbar-width: thin;
-    scrollbar-color: var(--gray-color) rgba(#000, 0.05);
-    &::-webkit-scrollbar-track {background-color: rgba(#000, 0.05);}
-    &::-webkit-scrollbar-thumb {background-color: rgba(#000, 0.15);}
+    scrollbar-color: var(--scrollbar-color) var(--scrollbar-thumb);
+    &::-webkit-scrollbar-track {background-color: var(--scrollbar-color);}
+    &::-webkit-scrollbar-thumb {background-color: var(--scrollbar-thumb);}
     &::-webkit-scrollbar {
         width: 10px;
         box-shadow: inset 1px 0 0 0 1px rgba(#000, 0.1);
