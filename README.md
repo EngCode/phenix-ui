@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/build-v0.6.9-blue.svg" alt="" />
+  <img src="https://img.shields.io/badge/build-v0.7.3-blue.svg" alt="" />
   <img src="https://img.shields.io/github/languages/code-size/EngCode/phenix-ui.svg" alt="" />
   <img src="https://img.shields.io/github/repo-size/EngCode/phenix-ui.svg" alt="" />
   <img src="https://img.shields.io/github/issues/EngCode/phenix-ui.svg" alt="" />
@@ -78,7 +78,6 @@
     <li>✴️ Advanced Form Controls</li>
     <li>✴️ Advanced Datatables</li>
     <li>✴️ Design Theme Switcher</li>
-    <li>✴️ API Connection Handler</li>
     <li>✴️ Advanced HTML Multimedia Players</li>
 </ul>
 </div>
@@ -96,7 +95,7 @@
 
 ---
 
-#### Changelog Update v0.7.0
+#### Changelog Update v0.7.X
 
 ```
 01 - [update] CSS Layout Groups
@@ -108,6 +107,7 @@
 07 - [update] Border Utilities
 08 - [update] Position Utilities changed
 09 - [update] Dynamic Position for Dropdowns, Select
+10 - [update] Popups Modal and Select Component.
 ```
 
 ---
@@ -186,7 +186,7 @@ the next piece of code will load ******[Phenix D.S](https://design.phenixthemes
 
 ```
 <!-- Phenix CSS LTR -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/css/phenix.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.3/dist/css/phenix.css" rel="stylesheet" />
 ```
 
 ### Right-to-Left (RTL) Version
@@ -195,7 +195,7 @@ if your document language is right-to-left you can use ****[Phenix D.S](https:/
 
 ```
 <!-- Phenix CSS RTL -->
-<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/css/phenix-rtl.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.3/dist/css/phenix-rtl.css" rel="stylesheet" />
 ```
 
 ---
@@ -206,7 +206,7 @@ the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.c
 
 ```
 <!-- Phenix JS -->
-<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.0/dist/js/phenix.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phenix-ui@0.7.3/dist/js/phenix.js"></script>
 ```
 
 ---
