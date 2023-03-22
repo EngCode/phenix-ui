@@ -99,7 +99,7 @@
 
 ```
 01 - [update] CSS Layout Groups
-02 - [update] Advanced Select
+02 - [update] Advanced Select [rebuild, react compatibility, multiple mode]
 03 - [update] Counter Lazyloading
 04 - [update] Timer Lazyloading
 05 - [update] Responsive Form Controls Sizes
