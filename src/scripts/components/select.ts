@@ -502,7 +502,7 @@ PhenixElements.prototype.select = function (options?:{
 
                         //====> Select Original Options <====//
                         select.querySelector(`[value="${value}"]`)?.setAttribute('selected', true);
-                        new_select[0].querySelector(`[data-value="${value}"]`)?.classList.add('px-selected');
+                        options_list[0].querySelector(`[data-value="${value}"]`)?.classList.add('px-selected');
                     }
 
                     //===> Fire Event <===//
