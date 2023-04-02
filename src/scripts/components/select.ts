@@ -16,16 +16,6 @@ PhenixElements.prototype.select = function (options?:{
 }) {
     //====> Loop Through Phenix Elements <====//
     this.forEach(select => {
-        //====> Fallback Fix <====//
-        if(select.tagName !== "SELECT") {
-            let the_controller = select.querySelector('select.px-mounted');
-            if (the_controller) {
-                let update_event = new CustomEvent('update', {bubbles: true,cancelable: false});
-                the_controller.dispatchEvent(update_event);
-            }
-            return;
-        };
-
         //====> Get Options <====//
         let events_data:any = {},
             classes  = select.classList,
@@ -34,6 +24,14 @@ PhenixElements.prototype.select = function (options?:{
             search = select.getAttribute('data-search') || options?.search,
             placeholder = select.getAttribute('data-placeholder') || options?.placeholder,
             searchPlaceholder = select.getAttribute('data-search-placeholder') || options?.searchPlaceholder || 'Search...';
+        
+        //====> Create Custom Events <====//
+        const opened = new CustomEvent('opened', {detail: events_data,bubbles: true,cancelable: false}), 
+              change = new CustomEvent('change', {detail: events_data,bubbles: true,cancelable: false}), 
+              update = new CustomEvent('update', {detail: events_data,bubbles: true,cancelable: false}), 
+              typing = new CustomEvent('typing', {detail: events_data,bubbles: true,cancelable: false}), 
+              focus  = new CustomEvent('focus',  {detail: events_data,bubbles: true,cancelable: false}), 
+              closed = new CustomEvent('closed', {detail: events_data,bubbles: true,cancelable: false});
 
         //====> Select Component <====//
         const select_create = () => {
@@ -79,50 +77,38 @@ PhenixElements.prototype.select = function (options?:{
             return [new_select, options_list]
         };
 
+        //===> if its Wrong Element Skip-it <====//
+        if (select.tagName !== "SELECT") return;
+
+        //====> Rebuild from Scratch <====//
+        if (select.classList.contains('px-mounted')) {
+            select.addEventListener('update', isUpdated => {
+                //===> Get Options <====//
+                const original_options = select.querySelectorAll('option'),
+                      select_wrapper =  Phenix(select).ancestor('.px-select'),
+                      new_select_options = select_wrapper.querySelectorAll('.px-select-options .px-select-option');
+                
+                //===> if there is a new Items Rebuild <====/
+                if (original_options.length !== new_select_options.length) {
+                    //===> Remove Classes <===//
+                    select.classList.remove('px-mounted');
+                    select_wrapper.classList.remove('px-mounted');
+
+                    //===> Remove Elements <===//
+                    select_wrapper.querySelectorAll('.px-select-toggle, .px-select-options').forEach((element:HTMLElement) => element.remove());
+
+                    //===> Rebuild the Component <====//
+                    Phenix(select).select();
+                }
+            });
+        }
+
         //====> if Not Mounted Create <====//
-        if (!select.classList.contains('px-mounted')) {
+        else {
             //====> Create New Component <====//
             let select_component = select_create(),
                 new_select = select_component[0],
                 options_list = select_component[1];
-
-            //====> Create Custom Events <====//
-            const opened = new CustomEvent('opened', {
-                //===> Fired when options list is opened
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            }), 
-            //===> Fired when select value is changed
-            change = new CustomEvent('change', {
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            }), 
-            //===> Fired when select value is changed
-            update = new CustomEvent('update', {
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            }), 
-            //===> Fired when typing in options search
-            typing = new CustomEvent('typing', {
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            }), 
-            //===> Fired when focused on options search
-            focus  = new CustomEvent('focus',  {
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            }), 
-            //===> Fired when options list is closed
-            closed = new CustomEvent('closed', {
-                detail: events_data,
-                bubbles: true,
-                cancelable: false
-            });
 
             //====> Create Options List <====//
             select.querySelectorAll(':scope > *').forEach(option => {

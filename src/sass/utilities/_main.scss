@@ -157,7 +157,7 @@
     position: relative;
     padding-#{$direction-start}: calc(1em + 8px);
     &::before {
-        top: 0;
+        top: 4px;
         position: absolute;
         #{$direction-start}:0;
     }
@@ -166,8 +166,9 @@
 /*=== Tooltips ===*/
 [class*="tooltip"] {
     position: relative;
+    --title-content: attr(data-title);
     &::after {
-        content: attr(title);
+        content: var(--title-content);
         position: absolute;
         font-size:12px;
         line-height: 27px;
@@ -185,26 +186,22 @@
         visibility: visible;
         opacity: 1;
     }
+
+    &[class*="tooltip"][title]:not([data-title]) {--title-content: attr(title);}
 }
 
 /*==== Default Tooltip ====*/
-.tooltip {
-    &::after {
-        left:50%;
-        bottom: 100%;
-        @extend %position-center-x;
-        max-width:300px;
-    }
-    /*==== Pointing Arrow ====*/
-    &:not([class*="fa-"])::after {margin-bottom: 5px;}
+.tooltip::after {
+    left:50%;
+    bottom: 100%;
+    @extend %position-center-x;
+    max-width:300px;
 }
 
 /*==== Bottom Tooltip ====*/
-.tooltip-bottom {
-    &::after {
-        left:50%;
-        top: 100%;
-        @extend %position-center-x;
-        max-width:300px;
-    }
+.tooltip-bottom::after {
+    left:50%;
+    top: 100%;
+    @extend %position-center-x;
+    max-width:300px;
 }

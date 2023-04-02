@@ -53,6 +53,10 @@
     --color : var(--dark-color);
     --background : var(--primary-offwhite);
     --border-color : transparent;
+    /*==== Hover Options ====*/
+    --color-hvr : var(--primary-color);
+    --border-hvr : var(--border-color);
+    --background-hvr : var(--primary-reverse);
 
     /*==== Standard ====*/
     border : var(--border-size) solid var(--border-color);
@@ -78,7 +82,7 @@
         @extend %inline-block;
     }
 
-    .icon, img {top: -1px; position: relative;}
+    // .icon, img {top: -1px; position: relative;}
     
     /*===== Button Sizes  ===*/
     @include make_button_sizes();
@@ -113,13 +117,17 @@
     &.outline {
         --border-size  : 2px;
         --border-color : rgba(0,0,0, 0.1);
+        --background : transparent;
         line-height : calc(var(--height) - 3px);
     }
 
-    &.btn-icon {
+    &.btn-icon, &.square[class*="fa-"] {
+        line-height: calc(var(--height) - 2px);
+    }
+
+    &.btn-icon{
         /*==== icon ====*/
         &::before, .icon {@include margin-inline(calc(var(--padding) / 2) ,'end');}
-
         /*==== Labeled ====*/
         &.labeled {padding-#{$direction-start}: 0;}
     }
@@ -138,22 +146,21 @@
         width: var(--height);
         height: var(--height);
         background-color: rgba(#000, 0.1);
+        line-height: calc(var(--height) - 3px);
     }
 
-    /*==== Colors Maker ===*/
     @mixin make-color($prefix, $hover, $text:'dark-reverse') {
         --color  : var(#{'--'+$text});
+        --color-hvr  : var(#{'--'+$text});
         --background : var(#{'--'+$prefix+'-color'});
-        --border-color : var(#{'--'+$prefix+'-color'});
-        &:hover,&.active,&.px-active, &.is-active {--background : var(#{'--'+$prefix+'-'+$hover});}
-
-        /*==== Outline ====*/
+        --border-hvr : var(#{'--'+$prefix+'-'+$hover});
+        --background-hvr : var(#{'--'+$prefix+'-'+$hover});
         &.outline {
-            --color: var(#{'--'+$prefix+'-color'});
-            &:hover, &.active, &.px-active, &.is-active {
-                --color: var(#{'--'+$text});
-                --background: var(#{'--'+$prefix+'-color'});
-            }
+            --background : transparent;
+            --color-hvr : var(#{'--'+$text});
+            --color : var(#{'--'+$prefix+'-color'});
+            --border-color: var(#{'--'+$prefix+'-color'});
+            --background-hvr: var(#{'--'+$prefix+'-color'});
         }
     }
 
@@ -176,10 +183,7 @@
         --background   : white;
         --border-color : white;
     }
-    
-    /*===== Outline ====*/
-    &.outline {--background : transparent;}
-    
+
     /*==== Mobile Only ====*/
     &.responsive-btn, &.btn-responsive {
         @include small('down') {
@@ -195,10 +199,23 @@
     }
 
     &.fix-lineheight {line-height: calc(var(--height) - 2px);}
+
+    /*==== Standard Hover ===*/
+    &:hover,&.active,&.px-active, &.is-active {
+        --color : var(--color-hvr);
+        --background : var(--background-hvr);
+        /*==== Outline ====*/
+        &.outline {
+            --border-color : transparent;
+            --color : var(--color-hvr);
+            --background : var(--background-hvr);
+        }
+    }
 }
 
-button.btn, input.btn, .fix-lineheight {
-    line-height: 1;
-    padding-bottom: 3px;
+button, input, .fix-lineheight {
+    &.btn:not(.labeled), &.btn.btn-icon:not(.labeled) {
+        line-height: 1;
+        padding-bottom: 3px;
+    }
 }
-

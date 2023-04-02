@@ -9,7 +9,7 @@ declare var wp:any,
     window:any;
 
 /*====> D.O.M is Ready ? <====*/
-Phenix(document).ready(ready => {
+Phenix(window).on("load", (loaded) => {
     //===> Contact Form 7 Fixes <===//
     const fixCF7 = () => {
         if (document.querySelector(".wpcf7-form")) {
@@ -82,7 +82,7 @@ Phenix(document).ready(ready => {
         //====> Links do not have a discernible name <====//
         Phenix('input:not([title]), select:not([title])').forEach((element:HTMLElement) => {
             //===> Define Data <===//
-            let element_label = element.tagName;
+            let element_label = element.getAttribute('placeholder') || element.getAttribute('data-placeholder') || element.tagName;
 
             //===> Get a Correct Title <===//
             let label = Phenix(element).prev('label') || Phenix(element).next('label');
@@ -118,7 +118,7 @@ Phenix(document).ready(ready => {
             spamInput = `<input name="px-protection" title="px-prot" style="left:100%; opacity: 0; visibility: hidden; z-index: -1" class="hidden position-ab" type="text" name="px-prot" value="" tabindex="-1" autocomplete="off" />`;
 
         //===> Create Spam Inputs <===//
-        FormsSubmit.forEach(button => Phenix(button).insert('after', spamInput));
+        FormsSubmit.forEach(button => Phenix(button).insert('before', spamInput));
 
         //===> Add Spam Protection Filter <===//
         Phenix('form[action] [type="submit"]').on('click', isClicked => {
@@ -138,43 +138,6 @@ Phenix(document).ready(ready => {
     },
 
     editorAssets = () => {
-        //===> Load Assets in Frame <====//
-        if (document.querySelector('#site-editor')) {
-            //===> Time Counter <===//
-            let trying_times = 0,
-                loadAssetTimer = setInterval(()=> {
-                //===> When the Frame is Found <===//
-                if (window.frames['editor-canvas']) {
-                    //===> Check in the Editor <===//
-                    let frameDoc = window.frames['editor-canvas'].document;
-                    
-                    //===> Check for the Frame Document <===//
-                    if (frameDoc) {
-                        //===> Load FontAwesome <===//
-                        if (!frameDoc.querySelector("#fontawesome-css")) {
-                            let fontAwesome = document.querySelector("#fontawesome-css"),
-                                importedEl = fontAwesome ? document.importNode(fontAwesome, true) : false;
-    
-                            if(importedEl && frameDoc.body.appendChild !== null) frameDoc.body.appendChild(document.importNode(fontAwesome, true));
-                        }
-    
-                        //===> Load Phenix Js <===//
-                        if (!frameDoc.querySelector("#phenix-js")) {
-                            let phenixJs = document.querySelector("#phenix-js"),
-                                importedEl = phenixJs ? document.importNode(phenixJs, true) : false;
-                            if(importedEl && frameDoc.body.appendChild !== null) frameDoc.body.appendChild(document.importNode(phenixJs, true));
-                        }
-                    }
-
-                    //===> Clear Timer <===//
-                    clearInterval(loadAssetTimer);
-                }
-                //===> Increase Counter <===//
-                // trying_times += 1;
-                // if (trying_times > 30) clearInterval(loadAssetTimer);
-            }, 300);
-        };
-
         //====> Add Design Options Classes <===//
         document.body.classList.add('phenix-wp-design');
 
@@ -212,10 +175,10 @@ Phenix(document).ready(ready => {
         Phenix(".wp-block-phenix-logo").setAttributes({"href": PDS_WP_KEY?.site || "/"});
 
         //===> Run Scripts <===//
-        Phenix(document).copyrights("Phenix Blocks").init();
+        Phenix(document).copyrights("Phenix Themes").init();
     } 
     /*====> for Admin Panel <====*/
-    else {
+    if (document.body.classList.contains('wp-admin') && !document.body.getAttribute('class')?.includes('-editor')) {
         //===> Fix Tables Style <===//
         Phenix('.wp-list-table .column-date, .wp-list-table .column-author').forEach((dateColumn:HTMLElement) => {
             dateColumn.classList.add('tx-nowrap');
@@ -247,10 +210,15 @@ Phenix(document).ready(ready => {
     if(document.querySelector('#wpadminbar')) {
         /*====> Remove Logo Submenu <====*/
         document.querySelector('#wp-admin-bar-wp-logo .ab-sub-wrapper')?.remove();
+        
         document.querySelector('#wp-admin-bar-customize')?.remove();
         let aboutLink = document.querySelector('#wpadminbar .ab-item[href*="about.php"]');
         if (aboutLink) aboutLink.setAttribute('href', aboutLink.getAttribute('href').replace('about.php', 'admin.php?page=pds-dashboard'));
 
+        document.querySelectorAll('#wp-admin-bar-wp-logo [title], #wp-admin-bar-wp-logo .screen-reader-text').forEach((element:HTMLElement) => {
+            if(element.getAttribute('title')) element.setAttribute('title', Phenix(document).direction() === "ltr" ? "Dashboard" : "لوحة التحكم");
+            if(element.matches('.screen-reader-text')) element.textContent = Phenix(document).direction() === "ltr" ? "Dashboard" : "لوحة التحكم";
+        });
         /*====> Fixes <====*/
         Phenix('a.ab-item, .ab-item a').forEach((link:HTMLElement) => link.setAttribute('rel', 'noopener'));
     }

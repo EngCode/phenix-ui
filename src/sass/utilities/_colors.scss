@@ -69,6 +69,12 @@
 .bg-alpha-25  {background-color: rgba(#000, 0.25);}
 .bg-alpha-50  {background-color: rgba(#000, 0.50);}
 .bg-alpha-75  {background-color: rgba(#000, 0.75);}
+.bg-revert-05  {background-color: rgba(#FFF, 0.05);}
+.bg-revert-10  {background-color: rgba(#FFF, 0.10);}
+.bg-revert-15  {background-color: rgba(#FFF, 0.15);}
+.bg-revert-25  {background-color: rgba(#FFF, 0.25);}
+.bg-revert-50  {background-color: rgba(#FFF, 0.50);}
+.bg-revert-75  {background-color: rgba(#FFF, 0.75);}
 
 /*==== Brands Backgrounds ====*/
 .bg-facebook {background-color: var(--facebook-color);}
@@ -119,6 +125,10 @@
 .bg-grade-warning   {background-image: linear-gradient(var(--gradient-rotation) ,var(--warning-gradient));}
 .bg-grade-success   {background-image: linear-gradient(var(--gradient-rotation) ,var(--success-gradient));}
 .bg-grade-secondary {background-image: linear-gradient(var(--gradient-rotation) ,var(--secondary-gradient));}
+.bg-grade-primary-offwhite {background-image: linear-gradient(var(--gradient-rotation) ,#FFF, var(--primary-offwhite));}
+.bg-grade-secondary-offwhite {background-image: linear-gradient(var(--gradient-rotation) ,#FFF, var(--secondary-offwhite));}
+.bg-grade-primary-secondary {background-image: linear-gradient(var(--gradient-rotation) ,var(--primary-color), var(--secondary-color));}
+.bg-grade-primary-secondary-2nd {background-image: linear-gradient(var(--gradient-rotation) ,var(--primary-hover), var(--secondary-hover));}
 
 /*==== Gradients Rotation ====*/
 [class*="bg-grade-"] {
@@ -171,3 +181,36 @@
 .border-instagram {border-color: var(--instagram-color);}
 .border-whatsapp  {border-color: var(--whatsapp-color);}
 .border-pinterest {border-color: var(--pinterest-color);}
+
+/*==== Background Utilites ====*/
+.bgs-100 {background-size: 100%;}
+.bgs-auto {background-size: auto;}
+/*==== Width ====*/
+.bgw-25 {background-size: 25% auto;}
+.bgw-50 {background-size: 50% auto;}
+.bgw-75 {background-size: 75% auto;}
+.bgw-90 {background-size: 90% auto;}
+.bgw-100 {background-size: 100% auto;}
+/*==== Height ====*/
+.bgh-25 {background-size: auto 25%;}
+.bgh-50 {background-size: auto 50%;}
+.bgh-75 {background-size: auto 75%;}
+.bgh-90 {background-size: auto 90%;}
+.bgh-100 {background-size: auto 100%;}
+/*==== Repeat ====*/
+.bgr {background-repeat: repeat;}
+.bgr-x {background-repeat: repeat-x;}
+.bgr-y {background-repeat: repeat-y;}
+.bgr-n {background-repeat: no-repeat;}
+/*==== Position ====*/
+.bgp-cs {background-position: center #{$direction-start};}
+.bgp-ce {background-position: center #{$direction-end};}
+.bgp-cc {background-position: center;}
+/*==== .Top. ====*/
+.bgp-ts {background-position: #{$direction-start} top;}
+.bgp-tc {background-position: center top;}
+.bgp-te {background-position: #{$direction-start} top;}
+/*==== .Bottom. ====*/
+.bgp-bs {background-position: #{$direction-start} bottom;}
+.bgp-bc {background-position: center bottom;}
+.bgp-be {background-position: #{$direction-start} bottom;}

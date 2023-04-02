@@ -54,9 +54,9 @@ body:not(.wp-admin):not([class*="login"]), body.block-editor-page, .phenix-wp-de
 }
 
 /*==== Helpers Fixes ====*/
-.full-screen, .full-screen-wide {
-    > [class*="container"] {min-height: inherit;}
-}
-
+.full-screen {min-height: 100vh;}
+.full-screen-wide {min-height: 85vh;}
 .pos-overlap[data-sticky]:not(.is-sticky) {background-color: transparent;}
-
+.full-screen, .full-screen-wide {
+    > [class*="row"], > [class*="flexbox"] {min-height: inherit;}
+}
