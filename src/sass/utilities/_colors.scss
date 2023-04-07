@@ -61,6 +61,7 @@
 .bg-warning {background-color: var(--warning-color);}
 .bg-info {background-color: var(--info-color);}
 .bg-gray {background-color: var(--gray-color);}
+.bg-gray-lighter {background-color: #F9F9F9;}
 .bg-dark {background-color: var(--dark-color);}
 .bg-white {background-color: white;}
 .bg-alpha-05  {background-color: rgba(#000, 0.05);}
@@ -125,10 +126,29 @@
 .bg-grade-warning   {background-image: linear-gradient(var(--gradient-rotation) ,var(--warning-gradient));}
 .bg-grade-success   {background-image: linear-gradient(var(--gradient-rotation) ,var(--success-gradient));}
 .bg-grade-secondary {background-image: linear-gradient(var(--gradient-rotation) ,var(--secondary-gradient));}
+
+/*==== Mixed Gradient ====*/
+.bg-grade-primary-purple   {background-image: linear-gradient(var(--gradient-rotation) ,var(--primary-purple));}
 .bg-grade-primary-offwhite {background-image: linear-gradient(var(--gradient-rotation) ,#FFF, var(--primary-offwhite));}
 .bg-grade-secondary-offwhite {background-image: linear-gradient(var(--gradient-rotation) ,#FFF, var(--secondary-offwhite));}
 .bg-grade-primary-secondary {background-image: linear-gradient(var(--gradient-rotation) ,var(--primary-color), var(--secondary-color));}
 .bg-grade-primary-secondary-2nd {background-image: linear-gradient(var(--gradient-rotation) ,var(--primary-hover), var(--secondary-hover));}
+
+/*==== Offwhite Gradients ====*/
+.bg-grade-silver {background-image: linear-gradient(var(--gradient-rotation), var(--silver-gradient));}
+.bg-grade-silver-2nd {background-image: linear-gradient(var(--gradient-rotation), var(--silver-gradient-2nd));}
+.bg-grade-offwhite-red    {background-image: linear-gradient(var(--gradient-rotation), #FFE7E7, White);}
+.bg-grade-offwhite-blue   {background-image: linear-gradient(var(--gradient-rotation) ,var(--blue-white));}
+.bg-grade-offwhite-green  {background-image: linear-gradient(var(--gradient-rotation), #DAEEE5, White);}
+.bg-grade-offwhite-yellow {background-image: linear-gradient(var(--gradient-rotation), #FDF5E8, White);}
+.bg-grade-offwhite-silver {background-image: linear-gradient(var(--gradient-rotation), #E1E8F7, White);}
+.bg-grade-offwhite-info   {background-image: linear-gradient(var(--gradient-rotation), var(--info-light), White);}
+.bg-grade-offwhite-purple {background-image: linear-gradient(var(--gradient-rotation), #E1E1F7, White);}
+.bg-grade-offwhite-danger {background-image: linear-gradient(var(--gradient-rotation), var(--danger-light), White);}
+.bg-grade-offwhite-yellow-2nd  {background-image: linear-gradient(var(--gradient-rotation), #F6F7E1, White);}
+.bg-grade-offwhite-blue-2nd {background-image: linear-gradient(var(--gradient-rotation), #E9F1FF, White);}
+.bg-grade-offwhite-blue-3rd {background-image: linear-gradient(var(--gradient-rotation), #A7C4FF, White);}
+.bg-grade-offwhite-blue-4th {background-image: linear-gradient(var(--gradient-rotation), White, #E9F1FF, White);}
 
 /*==== Gradients Rotation ====*/
 [class*="bg-grade-"] {

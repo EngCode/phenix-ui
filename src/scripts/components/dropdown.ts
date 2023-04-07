@@ -56,34 +56,39 @@ PhenixElements.prototype.dropdown = function (options?:{
         //====> Hide Activated Dropdowns <====//
         const hide_others = (activated) => {
             //==== Hide Others ====//
-            Phenix(activated).removeClass(active).forEach((dropdown:HTMLElement) => {
-                //====> Get the Effect Type <====//
-                let dropdown_wrapper = Phenix(dropdown).ancestor('[data-effect]'),
-                    current_effect   = dropdown_wrapper.getAttribute('data-effect');
-
-                //====> De-Activate Triggers <====//
-                dropdown_wrapper.querySelector('.px-toggle').classList.remove(active);
-                Phenix(dropdown).siblings(active)?.forEach((sibling:HTMLElement) => sibling.classList.remove(active));
-
-                //====> Hide Opened Dropdowns <====//
-                if (current_effect == 'fade') Phenix(dropdown).fadeOut(duration, delay, display);
-                else if (current_effect == 'slide') Phenix(dropdown).slideUp(duration, delay, display);
+            Phenix(activated).forEach((dropdown:HTMLElement) => {
+                if (dropdown_target !== dropdown) {
+                    //====> Get the Effect Type <====//
+                    let dropdown_wrapper = Phenix(dropdown).ancestor('[data-effect]'),
+                        current_effect   = dropdown_wrapper.getAttribute('data-effect');
+    
+                    //====> De-Activate Triggers <====//
+                    dropdown.classList.remove(active);
+                    dropdown_wrapper.querySelector('.px-toggle').classList.remove(active);
+    
+                    Phenix(dropdown).siblings(active)?.forEach((sibling:HTMLElement) => {
+                        sibling.classList.remove(active);
+                    });
+    
+                    //====> Hide Opened Dropdowns <====//
+                    if (current_effect == 'fade') Phenix(dropdown).fadeOut(duration, delay, display);
+                    else if (current_effect == 'slide') Phenix(dropdown).slideUp(duration, delay, display);
+                }
             });
         },
 
         //====> Click to Dropdown <====//
         dropdown_start = event => {
             //====> De-Activate Other <====//
-            // hide_others(activated);
+            hide_others(activated);
 
             //====> Prevent Default <====//
             event.preventDefault();
-
+            
             //====> Get the Target and its Sibling <====//
             let event_trigger = event.target;
             if (!event.target.matches(toggle)) event_trigger = Phenix(event_trigger).ancestor(toggle);
 
-            
             siblings = Phenix(event_trigger).addClass(active).siblings(target);
 
             //====> Active Button and the Target <====//
@@ -103,16 +108,6 @@ PhenixElements.prototype.dropdown = function (options?:{
                     Phenix(siblings).slideDown(duration, delay, display);
                 }
             }
-        },
-
-        //====> Hide Dropdown on Blank <====//
-        dropdown_hide = blank => {
-            //====> Clicked Target <====//
-            let exclude_final = `${target} *:not([href^="#"]):not(${exclude})`,
-                clicked:any = blank.target;
-
-            //====> if the target is not the current element or any of its children <====//
-            if (!clicked.matches(target) && !clicked.matches(exclude_final) && !clicked.matches(toggle) && !clicked.matches(`${toggle} *`)) hide_others(activated);
         };
 
         //====> Click to Dropdown <====//
@@ -124,7 +119,16 @@ PhenixElements.prototype.dropdown = function (options?:{
         toggle_element.setAttribute('tabIndex', '0');
 
         //====> De-Activate on Blank <====//
-        window.addEventListener('click', dropdown_hide);
+        window.addEventListener('click', (blank) => {
+            //====> Clicked Target <====//
+            let exclude_final = `${target} *:not([href^="#"]):not(${exclude})`,
+                clicked:any = blank.target;
+
+            //====> if the target is not the current element or any of its children <====//
+            if (!clicked.matches(target) && !clicked.matches(toggle) && !clicked.matches(`${toggle} *`) && !clicked.matches(exclude_final)) {
+                hide_others(activated);
+            }
+        });
 
         //====> CSS Prepare <====//
         Phenix(dropdown_wrapper).addClass("position-rv");

@@ -408,15 +408,15 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> Media Query <====*/
     mediaQuery(breakpoint:any, fn_callback?:any, mobile_first?:boolean) {
         /*==== Breakpoints Points ====*/
-        let xsmall_end = 485, /*===> Max xSmall breakpoint Width */
-            small_start= 580, /*===> Min Small breakpoint Width */
-            small_end = 705,  /*===> Max Small breakpoint Width */
+        let xsmall_end = 499, /*===> Max xSmall breakpoint Width */
+            small_start= 500, /*===> Min Small breakpoint Width */
+            small_end = 774,  /*===> Max Small breakpoint Width */
             /*==== Medium Points ====*/
             medium_start = 775,  /*===> Min Medium breakpoint Width */
-            medium_end = 1105,   /*===> Max Medium breakpoint Width */
+            medium_end = 1204,   /*===> Max Medium breakpoint Width */
             /*==== Large Points ====*/
             large_start = 1205, /*===> Min Large breakpoint Width */
-            large_end = 1370,   /*===> Max Large breakpoint Width */
+            large_end = 1404,   /*===> Max Large breakpoint Width */
             /*==== xLarge Points ====*/
             xlarge_start = 1405, /*===> Min xLarge breakpoint Width */
             xlarge_end = 2565;   /*===> Max xLarge breakpoint Width */
