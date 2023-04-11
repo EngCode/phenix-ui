@@ -14,7 +14,7 @@ import Phenix, { PhenixElements } from "..";
 /*====> Phenix Blocks Script <====*/
 PhenixElements.prototype.init = function (scripts?:[]) {
     //===> Smooth Scroll <====//
-    Phenix('a[href^="#"]').smothScroll();
+    Phenix('body:not(.wp-admin) a[href*="#"]').smothScroll();
 
     /*====> Add Data Options to un-reachable Elements <====*/
     Phenix(`[data-add-options]`).forEach((element:HTMLElement) => {
@@ -30,8 +30,18 @@ PhenixElements.prototype.init = function (scripts?:[]) {
         });
     });
 
+    //===> Element Overlap <===//
+    Phenix(".pos-overlap").forEach((element:HTMLElement) => {
+        let height = Phenix(element).height(),
+            nextEl = Phenix(element).next() || Phenix(element.parentNode).next(),
+            nextElPadding = nextEl ? Phenix(nextEl).getCSS("paddingTop") : 0;
+        //===> Element CSS <===//
+        element.style.marginBottom = `-${height}px`;
+        if(nextEl) Phenix(nextEl).css({'padding-top': `${height+parseInt(nextElPadding)}px`});
+    });
+
     //====> Validation Demo <====//
-    Phenix('.wpcf7-form').validation();
+    Phenix('.wpcf7-form, .px-form-validation').validation();
 
     //====> Sticky Header Fixes <====//    
     if (Phenix('[data-sticky="absolute"]')[0]) {
@@ -67,28 +77,40 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     //===> Sticky Elements <====//
     Phenix("[data-sticky").sticky();
 
-    //===> Element Overlap <===//
-    Phenix(".pos-overlap").forEach((element:HTMLElement) => {
-        let height = Phenix(element).height(),
-            nextEl = Phenix(element).next() || Phenix(element.parentNode).next(),
-            nextElPadding = nextEl ? Phenix(nextEl).getCSS("paddingTop") : 0;
-        //===> Element CSS <===//
-        element.style.marginBottom = `-${height}px`;
-        if(nextEl) Phenix(nextEl).css({'padding-top': `${height+parseInt(nextElPadding)}px`});
-    });
-
     //====> Sliders <====//
     Phenix('.px-slider').slider();
+    
+    //====> Tabs <====//
+    Phenix('.px-tabs').tabs();
+    
+    //====> Popups <====//
+    Phenix('.px-modal').popup();
+
+    //====> Activate Select <====//
+    Phenix('.px-select').select();
+    
+    //===> Phenix Menu <===//
+    Phenix('.px-navigation').menu();
 
     //====> Multimedia <====//
     Phenix('.px-media').multimedia();
 
-    //===> Phenix Menu <===//
-    Phenix('.px-navigation').menu();
-
+    //====> Phenix Uploader <====//
+    Phenix('.px-uploader').uploader();
+    
     //====> Dropdown Buttons <====//
     Phenix('.px-dropdown').dropdown();
+    
+    //====> Animated Counter <====//
+    Phenix('.number-counter, .px-counter').counter();
 
+    //====> Global Accordion <====//
+    Phenix('.px-accordion:not(.custom-accordion) .accordion-btn').collapse({
+        related : true,
+        parent  : '.px-accordion',
+        target  : '.accordion-content',
+    });
+    
     //===> Lightbox Images <===//
     Phenix('.lightbox-image img').forEach((image:HTMLElement) => {
         image.classList.add('px-lightbox');
@@ -96,14 +118,8 @@ PhenixElements.prototype.init = function (scripts?:[]) {
         image.setAttribute('data-src', image.getAttribute('src'));
     });
 
-    //====> Popups <====//
-    Phenix('.px-modal').popup();
-
     //===> Animations <===//
-    Phenix('[data-animation], .px-animate').animations({animateCSS: ["fading", "sliding", "zooming", "utilities"]});
-
-    //====> Activate Select <====//
-    Phenix('.px-select').select();
+    Phenix('[data-animation], .px-animate').animations({animateCSS: ["all"]});
 
     //===> .Others. <===//
     Phenix(document).utilities();

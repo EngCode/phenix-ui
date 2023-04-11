@@ -5,6 +5,16 @@
  * ===> 04 - Hidden
 */
 
+/*==== Opacity Assets ====*/
+.opacity-0 {opacity: 0;}
+.opacity-10 {opacity: 0.1;}
+.opacity-15 {opacity: 0.15;}
+.opacity-20 {opacity: 0.20;}
+.opacity-25 {opacity: 0.25;}
+.opacity-50 {opacity: 0.50;}
+.opacity-75 {opacity: 0.75;}
+.opacity-90 {opacity: 0.90;}
+
 /*==== Screen Reader Only ====*/
 .visually-hidden, .visually-hidden-focusable:not(:focus):not(:focus-within) {
     position: absolute;

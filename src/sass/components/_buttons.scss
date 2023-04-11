@@ -78,7 +78,7 @@
 
     /*==== icons preset ====*/
     &::before, .icon, img {
-        line-height: 1;
+        line-height: inherit;
         @extend %inline-block;
     }
 
@@ -121,9 +121,7 @@
         line-height : calc(var(--height) - 3px);
     }
 
-    &.btn-icon, &.square[class*="fa-"] {
-        line-height: calc(var(--height) - 2px);
-    }
+    &.btn-icon {line-height: calc(var(--height) - 2px);}
 
     &.btn-icon{
         /*==== icon ====*/
@@ -198,7 +196,7 @@
         };
     }
 
-    &.fix-lineheight {line-height: calc(var(--height) - 2px);}
+    &.fix-lineheight {line-height: calc(var(--height) - 3px);}
 
     /*==== Standard Hover ===*/
     &:hover,&.active,&.px-active, &.is-active {
@@ -213,9 +211,13 @@
     }
 }
 
-button, input, .fix-lineheight {
-    &.btn:not(.labeled), &.btn.btn-icon:not(.labeled) {
-        line-height: 1;
-        padding-bottom: 3px;
+button, input {
+    &.btn {
+        line-height: normal;
+        &:not(.labeled)::before {
+            top: -1px;
+            line-height: 1;
+            position: relative;
+        }
     }
 }

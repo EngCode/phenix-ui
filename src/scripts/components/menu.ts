@@ -85,7 +85,7 @@ PhenixElements.prototype.menu = function (options?:{
 
         //====> Submenus Handler <====//
         let submenus_handle = (elements:any) => Phenix(elements).on('click', click => {
-            //===> Disable Default Behavor <===//
+            //===> Disable Default Behavior <===//
             click.preventDefault();
 
             //===> Dropdown Data <===//
@@ -148,6 +148,8 @@ PhenixElements.prototype.menu = function (options?:{
     Phenix(`.menu-toggle`).on('click', click => {
         //===> Disable Default Behavior <===//
         click.preventDefault();
+        if (Phenix(click.target).ancestor('.block-editor-block-list__block')) return;
+
         //===> Dropdown Data <===//
         let trigger = click.target,
             target  = trigger.getAttribute('data-id');

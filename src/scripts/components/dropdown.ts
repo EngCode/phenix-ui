@@ -30,6 +30,9 @@ PhenixElements.prototype.dropdown = function (options?:{
     },
 }) {    
     this.forEach(dropdown_wrapper => {
+        //====> if its already mounted <====//
+        if (dropdown_wrapper.classList.contains('px-mounted')) return;
+
         //====> Default Options <====//
         let siblings,
             inline = attr => dropdown_wrapper.getAttribute(attr),
@@ -47,11 +50,13 @@ PhenixElements.prototype.dropdown = function (options?:{
             //====> Catch the Target <====//
             dropdown_target = dropdown_wrapper.querySelector(target);
 
+        //===> Dynamic Position <===//
+        let change_position = () => {
+            if(position[0] === 'top' || position[0] === 'bottom') Phenix(dropdown_target).dynamicPosition();
+        };
+
         //====> identify the effect <====//
         dropdown_wrapper.setAttribute('data-effect', effect);
-
-        //===> Dynamic Position <===//
-        let change_position = () => position[0] === 'top' || 'bottom' ? Phenix(dropdown_target).dynamicPosition() : null;
 
         //====> Hide Activated Dropdowns <====//
         const hide_others = (activated) => {
@@ -89,7 +94,11 @@ PhenixElements.prototype.dropdown = function (options?:{
             let event_trigger = event.target;
             if (!event.target.matches(toggle)) event_trigger = Phenix(event_trigger).ancestor(toggle);
 
-            siblings = Phenix(event_trigger).addClass(active).siblings(target);
+            //===> Get the Targeted Sibling <===//
+            siblings = Phenix(event_trigger).siblings(target);
+
+            //===> Activate the Button <===//
+            Phenix(event_trigger).toggleClass(active);
 
             //====> Active Button and the Target <====//
             if (siblings) {
@@ -97,22 +106,22 @@ PhenixElements.prototype.dropdown = function (options?:{
                 change_position();
 
                 //====> Active Target <====//
-                Phenix(siblings).addClass(active);
+                Phenix(siblings).toggleClass(active);
 
-                //====> Effect : Fade-In-Out <====//
-                if (effect == 'fade') {
-                    Phenix(siblings).fadeIn(duration, delay, display);
-                }
-                //====> Effect : Slide-Down-Up <====//
-                else if (effect == 'slide') {
-                    Phenix(siblings).slideDown(duration, delay, display);
-                }
+                //====> Effect : Fading <====//
+                if (effect == 'fade') { Phenix(siblings).fadeToggle(duration, delay, display); }
+                //====> Effect : Slide <====//
+                else if (effect == 'slide') { Phenix(siblings).slideToggle(duration, delay, display); }
             }
         };
 
         //====> Click to Dropdown <====//
         let toggle_element = dropdown_wrapper.querySelector(toggle);
-        toggle_element.addEventListener('click', dropdown_start);
+        // toggle_element.removeEventListener('click', clicked => null);
+        toggle_element.addEventListener('click', clicked => {
+            console.log("Clicked...");
+            dropdown_start(clicked);
+        });
 
         //====> Set Accessibility Options <====//
         toggle_element.setAttribute('role', 'button');
@@ -154,6 +163,9 @@ PhenixElements.prototype.dropdown = function (options?:{
                 change_position();
             }
         }, 300);
+
+        //===> Finished Mounting <===//
+        dropdown_wrapper.classList.add('px-mounted');
     });
 
     //====> Return Phenix Elements <====//
