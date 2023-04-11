@@ -117,9 +117,7 @@ PhenixElements.prototype.dropdown = function (options?:{
 
         //====> Click to Dropdown <====//
         let toggle_element = dropdown_wrapper.querySelector(toggle);
-        // toggle_element.removeEventListener('click', clicked => null);
         toggle_element.addEventListener('click', clicked => {
-            console.log("Clicked...");
             dropdown_start(clicked);
         });
 

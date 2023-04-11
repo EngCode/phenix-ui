@@ -98,16 +98,17 @@
 #### Changelog Update v0.7.X
 
 ```
-01 - [update] CSS Layout Groups
-02 - [update] Advanced Select [rebuild, react compatibility, multiple mode]
-03 - [update] Counter Lazyloading
-04 - [update] Timer Lazyloading
-05 - [update] Responsive Form Controls Sizes
-06 - [Doc] Carousel Slider
+01 - [Doc] Carousel Slider
+02 - [update] CSS Layout Groups
+03 - [update] Advanced Select [rebuild, react compatibility, multiple mode]
+04 - [update] Counter Lazyloading
+05 - [update] Timer Lazyloading
+06 - [update] Responsive Form Controls Sizes
 07 - [update] Border Utilities
 08 - [update] Position Utilities changed
 09 - [update] Dynamic Position for Dropdowns, Select
 10 - [update] Popups Modal and Select Component.
+11 - [BugFix] Dropdown, Navbar, Buttons, React-Js Mode.
 ```
 
 ---
