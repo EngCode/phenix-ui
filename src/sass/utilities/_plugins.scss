@@ -61,9 +61,9 @@
 .is-sticky {
     z-index: var(--header-index);
     /*==== Absolute ====*/
-    &[data-sticky="absolute"] {position: fixed;}
+    &[data-sticky*="absolute"] {position: fixed;}
     /*==== Native ====*/
-    [data-sticky="inner"].is-sticky {
+    [data-sticky*="inner"].is-sticky {
         position: -webkit-sticky;
         position: sticky;
     }
@@ -157,21 +157,6 @@
             animation-duration: 1s;
 }
 
-/*==== Background X ====*/
-.bg-animated-x {
-    --duration : 60s;
-    background-repeat: repeat-x;
-    -webkit-animation: background_x var(--duration) linear infinite;
-            animation: background_x var(--duration) linear infinite;
-}
-
-.bg-animated-y {
-    --duration : 60s;
-    background-repeat: repeat-x;
-    -webkit-animation: background_y var(--duration) linear infinite;
-            animation: background_y var(--duration) linear infinite;
-}
-
 /*==== Row Fix ====*/
 .container-fluid > .row {
     margin-left: calc(var(--container-padding) * -1);
@@ -180,24 +165,3 @@
 
 /*==== Phenix Modal ====*/
 .px-modal[class*="overlay"]::before {height: calc(100vh *2);z-index: -1;}
-
-/*==== Custom Animations ====*/
-@-webkit-keyframes background_x {
-    from {background-position: 0 0;}
-    to {background-position: 100% 0;}
-}
-
-@keyframes background_x {
-    from {background-position: 0 0;}
-    to {background-position: 100% 0;}
-}
-
-@-webkit-keyframes background_y {
-    from {background-position: 0 0;}
-    to {background-position: 0 100%;}
-}
-
-@keyframes background_y {
-    from {background-position: 0 0;}
-    to {background-position: 0 100%;}
-}
