@@ -197,6 +197,7 @@
     }
 
     &.fix-lineheight {line-height: calc(var(--height) - 3px);}
+    &.fix-icon::before {transform: translateY(-15%);}
 
     /*==== Standard Hover ===*/
     &:hover,&.active,&.px-active, &.is-active {
@@ -212,7 +213,7 @@
 }
 
 button, input {
-    &.btn {
+    &.btn, &.btn.outline {
         line-height: normal;
         &:not(.labeled)::before {
             top: -1px;

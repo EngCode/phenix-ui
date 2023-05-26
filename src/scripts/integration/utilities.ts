@@ -18,7 +18,7 @@ PhenixElements.prototype.utilities = function (options?:{
     let type = options?.type || 'all';
 
     //===> Placeholder Effect <====//
-    Phenix('[placeholder]').forEach((control:HTMLElement) => {
+    if (type.includes("form") || type === "all") Phenix('[placeholder]').forEach((control:HTMLElement) => {
         //====> Current Placeholder <===//
         let holder = control.getAttribute('placeholder');
         //====> Empty Placeholder <===//
@@ -28,7 +28,7 @@ PhenixElements.prototype.utilities = function (options?:{
     });
 
     //===> Form Controls Group <===//
-    Phenix('.form-ui, .px-form').forEach((form:HTMLElement) => {
+    if (type.includes("form") || type === "all") Phenix('.form-ui, .px-form').forEach((form:HTMLElement) => {
         //===> Get the Controls Size <====//
         let size = form.getAttribute('data-size') || '';
 
@@ -43,7 +43,7 @@ PhenixElements.prototype.utilities = function (options?:{
     });
 
     //====> Item Remover <====//
-    Phenix('.remove-item').on('click', click => {
+    if (type.includes("other") || type === "all") Phenix('.remove-item').on('click', click => {
         //====> Prevent Default Behavior <====//
         click.preventDefault();
         //====> Remover Data <====//
@@ -64,7 +64,7 @@ PhenixElements.prototype.utilities = function (options?:{
     });
 
     //====> Masonry Grid <====//
-    Phenix('.px-masonry').forEach((gallery:HTMLElement) => {
+    if (type.includes("form") || type === "grid") Phenix('.px-masonry').forEach((gallery:HTMLElement) => {
         //===> Wait for Loading <===//
         setTimeout(() => {
             let max_height = Phenix(gallery).height();
@@ -74,28 +74,64 @@ PhenixElements.prototype.utilities = function (options?:{
     });
 
     //====> Dynamic Word Coloring <====//
-    Phenix('body:not(.wp-admin) .colored-word').forEach((title:HTMLElement) => {
-        //====> Setup Properties <====//
-        var titleContent = title.innerHTML,
-            word_array = titleContent.split(/[ ]+/),
-            lastWord  = word_array.splice(-1);
-        //====> Return Title <====//
-        let theResult = `${word_array} <span class="color-primary">${lastWord}</span>`;
-        title.innerHTML = theResult.replace(/,/g, ' ');
-    });
+    if (type.includes("text") || type === "all") {
+        //====> Dynamic Word Coloring <====//
+        Phenix('body:not(.wp-admin) .colored-word').forEach((title:HTMLElement) => {
+            //====> Setup Properties <====//
+            var titleContent = title.innerHTML,
+                word_array = titleContent.split(/[ ]+/),
+                lastWord  = word_array.splice(-1);
+            //====> Return Title <====//
+            let theResult = `${word_array} <span class="color-primary">${lastWord}</span>`;
+            title.innerHTML = theResult.replace(/,/g, ' ');
+        });
+        //====> Max Text Length <====//
+        Phenix('[data-max-text]').forEach((element:any) => {
+            //===> Element Data <===//
+            let text = element.textContent,
+                max  = parseInt(element.getAttribute('data-max-text'));
+    
+            //===> check count <===//
+            if (text.length > max) element.textContent = text.slice(0, max);
+        });
 
-    //====> Max Text Length <====//
-    Phenix('[data-max-text]').forEach((element:any) => {
-        //===> Element Data <===//
-        let text = element.textContent,
-            max  = parseInt(element.getAttribute('data-max-text'));
+        //====> Custom Colored Titles <====//
+        const pds_words_wrapper = (str, classes, num) => {
+            //===> Split String <===//
+            const words = str.split(' ');
+        
+            //===> make sure its valid request <===//
+            if (!num) num = 2;
+            if (words.length < num) { return str; }
 
-        //===> check count <===//
-        if (text.length > max) element.textContent = text.slice(0, max);
-    });
+            //===> Get the last two words <===//
+            const lastTwoWords = words.slice(-num);
+        
+            //===> Join the words back together with a space between them, and wrap in a span element <===//
+            const wrappedWords = `<span class="${classes}">${lastTwoWords.join(' ')}</span>`;
+        
+            //===> Replace the last two words in the original string with the wrapped words <===//
+            return str.replace(lastTwoWords.join(' '), wrappedWords);
+        };
+
+        Phenix('.gradient-text').forEach((title:HTMLElement) => {
+        //===> Get the Title Content <===//
+        let title_content = title.textContent,
+            gradient_name = "";
+
+        //===> get the title background name <===//
+        title.classList.forEach(className => {
+            if (className.includes('grade-')) gradient_name += ` ${className.includes('bg-') ? "" : "bg-"}${className}`;
+        });
+
+        //====> Set the Title Content <====//
+        title.innerHTML = pds_words_wrapper(title_content, `bg-clip-text ${gradient_name.length < 1 ? "bg-grade-45 bg-grade-primary-secondary" : gradient_name.trim()}`, title_content.split(' ').length - 1);
+        });
+    }
+
 
     //====> icons List <====//
-    Phenix('.icons-list').forEach((list:HTMLElement) => {
+    if (type.includes("icons") || type === "all") Phenix('.icons-list').forEach((list:HTMLElement) => {
         if (list.getAttribute('data-icon')) {
             let classes = list.getAttribute('data-icon').split(" ") || [];
             list.querySelectorAll('li').forEach(item => item.classList.add(...classes));
@@ -103,32 +139,37 @@ PhenixElements.prototype.utilities = function (options?:{
     });
 
     //====> Copyrights Protection <====//
-    // Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
-    // Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
+    if (type.includes("copyrights")) {
+        Phenix(document).on("contextmenu", rightClick => rightClick.preventDefault());
+        Phenix(document).on("selectstart", textSelect => textSelect.preventDefault());
+    }
 
-    //====> H1 Fix <====//
-    let headline = document.querySelector('h1');
-    if(!headline) Phenix('body').insert('prepend', `<h1 class="hidden">${document.title}</h1>`);
+    //====> SEO Fix <====//
+    if (type.includes("seo") || type === "all") {
+        //====> Headline Fix <====//
+        let headline = document.querySelector('h1');
+        if(!headline) Phenix('body').insert('prepend', `<h1 class="hidden">${document.title}</h1>`);
 
-    //====> Images SEO/Performance <====//
-    Phenix('img').forEach((img:any) => {
-        //===> Get Image Data <===//
-        let img_width = img.getAttribute('width') || img.style.width,
-            img_height = img.getAttribute('height') || img.style.height,
-            parent_width = img.parentNode.clientWidth,
-            parent_height = img.parentNode.clientHeight;
-        //===> Set Width and Height <===//
-        if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}`);
-        if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}`);
-        //===> Alternative Text <===//
-        if (!img.getAttribute('alt') || img.getAttribute('alt') === "") img.setAttribute('alt', document.title);
-    });
-
-    //====> Links SEO <====//
-    Phenix('a[href]').forEach((link:any) => {
-        //===> Alternative Text <===//
-        if (!link.getAttribute('title') || link.getAttribute('title') === "") link.setAttribute('title', link.textContent.trim());
-    });
+        //====> Images SEO/Performance <====//
+        Phenix('img').forEach((img:any) => {
+            //===> Get Image Data <===//
+            let img_width = img.getAttribute('width') || img.style.width,
+                img_height = img.getAttribute('height') || img.style.height,
+                parent_width = img.parentNode.clientWidth,
+                parent_height = img.parentNode.clientHeight;
+            //===> Set Width and Height <===//
+            if (!img_width && parent_width > 0)  img.setAttribute('width', `${parent_width}`);
+            if (!img_height && parent_height > 0) img.setAttribute('height', `${parent_height}`);
+            //===> Alternative Text <===//
+            if (!img.getAttribute('alt') || img.getAttribute('alt') === "") img.setAttribute('alt', document.title);
+        });
+    
+        //====> Links SEO <====//
+        Phenix('a[href]').forEach((link:any) => {
+            //===> Alternative Text <===//
+            if (!link.getAttribute('title') || link.getAttribute('title') === "") link.setAttribute('title', link.textContent.trim());
+        });
+    }
 
     //====> Return Phenix Query <====//
     return this;

@@ -58,10 +58,18 @@
 }
 
 /*==== Sticky ====*/
+[data-sticky*="absolute"]:not(.is-sticky) {
+    position: relative;
+    z-index: var(--header-index);
+}
+
 .is-sticky {
     z-index: var(--header-index);
     /*==== Absolute ====*/
-    &[data-sticky*="absolute"] {position: fixed;}
+    &[data-sticky*="absolute"] {
+        position: fixed;
+        width: 100%;
+    }
     /*==== Native ====*/
     [data-sticky*="inner"].is-sticky {
         position: -webkit-sticky;
@@ -114,6 +122,8 @@
     .ratio#{$infix} {
         --ratio-size : 60%;
         /*==== Square 1x1 ====*/
+        &-none  {--ratio-size: auto;}
+        /*==== Square 1x1 ====*/
         &-1x1  {--ratio-size: 100%;}
         /*==== FHD 16x9 ====*/
         &-16x9 {--ratio-size: 56.3%;}
@@ -164,4 +174,13 @@
 }
 
 /*==== Phenix Modal ====*/
-.px-modal[class*="overlay"]::before {height: calc(100vh *2);z-index: -1;}
+.px-modal[class*="overlay"]::before {display: none!important;}
+
+/*==== Scaling ====*/
+.scale-050 {transform: scale(0.50);}
+.scale-075 {transform: scale(0.75);}
+.scale-110 {transform: scale(1.10);}
+.scale-125 {transform: scale(1.25);}
+.scale-150 {transform: scale(1.50);}
+.scale-175 {transform: scale(1.75);}
+.scale-200 {transform: scale(2);}

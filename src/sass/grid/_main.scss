@@ -47,13 +47,14 @@
     @include large() { max-width: 1024px; }
 }
 
-@media screen and (min-width: 1500px) {
-    .container-xl, .container-lg {max-width: 1400px;}
+@media screen and (min-width: 1450px) {
     .container-xl, .container-lg, .container-fluid {--container-padding : #{REM(30)};}
 }
 
-@media screen and (max-width: 1480px) and (min-width: 1370px) {
-    .container-xl, .container-lg {max-width: 95%;}
+.container-xl, .container-lg {
+    @media screen and (max-width: 1449px) {max-width: 90%;}
+    @media screen and (max-width: 1100px) {max-width: 100%;}
+    @media screen and (min-width: 1450px) {max-width: 1400px;}
 }
 
 /*==== Flexbox Grid ====*/

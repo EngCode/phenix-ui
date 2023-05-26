@@ -58,7 +58,7 @@ PhenixElements.prototype.notifications = function (options?:{
     else if (type === 'warning') background = 'bg-warning color-dark';
 
     //=== Set Notifications ===//
-    current = Phenix(notifications).insert('append', `<div class="w-max-320 ${css_classes} ${background} ${item_position} hidden">${message}</div>`);
+    current = Phenix(notifications).insert('append', `<div class="w-max-320 z-index-modal position-rv ${css_classes} ${background} ${item_position} hidden" style="pointer-events: all">${message}</div>`);
 
     //====> Show Notifications <====//
     Phenix(notifications).removeClass('hidden').fadeIn(500, 0, 'flex');
@@ -69,6 +69,11 @@ PhenixElements.prototype.notifications = function (options?:{
         Phenix(current).fadeOut();
         setTimeout(() => current ? current.remove() : '', 500);
     }, duration);
+
+    Phenix(current).on('click', isClicked => {
+        Phenix(current).fadeOut();
+        setTimeout(() => current ? current.remove() : '', 500);
+    });
 
     //====> Return Phenix <====//
     return this;

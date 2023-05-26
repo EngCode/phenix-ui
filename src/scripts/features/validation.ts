@@ -1,4 +1,4 @@
-/**======> Referance By Comment <======
+/**======> Reference By Comment <======
  * ===> 01 - Phenix Object
  * ===> 02 - Validation
  * ===> 03 - Default Browser Api
@@ -20,7 +20,7 @@ PhenixElements.prototype.validation = function (options?:{
     //====> Different Pattern for Each input <====//
     patterns?:[{
         name?:string,     //===> Input Name Attribute
-        pattern?:string,  //===> RegEx Pattren
+        pattern?:string,  //===> RegEx Pattern
         message?:string,  //===> Error Message
         position?:string, //===> Message Position [top, bottom]
     }], 
@@ -54,7 +54,7 @@ PhenixElements.prototype.validation = function (options?:{
 
                 //====> Create an Error List <====//
                 } else if (hasError.textContent !== message) {
-                    //===> get previose message <===//
+                    //===> get previous message <===//
                     let original = hasError.textContent;
 
                     //===> Create the List <===//
@@ -86,15 +86,15 @@ PhenixElements.prototype.validation = function (options?:{
                 //====> .Value Check. <====//
                 if (input.validity.valueMissing) {
                     hasError = true;
-                    let message = defaults?.valueMissing || pageDir == 'ltr' ? "this field is Reqiuered Please fill this field" : "هذا الحقل مطلوب يرجي املائه";
+                    let message = defaults?.valueMissing || input.getAttribute('data-message') || pageDir == 'ltr' ? "this field is Required Please fill this field" : "هذا الحقل مطلوب يرجي املاءه";
                     input.setCustomValidity(message);
                     errorHandler(input, message, position);
                 }
 
-                //====> .Type/Bad/Pattren Check. <====//
+                //====> .Type/Bad/Pattern Check. <====//
                 else if (input.validity.typeMismatch || input.validity.badInput || input.validity.patternMismatch) {
                     hasError = true;
-                    let message = defaults?.typeMismatch || pageDir == 'ltr' ? "You have entered a wrong value please currect your value." : "لقد ادخلت قيمة خاطئه يرجي التصحيح.";
+                    let message = defaults?.typeMismatch || input.getAttribute('data-message') || pageDir == 'ltr' ? "You have entered a wrong value please current your value." : "لقد ادخلت قيمة خاطئه يرجي التصحيح.";
                     input.setCustomValidity(message);
                     errorHandler(input, message, position);
                 }
@@ -114,6 +114,22 @@ PhenixElements.prototype.validation = function (options?:{
                     input.setCustomValidity(message);
                     errorHandler(input, message, position);
                 }
+
+                //====> Custom Pattern <====//
+                // else if (input.getAttribute('pattern') || input.validity.patternMismatch) {
+                //     //===> Get the input Pattern <===//
+                //     let regEx = input.getAttribute('pattern');
+
+                //     //===> Check for it <===//
+                //     if (!regEx.test(input.value)) {
+                //         //===> Return Error <===//
+                //         hasError = true;
+                //         //===> Return Message Error <===//
+                //         let message = input.getAttribute('data-message') || pageDir == 'ltr' ? "You have entered a wrong value please current your value." : "لقد ادخلت قيمة خاطئه يرجي التصحيح.";
+                //         input.setCustomValidity(message);
+                //         errorHandler(input, message, position);
+                //     }
+                // }
 
                 //====> .Success. <====//
                 else if (input.validity.valid) {
@@ -160,9 +176,9 @@ PhenixElements.prototype.validation = function (options?:{
 
         //===> Active on Form Submit <===//
         if(element.tagName == 'FORM') {
-            element.addEventListener('submit', isSubmiting => {
+            element.addEventListener('submit', isSubmitting => {
                 element.querySelectorAll('input, textarea, select').forEach(item => {
-                    valid_control(item, isSubmiting);
+                    valid_control(item, isSubmitting);
                 });
             });
         }

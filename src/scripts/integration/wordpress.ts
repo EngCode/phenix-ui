@@ -51,6 +51,7 @@ Phenix(window).on("load", (loaded) => {
             Phenix('.wpcf7[dir], .wpcf7 [dir]').forEach((element:HTMLElement) => element.removeAttribute('dir'));
         }
     },
+
     //====> S.E.O : Fixes <====//
     fixSEO = () => {
         document.body.setAttribute('itemscope', "");
@@ -74,9 +75,9 @@ Phenix(window).on("load", (loaded) => {
             } else elTitle = document.title;
 
             //===> Set Attributes <===//
-            if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${elTitle} ${elType} Element`);
             if(!link.getAttribute('title') || link.getAttribute('title') === "") link.setAttribute('title', `${elTitle} ${elType} Element`);
-            if(!link.getAttribute('placeholder') || link.getAttribute('placeholder') === "") link.setAttribute('placeholder', `${elTitle} ${elType} Element`);
+            if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${link.getAttribute('title') || elTitle} ${elType} Element`);
+            // if(!link.getAttribute('placeholder') || link.getAttribute('placeholder') === "") link.setAttribute('placeholder', `${elTitle} ${elType} Element`);
         });
         
         //====> Links do not have a discernible name <====//
@@ -125,14 +126,14 @@ Phenix(window).on("load", (loaded) => {
             //===> Get Form <===//
             let button = isClicked.target,
                 form = Phenix(button).ancestor('form'),
-                value = form.querySelector('[name="px-prot"]').value;
+                value = form.querySelector('[name="px-protection"]').value;
 
             if(value && value !== "") form.addEventListener('submit', submit => submit.preventDefault());
         });
 
         //===> Extra Spam Protection <===//
         document.querySelectorAll("form[action]").forEach((form:any) => form.addEventListener('submit', submit => {
-            let value = form.querySelector('[name="px-prot"]')?.value;
+            let value = form.querySelector('[name="px-protection"]')?.value;
             if(value && value !== "") submit.preventDefault();
         }));
     },
