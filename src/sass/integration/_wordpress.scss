@@ -65,6 +65,8 @@ body:not(.wp-admin):not([class*="login"]), body.block-editor-page, .phenix-wp-de
 .pos-overlap[data-sticky]:not(.is-sticky) {background-color: transparent;}
 .wp-block-phenix-icon-element img {border-radius: inherit;}
 
+.wp-block-image > a {display: block;width: inherit;}
+
 .pds-video-bg {
     > video {z-index: 0;}
     > *:not(video):not(.position) {z-index: 1;}
@@ -82,6 +84,16 @@ body:not(.wp-admin):not([class*="login"]), body.block-editor-page, .phenix-wp-de
         visibility: visible;
         -webkit-animation: attr(data-animation) 1s both;
             animation: attr(data-animation) 1s both;
+    }
+}
+
+.has-animated-childs:not(.edit-mode) .splide__slide:not(.block-editor-block-list__block) {
+    $animated-elements : "img:not([data-animation]), h1:not([data-animation]), h2:not([data-animation]), h3:not([data-animation]), h4:not([data-animation]), h5:not([data-animation]), h6:not([data-animation]), p:not([data-animation]), .btn:not([data-animation]), .form-control:not([data-animation]), .control-icon:not([data-animation]), li:not([data-animation]), .wp-block-phenix-group:not([data-animation])";
+    #{$animated-elements} {visibility: hidden;}
+    /*==== Animations ====*/
+    &.is-active {
+        //===> Elements <===//
+        #{$animated-elements} {visibility: visible;-webkit-animation: fadeInUp 1s both;animation: fadeInUp 1s both;}
     }
 }
 

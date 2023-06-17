@@ -20,35 +20,19 @@ PhenixElements.prototype.init = function (scripts?:[]) {
 
     //===> Lightbox Images <===//
     Phenix('.lightbox-image img').forEach((image:HTMLElement) => {
+        //===> Get the Source <===//
+        let image_source = image.getAttribute('src');
+
+        //===> Add Classes <===//
         image.classList.add('px-lightbox');
         image.classList.add('mouse-pointer');
+
+        //====> Check for File Type Classes <===//
         let fileType = image.classList.contains('jpg') ? "jpg" : "png";
-        image.setAttribute('data-src', image.getAttribute('src').replace('.webp', fileType));
-    });
+        if (fileType) image_source.replace('.webp', fileType);
 
-    //====> .Number Counter. <====//
-    Phenix('.number-counter:not(data-symbol)').forEach((counter:HTMLElement) => {
-        let number = `${parseInt(counter.textContent)}`;
-        counter.setAttribute('data-symbol', counter.textContent.replace(number, ""));
-    });
-
-    //====> .Custom Lightbox. <====//
-    Phenix("figure.px-lightbox").forEach((figure:any) => {
-        //===> Get Link Element <===//
-        const figureLink:any = figure.querySelector("a"),
-              figureImage:any = figure.querySelector("img");
-
-        //===> Move Classes <===//
-        figure.classList.remove("px-lightbox");
-        figureLink.classList.add("px-lightbox");
-
-        //===> Set Source/Type for Link <===//
-        figureLink.setAttribute("data-media", "embed");
-        figureLink.setAttribute("data-src", figureLink.getAttribute("href"));
-        
-        //===> Set Source/Type for Image <===//
-        figureImage.setAttribute("data-media", "embed");
-        figureImage.setAttribute("data-src", figureLink.getAttribute("href"));
+        //===> Set the Source <===//
+        image.setAttribute('data-src', image_source);
     });
 
     //===> Smooth Scroll <====//
@@ -154,9 +138,6 @@ PhenixElements.prototype.init = function (scripts?:[]) {
 
     //====> Progress <====//
     Phenix('.px-progress').progress({lazyloading: true});
-    
-    //====> Animated Counter <====//
-    Phenix('.number-counter, .px-counter').counter();
 
     //====> Global Accordion <====//
     Phenix('.px-accordion:not(.custom-accordion) .accordion-btn').collapse({

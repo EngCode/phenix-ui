@@ -17,51 +17,74 @@ PhenixElements.prototype.utilities = function (options?:{
     //====> Default Type <====//
     let type = options?.type || 'all';
 
-    //===> Placeholder Effect <====//
-    if (type.includes("form") || type === "all") Phenix('[placeholder]').forEach((control:HTMLElement) => {
-        //====> Current Placeholder <===//
-        let holder = control.getAttribute('placeholder');
-        //====> Empty Placeholder <===//
-        Phenix(control).on('focus', event => control.removeAttribute('placeholder'));
-        //====> Restore Placeholder <===//
-        Phenix(control).on('blur', event => control.setAttribute('placeholder', holder));
-    });
-
-    //===> Form Controls Group <===//
-    if (type.includes("form") || type === "all") Phenix('.form-ui, .px-form').forEach((form:HTMLElement) => {
-        //===> Get the Controls Size <====//
-        let size = form.getAttribute('data-size') || '';
-
-        //===> for Each Form <====//
-        form.querySelectorAll('input, select, textarea').forEach(controler => {
-            //====> Get the controler type <====//
-            let type = controler.getAttribute('type');
-            //====> if has no such class names or type <====//
-            if (!controler.matches('.btn' || '.form-control'))
-                type !== 'submit' || 'button' || 'radio' || 'checkbox' ? controler.classList.add('form-control', size) : '';
+    //===> Form Utils <====//
+    if (type.includes("form") || type === "all") {
+        //===> Placeholder Effect <====//
+        Phenix('[placeholder]').forEach((control:HTMLElement) => {
+            //====> Current Placeholder <===//
+            let holder = control.getAttribute('placeholder');
+            //====> Empty Placeholder <===//
+            Phenix(control).on('focus', event => control.removeAttribute('placeholder'));
+            //====> Restore Placeholder <===//
+            Phenix(control).on('blur', event => control.setAttribute('placeholder', holder));
         });
-    });
 
-    //====> Item Remover <====//
-    if (type.includes("other") || type === "all") Phenix('.remove-item').on('click', click => {
-        //====> Prevent Default Behavior <====//
-        click.preventDefault();
-        //====> Remover Data <====//
-        let trigger = click.target,
-            target  = trigger.getAttribute('data-target' || 'href') || false,
-            relation = trigger.getAttribute('data-relation');
+        //===> Form Controls Group <===//
+        Phenix('.form-ui, .px-form').forEach((form:HTMLElement) => {
+            //===> Get the Controls Size <====//
+            let size = form.getAttribute('data-size') || '';
+    
+            //===> for Each Form <====//
+            form.querySelectorAll('input, select, textarea').forEach(controler => {
+                //====> Get the controler type <====//
+                let type = controler.getAttribute('type');
+                //====> if has no such class names or type <====//
+                if (!controler.matches('.btn' || '.form-control'))
+                    type !== 'submit' || 'button' || 'radio' || 'checkbox' ? controler.classList.add('form-control', size) : '';
+            });
+        });
+    }
 
-        //=== Remove Target in Ancestors ===//
-        if (!relation || relation === 'ancestor') Phenix(trigger).ancestor(target).remove();
-        //=== Remove Target in Siblings ===//
-        else if (relation === 'sibling') {
-            Phenix(trigger).siblings(target).forEach(sibling => sibling .remove());
-        }
-        //=== Remove Target as Global ===//
-        else if (relation === 'global' || 'none') document.querySelector(target).remove();
-        //=== Remove the Closest Target ===//
-        else if (relation === 'closest' || 'related') trigger.closest(target).remove();
-    });
+    //====> Others <====//
+    if (type.includes("other") || type === "all") {
+        //====> Item Remover <====//
+        Phenix('.remove-item').on('click', click => {
+            //====> Prevent Default Behavior <====//
+            click.preventDefault();
+            //====> Remover Data <====//
+            let trigger = click.target,
+                target  = trigger.getAttribute('data-target' || 'href') || false,
+                relation = trigger.getAttribute('data-relation');
+    
+            //=== Remove Target in Ancestors ===//
+            if (!relation || relation === 'ancestor') Phenix(trigger).ancestor(target).remove();
+            //=== Remove Target in Siblings ===//
+            else if (relation === 'sibling') {
+                Phenix(trigger).siblings(target).forEach(sibling => sibling .remove());
+            }
+            //=== Remove Target as Global ===//
+            else if (relation === 'global' || 'none') document.querySelector(target).remove();
+            //=== Remove the Closest Target ===//
+            else if (relation === 'closest' || 'related') trigger.closest(target).remove();
+        });
+
+        //====> Create Animated Count Up <====//
+        Phenix('.px-counter').forEach((element:HTMLElement) => {
+            //===> Separate Numbers from Symbols <====//
+            const numbers = element.textContent.match(/\d+/g),
+                  characters = element.textContent.replace(`${numbers}`, '');
+
+            //===> Set Correct Values <====//
+            element.setAttribute('data-value', `${numbers}`);
+            if(characters && !element.getAttribute('data-symbol')) element.setAttribute('data-symbol', `${characters}`);
+
+            //====> inView Checker <====//
+            Phenix(window).on('scroll', scroll => {
+                //===> Start Counting <====//
+                if (Phenix(element).inView() && !element.classList.contains('counting')) Phenix(element).counter();
+            });
+        });
+    }
 
     //====> Masonry Grid <====//
     if (type.includes("form") || type === "grid") Phenix('.px-masonry').forEach((gallery:HTMLElement) => {
@@ -92,9 +115,8 @@ PhenixElements.prototype.utilities = function (options?:{
                 max  = parseInt(element.getAttribute('data-max-text'));
     
             //===> check count <===//
-            if (text.length > max) element.textContent = text.slice(0, max);
+            if (text.length > max) element.textContent = text.slice(0, max) + '...';
         });
-
         //====> Custom Colored Titles <====//
         const pds_words_wrapper = (str, classes, num) => {
             //===> Split String <===//

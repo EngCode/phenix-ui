@@ -40,7 +40,7 @@ PhenixElements.prototype.popup = function (options?:{
 
         /*=====> Backdrop Trigger <=====*/
         if (backdrop && !popup.querySelector('.backdrop-btn')) {
-            Phenix(popup).insert('append', `<button type="button" class="reset-button backdrop-btn modal-close position-fx fluid h-100vh pos-start-0 pos-top-0 bg-transparent" title="Close Window"></button>`);
+            Phenix(popup).insert('append', `<button type="button" class="reset-button backdrop-btn modal-close position-fx fluid h-100vh pos-start-0 pos-top-0 bg-alpha-75" title="Close Window"></button>`);
             backdrop = popup.querySelector('.backdrop-btn');
         }
 
@@ -58,7 +58,6 @@ PhenixElements.prototype.popup = function (options?:{
             'position-fx',
             'pos-start-0',
             'px-scrollbar',
-            'overlay-dark',
             'z-index-modal',
             'overflow-y-auto',
         );

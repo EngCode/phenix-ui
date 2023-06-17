@@ -173,13 +173,25 @@
     &.success { @include make-color('success','color'); }
     &.danger  { @include make-color('danger','color'); }
     &.warning { @include make-color('warning','color', 'dark-color'); }
-    &.disabled,&[disabled],&:disabled {@include make-color('disable', 'color', 'gray-color');}
+    &.warning { @include make-color('warning','color', 'dark-color'); }
+    &.disabled, &[disabled], &:disabled {@include make-color('disable', 'color', 'gray-color');}
 
     /*==== White Button ====*/
-    &.light {
+    &.light, &.white {
         --color : var(--dark-color);
+        --color-hvr  : var(--dark-color);
         --background   : white;
+        --background-hvr : #f1f1f1;
         --border-color : white;
+        --border-hvr : white;
+
+        &.outline {
+            --color : white;
+            --color-hvr : var(--dark-color);
+            --background : transparent;
+            --border-color: white;
+            --background-hvr: white;
+        }
     }
 
     /*==== Mobile Only ====*/

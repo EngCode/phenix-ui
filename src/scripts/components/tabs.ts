@@ -63,11 +63,11 @@ PhenixElements.prototype.tabs = function (options?:{
 
                 if (!tab_id && button.hasAttribute('href')) {
                     tab_id = button.getAttribute('href')?.replace('#','');
-                    button = button.parentNode;
+                    if (button.parentNode.childNodes.length < 2) button = button.parentNode;
                 }
 
                 //====> Add to URL <====//
-                if (hash_url !== '0' || 'false') {
+                if (hash_url && hash_url !== '0' || hash_url !== 'false') {
                     window.history.replaceState({ additionalInformation: 'Updated the URL with JS' }, document.title, window.location.href.replace(location.hash, "")+`#${tab_id}`);
                 }
 
@@ -95,8 +95,8 @@ PhenixElements.prototype.tabs = function (options?:{
         });
 
         //====> Active By URL <====//
-        if (window.location.hash) {
-            if (hash_url !== '0' || 'false') window.addEventListener('load', () => {
+        if (window.location.hash && hash_url && hash_url !== '0' || hash_url !== 'false') {
+            window.addEventListener('load', () => {
                 let tab_id = window.location.hash.substr(1);
                 //====> Active the Panel and Get its Siblings <====//
                 Phenix(`#${tab_id}`).fadeIn().addClass('active').removeClass('hidden').siblings('.tab-panel')?.forEach(panel => {
