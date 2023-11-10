@@ -152,7 +152,7 @@ Phenix(window).on("load", (loaded) => {
     };
 
     /*====> Change Scrollbar <====*/
-    document.querySelector('html').classList.add('px-scrollbar');
+    // document.querySelector('html').classList.add('px-scrollbar');
     document.querySelector('#phenix-js')?.removeAttribute('async');
 
     /*====> Unblock Fonts <====*/
@@ -176,8 +176,9 @@ Phenix(window).on("load", (loaded) => {
         Phenix(".wp-block-phenix-logo").setAttributes({"href": PDS_WP_KEY?.site || "/"});
 
         //===> Run Scripts <===//
-        Phenix(document).copyrights("Phenix Themes").init();
-    } 
+        Phenix(document).init();
+    }
+
     /*====> for Admin Panel <====*/
     if (document.body.classList.contains('wp-admin') && !document.body.getAttribute('class')?.includes('-editor')) {
         //===> Fix Tables Style <===//
@@ -197,6 +198,7 @@ Phenix(window).on("load", (loaded) => {
             }
         });
     }
+
     /*====> for Block Editor <====*/
     if(document.querySelector("#site-editor") || document.querySelector('body.block-editor-page')) {
         //===> Editor Assets <====//
@@ -207,14 +209,14 @@ Phenix(window).on("load", (loaded) => {
         //====> Disable Links <====//
         Phenix('.editor-styles-wrapper a[href]').on('click', clicked => clicked.preventDefault(), true);
     }
+
     /*====> for Adminbar <====*/
     if(document.querySelector('#wpadminbar')) {
         /*====> Remove Logo Submenu <====*/
-        document.querySelector('#wp-admin-bar-wp-logo .ab-sub-wrapper')?.remove();
-        
         document.querySelector('#wp-admin-bar-customize')?.remove();
-        let aboutLink = document.querySelector('#wpadminbar .ab-item[href*="about.php"]');
-        if (aboutLink) aboutLink.setAttribute('href', aboutLink.getAttribute('href').replace('about.php', 'admin.php?page=pds-dashboard'));
+        document.querySelector('#wp-admin-bar-wp-logo .ab-sub-wrapper')?.remove();
+        // let aboutLink = document.querySelector('#wpadminbar .ab-item[href*="about.php"]');
+        // if (aboutLink) aboutLink.setAttribute('href', aboutLink.getAttribute('href').replace('about.php', 'admin.php?page=pds-dashboard'));
 
         document.querySelectorAll('#wp-admin-bar-wp-logo [title], #wp-admin-bar-wp-logo .screen-reader-text').forEach((element:HTMLElement) => {
             if(element.getAttribute('title')) element.setAttribute('title', Phenix(document).direction() === "ltr" ? "Dashboard" : "لوحة التحكم");

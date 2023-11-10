@@ -196,18 +196,18 @@ PhenixElements.prototype.multimedia = function (options?:{
                     //===> Embed Options <===//
                     let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${autoplay ? 'autoplay="true"' : ''} ${controls ? 'controls' : ''} ${loop ? 'loop' : ''} ${muted ? 'muted' : ''}`;
                     //===> Video Source <===//
-                    if (embed == 'video' && !element.querySelector('video')) {
-                        Phenix(element).insert('append', `<video src="${src}" ${media_attributes}></video>`);
+                    if (embed == 'video' && !element.querySelector('.px-video')) {
+                        Phenix(element).insert('append', `<video class="px-video" src="${src}" ${media_attributes}></video>`);
                     }
                     //===> Video Source <===//
-                    else if (embed != 'video' && !element.querySelector('iframe')) {
+                    else if (embed != 'video' && !element.querySelector('.px-iframe')) {
                         //====> Get the Source <====//
                         let source = src;
                         //====> Cleanup URL <====//
                         if (source.includes('youtube.com')) source = src.replace('watch?v=', 'embed/');
                         else if (source.includes('vimeo.com')) source = src.replace('vimeo.com', 'player.vimeo.com/video');
                         //====> Create the View <====//
-                        Phenix(element).insert('append', `<iframe src="${source}"  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
+                        Phenix(element).insert('append', `<iframe class="px-iframe" src="${source}"  ${lazy ? 'loading="lazy"' : ''} frameborder="0" allowfullscreen></iframe>`);
                     } 
                     //===> Mark as Done <===//
                     mediaDone = true;

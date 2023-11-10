@@ -99,7 +99,7 @@ PhenixElements.prototype.tabs = function (options?:{
             window.addEventListener('load', () => {
                 let tab_id = window.location.hash.substr(1);
                 //====> Active the Panel and Get its Siblings <====//
-                Phenix(`#${tab_id}`).fadeIn().addClass('active').removeClass('hidden').siblings('.tab-panel')?.forEach(panel => {
+                if(tab_id) Phenix(`#${tab_id}`).fadeIn().addClass('active').removeClass('hidden').siblings('.tab-panel')?.forEach(panel => {
                     //====> Fire Event <====//
                     document.querySelector(`#${tab_id}`).dispatchEvent(showed);
                     //====> if the siblings is active <====//

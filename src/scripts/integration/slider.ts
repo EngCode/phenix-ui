@@ -157,6 +157,7 @@ PhenixElements.prototype.slider = function (options?:{
                 mediaQuery: 'min',
                 direction: direction,
                 breakpoints: breakpoints,
+                rewind: rewind,
                 paginationDirection: Phenix(document).direction(),
                 //====> Classes <====//
                 classes: {
@@ -324,10 +325,10 @@ PhenixElements.prototype.slider = function (options?:{
         //===> Create Script Element <===//
         let splide_loader = document.createElement("script"),
             libPath = Phenix(document).getURL().phenixJS.replace('js/', 'lib/'),
-            splide_url =  libPath+'splide.min.js';
+            splide_url = libPath+'splide.min.js';
 
         //===> Set ID <===//
-        splide_loader.setAttribute('id', 'splidejs-phenix')
+        splide_loader.setAttribute('id', 'splidejs-phenix');
         //===> Set Source <===//
         splide_loader.setAttribute("src", splide_url);
         splide_loader.setAttribute("async", "");

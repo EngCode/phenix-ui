@@ -166,13 +166,17 @@ PhenixElements.prototype.scrollSpy = function (options?:{
     //====> Loop Through Phenix Elements <====//
     this.forEach(element => {
         //====> Get All Links & Triggers <====//
-        let triggers:any = Array.from(element.querySelectorAll('[href], [data-target]'));
+        let triggers:any = element.querySelectorAll('[href], [data-target]');
 
         //====> Apply Smooth Scroll & Loop Through Links & Triggers <====//
-        Phenix(triggers).smothScroll({
-            into : element.getAttribute('data-into') || spotInto,
-            offset : element.getAttribute('data-offset') || spotOffset
-        }).forEach(element => {
+        triggers.forEach(trigger => {            
+            Phenix(trigger).smothScroll({
+                into : element.getAttribute('data-into') || spotInto,
+                offset : element.getAttribute('data-offset') || spotOffset
+            })
+        });
+        
+        triggers.forEach(element => {
             //====> Get Data <====//
             let selector = element.getAttribute('href') || element.getAttribute('data-target'),
 
@@ -198,10 +202,10 @@ PhenixElements.prototype.scrollSpy = function (options?:{
             };
 
             //====> First View [workout] <====//
-            if (Phenix(selector).inView({
-                flow : spotFlow,
-                into : element.getAttribute('data-into') || spotInto,
-                offset : element.getAttribute('data-offset') || spotOffset,
+            if (document.querySelector(`${selector}`) && Phenix(selector).inView({
+                flow : options?.flow || 'both',
+                into : element.getAttribute('data-into') || options?.into || 0,
+                offset : element.getAttribute('data-offset') || options?.offset || 0,
             })) activator();
 
             //====> Check While Scroll if in view-point : Activate <====//

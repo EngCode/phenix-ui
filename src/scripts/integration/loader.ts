@@ -38,12 +38,4 @@ if (loading_document) {
         loading_document.append(loading_wrapper);
         elLoader = loading_wrapper;
     }
-
-    //===> Loading Complete <===//
-    if(elLoader) {
-        //===> When Loading is Complete <===//
-        window.addEventListener('load', loaded => Phenix(elLoader).fadeOut(500, 0));
-        //===> When Leaving Page <===//
-        window.addEventListener('beforeunload', isLeaving => Phenix(elLoader).fadeIn(500, 0));
-    }
 }

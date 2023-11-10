@@ -1,7 +1,3 @@
-/**======> Reference By Comment <======
- * ===> 01 - Splide CSS
-*/
-
 @-webkit-keyframes splide-loading {
     0% {
         transform: rotate(0)
@@ -30,21 +26,14 @@
          user-select: none
 }
 
-.splide__track--fade>.splide__list {
-    display: block
-}
-
 .splide__track--fade>.splide__list>.splide__slide {
-    left: 0;
+    margin: 0 !important;
     opacity: 0;
-    position: absolute;
-    top: 0;
     z-index: 0
 }
 
 .splide__track--fade>.splide__list>.splide__slide.is-active {
     opacity: 1;
-    position: relative;
     z-index: 1
 }
 
@@ -62,15 +51,17 @@
 }
 
 .splide__list {
-    // padding: 0;
-    // margin: 0;
-    height: 100%;
-    display: flex;
     -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
+            backface-visibility: hidden;
+    display: flex;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important
 }
 
-.splide.is-initialized:not(.is-active) .splide__list {display: block}
+.splide.is-initialized:not(.is-active) .splide__list {
+    display: block
+}
 
 .splide__pagination {
     align-items: center;
@@ -89,25 +80,36 @@
     pointer-events: auto
 }
 
-.splide__progress__bar {width: 0}
+.splide:not(.is-overflow) .splide__pagination {
+    display: none
+}
+
+.splide__progress__bar {
+    width: 0
+}
 
 .splide {
     position: relative;
     visibility: hidden
 }
 
-.splide.is-initialized,.splide.is-rendered {
+.splide.is-initialized,
+.splide.is-rendered {
     visibility: visible
 }
 
 .splide__slide {
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+            backface-visibility: hidden;
     box-sizing: border-box;
     flex-shrink: 0;
     list-style-type: none !important;
     margin: 0;
     position: relative
+}
+
+.splide__slide img {
+    vertical-align: bottom
 }
 
 .splide__spinner {
@@ -139,13 +141,17 @@
     width: 1px
 }
 
-.splide__toggle.is-active .splide__toggle__play,.splide__toggle__pause {display: none}
+.splide__toggle.is-active .splide__toggle__play,
+.splide__toggle__pause {
+    display: none
+}
 
-.splide__toggle.is-active .splide__toggle__pause {display: inline}
+.splide__toggle.is-active .splide__toggle__pause {
+    display: inline
+}
 
 .splide__track {
-    width: 100%;
-    z-index: 0;
     overflow: hidden;
     position: relative;
+    z-index: 0
 }
