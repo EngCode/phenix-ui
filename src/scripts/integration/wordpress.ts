@@ -80,7 +80,7 @@ Phenix(window).on("load", (loaded) => {
             // if(!link.getAttribute('placeholder') || link.getAttribute('placeholder') === "") link.setAttribute('placeholder', `${elTitle} ${elType} Element`);
         });
         
-        //====> Links do not have a discernible name <====//
+        //====> Inputs do not have a discernible name <====//
         Phenix('input:not([title]), select:not([title])').forEach((element:HTMLElement) => {
             //===> Define Data <===//
             let element_label = element.getAttribute('placeholder') || element.getAttribute('data-placeholder') || element.tagName;
@@ -151,8 +151,7 @@ Phenix(window).on("load", (loaded) => {
         Phenix(`${reset_styles}, ${common_css}, ${block_library}`).forEach((file:HTMLElement) => file.remove());
     };
 
-    /*====> Change Scrollbar <====*/
-    // document.querySelector('html').classList.add('px-scrollbar');
+    /*====> Unblock Phenix <====*/
     document.querySelector('#phenix-js')?.removeAttribute('async');
 
     /*====> Unblock Fonts <====*/

@@ -151,7 +151,6 @@ PhenixElements.prototype.utilities = function (options?:{
         });
     }
 
-
     //====> icons List <====//
     if (type.includes("icons") || type === "all") Phenix('.icons-list').forEach((list:HTMLElement) => {
         if (list.getAttribute('data-icon')) {

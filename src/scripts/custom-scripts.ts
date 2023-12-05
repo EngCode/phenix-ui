@@ -10,6 +10,7 @@
 
 /*====> Import Phenix <====*/
 import Phenix from '.';
+declare var PDS_WP_KEY: any;
 
 //======> D.O.M is Ready [for you] <=======//
-Phenix(document).ready((event:any) => { /*--> Your Code <--*/});
+Phenix(document).ready((event:any) => {});

@@ -47,8 +47,13 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
     /*====> Add Class <====*/
     addClass(className:any) {
+        //====> Split classNames string into an array of class names <====//
+        const classNamesArray = className.split(' ');
+
         //====> Add Class for Each Element <====//
-        this.forEach((element:HTMLElement) => element.classList.add(className));
+        this.forEach((element: HTMLElement) => {
+            classNamesArray.forEach(className => element.classList.add(className));
+        });
 
         //====> Return Phenix Elements <====//
         return this;
@@ -56,8 +61,13 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
     /*====> Remove Class <====*/
     removeClass(className:any) {
+        //====> Split classNames string into an array of class names <====//
+        const classNamesArray = className.split(' ');
+
         //====> Add Class for Each Element <====//
-        this.forEach((element:HTMLElement) => element.classList.remove(className));
+        this.forEach((element: HTMLElement) => {
+            classNamesArray.forEach(className => element.classList.remove(className));
+        });
 
         //====> Return Phenix Elements <====//
         return this;
@@ -65,8 +75,13 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
     /*====> Toggle Class <====*/
     toggleClass(className:any) {
-        //====> Toggle Class for Each Element <====//
-        this.forEach((element:HTMLElement) => element.classList.toggle(className));
+        //====> Split classNames string into an array of class names <====//
+        const classNamesArray = className.split(' ');
+
+        //====> Add Class for Each Element <====//
+        this.forEach((element: HTMLElement) => {
+            classNamesArray.forEach(className => element.classList.toggle(className));
+        });
 
         //====> Return Phenix Elements <====//
         return this;
@@ -354,7 +369,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> Resources Lazy-Loader <====*/
     lazyLoading() {
         //====> Element Data <====//
-        let spinner = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
+        // let spinner = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDApIG5vbmUgcmVwZWF0IHNjcm9sbCAwJSAwJTsgZGlzcGxheTogYmxvY2s7IHNoYXBlLXJlbmRlcmluZzogYXV0bzsiIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkY2RjIiBzdHJva2Utd2lkdGg9IjMiIHI9IjE4IiBzdHJva2UtZGFzaGFycmF5PSI4NC44MjMwMDE2NDY5MjQ0MSAzMC4yNzQzMzM4ODIzMDgxMzgiPgogIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSI+PC9hbmltYXRlVHJhbnNmb3JtPgo8L2NpcmNsZT4KPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+PC9zdmc+";
         
         //====> Loop Through Media Elements <====//
         Phenix('img, video, audio, iframe').forEach((element:HTMLElement) => {
@@ -495,6 +510,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
         //===> Active <===//
         createQuery();
+
         //===> Live Check <===//
         window.addEventListener('resize', resizing => {
             createQuery();
@@ -535,9 +551,45 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         return this;
     };
 
+    /*====> CSS/JS Importer <====*/
+    import = (id:string, type:string, source:string, callback:any, isIntegrated:boolean) => {
+        //===> if Already Exist Quit <===//
+        if (document.querySelector(`#${id}-phenix-${type}`)) return;
+
+        //===> Create Element <===//
+        let element  = document.createElement(type),
+            libPath = Phenix(document).getURL().phenixJS.replace('js/', 'lib/'),
+            trueUrl = `${isIntegrated ? libPath : ""}${source}`;
+
+        //===> Set ID <===//
+        element.setAttribute('id', `${id}-phenix-${type === "link" ? "css" : type}`);
+
+        //===> Set Source <===//
+        if (type === "script") {
+            element.setAttribute("src", trueUrl);
+            element.setAttribute("async", "");
+            //===> Append Element <===//
+            document.body.appendChild(element);
+        }
+
+        //===> for CSS <===//
+        else if (type === "link" || type === "css") {
+            element.setAttribute("href", trueUrl);
+            element.setAttribute("rel", "stylesheet");
+            //===> Append Element <===//
+            document.head.appendChild(element);
+        };
+
+        //====> When Loaded Run Callback <====//
+        element.addEventListener("load", callback);
+
+        //====> When Error Re-Load <====//
+        element.addEventListener("error", event => element.setAttribute("src", trueUrl));
+    };
+
     /*====> Define Information <====*/
     height; getCSS; direction; getURL
-    inView; viewport; copyrights; init;
+    inView; viewport; copyrights;
 
     /*====> Define UI Effects <====*/
     slideUp; slideDown; slideToggle;
@@ -553,7 +605,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     popup; lightbox; menu; datatable;
     validation; uploader; progress;
     select; repeater; rating; seo; loader;
-    slider; utilities; notifications;
+    slider; utilities; notifications; init;
 }
 
 /*====> Phenix Selecting Method <====*/
@@ -591,7 +643,6 @@ import './features/animations'; //==> View-port Animations
 import './features/validation'; //==> Form Validation
 import './features/collapse';   //==> Collapse Toggle
 import './features/notifications'; //==> Notifications
-// import './features/connect';       //==> API Connector
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus
@@ -608,7 +659,6 @@ import './components/datatable'; //==> Data-Tables
 /*====> Integration <====*/
 import './integration/slider';    //==> Splide.js Slider
 import './integration/utilities'; //==> Phenix Utilities
-// import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/
 import './custom-scripts';

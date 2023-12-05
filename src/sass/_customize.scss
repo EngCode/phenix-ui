@@ -17,14 +17,15 @@
     /*==== Primary Color ====*/
     --primary-color   : #0C97F9;
     --primary-hover   : #1A69F4;
-    --primary-dark    : #0e151f;
+    --primary-dark    : #040f27;
     --primary-reverse : #FFFFFF;
     --primary-offwhite: #e1eef7;
+    --offwhite-border : #a8c2e0;
 
     /*==== Secondary Color ====*/
     --secondary-color   : #F8C25B;
     --secondary-hover   : #FB955D;
-    --secondary-dark    : #171931;
+    --secondary-dark    : #b03513;
     --secondary-reverse : #000000;
     --secondary-offwhite: #fddfa8;
 
@@ -38,6 +39,14 @@
     --ice-gradient       : #54AEFC, #3289E9, #5848D2;
     --fire-gradient      : #FFD500, #FAA10B, #F4291A;
     --purple-gradient    : #8772F7, #5F48DD;
+    --primary-purple     : var(--primary-color), #5848D2;
+    --blue-white         : #e9f1ff, #FFFFFF;
+
+    /*==== Profilaat Colors ====*/
+    --blue-color      : #3289E9;
+    --blue-offwhite   : #A8CDFD;
+    --silver-gradient : #f1f1f1 , #FFFFFF;
+    --silver-gradient-2nd : #f6f6f6, #FFFFFF;
 
     /*=== Assets Colors ====*/
     --links-color   : var(--primary-color);
@@ -58,9 +67,9 @@
     --warning-light : #FFE875;
 
     /*==== Typography Colors ====*/
-    --typography-color : #555;
-    --light-reverse    : #000;
-    --dark-reverse     : #FFF;
+    --typography-color : #111111;
+    --light-reverse    : #000000;
+    --dark-reverse     : #FFFFFF;
 
     /*==== Index Order ====*/
     --header-index : 999991;
@@ -75,6 +84,7 @@
 }
 
 /*==== Integration ====*/
+// @import 'integration/wordpress'; //===> WordPress
 @import 'integration/splide';    //===> Splide Slider
 
 /*==== Components Modules ====*/
@@ -87,6 +97,7 @@
 @import 'components/slider';     //===> Phenix Sliders
 
 /*==== Form Components ====*/
+@import 'form/uploader';
 @import 'form/form-controls';
 
 /*==== Utilities Modules ====*/
@@ -100,3 +111,4 @@
 @import 'utilities/borders';    //===> CSS Borders
 @import 'utilities/visibility'; //===> Visibility Utilities
 @import 'utilities/plugins';    //===> Phenix Plugins Assets
+@import 'utilities/hovers';     //===> Phenix Plugins Assets
