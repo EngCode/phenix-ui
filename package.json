@@ -46,7 +46,7 @@
   ],
   "scripts": {
     "phenix-start": "concurrently --kill-others \"npm run phenix-sass\" \"npm run phenix-ts && size-limit\"",
-    "phenix-ts": "npx webpack --config typescript.webpack.js --watch",
+    "phenix-ts": "npx webpack --config scripts.webpack.js --watch",
     "phenix-sass": "npx node-sass --watch src/sass -o dist/css --output-style compressed --source-map true",
     "animate-sass": "npx node-sass --watch src/animations/ -o dist/css/animations/ --output-style compressed"
   },
