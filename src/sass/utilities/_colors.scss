@@ -64,18 +64,27 @@
 .bg-gray-lighter {background-color: #F9F9F9;}
 .bg-dark {background-color: var(--dark-color);}
 .bg-white {background-color: white;}
+/*==== Dark Alpha ====*/
 .bg-alpha-05  {background-color: rgba(#000, 0.05);}
 .bg-alpha-10  {background-color: rgba(#000, 0.10);}
 .bg-alpha-15  {background-color: rgba(#000, 0.15);}
 .bg-alpha-25  {background-color: rgba(#000, 0.25);}
 .bg-alpha-50  {background-color: rgba(#000, 0.50);}
 .bg-alpha-75  {background-color: rgba(#000, 0.75);}
+/*==== Light Alpha ====*/
 .bg-revert-05  {background-color: rgba(#FFF, 0.05);}
 .bg-revert-10  {background-color: rgba(#FFF, 0.10);}
 .bg-revert-15  {background-color: rgba(#FFF, 0.15);}
 .bg-revert-25  {background-color: rgba(#FFF, 0.25);}
 .bg-revert-50  {background-color: rgba(#FFF, 0.50);}
 .bg-revert-75  {background-color: rgba(#FFF, 0.75);}
+/*==== Components ====*/
+.bg-component-lvl-1 {background-color: var(--component-bg-lvl-1);}
+.bg-component-lvl-2 {background-color: var(--component-bg-lvl-2);}
+.bg-component-lvl-3 {background-color: var(--component-bg-lvl-3);}
+.color-component-lvl-1 {color: var(--component-tx-lvl-1);}
+.color-component-lvl-2 {color: var(--component-tx-lvl-2);}
+.color-component-lvl-3 {color: var(--component-tx-lvl-3);}
 
 /*==== Brands Backgrounds ====*/
 .bg-facebook {background-color: var(--facebook-color);}
@@ -172,22 +181,22 @@
 .bg-grade-180n {--gradient-rotation : -180deg;}
 
 /*==== Border Colors ====*/
-.border-primary    {border-color: var(--primary-color);}
-.border-secondary  {border-color: var(--secondary-color);}
-.border-success    {border-color: var(--success-color);}
-.border-danger     {border-color: var(--danger-color);}
-.border-warning    {border-color: var(--warning-color);}
-.border-light      {border-color: var(--dark-reverse);}
-.border-info       {border-color: var(--info-color);}
-.border-gray       {border-color: var(--gray-color);}
-.border-gray-light {border-color: var(--gray-light);}
-.border-dark       {border-color: var(--dark-color);}
-.border-white      {border-color: white;}
-.border-alpha-10   {border-color: rgba(#000, 0.1);}
-.border-alpha-15   {border-color: rgba(#000, 0.15);}
-.border-alpha-25   {border-color: rgba(#000, 0.25);}
-.border-alpha-50   {border-color: rgba(#000, 0.50);}
-.border-alpha-75   {border-color: rgba(#000, 0.75);}
+.border-primary     {border-color: var(--primary-color);}
+.border-secondary   {border-color: var(--secondary-color);}
+.border-success     {border-color: var(--success-color);}
+.border-danger      {border-color: var(--danger-color);}
+.border-warning     {border-color: var(--warning-color);}
+.border-light       {border-color: var(--dark-reverse);}
+.border-info        {border-color: var(--info-color);}
+.border-gray        {border-color: var(--gray-color);}
+.border-gray-light  {border-color: var(--gray-light);}
+.border-dark        {border-color: var(--dark-color);}
+.border-white       {border-color: white;}
+.border-alpha-10    {border-color: rgba(#000, 0.1);}
+.border-alpha-15    {border-color: rgba(#000, 0.15);}
+.border-alpha-25    {border-color: rgba(#000, 0.25);}
+.border-alpha-50    {border-color: rgba(#000, 0.50);}
+.border-alpha-75    {border-color: rgba(#000, 0.75);}
 .border-revert-10   {border-color: rgba(#FFF, 0.1);}
 .border-revert-15   {border-color: rgba(#FFF, 0.15);}
 .border-revert-25   {border-color: rgba(#FFF, 0.25);}
@@ -239,44 +248,3 @@
 .bgp-bs {background-position: #{$direction-start} bottom;}
 .bgp-bc {background-position: center bottom;}
 .bgp-be {background-position: #{$direction-end} bottom;}
-
-/*==== Background Animations ====*/
-.bg-animated-x {
-    --duration : 60s;
-    background-repeat: repeat-x;
-    -webkit-animation: background_x var(--duration) linear infinite;
-            animation: background_x var(--duration) linear infinite;
-}
-
-.bg-animated-y {
-    --duration : 60s;
-    background-repeat: repeat-x;
-    -webkit-animation: background_y var(--duration) linear infinite;
-            animation: background_y var(--duration) linear infinite;
-}
-
-.bg-animated-zoom {
-    -webkit-animation: bgZoomInOut 30s linear infinite;
-        animation: bgZoomInOut 30s linear infinite;
-}
-
-/*==== Custom Animations ====*/
-@-webkit-keyframes background_x {
-    from {background-position: 0 0;}
-    to {background-position: 100% 0;}
-}
-
-@keyframes background_x {
-    from {background-position: 0 0;}
-    to {background-position: 100% 0;}
-}
-
-@-webkit-keyframes background_y {
-    from {background-position: 0 0;}
-    to {background-position: 0 100%;}
-}
-
-@keyframes background_y {
-    from {background-position: 0 0;}
-    to {background-position: 0 100%;}
-}
