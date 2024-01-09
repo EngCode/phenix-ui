@@ -55,12 +55,17 @@
             backface-visibility: hidden;
     display: flex;
     height: 100%;
-    margin: 0 !important;
-    padding: 0 !important
+    // margin: 0 !important;
+    // padding: 0 !important
 }
 
 .splide.is-initialized:not(.is-active) .splide__list {
     display: block
+}
+
+.splide--fade {
+    direction: ltr;
+    .splide__slide {direction: $direction;}
 }
 
 .splide__pagination {
@@ -106,6 +111,20 @@
     list-style-type: none !important;
     margin: 0;
     position: relative
+
+    /*==== Animated Childs ====*/
+    [data-animation] {
+        visibility: hidden!important;
+        animation-name: var(--animation-exit, 'fadeOut');
+        animation-delay: var(--animation-delay, 0);
+        animation-duration: var(--animate-duration, 1s);
+    }
+
+    /*==== Animations ====*/
+    &.is-active [data-animation] {
+        visibility: visible!important;
+        animation-name: var(--animation-name, 'fadeIn');
+    }
 }
 
 .splide__slide img {

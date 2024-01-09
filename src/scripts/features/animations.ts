@@ -36,6 +36,7 @@ PhenixElements.prototype.animations = function (options?:{
             flow = parseInt(element.getAttribute('data-flow')) || options?.flow || false,
             into = parseInt(element.getAttribute('data-into')) || options?.into || false,
             lazy = parseInt(element.getAttribute('data-lazy')) || options?.lazyloading,
+            delay = parseInt(element.getAttribute('data-delay')) || options?.delay,
             lazygroup = parseInt(element.getAttribute('data-lazy-group')) || options?.lazygroup || true,
             directionFix = options?.directionFix || true;
 
@@ -63,11 +64,13 @@ PhenixElements.prototype.animations = function (options?:{
         //====> Set Duration <====//
         element.setAttribute('data-duration', duration);
 
+        //===> Set the Animation Name as CSS Variable <====//
+        element.style.setProperty('--animation-name', animation);
+        element.style.setProperty('--animation-duration', duration);
+        element.style.setProperty('--animation-delay', delay||0);
+
         //====> if the Element in view Show it <====//
         let isInView = () => {
-            //====> Get Options <=====//
-            let delay = parseInt(element.getAttribute('data-delay')) || options?.delay;
-
             //====> Animations CSS <====//
             if (delay) element.style.animationDelay = `${delay}ms`;
             if (duration) element.style.animationDuration = `${duration}ms`;
@@ -76,12 +79,17 @@ PhenixElements.prototype.animations = function (options?:{
             let animate = () => {
                 //====> Show the Element <====//
                 Phenix(element).removeClass('visibility-hidden');
+                //====> Slider Fallback <====//
+                if (Phenix(element).ancestor('.px-slider')) return;
                 //====> Animations Classes <====//
-                element.classList.add('view-active', animation)
+                element.classList.add('view-active', animation);
             }
 
-            //====> Check for View <====//
+            //====> Animate if it is in ViewPort <====//
             if (Phenix(element).inView({offset:offset, into: into, flow: flow})) animate();
+
+            //===> When is out of view Reset <===//
+            else element.classList.remove('view-active', animation);
         };
 
         //====> Lazyloading <====//
@@ -90,8 +98,6 @@ PhenixElements.prototype.animations = function (options?:{
                 current_delay = 0;
     
             group?.querySelectorAll('[data-animation]:not([data-delay])').forEach((item, index) => {
-                let prev_item = index-1;
-    
                 if (item !== element) {
                     if (!item.style.animationDelay) {
                         current_delay += duration;
@@ -132,12 +138,10 @@ PhenixElements.prototype.animations = function (options?:{
         //===> Append Script <===//
         document.head.appendChild(animations_loader);
 
-        //====> When Loaded Run Sliders <====//
+        //====> When Loaded Run <====//
         animations_loader.addEventListener("load", () => {
             viewPort_Handler;
-            /*====> Unblock Fonts <====*/
             animations_loader.setAttribute('media', 'all');
-            // document.head.querySelectorAll('.px-css-file').forEach(style => style.setAttribute('media', 'all'));
         });
 
         //====> When Error Re-Load <====//

@@ -603,7 +603,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     /*====> Define Components <====*/
     dropdown; tabs; collapse; connect;
     popup; lightbox; menu; datatable;
-    validation; uploader; progress;
+    validation; uploader; progress; rebuildSelect
     select; repeater; rating; seo; loader;
     slider; utilities; notifications; init;
 }
@@ -659,6 +659,8 @@ import './components/datatable'; //==> Data-Tables
 /*====> Integration <====*/
 import './integration/slider';    //==> Splide.js Slider
 import './integration/utilities'; //==> Phenix Utilities
+// import './integration/blocks';    //==> Phenix Blocks Scripts
+// import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/
 import './custom-scripts';
