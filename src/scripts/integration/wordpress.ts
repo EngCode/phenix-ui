@@ -4,9 +4,7 @@
 
 /*====> Phenix JS <====*/
 import Phenix from "..";
-declare var wp:any,
-    PDS_WP_KEY:any,
-    window:any;
+declare var wp:any, PDS_WP_KEY:any, window:any;
 
 /*====> D.O.M is Ready ? <====*/
 Phenix(window).on("load", (loaded) => {
@@ -66,22 +64,19 @@ Phenix(window).on("load", (loaded) => {
         if (!document.head.querySelector('meta[name="keywords"]')) Phenix(document.head).insert('append', `<meta name="description" content="${document.title}, HTML, Phenix, Abdullah, Ramadan, Web, Designer, Developer, Placeholder, Keyword, WordPress, phenixthemes.com">`);
         
         //====> Links do not have a discernible name <====//
-        Phenix('a:empty, button:empty').forEach((link:HTMLElement) => {
-            //===> Define Data <===//
-            let elTitle = "",
-                elType  = link.classList.contains('btn') || link.tagName === "BUTTON" ? "Button" : link.classList.contains('media') ? "Media" : "Resource";
-
-            //===> Get a Correct Title <===//
-            let parent = Phenix(link).ancestor('[class*="col"]') || Phenix(link).ancestor('[class*="row"]') || Phenix(link).ancestor('[class*="container"]');
-            if (parent && parent.querySelectorAll('h2:first-of-type, h3:first-of-type, h4:first-of-type, p:first-of-type')[0]) {
-                parent.querySelectorAll('h2:first-of-type, h3:first-of-type, h4:first-of-type, p:first-of-type').forEach(element => !elTitle && element.textContent ? elTitle = element.textContent.trim() : "");
-            }
-
-            if (elTitle === "") elTitle = link.querySelector('*')?.textContent ? link.querySelector('*').textContent.trim() : "";
-
-            //===> Set Attributes <===//
-            if(!link.getAttribute('title') || link.getAttribute('title') === "") link.setAttribute('title', `${elTitle}`);
-            if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${link.getAttribute('title') || elTitle}`);
+        Phenix('a:empty:not(.px-media), button:empty').forEach((link:HTMLElement) => {
+            setTimeout(() => {
+                //===> Get the Title from the Closest Text Element <===//
+                let closestElement = link.closest('h2, h3, h4, p, a, img'),
+                    elTitle:string = closestElement?.textContent.trim() || link.getAttribute('title') || "";
+    
+                //===> Get from an Attributes <===//
+                if (!elTitle || elTitle === "null") elTitle = closestElement?.getAttribute('alt') || closestElement?.getAttribute('title') || "";
+    
+                //===> Set Attributes <===//
+                if(!link.getAttribute('title')) link.setAttribute('title', `${elTitle}`);
+                if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${elTitle}`);
+            }, 1000);
         });
         
         //====> Inputs do not have a discernible name <====//
@@ -142,19 +137,6 @@ Phenix(window).on("load", (loaded) => {
         }));
     };
 
-    // editorAssets = () => {
-    //     //====> Add Design Options Classes <===//
-    //     document.body.classList.add('phenix-wp-design');
-
-    //     //===> Removes Editor Reset styles <===//
-    //     let common_css    = `#common-rtl-css, #common-css`,
-    //         reset_styles  = `#wp-reset-editor-styles-rtl-css, #wp-reset-editor-styles-css`,
-    //         block_library = `#wp-block-library-theme-css, #wp-block-library-theme-rtl-css`;
-
-    //     //===> Run Files Remover <===//
-    //     Phenix(`${reset_styles}, ${common_css}, ${block_library}`).forEach((file:HTMLElement) => file.remove());
-    // };
-
     /*====> Unblock Phenix <====*/
     document.querySelector('#phenix-js')?.removeAttribute('async');
 
@@ -195,23 +177,32 @@ Phenix(window).on("load", (loaded) => {
         
         //===> Run Scripts <===//
         Phenix(document).init();
-
-        //====> Hide WooCommerce Blocks <====//
-        // Phenix("#menu-settings li a").forEach((link:HTMLElement) => {
-        //     if (link.getAttribute("href").includes("blocks-product-editor-for-woocommerce")) {
-        //         Phenix(link.parentNode).css({"display": "none"});
-        //     }
-        // });
     }
 
     /*====> for Block Editor <====*/
-    // if(document.querySelector("#site-editor") || document.querySelector('body.block-editor-page')) {
-    //     //===> Editor Assets <====//
-    //     window.onload = editorAssets();
-    //     // let cf7Cleaner = setInterval(() => fixCF7(), 1000);
-    //     // setTimeout(() => clearInterval(cf7Cleaner), 10000);
+    if(document.querySelector("#site-editor") || document.querySelector('body.block-editor-page')) {
+        //====> Disable Links <====//
+        Phenix('.editor-styles-wrapper a[href]').on('click', clicked => clicked.preventDefault(), true);
+    }
 
-    //     //====> Disable Links <====//
-    //     Phenix('.editor-styles-wrapper a[href]').on('click', clicked => clicked.preventDefault(), true);
-    // }
+    //===> WP Media Uploader <===//
+    Phenix(".px-custom-uploader .uploader-btn").on("click", isClicked => {
+        //===> Prevent Default <===//
+        isClicked.preventDefault();
+        let input = Phenix(isClicked.target).next(".uploader-input");
+        
+        //===> Open Media Uploader <===//
+        console.log(wp.media);
+        var image = wp.media({
+            title: "Upload Image",
+            multiple: false
+        }).open().on("select", isSelect => {
+            //===> Get the Image URL <===//
+            var uploaded_image = image.state().get("selection").first();
+            //===> Set the URL to the Input <===//
+            input.value = uploaded_image.toJSON().url;
+            //===> Preview <===//
+            input.parentNode.querySelector(".input-value").innerHTML = new URL(uploaded_image.toJSON().url).pathname.split("/").pop();
+        });
+    });
 });

@@ -36,7 +36,10 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     });
 
     //===> Smooth Scroll <====//
-    Phenix('body:not(.wp-admin) *:not(.scrollspy-menu) a[href*="#"]').smothScroll();
+    Phenix('body:not(.wp-admin) a[href*="#"]').forEach((link:HTMLElement) => {
+        let ancestorIs = Phenix(link).ancestor('.px-tabs') || Phenix(link).ancestor('.scrollspy-menu');
+        if (!ancestorIs) Phenix(link).smothScroll();
+    });
 
     /*====> Add Data Options to un-reachable Elements <====*/
     Phenix(`[data-add-options]`).forEach((element:HTMLElement) => {
@@ -78,39 +81,60 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     //====> Header Holders <====//
     if (main_header && header_holder) header_holder.prepend(main_header);
 
-    //====> Sticky Header Fixes <====//    
-    if (Phenix('[data-sticky="absolute"]')[0]) {
-        //===> Define Data <===//
-        const stickyHeader = Phenix('[data-sticky="absolute"]'),
-              headerHeight = stickyHeader.height();
+    //===> Audio Player [Testimonials] <===//
+    if (document.querySelector('[data-audio]')) {
+        //===> Create Audio Player <===//
+        let audio_player = document.createElement("audio");
+        //=== Set Player ID ===//
+        audio_player.setAttribute('id', 'px-audio-player');
+        //=== Insert Player to the Document ===//
+        document.body.appendChild(audio_player);
 
-        //====> Full Screen Fixes <====//
-        Phenix('.full-screen').forEach((element:HTMLElement) => {
-            //===> Check for Row Element and Padding <====//
-            let rowElement:HTMLElement = element.querySelector('[class*="row"]') || element.querySelector('[class*="flexbox"]'),
-                hasPadding = [Phenix(element).getCSS('padding-top'), Phenix(element).getCSS('padding-bottom')],
-                paddingValue:any = 0; hasPadding.forEach((value:string) => paddingValue += parseInt(value));
-
-            console.log(hasPadding);
-            //===> Set Height <===//
-            element.style.minHeight = `calc(100vh - ${headerHeight+paddingValue}px)`;
-            if (rowElement) rowElement.style.minHeight = `calc(100vh - ${headerHeight+paddingValue}px)`;
-        });
-
-        Phenix('.full-screen-wide').forEach((element:HTMLElement) => {
-            //===> Check for Row Element and Padding <====//
-            let rowElement:HTMLElement = element.querySelector('[class*="row"]') || element.querySelector('[class*="flexbox"]'),
-                hasPadding = [Phenix(element).getCSS('padding-top'), Phenix(element).getCSS('padding-bottom')],
-                paddingValue:any = 0; hasPadding.forEach((value:string) => paddingValue += parseInt(value));
-
-            //===> Set Height <===//
-            element.style.minHeight = `calc(85vh - ${headerHeight+paddingValue}px)`;
-            if (rowElement) rowElement.style.minHeight = `calc(85vh - ${headerHeight+paddingValue}px)`;
-        });
+        //====> Audio Buttons <====//
+        Phenix('button[data-audio]').on('click', event => {
+            //=== Get Data ===//
+            let element = event.target,
+                audio_file = element.getAttribute('data-audio');
+            //=== Set Audio ===//
+            audio_player.setAttribute('src', audio_file);
+            //=== Player Audio ===//
+            audio_player.play();
+        }, true);
     }
 
+    //====> Sticky Header Fixes <====//    
+    // if (Phenix('[data-sticky="absolute"], .main-header.position-st')[0]) {
+    //     //===> Define Data <===//
+    //     const stickyHeader = Phenix('[data-sticky="absolute"], .main-header.position-st'),
+    //           headerHeight = stickyHeader.height();
+
+    //     //====> Full Screen Fixes <====//
+    //     Phenix('.full-screen').forEach((element:HTMLElement) => {
+    //         //===> Check for Row Element and Padding <====//
+    //         let rowElement:HTMLElement = element.querySelector('[class*="row"]') || element.querySelector('[class*="flexbox"]'),
+    //             hasPadding = [Phenix(element).getCSS('padding-top'), Phenix(element).getCSS('padding-bottom')],
+    //             paddingValue:any = 0; hasPadding.forEach((value:string) => paddingValue += parseInt(value));
+
+    //         console.log(hasPadding);
+    //         //===> Set Height <===//
+    //         element.style.minHeight = `calc(100vh - ${headerHeight+paddingValue}px)`;
+    //         if (rowElement) rowElement.style.minHeight = `calc(100vh - ${headerHeight+paddingValue}px)`;
+    //     });
+
+    //     Phenix('.full-screen-wide').forEach((element:HTMLElement) => {
+    //         //===> Check for Row Element and Padding <====//
+    //         let rowElement:HTMLElement = element.querySelector('[class*="row"]') || element.querySelector('[class*="flexbox"]'),
+    //             hasPadding = [Phenix(element).getCSS('padding-top'), Phenix(element).getCSS('padding-bottom')],
+    //             paddingValue:any = 0; hasPadding.forEach((value:string) => paddingValue += parseInt(value));
+
+    //         //===> Set Height <===//
+    //         element.style.minHeight = `calc(85vh - ${headerHeight+paddingValue}px)`;
+    //         if (rowElement) rowElement.style.minHeight = `calc(85vh - ${headerHeight+paddingValue}px)`;
+    //     });
+    // }
+
     //===> Sticky Elements <====//
-    Phenix("[data-sticky").sticky();
+    Phenix("[data-sticky], .main-header.position-st").sticky();
 
     //====> Sliders <====//
     Phenix('.px-slider').slider();
@@ -124,6 +148,24 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     //====> Activate Select <====//
     Phenix('.px-select').select();
     
+    //===> Unlocated Menu fallback style. <===//
+    Phenix('.px-navigation > div.reset-list').forEach((element:HTMLElement) => {
+        //===> Define Elements <===//
+        let parent:any = Phenix(element).ancestor(".px-navigation"),
+            classNames = element.classList,
+            children  = element.childNodes;
+
+        //===> Move Children <===//
+        children.forEach((child:any) => {
+            parent.appendChild(child);
+            //===> Move Classnames <===//
+            classNames.forEach((className:string) => child.classList.add(className));
+        });
+
+        //===> Remove Element <===//
+        element.remove();
+    });
+
     //===> Phenix Menu <===//
     Phenix('.px-navigation').menu();
 
@@ -147,7 +189,7 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     });
 
     //===> Animations <===//
-    Phenix('[data-animation], .px-animate').animations({animateCSS: ["all"]});
+    Phenix('[data-animation], .px-animate, [data-lazy-group]').animations({animateCSS: ["all"]});
 
     /*===> Table of contents Menu <===*/
     let postContent = document.querySelector(".entry-content"), last_title,
