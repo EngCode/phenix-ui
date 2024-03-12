@@ -8,23 +8,24 @@
 */
 
 /*==== Progress Bars ====*/
-.px-progress {
+.px-progress:not([data-type="circle"]) {
     /*==== Label Basic ====*/
-    &[data-label]::before, .px-progress-bar[data-label]::before {@extend .position-ab;}
+    &[data-label]::before, .px-progress-bar[data-label]::before {position: absolute;}
 
     /*==== Label Before ====*/
     &[data-label]::before {
+        top: 50%;
         width: 100%;
         #{$direction-start}: 0;
         content: attr(data-label);
-        @extend .pos-center-y;
+        @extend %position-center-y;
     }
 
     /*==== Inverted Label ====*/
     .px-progress-bar[data-label]::before {
         color: #FFF;
         width: var(--width);
-        @extend .pos-center-y;
+        @extend %position-center-y;
         #{$direction-start}: 0;
         content: attr(data-label);
     }
@@ -32,9 +33,6 @@
     /*==== Value Label ====*/
     &[data-label="value"]::before {content: attr(data-value) "%";}
     .px-progress-bar[data-label="value"]::before {content: attr(data-value) "%";}
-
-    //====> Circle Mode <====//
-    &[data-type="circle"] svg path {transition: stroke-dasharray 850ms ease-in-out;}
 
     //====> Radial Mode <====//
     &[data-type="radial"] {
@@ -45,16 +43,10 @@
         }
         /*==== SVG ====*/
         svg path {
-            transition: stroke-dashoffset 850ms ease-in-out;
+            transition: all 0.3s ease-in-out;
             transform: scale(1.19) translateY(-8%) translateX(-8%);
         }
     }
-}
-
-/*==== Progress Circle Fix ====*/
-.px-progress-circle {
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 2px #FFF, inset 0 0 0 12px rgba(#000, 0.30);
 }
 
 /*==== Sticky ====*/
@@ -81,7 +73,7 @@
 .px-media {
     /*==== ....====*/
     &:not([class*="position-"]) {position: relative;}
-    &:not([class*="flex"]):not([class*="display-"]):not([class*="inline-"]) {display: block;}
+    &:not([class*="flex"]):not([class*="inline-"]) {display: block;}
     &:not([class*="bgs-"]):not([class*="bgh-"]):not([class*="bgw-"]) {
         background-size: cover;
         background-position: center;
@@ -195,3 +187,20 @@
 @include xlarge(){
     @include make_ratio('-xl');
 };
+
+/*==== Section Snapping ====*/
+.px-section-snap {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    > .px-section-snap-item, > div:not(.no-snap) {scroll-snap-align: start;}
+}
+
+.px-section-snap-x {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    > .px-section-snap-item, > div:not(.no-snap) {scroll-snap-align: start;}
+}
+
+// .px-masonry, .row.px-masonry {display: block;}
