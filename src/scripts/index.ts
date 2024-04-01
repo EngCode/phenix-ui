@@ -262,18 +262,17 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 
     /*====> CSS Styling <====*/
     css(style:object, clearInline?) {
+        //====> Check for the Elements <====//
+        if (this.length === 0) return;
+
         //====> if inline-style Clear is Activated <====//
         if (clearInline) this.forEach((element:HTMLElement) => (element.removeAttribute('style')));
 
         //====> for Each CSS Property <====//
         for (const [key, value] of Object.entries(style)) {
-            //====> Convert Property[String] To Object Name[Key] <====//
-            // let property = key.replace(/(-[a-z])/, prop => prop.replace("-", "").toUpperCase());
-
             //====> Style Elements <====//
             this.forEach((element:HTMLElement) => {
                 element.style.setProperty(key, value);
-                // element.style[property] = value
             });
         }
 
@@ -617,21 +616,21 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
 /*====> Phenix Selecting Method <====*/
 const Phenix = (selector?:any) => {
     /*====> Get Elements from Selector <====*/
-    if (typeof(selector) === 'string') {
+    if (typeof(selector) === 'string' && selector.length > 0) {
         //====> Select as Phenix Elements <====//
-        let selected = document.querySelectorAll(selector);
-
+        const selected = document.querySelectorAll(selector);
         //====> Create Elements Query <====//
-        if (selector.length > 0) return new PhenixElements(...selected);
+        return new PhenixElements(...selected);
     }
 
     /*====> if its Elements Passed it <====*/
     else if (selector !== null && typeof(selector) !== 'undefined' || 'number') {
         //====> if Not Array Make it one <====//
-        if (!Array.isArray(selector) || typeof(selector) !== 'object') selector = [selector];
-
+        const elements = Array.isArray(selector) ? selector : [selector];
+        //====> Filter Undefined/Nulled Items <====//
+        const filteredElements = elements.filter((element) => element !== null && element !== undefined);
         //====> and Create Elements Query <====//
-        return new PhenixElements(...selector);
+        return new PhenixElements(...filteredElements);
     }
 }
 
