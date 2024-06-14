@@ -1,11 +1,4 @@
-<p align="center">
-  <a href="https://phenixthemes.com/demo/">
-    <img src="https://phenixthemes.com/pds-docs/wp-content/uploads/sites/2/2022/09/phenix-design-icon.svg" alt="Phenix Design logo" width="175" height="162">
-  </a>
-</p>
-
 <h2 align="center">Phenix Design System</h2>
-
 <p align="center">
   Simple, Effective, and powerful user-interface framework for faster and easier web development.
 </p>
@@ -120,7 +113,7 @@
 02 - [new] Collapse Javascript
 03 - [upgrade] Re-Build Accordion with Collapse
 04 - [new] Multi-level Dropdowns and Megamenu
-05 - [new] CSS Animations on Dimand
+05 - [new] CSS Animations on Demand
 06 - [upgrade] Add Media Lightbox for Popups.
 07 - [new] Notifications and Toasts
 08 - [upgrade] Typography CSS Utilites
