@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://design.phenixthemes.com">
+  <a href="https://phenixthemes.com/demo/">
     <img src="https://phenixthemes.com/pds-docs/wp-content/uploads/sites/2/2022/09/phenix-design-icon.svg" alt="Phenix Design logo" width="175" height="162">
   </a>
 </p>
@@ -10,7 +10,7 @@
   Simple, Effective, and powerful user-interface framework for faster and easier web development.
 </p>
 <p align="center">
-  <a href="https://design.phenixthemes.com"><strong>Explore Phenix docs »</strong></a>
+  <a href="https://phenixthemes.com/demo/"><strong>Explore Phenix docs »</strong></a>
 </p>
 <p align="center">
 <a href="https://github.com/EngCode/phenix-ui/issues/new?assignees=-&labels=bug&template=bug_report.yml">Report bug</a>
@@ -33,7 +33,7 @@
 
 ### Introduction
 
-**[Phenix DS](https://design.phenixthemes.com/about-phenix/ "About Phenix")** is lightweight user-interface framework build for simple structure, fast execution, and performance is number One concern in mind it was build for personal use and later published as open-source project for web community benefits.
+**[Phenix DS](https://phenixthemes.com/demo//about-phenix/ "About Phenix")** is lightweight user-interface framework build for simple structure, fast execution, and performance is number One concern in mind it was build for personal use and later published as open-source project for web community benefits.
 
 ---
 
@@ -139,15 +139,15 @@
 
 ---
 
-#### [Documentation](https://design.phenixthemes.com)
+#### [Documentation](https://phenixthemes.com/demo/)
 
-you can visit the offical website of phenix design system and read the documentation to master the frameowork : [design.phenixthemes.com](https://design.phenixthemes.com).
+you can visit the offical website of phenix design system and read the documentation to master the frameowork : [design.phenixthemes.com](https://phenixthemes.com/demo/).
 
 ---
 
 ### Where to Start
 
-to use and understand phenix design pattern you need to get familiar with all [Utilities](https://design.phenixthemes.com/category/utilities/) class names like [spacing](https://design.phenixthemes.com/spacing/)[,](https://design.phenixthemes.com/display/) [s](https://design.phenixthemes.com/sizing/)[izing](https://design.phenixthemes.com/sizing/)[, colors](https://design.phenixthemes.com/colors/)[, backgrounds](https://design.phenixthemes.com/backgrounds/) to be able to customize and change any component used in the documentation examples and builds.
+to use and understand phenix design pattern you need to get familiar with all [Utilities](https://phenixthemes.com/demo//category/utilities/) class names like [spacing](https://phenixthemes.com/demo//spacing/)[,](https://phenixthemes.com/demo//display/) [s](https://phenixthemes.com/demo//sizing/)[izing](https://phenixthemes.com/demo//sizing/)[, colors](https://phenixthemes.com/demo//colors/)[, backgrounds](https://phenixthemes.com/demo//backgrounds/) to be able to customize and change any component used in the documentation examples and builds.
 
 ---
 
@@ -169,7 +169,7 @@ after that you will need to install Node.JS and SASS the Ruby version for compil
 
 ### SASS Modules
 
-after installing phenix-ui from npm you can import sass modules into you project sass with `@import './node_modules/phenix-sass/*'`which will import the **“*name”** module into your project, for more information about [SASS modules click here](https://design.phenixthemes.com/category/sass-customize/ "SASS Customize") also,
+after installing phenix-ui from npm you can import sass modules into you project sass with `@import './node_modules/phenix-sass/*'`which will import the **“*name”** module into your project, for more information about [SASS modules click here](https://phenixthemes.com/demo//category/sass-customize/ "SASS Customize") also,
 
 ---
 
@@ -177,13 +177,13 @@ after installing phenix-ui from npm you can import sass modules into you project
 
 you can import and use the TypeScript modules into your project typescript by import Phenix from `'./node_modules/phenix-ts'`  which will import Phenix plugins for you to use it in your project,
 
-or you can use it as JavaScript module by  import Phenix from `"./node_modules/phenix-js"` inside your script file or even with html script in the example below, for more information about how to use [P.D.S TypeScript/JavaScript click here](https://design.phenixthemes.com/category/typescript-js/ "Typescript").
+or you can use it as JavaScript module by  import Phenix from `"./node_modules/phenix-js"` inside your script file or even with html script in the example below, for more information about how to use [P.D.S TypeScript/JavaScript click here](https://phenixthemes.com/demo//category/typescript-js/ "Typescript").
 
 ---
 
 ### CDN CSS
 
-the next piece of code will load ******[Phenix D.S](https://design.phenixthemes.com/ "Home")****** Stylesheet **“LTR”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
+the next piece of code will load ******[Phenix D.S](https://phenixthemes.com/demo// "Home")****** Stylesheet **“LTR”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
 
 ```
 <!-- Phenix CSS LTR -->
@@ -192,7 +192,7 @@ the next piece of code will load ******[Phenix D.S](https://design.phenixthemes
 
 ### Right-to-Left (RTL) Version
 
-if your document language is right-to-left you can use ****[Phenix D.S](https://design.phenixthemes.com/ "Home")**** Stylesheet **“RTL”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
+if your document language is right-to-left you can use ****[Phenix D.S](https://phenixthemes.com/demo// "Home")**** Stylesheet **“RTL”** version from npm CDN Links you can copy it and place it into your document `<head>...</head>` tag.
 
 ```
 <!-- Phenix CSS RTL -->
@@ -203,7 +203,7 @@ if your document language is right-to-left you can use ****[Phenix D.S](https:/
 
 ### CDN JavaScript
 
-the next piece of code will load ****[Phenix D.S](https://design.phenixthemes.com/ "Home")**** [JavaScript](https://design.phenixthemes.com/category/typescript-js/ "Typescript") for [ui Effects](https://design.phenixthemes.com/ui-effects/ "UI Effects") and Interactive [Components](https://design.phenixthemes.com/category/components/ "Components") like [[popups](https://design.phenixthemes.com/popup-modals/ "Popup Modals"), [sliders](https://design.phenixthemes.com/carousel-slider/ "Carousel Slider"), [animations](https://design.phenixthemes.com/animations/ "Animations"), [tabs](https://design.phenixthemes.com/tabs-panels/ "Tabs & Panels"), [data tables](https://design.phenixthemes.com/data-tables/ "Data Tables")] from npm CDN Links you can copy it and place it before your document `</body>` closing tag.
+the next piece of code will load ****[Phenix D.S](https://phenixthemes.com/demo// "Home")**** [JavaScript](https://phenixthemes.com/demo//category/typescript-js/ "Typescript") for [ui Effects](https://phenixthemes.com/demo//ui-effects/ "UI Effects") and Interactive [Components](https://phenixthemes.com/demo//category/components/ "Components") like [[popups](https://phenixthemes.com/demo//popup-modals/ "Popup Modals"), [sliders](https://phenixthemes.com/demo//carousel-slider/ "Carousel Slider"), [animations](https://phenixthemes.com/demo//animations/ "Animations"), [tabs](https://phenixthemes.com/demo//tabs-panels/ "Tabs & Panels"), [data tables](https://phenixthemes.com/demo//data-tables/ "Data Tables")] from npm CDN Links you can copy it and place it before your document `</body>` closing tag.
 
 ```
 <!-- Phenix JS -->
