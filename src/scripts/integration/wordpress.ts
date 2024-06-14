@@ -7,34 +7,107 @@ import Phenix from "..";
 declare var wp:any, PDS_WP_KEY:any, window:any;
 
 /*====> D.O.M is Ready ? <====*/
-Phenix(window).on("load", (loaded) => {
+Phenix(document).on("DOMContentLoaded", (loaded) => {
     //===> Contact Form 7 Fixes <===//
     const fixCF7 = () => {
-        if (document.querySelector(".wpcf7-form")) {
-            //===> Redirect WP7 After Submit <===//
-            if (window.location.hash.substr(1).includes('wpcf7-')) {
-                //===> ... <===//
-                let isFailed = false,
-                    theForm = document.querySelector(`#${window.location.hash.substr(1)}`);
-                
-                //===> Check Forms <===//
-                if(theForm.classList.contains('failed')) isFailed = true;
+        //====> Fetching Form Data for CF7 <=====//
+        document.querySelectorAll('.wpcf7-form').forEach((form:any) => {
+            //====> Forms Validation <====//
+            Phenix('.wpcf7-form, .px-form-validation').validation();
 
-                //===> Redirect <===//
-                if (isFailed === false) {
-                    console.log("is Success");
-                    window.location.href = `${PDS_WP_KEY.site ? PDS_WP_KEY.site + '/success' : "/success"}`;
+            //====> on Submit Prevent the Native behavior and submit with Fetch <====//
+            form.addEventListener('submit', (event:any) => {
+                //====> Prevent the default form submission <====//
+                event.preventDefault();
+                const submitButton = form.querySelector('input[type="submit"]') || form.querySelector('button[type="submit"]') || form.querySelector('.btn:last-of-type');
+
+                console.log(submitButton);
+
+                if(!form.querySelector('.px-validation') && !form.querySelector('.error')) {
+                    //====> Disable Form <====//
+                    submitButton.classList.add('px-loading-inline');
+
+                    //====> Date/Time Reformated <====//
+                    const dateTimeFormatter = (dateString) => {
+                        //===> Get Current Date and Time Data <===//
+                        let date = new Date(dateString),
+                            year = date.getFullYear(),
+                            month = ('0' + (date.getMonth() + 1)).slice(-2),
+                            day = ('0' + date.getDate()).slice(-2),
+                            hours = ('0' + date.getHours()).slice(-2),
+                            minutes = ('0' + date.getMinutes()).slice(-2);
+
+                        //===> Construct a readable date and time format <===//
+                        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+                    }
+
+                    // Create a new FormData object from the form
+                    const formData = new FormData(form);
+
+                    //====> Loop through each entry in the FormData object <===//
+                    for (const pair of formData.entries()) {
+                        //====> Check if the entry value is a date/time string <====//
+                        if (typeof pair[1] === 'string' && pair[1].match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/)) {
+                            //====> Reformat the date/time string <====//
+                            formData.set(pair[0], dateTimeFormatter(pair[1]));
+                        }
+                    }
+
+                    //====> Submit with Ajax [Fetch] <====//
+                    fetch(form.getAttribute('action'), {
+                        body: formData,
+                        method: form.getAttribute('method'),
+                    }).then(response => {
+                        //====> Check Network Connection <====//
+                        if (!response.ok) {
+                            //===> Show Failed Message <===//
+                            Phenix(document).notifications({
+                                type: "error",
+                                duration: "7000",
+                                position: ["center", "center"],
+                                message: "Network response was not ok",
+                            });
+    
+                            //===> Throw an Error <====//
+                            throw new Error('Network response was not ok');
+                        }
+                        //====> Return Response Text <====//
+                        return response.text();
+                    }).then(data => {
+                        //====> Enable Form <====//
+                        submitButton.classList.add('px-loading-inline');
+                        //===> Reset Forms on Loading <===//
+                        Phenix('.wpcf7 input:not([type="hidden"]):not(.btn):not([type="submit"]), .wpcf7 select, .wpcf7 textarea').forEach((input:any) => {input.value = '';});
+
+                        //===> Reset PX Select Component <===//
+                        form.querySelectorAll('div.px-select').forEach((element: any) => {
+                            let firstOption = element.querySelector('.px-select-option:first-child');
+                            const toggleButton = element.querySelector('.px-select-toggle');
+                            if (!firstOption) firstOption = element.querySelector('.px-select-option:nth-child(2)');
+                            
+                            toggleButton.textContent = firstOption.textContent;
+                        });
+
+                        //====> Disable Form <====//
+                        submitButton.classList.remove('px-loading-inline');
+                        //===> Redirect to Success <===//
+                        const sourceParameter = window.location.href.replace(PDS_WP_KEY.site, '');
+                        window.location.href = `${PDS_WP_KEY.site ? PDS_WP_KEY.site + `/success/?source=${sourceParameter}` : `/success/?source=${sourceParameter}`}`;
+                    }).catch(error => {
+                        //===> Show Error Message <===//
+                        Phenix(document).notifications({
+                            type: "error",
+                            duration: "7000",
+                            position: ["center", "center"],
+                            message: error,
+                        });
+                    });
                 }
+            });
+        });
 
-                //===> Show Failed Message <===//
-                else Phenix(document).notifications({
-                    type: "error",
-                    duration: "7000",
-                    position: ["center", "center"],
-                    message: Phenix(document).direction() === "ltr" ? "Something Went Wrong Please Try Again." : "لقد حدث خطأ ما يرجي اعادة المحاولة.",
-                });
-            }
-
+        //===> CF7 Style Fixes <===//
+        if (document.querySelector(".wpcf7-form")) {
             //===> Textarea <===//
             Phenix('.wpcf7-textarea').forEach((element:any) => {
                 element.setAttribute('cols', null);
@@ -53,13 +126,15 @@ Phenix(window).on("load", (loaded) => {
     //====> S.E.O : Fixes <====//
     fixSEO = () => {
         //====> Schema Meta Data Set <====//
-        document.body.setAttribute('itemscope', "");
-        document.body.setAttribute('itemtype', "https://schema.org/WebPage");
+        if(!document.body.getAttribute('itemscope')) document.body.setAttribute('itemscope', "");
+        if(!document.body.getAttribute('itemtype')) document.body.setAttribute('itemtype', "https://schema.org/WebPage");
+
+        //====> Create Placeholder Keywords <=====//
         let pds_keywords = `${document.title}, HTML, Phenix, Abdullah, Ramadan, Web, Designer, Developer, Design System, WordPress, phenixthemes.com`;
         let pds_meta_description = document.querySelector('.entry-content p:first-of-type')?.textContent.substring(0, 160);
-        if (document.location.href.includes('phenixthemes.com')) {
-            pds_keywords += `,شركة برمجة, تصميم مواقع, شركة تصميم مواقع, تصميم موقع الكتروني, تصميم مواقع الكترونية, شركات تصميم مواقع الكترونية, تصميم واجهة مستخدم, تطوير موقع ووردبريس, شركات تطوير مواقع الكترونية, شركات تصميم المواقع الالكترونية, تصميم مواقع الشركات, افضل شركة لتصميم المواقع, افضل شركات تصميم متاجر الكترونية, شركات تطوير المواقع الالكترونية, افضل شركات تصميم منصات الكترونية, افضل شركة برمجة منصات, شركات لعمل مواقع الانترنت, شركة برمجة وتصميم مواقع, أسعار تصميم المواقع, شركة تصميم مواقع ويب`
-        }
+
+        //====> Add keywords for PX website only <====//
+        if (document.location.href.includes('phenixthemes.com')) pds_keywords += `,شركة برمجة, تصميم مواقع, شركة تصميم مواقع, تصميم موقع الكتروني, تصميم مواقع الكترونية, شركات تصميم مواقع الكترونية, تصميم واجهة مستخدم, تطوير موقع ووردبريس, شركات تطوير مواقع الكترونية, شركات تصميم المواقع الالكترونية, تصميم مواقع الشركات, افضل شركة لتصميم المواقع, افضل شركات تصميم متاجر الكترونية, شركات تطوير المواقع الالكترونية, افضل شركات تصميم منصات الكترونية, افضل شركة برمجة منصات, شركات لعمل مواقع الانترنت, شركة برمجة وتصميم مواقع, أسعار تصميم المواقع, شركة تصميم مواقع ويب`;
 
         //====> Check for Headline Level 1 <====//
         if(!document.querySelector('h1')) Phenix('.main-header').insert('append', `<h1 class="hidden">${document.title}</h1>`);
@@ -69,35 +144,41 @@ Phenix(window).on("load", (loaded) => {
         if (!document.head.querySelector('meta[name="keywords"]')) Phenix(document.head).insert('append', `<meta name="keywords" content="${pds_keywords}">`);
 
         //====> Links do not have a discernible name <====//
-        Phenix('a:empty:not(.px-media), button:empty').forEach((link:HTMLElement) => {
-            setTimeout(() => {
+        Phenix('a:not([title]):empty, button:not([title]):empty, a:not([title]), button:not([title])').forEach((link:HTMLElement) => {
+            //===> Links Metadata Fixer <===//
+            const LinksMetaFixer = () => {
                 //===> Get the Title from the Closest Text Element <===//
                 let closestElement = link.closest('h2, h3, h4, p, a, img'),
-                    elTitle:string = closestElement?.textContent.trim() || link.getAttribute('title') || "";
-    
-                //===> Get from an Attributes <===//
-                if (!elTitle || elTitle === "null") elTitle = closestElement?.getAttribute('alt') || closestElement?.getAttribute('title') || "";
-    
+                    elTitle:string = document.title;
+
+                //===> Get the Title from the closest elements Attributes or the document title <===//
+                if (closestElement) closestElement.textContent.trim() || link.getAttribute('title') || closestElement?.getAttribute('alt') || document.title;
+
                 //===> Set Attributes <===//
                 if(!link.getAttribute('title')) link.setAttribute('title', `${elTitle}`);
                 if(!link.getAttribute('aria-label')) link.setAttribute('aria-label', `${elTitle}`);
-            }, 1000);
+            };
+
+            //===> Fix the Links <===//
+            LinksMetaFixer();
         });
-        
+
         //====> Inputs do not have a discernible name <====//
-        Phenix('input:not([title]), select:not([title])').forEach((element:HTMLElement) => {
+        Phenix('input:not([title]):not([type="submit"]), select:not([title])').forEach((element:HTMLElement) => {
             //===> Define Data <===//
-            let element_label = element.getAttribute('placeholder') || element.getAttribute('data-placeholder') || element.tagName;
+            let element_label = element.getAttribute('placeholder') || element.getAttribute('data-placeholder');
 
-            //===> Get a Correct Title <===//
-            let label = Phenix(element).prev('label') || Phenix(element).next('label');
-            if (!label) {
+            //===> If the placeholder is not valid <===//
+            if (!element_label) {
+                //===> Get the Label <===//
+                let label = Phenix(element).prev('label') || Phenix(element).next('label') || element.closest('label');
+                //=== Get the Controller Parent ====//
                 let element_parent = Phenix(element).ancestor('p') || Phenix(element).ancestor('[class*="col"]') || Phenix(element).ancestor('div');
-                if (element_parent) label = Phenix(element_parent).prev('label') || Phenix(element_parent).next('label');
+                //===> if the label not exist get the parent text <====//
+                if (!label && element_parent) label = Phenix(element_parent).prev('label') || Phenix(element_parent).next('label');
+                //===> Correct Label if there are none <===//
+                if (label && label.textContent) element_label = label.textContent.trim();
             }
-
-            //===> Set Attributes <===//
-            if (label && label.textContent) element_label = label.textContent.trim();
 
             //===> Set Attributes <===//
             if(!element.getAttribute('aria-label')) element.setAttribute('aria-label', `${element_label}`);
@@ -115,46 +196,21 @@ Phenix(window).on("load", (loaded) => {
             if (!checkForForm || !checkForInput) button.setAttribute('type', "button");
             else if (checkForForm && !checkForInput) button.setAttribute('type', 'submit');
         });
-    },
-
-    spamBlock = () => {
-        //===> Form Spam Protection <===//
-        let FormsSubmit = Phenix('form [type="submit"]'),
-            spamInput = `<input name="px-protection" title="px-prot" style="left:100%; opacity: 0; visibility: hidden; z-index: -1" class="hidden position-ab" type="text" name="px-prot" value="" tabindex="-1" autocomplete="off" />`;
-
-        //===> Create Spam Inputs <===//
-        FormsSubmit.forEach(button => Phenix(button).insert('before', spamInput));
-
-        //===> Add Spam Protection Filter <===//
-        Phenix('form [type="submit"]').on('click', isClicked => {
-            //===> Get Form <===//
-            let button = isClicked.target,
-                form = Phenix(button).ancestor('form'),
-                value = form.querySelector('[name="px-protection"]').value;
-
-            if(value && value !== "") form.addEventListener('submit', submit => submit.preventDefault());
-        });
-
-        //===> Extra Spam Protection <===//
-        document.querySelectorAll("form").forEach((form:any) => form.addEventListener('submit', submit => {
-            let value = form.querySelector('[name="px-protection"]')?.value;
-            if (value && value !== "") submit.preventDefault();
-        }));
     };
-
-    /*====> Unblock Phenix <====*/
-    document.querySelector('#phenix-js')?.removeAttribute('async');
 
     /*====> Unblock Fonts <====*/
     Phenix('#fontawesome-css, #pds-icons-css, #pds-cfont-css, #theme-style-css, #phenix-css, #pds-primary-font-css, #pds-secondary-font-css').forEach((style:HTMLElement) => style.setAttribute('media', 'all'));
 
     /*====> for Front-End <====*/
     if (!document.body.classList.contains('wp-admin')) {
-        //====> Start Fixes <====//
-        fixCF7(); fixSEO(); spamBlock();
-
         /*====> Activated Menu Items <====*/
         Phenix('.current-menu-parent, .current-menu-item').addClass('px-item-active');
+
+        //===> Run Scripts <===//
+        Phenix(document).init();
+        
+        //====> Start Fixes <====//
+        fixCF7(); fixSEO();
 
         //====> Adminbar Fix <====//
         if (document.querySelector('#wpadminbar')) Phenix('body').css({ "padding": "0", 'padding-top' : '32px', "margin-top": "-24px"});
@@ -164,9 +220,6 @@ Phenix(window).on("load", (loaded) => {
 
         //===> Set Logo Link <===//
         Phenix(".wp-block-phenix-logo").setAttributes({"href": PDS_WP_KEY?.site || "/"});
-
-        //===> Run Scripts <===//
-        Phenix(document).init();
     }
 
     /*====> for Admin Panel <====*/
@@ -185,7 +238,7 @@ Phenix(window).on("load", (loaded) => {
     }
 
     /*====> for Block Editor <====*/
-    if(document.querySelector("#site-editor") || document.querySelector('body.block-editor-page')) {
+    if(document.querySelector("#site-editor") || document.querySelector('body[class*="editor"]')) {
         //====> Disable Links <====//
         Phenix('.editor-styles-wrapper a[href]').on('click', clicked => clicked.preventDefault(), true);
     }

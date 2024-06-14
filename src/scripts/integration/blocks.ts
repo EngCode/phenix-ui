@@ -13,27 +13,8 @@ import Phenix, { PhenixElements } from "..";
 
 /*====> Phenix Blocks Script <====*/
 PhenixElements.prototype.init = function (scripts?:[]) {
-    //===> Lazy Backgrounds <===//
-    Phenix('.wp-block-phenix-container[data-src]').forEach((container:HTMLElement) => {
-        container.setAttribute('data-lazyloading', "true");
-    });
-
-    //===> Lightbox Images <===//
-    Phenix('.lightbox-image img').forEach((image:HTMLElement) => {
-        //===> Get the Source <===//
-        let image_source = image.getAttribute('src');
-
-        //===> Add Classes <===//
-        image.classList.add('px-lightbox');
-        image.classList.add('mouse-pointer');
-
-        //====> Check for File Type Classes <===//
-        let fileType = image.classList.contains('jpg') ? "jpg" : "png";
-        if (fileType) image_source.replace('.webp', fileType);
-
-        //===> Set the Source <===//
-        image.setAttribute('data-src', image_source);
-    });
+    //===> Activate Lazyloading <===//
+    Phenix(document).lazyLoading();
 
     //===> Smooth Scroll <====//
     Phenix('body:not(.wp-admin) a[href*="#"]').forEach((link:HTMLElement) => {
@@ -61,19 +42,6 @@ PhenixElements.prototype.init = function (scripts?:[]) {
         Phenix(grid_element).insert("append", element);
     });
 
-    //===> Element Overlap <===//
-    Phenix(".pos-overlap").forEach((element:HTMLElement) => {
-        let height = Phenix(element).height(),
-            nextEl = Phenix(element).next() || Phenix(element.parentNode).next(),
-            nextElPadding = nextEl ? Phenix(nextEl).getCSS("paddingTop") : 0;
-        //===> Element CSS <===//
-        element.style.marginBottom = `-${height}px`;
-        if(nextEl) Phenix(nextEl).css({'padding-top': `${height+parseInt(nextElPadding)}px`});
-    });
-
-    //====> Forms Validation <====//
-    Phenix('.wpcf7-form, .px-form-validation').validation();
-
     //===> Move Header <===//
     const main_header = document.querySelector('.main-header'),
           header_holder = document.querySelector('#header-holder');
@@ -85,29 +53,51 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     if (document.querySelector('[data-audio]')) {
         //===> Create Audio Player <===//
         let audio_player = document.createElement("audio");
-        //=== Set Player ID ===//
-        audio_player.setAttribute('id', 'px-audio-player');
-        //=== Insert Player to the Document ===//
-        document.body.appendChild(audio_player);
+            //=== Set Player ID ===//
+            audio_player.setAttribute('id', 'px-audio-player');
+            //=== Insert Player to the Document ===//
+            document.body.appendChild(audio_player);
 
         //====> Audio Buttons <====//
         Phenix('button[data-audio]').on('click', event => {
             //=== Get Data ===//
-            let element = event.target,
-                audio_file = element.getAttribute('data-audio');
-            //=== Set Audio ===//
-            audio_player.setAttribute('src', audio_file);
-            //=== Player Audio ===//
-            audio_player.play();
+            let button = event.target,
+                audio_file = button.getAttribute('data-audio');
+
+            //=== Check if the Audio is Already Playing ===//
+            if (audio_player.getAttribute('src') === audio_file && !audio_player.paused) {
+                //=== Pause the Audio ===//
+                audio_player.pause();
+
+                //=== Switch Play Status icon ===//
+                if(button.classList.contains('fa-pause')) {
+                    button.classList.remove('fa-pause');
+                    button.classList.add('fa-play');
+                }
+            } else {
+                //=== Set Audio and Play ===//
+                audio_player.setAttribute('src', audio_file);
+                audio_player.play();
+
+                //=== Switch Play Status icon ===//
+                button.classList.add('fa-pause');
+                button.classList.remove('fa-play');
+
+                //=== When Audio is Finished Switch the Status icon ===//
+                audio_player.addEventListener('ended', (isEnded) => {
+                    button.classList.add('fa-play');
+                    button.classList.remove('fa-pause');
+                });
+            }
         }, true);
     }
 
     //===> Sticky Elements <====//
-    Phenix("[data-sticky], .main-header.position-st").sticky();
+    Phenix("[data-sticky], .main-header.position-st").sticky({into: 0});
 
     //====> Sliders <====//
-    Phenix('.px-slider').slider();
-    
+    Phenix('.px-slider:not([data-is-navigation])').slider();
+
     //====> Tabs <====//
     Phenix('.px-tabs').tabs();
     
@@ -115,8 +105,11 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     Phenix('.px-modal').popup();
 
     //====> Activate Select <====//
-    Phenix('.px-select').select();
-    
+    Phenix('select.px-select').forEach((select:HTMLElement) => {
+        if (!select.querySelector('option')) Phenix(select).insert('prepend', `<option value="" selected>${select.getAttribute('data-placeholder') || 'Default'}</option>`);
+        Phenix(select).select();
+    });
+
     //===> Unlocated Menu fallback style. <===//
     Phenix('.px-navigation > div.reset-list').forEach((element:HTMLElement) => {
         //===> Define Elements <===//
@@ -135,15 +128,24 @@ PhenixElements.prototype.init = function (scripts?:[]) {
         element.remove();
     });
 
+    //===> Megamenu Hooks <===//
+    Phenix(".pds-megamenu").forEach((menu:HTMLElement) => {
+        //===> Get Elements <====//
+        const id = menu.getAttribute('id');
+        const menu_item = document.querySelector(`.mgh-${id}`);
+        //===> Get the Menu Item <===//
+        Phenix(menu_item).insert('append', menu);
+    });
+
     //===> Phenix Menu <===//
     Phenix('.px-navigation').menu();
 
     //====> Multimedia <====//
-    Phenix('.px-media').multimedia();
+    Phenix('.px-media').multimedia({lazyloading: true});
 
     //====> Phenix Uploader <====//
     Phenix('.px-uploader').uploader();
-    
+
     //====> Dropdown Buttons <====//
     Phenix('.px-dropdown').dropdown();
 
