@@ -17,10 +17,13 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     Phenix(document).lazyLoading();
 
     //===> Smooth Scroll <====//
-    Phenix('body:not(.wp-admin) a[href*="#"]:not(.wp-block-phenix-logo)').forEach((link:HTMLElement) => {
-        let hasFunction = Phenix(link).ancestor('.px-tabs') || Phenix(link).ancestor('.scrollspy-menu');
-        if (!hasFunction) Phenix(link).smothScroll();
+    Phenix('a.smooth-scroll, .smooth-scroll a[href*="#"]').forEach((link:HTMLElement) => {
+        // let hasFunction = Phenix(link).ancestor('.px-tabs') || Phenix(link).ancestor('.scrollspy-menu');
+        // if (!hasFunction) 
+        Phenix(link).smothScroll();
     });
+
+    Phenix(".go-up-btn").on("click", isClicked => window.scrollTo({top: 0,left: 0,behavior: "smooth",}));
 
     /*====> Add Data Options to un-reachable Elements <====*/
     Phenix(`[data-add-options]`).forEach((element:HTMLElement) => {
@@ -42,6 +45,12 @@ PhenixElements.prototype.init = function (scripts?:[]) {
         Phenix(grid_element).insert("append", element);
     });
 
+    //===> Move Elements to Sibling Grid <===//
+    Phenix('.move-to-grid-before').forEach(element => {
+        let grid_element = Phenix(element).siblings('.row')[0];
+        Phenix(grid_element).insert("prepend", element);
+    });
+
     //===> Move Header <===//
     const main_header = document.querySelector('.main-header'),
           header_holder = document.querySelector('#header-holder');
@@ -50,22 +59,9 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     if (main_header && header_holder) header_holder.prepend(main_header);
 
     //===> Audio Player [Testimonials] <===//
-    if (document.querySelector('[data-audio]')) {
-        //===> Define Objects <===//
-        let audio_player:any = document.querySelector('#px-audio-player');
-
-        //===> Create Audio Player <===//
-        if (!audio_player) {
-            //===> Create Player <===//
-            audio_player = document.createElement("audio");
-            //=== Set Player ID ===//
-            audio_player.setAttribute('id', 'px-audio-player');
-            //=== Insert Player to the Document ===//
-            document.body.appendChild(audio_player);
-        }
-
+    if (document.querySelector('[data-audio]') || document.querySelector('.audio-trigger')) {
         //====> Audio Buttons <====//
-        Phenix(document).audioTrigger('button[data-audio]', audio_player);
+        Phenix(document).audioTrigger('button[data-audio], .audio-trigger');
     }
 
     //===> Sticky Elements <====//
@@ -138,6 +134,9 @@ PhenixElements.prototype.init = function (scripts?:[]) {
     //===> Animations <===//
     Phenix('[data-animation], .px-animate, [data-lazy-group]').animations({animateCSS: ["all"]});
 
+    //====> Build Timer's <====//
+    Phenix('.px-timer').timer({type: "countdown"});
+
     /*===> Table of contents Menu <===*/
     let postContent = document.querySelector(".entry-content"), last_title,
         content_menu = document.querySelector('#table-of-content-list');
@@ -181,4 +180,12 @@ PhenixElements.prototype.init = function (scripts?:[]) {
 
     //===> .Others. <===//
     Phenix(document).utilities();
+
+    //===> Header Hacks <===//
+    if (main_header) {
+        
+    }
+
+    //===> Add Support for CSS Scroll Driving Animations <===//
+    // Phenix(document).import("scroll-timeline", "script", "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js", ()=>{}, false);
 }

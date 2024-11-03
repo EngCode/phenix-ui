@@ -59,8 +59,8 @@
     z-index: var(--header-index);
     /*==== Absolute ====*/
     &[data-sticky*="absolute"] {
-        position: fixed;
         width: 100%;
+        position: fixed!important;
     }
     /*==== Native ====*/
     [data-sticky*="inner"].is-sticky {
@@ -89,7 +89,7 @@
     }
 
     /*==== elements ====*/
-    &:not(.ratio-none) {
+    &:not(.ratio-none), &.ratio-none[class*="h-"] {
         .px-video, .px-iframe, .px-media-img, > iframe, > video {
             top: 0;
             left: 0;
@@ -109,7 +109,12 @@
     /*==== image type ====*/
     &.ratio-none[data-type="image"] {
         background-image: initial!important;
-        .px-media-img {pointer-events: none; position: relative;}
+        .px-media-img {
+            height: auto;
+            position: relative;
+            object-fit: initial;
+            pointer-events: none;
+        }
     }
 }
 
@@ -127,6 +132,25 @@
 .px-animate, [data-animation] {
     animation-fill-mode: both;
     animation-duration: 1s;
+}
+
+/*==== Slider Animation Support ====*/
+.splide__slide {
+    visibility: visible;
+    /*==== Animated Childs ====*/
+    [data-animation] {
+        animation-fill-mode: both;
+        visibility: hidden!important;
+        animation-name: var(--animation-exit, 'fadeOut');
+        animation-delay: calc(var(--animation-delay, 0));
+        animation-duration: var(--animate-duration, 1s);
+    }
+
+    /*==== Animations ====*/
+    &.is-active [data-animation], &.is-visible [data-animation] {
+        visibility: visible!important;
+        animation-name: var(--animation-name, 'fadeIn');
+    }
 }
 
 /*==== Row Fix ====*/

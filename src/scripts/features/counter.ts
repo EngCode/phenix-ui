@@ -45,35 +45,31 @@ PhenixElements.prototype.counter = function (options?:{
         if (reverse) count = value;
 
         
-        //====> Count Runer <===//
+        //====> Count Runner <===//
         const runCounter = () => {
             //===> Round Up Values <===//
-            count = Math.round(count);
-            value = Math.round(value);
-            
+            // count = Math.round(count);
+            // value = Math.round(value);
+
             //===> Set is Counting <===//
             if (!counting) element.classList.add('counting');
-            
-            //===> if [Count Down] is Activated => Decrease the Count <===//
-            if (reverse && count > 0) count -= increment;
-            
-            //===> Otherwise Increase the Count <===//
-            else if (count < value) count += increment;
-            
+
+            //===> if [Count Down] is Activated => Decrease the Count Otherwise Increase the Count <===//
+            count += (reverse ? -Math.min(increment, Math.abs(value - count)) : Math.min(increment, Math.abs(value - count)));
+            // if (reverse && count > 0) count -= increment;
+            // else if (count < value) count += increment;
+
             //===> Current Value <===//
-            let current = `${(count).toFixed(decimal).toString().replace(decimal_regex, ',')+symbol}`;
-            
-            //===> if the Element is Input Control <===//
-            if (input) element.value = current;
-            
-            //===> Otherwise <===//
-            else element.innerHTML = current;
+            // let current = `${count.toFixed(decimal).toString().replace(decimal_regex, ',')}${symbol}`;
+
+            //===> Update the Element <===//
+            element[ input ? 'value' : 'innerHTML' ] = `${count.toFixed(decimal).toString().replace(decimal_regex, ',')}${symbol}`;
+            // if (input) element.value = current;
+            // //===> Otherwise <===//
+            // else element.innerHTML = current;
 
             //===> Clear When Count Up Reaches The Target <===//
-            if (!reverse && count === value) clearInterval(interval);
-
-            //===> Clear When Count Down Reaches Zero <===//
-            else if (reverse && count === 0) clearInterval(interval);
+            if (count === (reverse ? 0 : value)) clearInterval(interval);
         };
 
         //====> Counter Handler <====//

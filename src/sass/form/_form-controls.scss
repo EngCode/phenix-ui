@@ -8,6 +8,7 @@
  * ===> 08 - Control icon
  * ===> 09 - Options Controls
  * ===> 10 - Forms [Gray Mode], [Dark Mode]
+ * ===> 11 - Counter Input
 */
 
 /*==== Selectors ====*/
@@ -91,6 +92,12 @@
         --background : var(--disable-color);
     }
 
+    &::placeholder, &::-ms-input-placeholder, 
+    &:-webkit-input-placeholder, &::-moz-placeholder {
+        opacity: 1;
+        color: var(--color);
+    }
+
     /*=== Sizes ===*/
     @include make_control_sizes();
 
@@ -118,6 +125,7 @@
     &[type*="date"], &[type*="time"] {
         display: block;
         line-height: var(--height);
+        appearance: textfield;
         -moz-appearance: textfield;
         -webkit-appearance: textfield;
         -webkit-min-logical-width: calc(100% - 16px);
@@ -196,6 +204,41 @@ textarea.form-control {
     @include padding-block(calc(var(--padding) / 1.75));
 }
 
+/*==== Counter Input ====*/
+.px-counter-input {
+    /*==== Buttons ====*/
+	.btn.square {
+		width: REM(28);
+		font-size: 0.75em;
+		background-color: transparent;
+	}
+
+	/*==== Reset Input ====*/
+	input[type="number"] {
+		border-color: rgba(#000, 0.1)!important;
+		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+			-webkit-appearance: none!important;
+			-moz-appearance: none!important;
+					appearance: none!important;
+		}
+	}
+
+	/*==== With Icon on the Side ====*/
+	&[class*="fa-"] {
+		input[type="number"] {
+			padding-#{$direction-start}: 2rem;
+			padding-#{$direction-end}: 4rem;
+		}
+
+		&::before {
+			top: 0;
+			position: absolute;
+			line-height: REM(34);
+			#{$direction-start}: REM(15);
+		}
+	}
+}
+
 /*==== Labels ====*/
 label,legend  {@extend %inline-block;}
 
@@ -203,7 +246,7 @@ label,legend  {@extend %inline-block;}
 .control-icon {
     position: relative;
     color: var(--color);
-    --white-space : calc(var(--padding)*2.1);
+    --white-space : calc(var(--padding)*2.25);
     /*==== icons ====*/
     &::before {
         top: 0;
@@ -247,8 +290,8 @@ label,legend  {@extend %inline-block;}
 
 /*==== Options Controls ====*/
 .option-control {
-    --color  : var(--gray-color);
-    --color-active : var(--success-color);
+    --color: transparent;
+    --color-active: var(--success-color);
     /*==== ... ====*/
     cursor: pointer;
     position : relative;
@@ -257,8 +300,8 @@ label,legend  {@extend %inline-block;}
     line-height: var(--height);
     /*==== option box ====*/
     span::before {
-        position : relative;
         color: var(--color);
+        position : relative;
         line-height: inherit;
         @extend %inline-block;
         transition: color 0.3s ease, background-color 0.3s, border-color 0.3s;
@@ -272,12 +315,11 @@ label,legend  {@extend %inline-block;}
     &[data-type="checkbox"], &[data-type="radio"] {
         span::before {
             top: -#{REM(1)};
-            padding: #{REM(4)};
-            font-size: 0.8em;
             line-height: 1;
+            padding: #{REM(4)};
             --border-size  : #{REM(2)};
-            --border-color : var(--color);
-            @include margin-inline(#{REM(5)}, 'end');
+            --border-color : var(--gray-color);
+            @include margin-inline(#{REM(8)}, 'end');
             border-radius: var(--radius);
             background-color: var(--background);
             border: var(--border-size) solid var(--border-color);
@@ -296,15 +338,16 @@ label,legend  {@extend %inline-block;}
     /*==== Switches ====*/
     &[data-type="switch"] .switch {
         display: flex;
-        padding: 0 #{REM(3)};
         line-height: 1;
-        padding-top: #{REM(2)};
         position: relative;
         width: var(--height);
+        padding: 0 #{REM(3)};
+        padding-top: #{REM(2)};
         background-color: transparent;
-        border: #{REM(1)} solid var(--color);
         height: calc(var(--height) / 2);
+        --border-color: rgba(0,0,0, 0.3);
         border-radius: calc(var(--height) / 2);
+        border: #{REM(1)} solid var(--border-color);
         transition: background-color 0.3s, border-color 0.3s;
         /*==== Extends ====*/
         // @extend %inline-block;
@@ -312,24 +355,26 @@ label,legend  {@extend %inline-block;}
         /*==== Handle ====*/
         &::before {
             content: '';
+            --color: var(--gray-color);
             border-radius: 50%;
             @extend %inline-block;
-            background-color: var(--color);
+            transform: translateX(0);
             width: calc(var(--height) / 3);
             height: calc(var(--height) / 3);
+            background-color: var(--color);
             transition: background-color 0.3s linear, -webkit-transform 0.3s ease;
             transition: transform 0.3s ease, background-color 0.3s linear;
             transition: transform 0.3s ease, background-color 0.3s linear, -webkit-transform 0.3s ease;
-            transform: translateX(0);
         }
     }
 
-    &[data-type="switch"] span {color: var(--color);}
+    &[data-type="switch"] input:checked ~ span {color: var(--color);}
     /*==== Checked mode ====*/
     input:checked ~ {
         span, .btn, .switch {
-            --color : var(--color-active);
-            --border-color : var(--color-active);
+            --color: var(--color-active);
+            --border-color: var(--color-active);
+            &::before {--border-color : var(--color-active); --color: var(--color-active);}
         }
 
         @if ($direction == "ltr") {

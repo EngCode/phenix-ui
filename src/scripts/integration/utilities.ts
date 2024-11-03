@@ -62,6 +62,8 @@ PhenixElements.prototype.utilities = function (options?:{
             original_row.querySelectorAll("[name]").forEach((element:HTMLElement) => {
                 //====> Get the Name <====//
                 let name = element.getAttribute("name");
+                //====> Move the Original Name to new Attribute <====//
+                element.setAttribute('data-original-name', name);
                 //====> Correct the Name <====//
                 element.setAttribute("name", `${fields_key}[${original_row.getAttribute('data-item-key')}][${name}]`);
             });
@@ -98,10 +100,10 @@ PhenixElements.prototype.utilities = function (options?:{
                 //===> Change the Fields Name <===//
                 newRow.querySelectorAll("[name]").forEach((element:any) => {
                     //====> Get the Name <====//
-                    let name = element.getAttribute("name");
-                    
-                    //====> Correct the Name <====//
-                    element.setAttribute("name", name.replace(`[${currentRows-1}]`, `[${currentRows}]`));
+                    let name = element.getAttribute('data-original-name');
+
+                    //====> Set the Name <====//
+                    element.setAttribute("name", `${fields_key}[${currentRows}][${name}]`);
 
                     //====> Cleanup Any Values <====//
                     if (element.value) element.value = "";
@@ -123,6 +125,7 @@ PhenixElements.prototype.utilities = function (options?:{
             setInterval(() => {
                 //====> Get the Rows <====//
                 let rows = repeater_container.querySelectorAll('[data-item-key]:not([data-item-key="0"])');
+
                 //====> Create Remove Button <====//
                 if (rows) rows.forEach(row => !row.querySelector('.px-repeater-remove') ? create_remove_btn(row) : '');
             }, 1000);

@@ -55,13 +55,14 @@
 /*==== Sorting Mixin ====*/
 @mixin make_sorting($infix:'', $order-limit:24) {
     /*=== Flow Reverse ===*/
-    .flow#{$infix}-reverse {flex-flow: row-reverse;}
+    .flow#{$infix}-reverse {flex-flow: row-reverse; flex-wrap: wrap;}
     /*=== Stacked Flow ===*/
     .flow#{$infix}-columns {flex-flow: column;}
     /*=== Reversed Stacked ===*/
     .flow#{$infix}-columns-reverse {flex-flow: column-reverse;}
     /*=== No-Wrap ===*/
     .flow#{$infix}-nowrap {flex-wrap: nowrap!important;}
+    .flow#{$infix}-wrap {flex-wrap: wrap!important;}
     /*=== Shrink and Grow ===*/
     .flex-shrink#{$infix}-on {flex-shrink: 1;}
     .flex-shrink#{$infix}-off {flex-shrink: 0;}

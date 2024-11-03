@@ -16,6 +16,8 @@
         box-sizing: border-box;
 }
 
+html,body{ scroll-behavior: smooth }
+
 /*==== Display Resets ====*/
 summary {display: list-item;}
 [hidden] { display: none !important; }
@@ -36,9 +38,11 @@ pre, code, kbd, samp {
 }
 
 /*==== Links Reset ====*/
-a {
-    text-decoration: none;
-    color: var(--links-color);
+a {color: var(--links-color, inherit);}
+a:where(:not(.wp-element-button):not([class*="color-"])) {color: var(--links-color, inherit);}
+
+a, .reset-link, .px-navigation a, .btn {
+    text-decoration: none!important;
     -webkit-text-decoration-skip: objects;
             text-decoration-skip: objects;
 }

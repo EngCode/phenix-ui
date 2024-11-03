@@ -67,6 +67,7 @@ PhenixElements.prototype.multimedia = function (options?:{
             ratio  = element.getAttribute('data-size') || options?.size,
             splide = Phenix(element).ancestor('.splide.is-initialized'),
             embed  = element.getAttribute('data-embed') || options?.embed || 'video',
+            cover  = element.getAttribute('data-cover') || options?.cover,
             gradient = element.getAttribute('data-gradient') || options?.gradient?.value || false,
             gradient_mode = element.getAttribute('data-mode') || options?.gradient?.mode || 'linear',
             gradient_repeat = element.getAttribute('data-repeat') || options?.gradient?.repeat,
@@ -130,10 +131,10 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> Image Type <====//
                 else if (type == 'image') {
                     //===> Set Background <===//
-                    background(element, src);
+                    // background(element, src);
                     //===> Create Image <===//
-                    if(!element.querySelector('img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="px-media-img" loading="lazy" />`);
-                    else element.querySelector('img').setAttribute('loading', 'lazy');
+                    if(!element.querySelector(':scope > img')) Phenix(element).insert('prepend',`<img src="${src}" alt="${alt}" class="px-media-img" loading="lazy" />`);
+                    else element.querySelector(':scope > img').setAttribute('loading', 'lazy');
                     //===> Mark as Done <===//
                     mediaDone = true;
                 }
@@ -183,7 +184,7 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> iFrame Type <====//
                 else if (type == 'iframe') {
                     //===> Get the Current iFrame <===//
-                    let iframe = element.querySelector('iframe');
+                    let iframe = element.querySelector(':scope > iframe');
                     //===> Create View <===//
                     if (!iframe) {
                         Phenix(element).insert('append', `<iframe src="${src}" frameborder="0" ${lazy ? 'loading="lazy"' : ''} allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>`);
@@ -195,9 +196,9 @@ PhenixElements.prototype.multimedia = function (options?:{
                 //====> Embed Type <====//
                 else if (type == 'embed') {
                     //===> Embed Options <===//
-                    let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${autoplay ? 'autoplay="true" playsinline="true"' : ''} ${controls ? 'controls' : ''} ${loop ? 'loop' : ''} ${muted ? 'muted' : ''}`;
+                    let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${autoplay ? 'autoplay="true" playsinline="true"' : ''} ${controls ? 'controls' : ''} ${loop ? 'loop' : ''} ${muted ? 'muted' : ''} ${cover ? `poster="${cover}"` : ''}`;
                     //===> Video Source <===//
-                    if (embed == 'video' && !element.querySelector('.px-video')) {
+                    if (embed == 'video' && !element.querySelector(':scope > .px-video')) {
                         Phenix(element).insert('append', `<video class="px-video" src="${src}" ${media_attributes}></video>`);
                         if (player_autoplay === 'hover') {
                             const video = element.querySelector('.px-video');
@@ -206,7 +207,7 @@ PhenixElements.prototype.multimedia = function (options?:{
                         }
                     }
                     //===> Video Source <===//
-                    else if (embed != 'video' && !element.querySelector('.px-iframe')) {
+                    else if (embed != 'video' && !element.querySelector(':scope > .px-iframe')) {
                         //====> Get the Source <====//
                         let source = src;
                         //====> Cleanup URL <====//
