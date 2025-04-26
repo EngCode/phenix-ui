@@ -16,6 +16,23 @@
 /*====> Phenix Object <====*/
 import Phenix, { PhenixElements } from "..";
 
+// ===> Add Type Declaration for Globals <===
+declare global {
+    interface Window {
+        // For three-utils.js script
+        threeUtils?: {
+            initializeViewer: (container: HTMLElement, options: object, assetsBasePath: string) => Promise<void>;
+        };
+        // For data localized from PHP using your existing key
+        PDS_WP_KEY?: {       // <-- Use your existing key name
+            assetsBasePath: string; // <-- Add the property we need
+            // Add other existing properties declared for PDS_WP_KEY if known
+            [key: string]: any; // Allows other existing properties
+        };
+    }
+}
+// ===> End Type Declaration <===
+
 /*====> Media Setter [un-tested] <====*/
 PhenixElements.prototype.multimedia = function (options?:{
     type?:string,   //===> background, image, video, embed, iframe, gradient, mixed-bg, audio
@@ -46,11 +63,11 @@ PhenixElements.prototype.multimedia = function (options?:{
         //===> Clean # for CSS Benefits <===//
         source = source.replaceAll('#','%23');
 
-        //===> De-Activate Lazy-Loading <===//
-        if (options?.lazyloading) element.classList.remove('lazyloader');
-
         //===> Set As CSS Background <===//
         element.style.backgroundImage = `url("${source}")`;
+        
+        //===> Remove Loading State <===//
+        element.classList.remove('px-is-loading');
     };
 
     //====> Loop Through Phenix Elements <====//
@@ -72,17 +89,13 @@ PhenixElements.prototype.multimedia = function (options?:{
             gradient_mode = element.getAttribute('data-mode') || options?.gradient?.mode || 'linear',
             gradient_repeat = element.getAttribute('data-repeat') || options?.gradient?.repeat,
             //====> Embed & Lazyloading <====//
-            lazyloading = element.getAttribute('data-lazyloading') || options?.lazyloading || false,
-            player_controls = element.getAttribute('data-controls') || options?.controls || false,
-            player_autoplay = element.getAttribute('data-autoplay') || options?.autoplay || false,
-            player_loop = element.getAttribute('data-loop') || options?.loop || false,
-            player_muted = element.getAttribute('data-muted') || options?.muted || false,
-            //====> .... <====//
-            lazy = lazyloading && lazyloading !== 'false' ? true : false,
-            controls = player_controls && player_controls !== 'false' ? true : false,
-            autoplay = player_autoplay && player_autoplay !== 'false' && player_autoplay !== 'hover' ? true : false,
-            loop = player_loop && player_loop !== 'false' ? true : false,
-            muted = player_muted && player_muted !== 'false' ? true : false;
+            lazy = Phenix(document).toBoolean(element.getAttribute('data-lazyloading') || options?.lazyloading),
+            controls = Phenix(document).toBoolean(element.getAttribute('data-controls') || options?.controls),
+            autoplay = Phenix(document).toBoolean(element.getAttribute('data-autoplay') || options?.autoplay) && (element.getAttribute('data-autoplay') || options?.autoplay) !== 'hover',
+            loop = Phenix(document).toBoolean(element.getAttribute('data-loop') || options?.loop),
+            muted = Phenix(document).toBoolean(element.getAttribute('data-muted') || options?.muted),
+            player_autoplay = element.getAttribute('data-autoplay') || options?.autoplay || 'hover';
+
         //====> Set Media Size <====//
         if (ratio && ratio != null || undefined) {
             //====> Predefined Ratio's <====//
@@ -199,7 +212,9 @@ PhenixElements.prototype.multimedia = function (options?:{
                     let media_attributes = `${lazy ? 'loading="lazy"' : ''} ${autoplay ? 'autoplay="true" playsinline="true"' : ''} ${controls ? 'controls' : ''} ${loop ? 'loop' : ''} ${muted ? 'muted' : ''} ${cover ? `poster="${cover}"` : ''}`;
                     //===> Video Source <===//
                     if (embed == 'video' && !element.querySelector(':scope > .px-video')) {
+                        //====> Create the Video <====//
                         Phenix(element).insert('append', `<video class="px-video" src="${src}" ${media_attributes}></video>`);
+                        //====> Video Autoplay <====//
                         if (player_autoplay === 'hover') {
                             const video = element.querySelector('.px-video');
                             Phenix(element).on('mouseenter', event => video.play());
@@ -221,6 +236,69 @@ PhenixElements.prototype.multimedia = function (options?:{
                     mediaDone = true;
                 }
 
+                //====> 3D Object Type <====//
+                else if (type == '3d-viewer') {
+                    //====> Define the Canvas <====//
+                    let canvas = element.querySelector(':scope > canvas.px-3d') as HTMLElement;
+
+                    //====> Create the Canvas if it doesn't exist <====//
+                    if (!canvas) {
+                         //====> Default Model Type <====//
+                         let modelTypeForCanvas = 'gltf';
+                         //====> Get the Model Type from the the Extension <====//
+                         const extension = src.split('.').pop()?.toLowerCase();
+                         //====> If the Extension is Valid <====//
+                         if (extension && ['gltf', 'glb', 'obj', 'fbx'].includes(extension)) modelTypeForCanvas = extension;
+                         //====> If the Extension is Null/Undefined <====//
+                         else if (extension) modelTypeForCanvas = extension || 'gltf';
+                         //====> Create the Canvas <====//
+                         const canvasHTML = `<canvas class="px-3d fluid" data-object="${src}" data-model-type="${modelTypeForCanvas}" data-background="${element.getAttribute('data-background') || 'null'}" data-auto-rotate="${element.getAttribute('data-auto-rotate') || 'false'}" data-controls="${element.getAttribute('data-controls') || 'orbit'}"></canvas>`;
+                         //====> Append the Canvas <====//
+                         Phenix(element).insert('append', canvasHTML);
+                         //====> Redefine the Canvas <====//
+                         canvas = element.querySelector(':scope > canvas.px-3d') as HTMLElement;
+                    }
+
+                    //====> Check if already initialized ====//
+                    if (canvas && canvas.dataset.threeInitialized !== 'true') {
+                        //====> Get Asset Base Path from Localized Data (using PDS_WP_KEY) ====//
+                        const assetsBasePath = window.PDS_WP_KEY?.assetsBasePath;
+
+                        //====> Gather Options from Canvas ====//
+                        const viewerOptions = {
+                            modelPath: canvas.dataset.object,
+                            modelType: canvas.dataset.modelType || 'gltf',
+                            background: canvas.dataset.background === 'null' ? "transparent" : canvas.dataset.background,
+                            autoRotate: canvas.dataset.autoRotate === 'true',
+                            controls: canvas.dataset.controls || 'orbit'
+                        };
+
+                        //====> Load three-utils.js & Initialize ====//
+                        if (window.threeUtils?.initializeViewer) {
+                            //====> Initialize the Viewer ====//
+                            window.threeUtils.initializeViewer(canvas, viewerOptions, assetsBasePath).catch(err => console.error("Error during Three.js initialization:", err, canvas));
+                            //====> Set the Initialized Attribute ====//
+                            canvas.dataset.threeInitialized = 'true';
+                        } else {
+                            //====> Import the Script ====//
+                            Phenix(document).import("three-utils", "script", "three/three-utils.js", () => {
+                                //====> Initialize the Viewer ====//
+                                if (window.threeUtils?.initializeViewer) {
+                                    //====> Initialize the Viewer ====//    
+                                    window.threeUtils.initializeViewer(canvas, viewerOptions, assetsBasePath).catch(err => console.error("Error during Three.js initialization:", err, canvas));
+                                    //====> Set the Initialized Attribute ====//
+                                    canvas.dataset.threeInitialized = 'true';
+                                }
+                                //====> Remove Loading Class from Canvas Wrapper ====//
+                                element.classList.remove('px-loading');
+                            }, { integrated: true, module: false });
+                        }
+                    }
+                    
+                    //===> Mark as Done for media handler loop ===//
+                    mediaDone = true;
+                }
+
                 //====> Something Else <====//
                 else {
                     //===> Set Background <===//
@@ -233,11 +311,17 @@ PhenixElements.prototype.multimedia = function (options?:{
             //====> Lazy-Loading Mode <====//
             if (lazy) {
                 //====> Activate Lazy-Loading <====//
-                if (!splide) element.classList.add('px-is-loading');
+                if (!splide) {
+                    element.classList.add('px-is-loading');
+                    // Set temporary loading background
+                    element.style.backgroundImage = 'none';
+                }
+
                 //====> First View Handler <=====//
-                if (Phenix(element).inView() || element.offsetTop < Phenix(document).viewport().height) mediaHandle();
-                //====> On-Scroll Handler <====//
-                window.addEventListener('scroll', event => Phenix(element).inView({offset: 100}) ? mediaHandle() : null);
+                Phenix(element).inView({
+                    offset: 100,
+                    callback: (element) => mediaHandle()
+                });
             }
 
             //====> None-Lazy <====//
@@ -245,6 +329,6 @@ PhenixElements.prototype.multimedia = function (options?:{
         }
 
         //====> None-Valid Source <====//
-        else element.style.backgroundImage = 'https://via.placeholder.com/1280x650?text=Source+URL+Not+Supported+or+404';
+        else element.style.backgroundImage = 'https://placehold.co/1280x650?text=Source+URL+Not+Supported+or+404';
     });
 }

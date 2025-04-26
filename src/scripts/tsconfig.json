@@ -3,10 +3,8 @@
         "strict": false,
         "forceConsistentCasingInFileNames": true,
         "module": "commonjs",
-        "target": "es2015",
+        "target": "es2017",
         "sourceMap": true,
         "esModuleInterop": true,
-        // "noImplicitAny": true,
-        // "alwaysStrict": true,
     },
 }

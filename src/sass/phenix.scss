@@ -15,8 +15,8 @@ $direction-end: right;
 /*==== Font Options ====*/
 :root {
     //==== Font Families ====//
-    --primary-font: "Somar Rounded";
-    --secondary-font: "Somar Rounded";
+    --primary-font: "Tajawal";
+    --secondary-font: "Tajawal";
 
     //==== Font Weight ====//
     --thin-weight   : 100;
@@ -46,5 +46,21 @@ $direction-end: right;
 @import 'assets/reset';     //===> CSS RESET
 @import 'grid/main';        //===> Layout Grid System
 
-/*==== Customizer ====*/
-@import 'customize';
+/*==== CSS Variables for Themeing ====*/
+@import 'theme';
+
+/*==== Integration ====*/
+@import 'integration/splide';    //===> Splide Slider
+
+/*==== Components Modules ====*/
+@import 'components/breadcrumb'; //===> Breadcrumb
+@import 'components/buttons';    //===> Buttons & Badges
+@import 'components/dropdown';   //===> Dropdown
+@import 'components/navbar';     //===> Phenix Navbar
+@import 'components/tables';     //===> Tables & Datatables
+@import 'components/tabs';       //===> Panels & Tabs
+@import 'components/slider';     //===> Phenix Sliders
+
+/*==== Form Components ====*/
+@import 'form/uploader';
+@import 'form/form-controls';

@@ -82,12 +82,21 @@ PhenixElements.prototype.progress = function (options?:{
             }
 
             //====> Set Progress <====//
-            if (lazy) {
-                //===> First View <===//
-                if (Phenix(progress).inView()) progress_handler();
-                //===> Hidden View <===//
-                window.addEventListener('scroll', scrolling => {
-                    Phenix(progress).inView() ? progress_handler() : null
+            if (lazy && lazy !== 'false') {
+                //====> Add Loading State <====//
+                progress.classList.add('px-is-loading');
+                progress.style.setProperty('--progress-value', '0');
+
+                //====> First View Handler <====//
+                Phenix(progress).inView({
+                    offset: 100,
+                    callback: () => {
+                        //====> Remove Loading State <====//
+                        progress.classList.remove('px-is-loading');
+                        //====> Start Progress <====//
+                        progress_handler();
+                    },
+                    feature: 'progress'
                 });
             } else {
                 progress_handler();

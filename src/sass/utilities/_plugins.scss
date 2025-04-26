@@ -23,9 +23,9 @@
 
     /*==== Inverted Label ====*/
     .px-progress-bar[data-label]::before {
+        top: 0;
         color: #FFF;
         width: var(--width);
-        @extend %position-center-y;
         #{$direction-start}: 0;
         content: attr(data-label);
     }
@@ -81,7 +81,7 @@
         background-position: center;
     }
     /*==== Media Element ====*/
-    .px-video, .px-iframe, .px-media-img, > iframe, > video {
+    .px-video, .px-iframe, .px-media-img, > iframe, > video, > canvas {
         width: 100%;
         -o-object-fit: cover;
            object-fit: cover;
@@ -90,7 +90,7 @@
 
     /*==== elements ====*/
     &:not(.ratio-none), &.ratio-none[class*="h-"] {
-        .px-video, .px-iframe, .px-media-img, > iframe, > video {
+        .px-video, .px-iframe, .px-media-img, > iframe, > video, > canvas {
             top: 0;
             left: 0;
             height: 100%;
@@ -131,25 +131,43 @@
 /*==== Phenix Animations ====*/
 .px-animate, [data-animation] {
     animation-fill-mode: both;
-    animation-duration: 1s;
+    animation-delay: calc(var(--animation-delay, 0));
+    animation-duration: var(--animation-duration, 1s);
+    &.scroll-progress {
+        animation-play-state: paused;
+        animation-delay: calc(var(--animation-progress) * -1s);
+    }
 }
 
 /*==== Slider Animation Support ====*/
-.splide__slide {
-    visibility: visible;
+.px-slider {
     /*==== Animated Childs ====*/
     [data-animation] {
+        visibility: hidden;
         animation-fill-mode: both;
-        visibility: hidden!important;
         animation-name: var(--animation-exit, 'fadeOut');
         animation-delay: calc(var(--animation-delay, 0));
         animation-duration: var(--animate-duration, 1s);
     }
 
     /*==== Animations ====*/
-    &.is-active [data-animation], &.is-visible [data-animation] {
-        visibility: visible!important;
-        animation-name: var(--animation-name, 'fadeIn');
+    .splide__slide {
+        &.is-active [data-animation], 
+        &.is-visible [data-animation],
+        &.swiper-slide-active [data-animation],
+        &.swiper-slide-visible [data-animation] {
+            visibility: visible!important;
+            animation-name: var(--animation-name, 'fadeIn');
+        }
+    }
+
+    &[data-center="1"] .splide__slide {
+       /*==== Animations ====*/
+       &.is-next [data-animation], 
+       &.is-prev [data-animation] {
+           visibility: visible!important;
+           animation-name: var(--animation-name, 'fadeIn');
+       }
     }
 }
 
@@ -162,10 +180,15 @@
 /*==== Phenix Modal ====*/
 .px-modal {
     overscroll-behavior: none;
-    .model-content {z-index: 2;}
     .backdrop-btn {z-index: 0;}
+    .model-content {z-index: 2;}
+    //====> Alignment Fix <====//
     &:not([class*="align-"]) {align-items: center;}
+    //====> Overlay Fix <====//
     &[class*="overlay"]::before {display: none!important;}
+    //====> Padding <====//
+    &:not([class*="pdy-"]):not([class*="pdt-"]) {padding-top: 2rem;}
+    &:not([class*="pdy-"]):not([class*="pdb-"]) {padding-bottom: 2rem;}
 }
 
 /*==== Scaling ====*/
@@ -184,7 +207,7 @@
 }
 
 @mixin make_ratio($infix:'') {
-    .ratio#{$infix} {
+    .px-media.ratio#{$infix} {
         --ratio-size : 60%;
         /*==== Square 1x1 ====*/
         &-none  {
@@ -216,6 +239,30 @@
         &-3x1 {--ratio-size: 33.3%;}
         &-1x3 {--ratio-size: 133.3%;}
     }
+
+    img.ratio#{$infix} {
+        aspect-ratio: 4 / 3;
+        /*==== Square 1x1 ====*/
+        &-1x1   {aspect-ratio: 1 / 1;}
+        /*==== FHD 16x9 ====*/
+        &-16x9  {aspect-ratio: 16 / 9%;}
+        &-9x16  {aspect-ratio: 9 / 16%;}
+        &-16x10 {aspect-ratio: 16 / 10;}
+        &-10x16 {aspect-ratio: 10 / 16;}
+        &-16x11 {aspect-ratio: 16 / 11;}
+        &-11x16 {aspect-ratio: 11 / 16;}
+        &-16x14 {aspect-ratio: 716 / 14;}
+        &-14x16 {aspect-ratio: 14 / 16;}
+        /*==== Landscape 21x9 ====*/
+        &-21x9 {aspect-ratio: 21 / 9;}
+        &-9x21 {aspect-ratio: 9 / 21;}
+        /*==== Classic 4x3 ====*/
+        &-4x3  {aspect-ratio: 4 / 3;}
+        &-3x4  {aspect-ratio: 3 / 4;}
+        /*==== Wide 3x1 ====*/
+        &-3x1  {aspect-ratio: 3 / 1;}
+        &-1x3  {aspect-ratio: 1 / 3;}
+    }
 }
 
 @include make_ratio();
@@ -232,19 +279,8 @@
     @include make_ratio('-xl');
 };
 
-/*==== Section Snapping ====*/
-.px-section-snap {
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-snap-type: y mandatory;
-    > .px-section-snap-item, > div:not(.no-snap) {scroll-snap-align: start;}
-}
-
-.px-section-snap-x {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    > .px-section-snap-item, > div:not(.no-snap) {scroll-snap-align: start;}
-}
-
-// .px-masonry, .row.px-masonry {display: block;}
+/*==== Swiper Fixes ====*/
+// .px-slider[data-duration="0"] .swiper-wrapper {
+//     -webkit-transition-timing-function:linear !important;
+//     transition-timing-function:linear !important;
+// }

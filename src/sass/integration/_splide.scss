@@ -75,10 +75,6 @@
     pointer-events: auto
 }
 
-.splide:not(.is-overflow) .splide__pagination {
-    display: none
-}
-
 .splide__progress__bar {
     width: 0
 }
@@ -100,7 +96,8 @@
     flex-shrink: 0;
     list-style-type: none !important;
     margin: 0;
-    position: relative
+    position: relative;
+    direction: $direction;
 }
 
 .splide__spinner {

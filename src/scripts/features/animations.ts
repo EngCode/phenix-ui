@@ -16,157 +16,221 @@ PhenixElements.prototype.animations = function (options?:{
     animation?:string, //===> Animation Name
     duration?:number,  //===> Animation Duration
     delay?:number,     //===> Animation Delay
-    animateCSS?:boolean, //===> Animations Library
-    directionFix?:boolean, //===> Directions Resolver
-    flow:string,    //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
-    into:number,    //====> Increase Target Position By [number]
-    offset:number,  //====> Decrease Target Position By [number]
-    lazyloading:boolean, //====> to Animate Element after Another
-    lazygroup:any,      //====> Define the group fo each lazyloading group
+    animateCSS?:boolean|string[]|string, //===> Animations Library
+    flow?:string,    //====> From Top to Bottom [start] Reverse [end] Or Any of [both]
+    into?:number,    //====> Increase Target Position By [number]
+    offset?:number,  //====> Decrease Target Position By [number]
+    lazyloading?:boolean, //====> to Animate Element after Another
+    lazygroup?:any,      //====> Define the group fo each lazyloading group
+    stagger?:number,     //====> Define the stagger for the lazyloading group
+    scrollDriven?:boolean, //====> Enable Scroll Driven Animations
+    drivenEnd?:number|string, //====> Define the end of the driven progress
+    exit?:string,        //====> Exit Animation
 }) {
-    //====> Loop Through Phenix Elements <====//
-    let viewPort_Handler = this.forEach((element:any, index) => {
+    //====> Animations Loader <====//
+    const loadAnimationCSS = (thirdParty?: boolean|string[]|string) => {
+        //===> Default to 'all' if undefined <===//
+        const animationsToLoad = thirdParty === undefined ? 'all' : thirdParty;
+        
+        //====> Load Animation CSS Files <====//
+        if (animationsToLoad === 'all') {
+            Phenix(document).import('px-animations', 'css', `${Phenix(document).getURL().phenixCSS}animations/all.css`, () => {}, { integrated: false });
+        } else if (Array.isArray(animationsToLoad)) {
+            //===> Ensure utilities is included <===//
+            const animationsList = animationsToLoad.includes('utilities') ? animationsToLoad : [...animationsToLoad, 'utilities'];
+            
+            //===> Load each package <===//
+            animationsList.forEach(pkg => {
+                Phenix(document).import(`px-animations-${pkg}`, 'css', `${Phenix(document).getURL().phenixCSS}animations/${pkg}.css`, () => {}, { integrated: false });
+            });
+        } else if (typeof animationsToLoad === 'string' && animationsToLoad !== 'all') {
+            //===> Load the specified package and utilities <===//
+            Phenix(document).import(`px-animations-${animationsToLoad}`, 'css', `${Phenix(document).getURL().phenixCSS}animations/${animationsToLoad}.css`, () => {}, { integrated: false });
+            Phenix(document).import('px-animations-utilities', 'css', `${Phenix(document).getURL().phenixCSS}animations/utilities.css`, () => {}, { integrated: false });
+        }
+        
+        //====> Return Phenix Elements <====//
+        return this;
+    };
+
+    //====> Load Animation CSS Files <====//
+    loadAnimationCSS(options?.animateCSS || 'all');
+
+    //====> Process Elements <====//
+    this.forEach((element:any) => {
         //====> if its the Main Document Return Nothing <====//
         if (element === window.document) return;
 
         //====> Get Options Data <====//
-        let animation = element.getAttribute('data-animation') || options?.animation || 'fadeIn',
-            duration  = parseInt(element.getAttribute('data-duration')) || options?.duration || 700,
-            offset = parseInt(element.getAttribute('data-offset')) || options?.offset || false,
-            flow = parseInt(element.getAttribute('data-flow')) || options?.flow || false,
-            into = parseInt(element.getAttribute('data-into')) || options?.into || false,
-            delay = parseInt(element.getAttribute('data-delay')) || options?.delay || 0,
-            lazygroup = element.getAttribute('data-lazy-group') || options?.lazygroup || false,
-            directionFix = options?.directionFix || true;
+        const pageDir = Phenix(document).direction();
+        const animation = element.getAttribute('data-animation') || options?.animation || 'fadeIn';
+        const duration = parseInt(element.getAttribute('data-duration')) || options?.duration || 700;
+        const delay = parseInt(element.getAttribute('data-delay')) || options?.delay || 0;
+        const lazygroup = Phenix(document).toBoolean(element.getAttribute('data-lazy-group')) || options?.lazygroup || false;
 
         //====> Directions Resolve <====//
-        if (directionFix) {
-            //====> Get Direction <====//
-            let pageDir = Phenix(document).direction();
+        let currentAnimation = animation;
 
-            //====> Fix Directions <====//
-            if (animation.includes('Start')) {
-                animation = animation.replace('Start', pageDir === 'ltr' ? 'Left' : 'Right');
-            } else if (animation.includes('End')) {
-                animation = animation.replace('End',  pageDir === 'ltr' ? 'Right' : 'Left');
-            }
+        //====> Fix Directions <====//
+        if (currentAnimation.includes('Start')) {
+            currentAnimation = currentAnimation.replace('Start', pageDir === 'ltr' ? 'Left' : 'Right');
+        } else if (currentAnimation.includes('End')) {
+            currentAnimation = currentAnimation.replace('End', pageDir === 'ltr' ? 'Right' : 'Left');
         }
 
         //====> Hide the Element <====//
         element.classList.add('visibility-hidden', 'animated');
-        //====> Set Duration <====//
-        // if (!element.getAttribute('data-duration')) element.setAttribute('data-duration', duration);
+        element.style.setProperty('--animation-delay', `${delay}ms`);
+        element.style.setProperty('--animation-name', currentAnimation);
+        element.style.setProperty('--animation-duration', `${duration}ms`);
 
-        //===> Set the Animation Name as CSS Variable <====//
-        element.style.setProperty('--animation-delay', delay);
-        element.style.setProperty('--animation-name', animation);
-        element.style.setProperty('--animation-duration', duration);
-
-        //====> if the Element in view Show it <====//
-        let isInView = () => {
-            //====> Animations CSS <====//
-            if (delay) element.style.animationDelay = `${delay}ms`;
-            if (duration) element.style.animationDuration = `${duration}ms`;
-
-            //====> Animate Method <====//
-            let animate = () => {
-                //====> Show the Element <====//
-                Phenix(element).removeClass('visibility-hidden');
-                //====> Slider Fallback <====//
-                if (Phenix(element).ancestor('.px-slider')) return;
-                //====> Animations Classes <====//
-                element.classList.add('view-active', animation);
-            }
-
-            //====> Animate if it is in ViewPort <====//
-            if (Phenix(element).inView({offset:offset, into: into, flow: flow})) animate();
-
-            //===> When is out of view Reset <===//
-            // else element.classList.remove('view-active', animation);
-        };
-
-        //====> Lazyloading Group <====//
+        //====> Setup Stagger for Sequence of Animations <====//
         if (lazygroup) {
-            //===> Define Delay <===//
-            let current_delay = 0;
+            //====> Get Base Stagger <====//
+            const baseStagger = parseInt(element.getAttribute('data-stagger')) || options?.stagger || 100;
 
-            //===> Loop over the Animated Children <===//
-            element.querySelectorAll('[data-animation]').forEach((item, index) => {
-                current_delay += duration/2;
-                item.setAttribute('data-delay', current_delay/3);
-                element.style.setProperty('--animation-delay', current_delay/3);
+            //====> Track Animation Order <====//
+            let animationOrder = 0;
+
+            //====> Create Intersection Observer <====//
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target as HTMLElement;
+                        //====> Calculate Delay <====//
+                        const delay = animationOrder * baseStagger;
+                        //====> Set Delay <====//
+                        element.style.setProperty('--animation-delay', `${delay}ms`);
+                        //====> Increment Order <====//
+                        animationOrder++;
+                        //====> Stop Observing <====//
+                        observer.unobserve(element);
+                    }
+                });
+            }, {threshold: 0.1});
+
+            //====> Observe Elements <====//
+            element.querySelectorAll('[data-animation]').forEach(item => {
+                observer.observe(item);
             });
         }
 
-        //====> Check for Loading Screen <====//
-        const startAnimations = () => {
-            //====> First View <====//
-            isInView();
-            //====> Scrolling Spy <====//
-            Phenix(window).on('scroll', isInView);
-        }
+        //====> Handle Animation Setup <====//
+        if (Phenix(document).toBoolean(element.getAttribute('data-scrollDriven')) || options?.scrollDriven) {
+            //====> Get Animation Options <====//
+            const completeAt = element.getAttribute('data-drivenEnd') || options?.drivenEnd || 'center';
+            const exitAnimation = element.getAttribute('data-exit') || options?.exit;
 
-        //====> Get Loading Screen <====//
-        let loadingScreen:any = document.querySelector(".px-page-loader");
+            //====> Show the Element <====//
+            Phenix(element).removeClass('visibility-hidden');
+            element.classList.add('view-active', currentAnimation);
 
-        //====> Check for Loading Screen <====//
-        if (loadingScreen) {
-            //====> Search for Loading Screen <====//
-            let loadingScreenChecker = setInterval(() => {
-                //===> When the Loading Screen is Hidden <===//
-                if (Phenix(loadingScreen).getCSS('display') === 'none') {
-                    //===> Start Animations <====//
-                    startAnimations();
-                    //====> Clear Interval <====//
-                    clearInterval(loadingScreenChecker);
+            //====> Create Scroll Progress Handler <====//
+            const handleScrollProgress = () => {
+                //====> Get Element Dimensions <====//
+                const rect = element.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+
+                //====> Define Progress and Points <====//
+                let progress, exitProgress;
+                const completionPoint = (() => {
+                    if (completeAt === 'center') return viewHeight / 2;
+                    if (completeAt === 'top') return 0;
+                    if (completeAt === 'bottom') return viewHeight;
+                    return (viewHeight * (parseInt(completeAt as string) || 50)) / 100;
+                })();
+
+                //====> Calculate Progress <====//
+                if (rect.top >= viewHeight || rect.bottom <= 0) {
+                    progress = 0;
+                    exitProgress = rect.top >= viewHeight ? 0 : 1;
+                } else {
+                    const startDistance = viewHeight - rect.top;
+                    const totalDistance = viewHeight + rect.height;
+                    progress = startDistance / totalDistance;
+                    progress = progress * (viewHeight / completionPoint);
+                    progress = Math.min(Math.max(progress, 0), 1);
+
+                    //====> Calculate Exit Progress <====//
+                    if (exitAnimation) {
+                        exitProgress = rect.bottom < viewHeight 
+                            ? (viewHeight - rect.bottom) / rect.height
+                            : 0;
+                        exitProgress = Math.min(Math.max(exitProgress, 0), 1);
+                    }
                 }
-            }, 500);
-        } else startAnimations();
+
+                //====> Update Progress Properties <====//
+                element.style.setProperty('--animation-progress', progress.toString());
+                if (exitAnimation) {
+                    element.style.setProperty('--exit-progress', exitProgress.toString());
+                    if (exitProgress > 0) element.classList.add(exitAnimation);
+                }
+            };
+
+            //====> Setup and Cleanup <====//
+            element.classList.add('scroll-progress');
+            window.addEventListener('scroll', handleScrollProgress, { passive: true });
+            handleScrollProgress();
+
+            //====> Cleanup Observer <====//
+            const observer = new MutationObserver((mutations, obs) => {
+                if (!document.contains(element)) {
+                    window.removeEventListener('scroll', handleScrollProgress);
+                    obs.disconnect();
+                }
+            });
+            observer.observe(document, { childList: true, subtree: true });
+        } 
+        //====> Handle Regular Animations <====//
+        else {
+            //====> Get Exit Animation <====//
+            const exitAnimation = element.getAttribute('data-exit') || options?.exit;
+
+            //====> Get Position Customization Options <====//
+            const offset = parseInt(element.getAttribute('data-offset')) || options?.offset || 0;
+            const into = parseInt(element.getAttribute('data-into')) || options?.into || 0;
+
+            //====> Calculate Root Margin <====//
+            const topMargin = into - offset;
+            const rootMargin = `${topMargin}px 0px ${offset}px 0px`;
+
+            //====> Create Intersection Observer <====//
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    //====> Get Element <====//
+                    const element = entry.target as HTMLElement;
+
+                    //====> Check if Element is in View <====//
+                    if (entry.isIntersecting) {
+                        //====> Entry Animation <====//
+                        if (!element.classList.contains('view-active')) {
+                            //====> Show the Element <====//
+                            Phenix(element).removeClass('visibility-hidden');
+                            //====> Add View Active and Current Animation <====//
+                            element.classList.add('view-active', currentAnimation);
+                            //====> Remove Exit Animation if Exists <====//
+                            if (exitAnimation) element.classList.remove(exitAnimation);
+                        }
+                    } 
+                    //====> Check if Element is Exiting <====//
+                    else if (exitAnimation) {
+                        //====> Exit Animation <====//
+                        const isScrollingDown = entry.boundingClientRect.top < 0;
+                        //====> Remove Current Animation and View Active <====//
+                        element.classList.remove(currentAnimation, 'view-active');
+                        //====> Add Exit Animation <====//
+                        if (isScrollingDown) {
+                            element.classList.add(exitAnimation);
+                        }
+                    }
+                });
+            }, {threshold: 0.1,rootMargin});
+
+            //====> Start Observing <====//
+            observer.observe(element);
+        }
     });
-
-    //====> Animations Loader <====//
-    let thirdParty:any = options?.animateCSS || 'all';
-
-    //====> Loading Handler <====//
-    let animation_loader = (package_name, id) => {
-        if (document.querySelector(`#px-animations${id}`)) return;
-
-        //===> Create Script Element <===//
-        let animations_loader = document.createElement("link"),
-            package_url =  `${Phenix(document).getURL().phenixCSS}animations/${package_name}.css`;
-
-        //===> Set Attributes <===//
-        animations_loader.setAttribute('id', `px-animations${id}`);
-        animations_loader.setAttribute('rel', 'stylesheet');
-        animations_loader.setAttribute('class', 'px-css-file');
-        animations_loader.setAttribute('media', 'screen and (min-width: 2500px)');
-
-        //===> Set Source <===//
-        animations_loader.setAttribute("href", package_url);
-
-        //===> Append Script <===//
-        document.head.appendChild(animations_loader);
-
-        //====> When Loaded Run <====//
-        animations_loader.addEventListener("load", () => {
-            viewPort_Handler;
-            animations_loader.setAttribute('media', 'all');
-        });
-
-        //====> When Error Re-Load <====//
-        animations_loader.addEventListener("error", () => animations_loader.setAttribute("href", package_url));
-    }
-    
-    //====> Load All Animations <====//
-    if (thirdParty.includes('all')) {
-        animation_loader('all', '');
-    }
-
-    //====> Load Packages one by one <====//
-    else {
-        if (thirdParty === Array) thirdParty.push('utilities');
-        thirdParty.forEach(animate_package => animation_loader(animate_package, `-${animate_package}`));
-    }
 
     //====> Return Phenix Elements <====//
     return this;

@@ -49,7 +49,6 @@ PhenixElements.prototype.popup = function (options?:{
 
         //====> Popup CSS Classes <====//
         popup.classList.add(
-            'pdy-30',
             'w-fluid',
             'h-100vh',
             'flexbox',
@@ -213,13 +212,11 @@ PhenixElements.prototype.popup = function (options?:{
         //=====> Open When Scroll <=====//
         if (showon) {
             Phenix(showon).forEach(selector => {
-                //===> First View <===//
-                if (Phenix(selector).inView()) show_modal();
-
-                //===> Hidden View <===//
-                window.addEventListener('scroll', scrolling => {
-                    if (Phenix(selector).inView()) {
-                        if (!popup.classList.contains('active') && !popup.classList.contains('has-shown')) show_modal();
+                Phenix(selector).inView({
+                    callback: () => {
+                        if (!popup.classList.contains('active') && !popup.classList.contains('has-shown')) {
+                            show_modal();
+                        }
                     }
                 });
             });

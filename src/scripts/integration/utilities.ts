@@ -38,12 +38,9 @@ PhenixElements.prototype.utilities = function (options?:{
             let size = form.getAttribute('data-size') || '';
     
             //===> for Each Form <====//
-            form.querySelectorAll('input, select, textarea').forEach(controler => {
-                //====> Get the controler type <====//
-                let type = controler.getAttribute('type');
+            form.querySelectorAll('input:not([type="submit"]):not([type="button"]):not([type="radio"):not([type="checkbox"]), select, textarea').forEach(controler => {
                 //====> if has no such class names or type <====//
-                if (!controler.matches('.btn' || '.form-control'))
-                    type !== 'submit' || 'button' || 'radio' || 'checkbox' ? controler.classList.add('form-control', size) : '';
+                if (!controler.matches('.btn') && !controler.matches('.form-control')) controler.classList.add('form-control', size);
             });
         });
 
@@ -130,6 +127,9 @@ PhenixElements.prototype.utilities = function (options?:{
                 if (rows) rows.forEach(row => !row.querySelector('.px-repeater-remove') ? create_remove_btn(row) : '');
             }, 1000);
         });
+
+        //====> Rating Controllers <====//
+        Phenix(".px-rating").rating();
     }
 
     //====> Others <====//
@@ -140,7 +140,7 @@ PhenixElements.prototype.utilities = function (options?:{
             click.preventDefault();
             //====> Remover Data <====//
             let trigger = click.target,
-                target  = trigger.getAttribute('data-target' || 'href') || false,
+                target  = trigger.getAttribute('data-target') || trigger.getAttribute('href') || false,
                 relation = trigger.getAttribute('data-relation');
     
             //=== Remove Target in Ancestors ===//
@@ -165,10 +165,11 @@ PhenixElements.prototype.utilities = function (options?:{
             element.setAttribute('data-value', `${numbers}`);
             if(characters && !element.getAttribute('data-symbol')) element.setAttribute('data-symbol', `${characters}`);
 
-            //====> inView Checker <====//
-            Phenix(window).on('scroll', scroll => {
-                //===> Start Counting <====//
-                if (Phenix(element).inView() && !element.classList.contains('counting')) Phenix(element).counter();
+            //====> Start Counter when in View <====//
+            Phenix(element).inView({
+                callback: () => {
+                    if (!element.classList.contains('counting')) Phenix(element).counter();
+                }
             });
         });
 
@@ -280,7 +281,7 @@ PhenixElements.prototype.utilities = function (options?:{
         }, 500);
     
         //====> Links SEO <====//
-        Phenix('a[href]').forEach((link:any) => {
+        Phenix('a:not([title]):empty, button:not([title]):empty, a:not([title]), button:not([title])').forEach((link:any) => {
             //===> Text Checker <===//
             let text = link.getAttribute('data-title') || "";
 
@@ -302,8 +303,11 @@ PhenixElements.prototype.utilities = function (options?:{
         if (!document.body.classList.contains('wp-admin') && !document_classes?.includes('-editor')) {
             //===> Import Masonry Grid Plugin <===//
             if(document.querySelector('.px-masonry')) Phenix(document).import("masonry", "script", "masonry.min.js", ()=> {
-                var masonry = new Masonry('.px-masonry', {itemSelector: '[class*="col"]'});
-            }, true);
+                Phenix(".px-masonry").forEach((grid:any) => {
+                    let first_child_class = grid.children[0].classList[0];
+                    var masonry = new Masonry(grid, {itemSelector: `.${first_child_class}`});
+                });
+            }, { integrated: true });
     
             //===> Typed List <===//
             if(document.querySelector('.typed-list')) {
@@ -341,7 +345,7 @@ PhenixElements.prototype.utilities = function (options?:{
                     //===> Run the Typewriter <===//
                     typeWriter.style.height = Phenix(document).toREM(Phenix(typeWriter).height());
                     tinyTypewriter(typeWriter, {items: items, cursor: false, startDelay: 700});
-                }), true);
+                }), { integrated: true });
             }
     
             //===> Marquee Slider <===//
@@ -390,7 +394,7 @@ PhenixElements.prototype.utilities = function (options?:{
                             stopOnHover: marquee.getAttribute('data-hover') && marquee.getAttribute('data-hover') === 'false' ? false : true,
                         });
                     });
-                }, true);
+                }, { integrated: true });
             }
         }
     }

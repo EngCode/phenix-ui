@@ -1,8 +1,8 @@
 /*
- * Phenix.js
- * Version  : 0.6 Beta
- * License  : MIT
- * Copyright: 2022 Abdullah.Ramadan
+ * Phenix Design System
+ * Version  : 1.3.0
+ * License  : GPL-3.0
+ * Copyright: 2025 Abdullah.Ramadan
 */
 
 /**======> Reference By Comment <======
@@ -15,58 +15,67 @@
  * ===> 07 - Get Siblings
  * ===> 08 - Get Next Siblings
  * ===> 09 - Get Previous Siblings
- * ===> 10 - CSS Styling
+ * ===> 10 - Set CSS Styls
  * ===> 11 - Set Multiple Attributes
  * ===> 12 - Insert Elements
  * ===> 13 - Event Handler
  * ===> 14 - Resources Lazy-Loader
  * ===> 15 - Media Query Method
- * ===> 16 - Service Worker
- * ===> 17 - Define information's
- * ===> 18 - Define UI Effects
- * ===> 19 - Define Other Features
- * ===> 20 - Include Features
- * ===> 21 - Integration
- * ===> 22 - Phenix Selecting Method
- * ===> 23 - Your Custom Script [JS]
+ * ===> 16 - Dynamic Position
+ * ===> 17 - CSS/JS Importer
+ * ===> 18 - Convert Pixels to REM
+ * ===> 19 - Copy to Clipboard
+ * ===> 20 - Audio Trigger
+ * ===> 21 - Convert String to Boolean
+ * ===> 22 - Define Information
+ * ===> 23 - Define UI Effects
+ * ===> 24 - Define Other Features
+ * ===> 25 - Include Features
+ * ===> 26 - Integration
+ * ===> 27 - Phenix Selecting Method
+ * ===> 28 - Your Custom Script [JS]
 */
 
 /*====> Phenix Object <====*/
-export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
+export class PhenixElements extends Array<HTMLElement | Record <string, any>> {
     /*====> D.O.M Ready <====*/
-    ready(callback:any) {
-        //====> Check if its Ready <====//
-        if (document.readyState == 'complete') callback();
-
+    ready(callback: () => void): this {
+         //====> Check if its Ready <====//
+        if (document.readyState === 'complete') queueMicrotask(callback);
         //====> Wait for It to be Ready <====//
-        else document.addEventListener('DOMContentLoaded', callback);
-
+        else document.addEventListener('DOMContentLoaded', () => queueMicrotask(callback),{ once: true });
         //====> Return Phenix Elements <====//
         return this;
     }
 
     /*====> Add Class <====*/
-    addClass(className:any) {
+    addClass(className: any) {
         //====> Split classNames string into an array of class names <====//
         const classNamesArray = className.split(' ');
+        const classNamesLength = classNamesArray.length;
 
         //====> Add Class for Each Element <====//
-        this.forEach((element: HTMLElement) => {
-            classNamesArray.forEach(className => element.classList.add(className));
-        });
+        for (let i = 0; i < this.length; i++) {
+            const element = this[i] as HTMLElement;
+            const classList = element.classList;
+
+            for (let j = 0; j < classNamesLength; j++) {
+                classList.add(classNamesArray[j]);
+            }
+        }
 
         //====> Return Phenix Elements <====//
         return this;
     }
 
     /*====> Remove Class <====*/
-    removeClass(className:any) {
-        //====> Split classNames string into an array of class names <====//
-        const classNamesArray = className.split(' ');
+    removeClass(className: string) {
+        //====> Split classNames string into an array of class names and convert it to a Set <====//
+        const classNamesSet = new Set(className.split(' '));
 
-        //====> Add Class for Each Element <====//
+        //====> Remove Class for Each Element <====//
         this.forEach((element: HTMLElement) => {
-            classNamesArray.forEach(className => element.classList.remove(className));
+            element.classList.remove(...classNamesSet);
         });
 
         //====> Return Phenix Elements <====//
@@ -74,14 +83,27 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     }
 
     /*====> Toggle Class <====*/
-    toggleClass(className:any) {
+    toggleClass(className: string) {
         //====> Split classNames string into an array of class names <====//
         const classNamesArray = className.split(' ');
 
-        //====> Add Class for Each Element <====//
-        this.forEach((element: HTMLElement) => {
-            classNamesArray.forEach(className => element.classList.toggle(className));
-        });
+        //====> Loop through each element only once <====//
+        for (let i = 0; i < this.length; i++) {
+            const element = this[i] as HTMLElement;
+            const classList = element.classList;
+
+            //====> Check if element already has the class <====//
+            const hasClass = classNamesArray.some(className => classList.contains(className));
+
+            //====> Toggle the class based on its presence <====//
+            classNamesArray.forEach(className => {
+                if (hasClass) {
+                    classList.remove(className);
+                } else {
+                    classList.add(className);
+                }
+            });
+        }
 
         //====> Return Phenix Elements <====//
         return this;
@@ -142,7 +164,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     next(target?, all_target?) {
         //====> Sibling Define <====//
         let siblings = [];
-        
+
         //====> Loop Through Phenix Elements <====//
         this.forEach((element:any) => {
             //====> Define Next Unit <====//
@@ -152,9 +174,9 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             if (!target) siblings.push(nextUnit);
     
             //====> if Target is Detected <====//
-            if (target) {
+            else {
                 //====> if All Next is the Target <====//
-                if (target.includes('all', 0)) {
+                if (all_target) {
                     //====> Loop Through All Next Siblings <====//
                     while (nextUnit) {
                         //====> if All has Target & Matches this Unit <====//
@@ -183,8 +205,8 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         });
 
         //====> Return Siblings <====//
-        if (siblings.length > 1) return siblings;
-        else if (siblings.length === 1) return siblings[0];
+        if (siblings.length === 1 && !all_target) return siblings[0];
+        else if (siblings.length > 0 || all_target) return siblings;
     }
 
     /*====> Get Previous Siblings <====*/
@@ -203,14 +225,14 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             //====> if Target is Detected <====//
             if (target) {
                 //====> if All Previous is the Target <====//
-                if (target.includes('all', 0)) {
+                if (all_target) {
                     //====> Loop Through All Previous Siblings <====//
                     while (prevUnit) {
                         //====> if All has Target & Matches this Unit <====//
-                        if (all_target && prevUnit.matches(all_target)) siblings.push(prevUnit);
+                        if (all_target && prevUnit.matches(target)) siblings.push(prevUnit);
     
                         //====> if All has no Target get this Unit <====//
-                        if (!all_target) siblings.push(prevUnit);
+                        else if (!all_target) siblings.push(prevUnit);
     
                         //====> get the previous one <====//
                         prevUnit = prevUnit.previousElementSibling;
@@ -234,8 +256,8 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         });
         
         //====> Return Siblings <====//
-        if (siblings.length > 1) return siblings;
-        else if (siblings.length === 1) return siblings[0];
+        if (siblings.length === 1 && !all_target) return siblings[0];
+        else if (siblings.length > 0 || all_target) return siblings;
     }
 
     /*====> Get Children <====*/
@@ -260,7 +282,7 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         else if (childs.length === 1) return childs[0];
     }
 
-    /*====> CSS Styling <====*/
+    /*====> Set CSS Styls <====*/
     css(style:object, clearInline?) {
         //====> Check for the Elements <====//
         if (this.length === 0) return;
@@ -369,24 +391,28 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         //====> Loop Through Media Elements <====//
         Phenix('img, video, audio, iframe').forEach((element:HTMLElement) => {
             //====> Set Loading Mode <====//
-            if (!Phenix(element).inView()) {
+            if (!element.matches('.px-loaded')) {
                 //====> Get Data <====//
-                let playable = element.matches('video' || 'audio' || 'iframe'),
-                    preloaded = element.getAttribute('preload' || 'loading');
+                let playable = element.matches('video') || element.matches('audio') || element.matches('iframe'),
+                    preloaded = element.getAttribute('preload') || element.getAttribute('loading');
 
                 //===> Mark as Loading <===//
-                if (element.matches('img'||'iframe')) element.classList.add('px-loading');
+                if (element.matches('img') || element.matches('iframe')) element.classList.add('px-loading');
 
                 //===> Native Loading Attribute <===//
                 if (playable && !preloaded) element.setAttribute('preload', 'none');
                 else if(element.matches('img')) element.setAttribute('loading', 'lazy');
 
-                //====> Keep Watching Element While Scrolling <====//
-                document.addEventListener('scroll', event => {
-                    if (element.matches('img'||'iframe') && Phenix(element).inView({offset: 100}) && !element.matches('.px-loaded')) {
-                        element.classList.remove('px-loading');
-                        element.classList.add('px-loaded');
-                    };
+                //====> Watch Element <====//
+                Phenix(element).inView({
+                    offset: 100,
+                    callback: () => {
+                        if (element.matches('img') || element.matches('iframe')) {
+                            element.classList.remove('px-loading');
+                            element.classList.add('px-loaded');
+                        }
+                    },
+                    feature: 'lazyloading'
                 });
             }
         });
@@ -527,10 +553,29 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     };
 
     /*====> CSS/JS Importer <====*/
-    import = (id:string, tag:string, source:string, callback:any, isIntegrated:boolean) => {
+    import = (id:string, tag:string, source:string, callback:any, options?:boolean|{
+        integrated?: boolean;   // Whether to prepend the library path to the source
+        module?: boolean;       // Whether to load as ES6 module
+        importMap?: Record<string, string>; // Import map for ES6 modules
+    }) => {
         //===> Get Correct Tagname <===//
         if (tag === "css") tag = "link";
         else if (tag === "js") tag = "script";
+
+        //===> Handle Legacy Support for Options <===//
+        let isIntegrated = false;
+        let isModule = false;
+        let moduleMap: Record<string, string> | undefined;
+
+        if (typeof options === 'boolean') {
+            // Legacy format: options is isIntegrated boolean
+            isIntegrated = options;
+        } else if (options && typeof options === 'object') {
+            // New format: options is an object
+            isIntegrated = options.integrated ?? false;
+            isModule = options.module ?? false;
+            moduleMap = options.importMap;
+        }
 
         //===> Define Element and URL Path <===//
         let element = document.querySelector(`#${id}-phenix-${tag === "link" ? "css" : tag}`),
@@ -548,7 +593,14 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
             //===> Load JS Script <===//
             if (tag === "script" || tag === "js") {
                 element.setAttribute("src", trueUrl);
-                element.setAttribute("async", "");
+                
+                //===> If it's an ES6 Module <===//
+                if (isModule) {
+                    element.setAttribute("type", "module");
+                } else {
+                    element.setAttribute("async", "");
+                }
+                
                 //===> Append Element <===//
                 document.body.appendChild(element);
             }
@@ -570,12 +622,12 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     };
 
     /*====> Convert Pixels to REM <====*/
-    toREM(size, base = 16) {
-        return `${(parseFloat(size) / base)}rem`;
+    toREM(size: number, base: number = 16): string {
+        return `${(parseFloat(size.toString()) / base)}rem`;
     };
 
     /*====> Copy to Clipboard <====*/
-    async copyText (text) {
+    async copyText (text: string) {
         //===> Copy to Clipboard Method <===//
         const type = "text/plain";
         const blob = new Blob([text], { type });
@@ -583,81 +635,90 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
         await navigator.clipboard.write(data);
     };
 
-    /*====> Voice Trigger <=====*/
+    /*====> Audio Trigger <=====*/
     audioTrigger = (trigger) => {
-        //===> Define Objects <===//
-        let audio_player:any = document.querySelector('#px-audio-player');
-
-        //===> Create Audio Player <===//
-        if (!audio_player) {
-            //===> Create Player <===//
-            audio_player = document.createElement("audio");
-            //=== Set Player ID ===//
-            audio_player.setAttribute('id', 'px-audio-player');
-            //=== Insert Player to the Document ===//
-            document.body.appendChild(audio_player);
-        }
-
-        //====> Audio Buttons <====//
-        Phenix(trigger).on('click', event => {
-            event.preventDefault();
-            //=== Get Data ===//
-            let button = event.target,
-                audio_file = button.getAttribute('href') || button.getAttribute('data-audio');
-
-            //=== Check if the Audio is Already Playing ===//
-            if (audio_player.getAttribute('src') === audio_file && !audio_player.paused) {
-                //=== Pause the Audio ===//
-                audio_player.pause();
-
-                //=== Switch Play Status icon ===//
-                if(button.classList.contains('fa-pause')) {
-                    button.classList.remove('fa-pause');
-                    button.classList.add('fa-play');
-                }
-
-                //=== Switch Play Status icon ===//
-                else if(button.classList.contains('fa-music-note')) {
-                    button.classList.remove('fa-music-note');
-                    button.classList.add('fa-music-note-slash');
-                }
-            } else {
-                //=== Set Audio and Play ===//
-                audio_player.setAttribute('src', audio_file);
-                audio_player.play();
-
-                //=== Switch Play Status icon ===//
-                if (button.classList.contains('fa-play')) {
-                    button.classList.add('fa-pause');
-                    button.classList.remove('fa-play');
-                }
-
-                //=== Switch Play Status icon ===//
-                else if(button.classList.contains('fa-music-note-slash')) {
-                    button.classList.add('fa-music-note');
-                    button.classList.remove('fa-music-note-slash');
-                }
-
-                //=== When Audio is Finished Switch the Status icon ===//
-                audio_player.addEventListener('ended', (isEnded) => {
+        //===> Check if the Trigger is HTML Element <===//
+        if (trigger instanceof HTMLElement) {
+            //===> Define Objects <===//
+            let audio_player:any = document.querySelector('#px-audio-player');
+    
+            //===> Create Audio Player <===//
+            if (!audio_player) {
+                //===> Create Player <===//
+                audio_player = document.createElement("audio");
+                //=== Set Player ID ===//
+                audio_player.setAttribute('id', 'px-audio-player');
+                //=== Insert Player to the Document ===//
+                document.body.appendChild(audio_player);
+            }
+    
+            //====> Audio Buttons <====//
+            Phenix(trigger).on('click', event => {
+                event.preventDefault();
+                //=== Get Data ===//
+                let button = event.target,
+                    audio_file = button.getAttribute('href') || button.getAttribute('data-audio');
+    
+                //=== Check if the Audio is Already Playing ===//
+                if (audio_player.getAttribute('src') === audio_file && !audio_player.paused) {
+                    //=== Pause the Audio ===//
+                    audio_player.pause();
+    
+                    //=== Switch Play Status icon ===//
+                    if(button.classList.contains('fa-pause')) {
+                        button.classList.remove('fa-pause');
+                        button.classList.add('fa-play');
+                    }
+    
+                    //=== Switch Play Status icon ===//
+                    else if(button.classList.contains('fa-music-note')) {
+                        button.classList.remove('fa-music-note');
+                        button.classList.add('fa-music-note-slash');
+                    }
+                } else {
+                    //=== Set Audio and Play ===//
+                    audio_player.setAttribute('src', audio_file);
+                    audio_player.play();
+    
                     //=== Switch Play Status icon ===//
                     if (button.classList.contains('fa-play')) {
                         button.classList.add('fa-pause');
                         button.classList.remove('fa-play');
                     }
-
+    
                     //=== Switch Play Status icon ===//
                     else if(button.classList.contains('fa-music-note-slash')) {
                         button.classList.add('fa-music-note');
                         button.classList.remove('fa-music-note-slash');
                     }
-                });
-            }
-        }, true);
+    
+                    //=== When Audio is Finished Switch the Status icon ===//
+                    audio_player.addEventListener('ended', (isEnded) => {
+                        //=== Switch Play Status icon ===//
+                        if (button.classList.contains('fa-play')) {
+                            button.classList.add('fa-pause');
+                            button.classList.remove('fa-play');
+                        }
+    
+                        //=== Switch Play Status icon ===//
+                        else if(button.classList.contains('fa-music-note-slash')) {
+                            button.classList.add('fa-music-note');
+                            button.classList.remove('fa-music-note-slash');
+                        }
+                    });
+                }
+            }, true);
+        };
+    };
+
+    /*====> Convert String to Boolean <====*/
+    toBoolean = (value: string | boolean | undefined): boolean | string => {
+        //===> Return true if the value is true, true string, or 1 and false if the value is false, false string, or 0 any other string return it self <===//
+        return value === true || value === 'true' || value === '1' ? true : value === false || value === 'false' || value === '0' ? false : typeof value === 'string' ? value : false;
     };
 
     /*====> Define Information <====*/
-    height; getCSS; direction; getURL
+    height; getCSS; direction; getURL;
     inView; viewport; copyrights;
 
     /*====> Define UI Effects <====*/
@@ -675,6 +736,9 @@ export class PhenixElements extends Array<HTMLElement | Object | 'object'> {
     validation; uploader; progress; rebuildSelect
     select; repeater; rating; seo; loader;
     slider; utilities; notifications; init;
+
+    /*====> WooCommerce Methods <====*/
+    pds_add_to_cart; pds_remove_from_cart; pds_toggle_wishlist;
 }
 
 /*====> Phenix Selecting Method <====*/
@@ -701,14 +765,20 @@ const Phenix = (selector?:any) => {
 //====> Export Phenix <====//
 export default Phenix;
 
-/*====> Import Features <====*/
-import './features/get-info';   //==> Information
-import './features/effects';    //==> UI Effects
+/*====> Import Methods <====*/
+import './features/get-info';   //==> Get Informations about elements
+import './features/viewport';   //==> Viewport Detection
 import './features/counter';    //==> Animated Counter
+import './features/effects';    //==> UI Effects
 import './features/animations'; //==> View-port Animations
 import './features/validation'; //==> Form Validation
 import './features/collapse';   //==> Collapse Toggle
 import './features/notifications'; //==> Notifications
+
+/*====> Import Scroll Methods <====*/
+import './features/smooth-scroll';   //==> Smooth Scroll
+import './features/sticky-elements'; //==> Sticky Elements
+import './features/scroll-spy';      //==> Scroll Spy
 
 /*====> Import Components <====*/
 import './components/menu';      //==> Menus
@@ -720,13 +790,11 @@ import './components/popup';     //==> Popups
 import './components/progress';  //==> Progress
 import './components/select';    //==> Advanced Select
 import './components/uploader';  //==> File Uploader
-import './components/datatable'; //==> Data-Tables
+import './components/rating'; //==> Rating
 
 /*====> Integration <====*/
 import './integration/slider';    //==> Splide.js Slider
 import './integration/utilities'; //==> Phenix Utilities
-// import './integration/blocks';    //==> Phenix Blocks Scripts
-// import './integration/wordpress'; //==> Wordpress Integration
 
 /*====> Custom Script <====*/
 import './custom-scripts';

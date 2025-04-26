@@ -1,0 +1,405 @@
+
+/*==== Canvas Overflow Fix ====*/
+// .interface-interface-skeleton__html-container {overflow: hidden;}
+
+/*==== GB Editor Blocks List ====*/
+.editor-styles-wrapper {
+	/*==== Set Color/Background/Font for PDS ====*/
+	color: var(--typography-color, inherit)!important;
+	background-color: var(--body-bg)!important;
+	font-family: var(--secondary-font)!important;
+
+	/*==== Popups Color Fix ====*/
+	.components-popover {color: #2b2b2b;}
+
+	/*==== Rich Text Color Fix ====*/
+	.block-editor-rich-text__editable:not([class*="color-"]):not([style*="color:"]):not(.bg-clip-text) {
+		color: inherit!important;
+	}
+
+	/*==== Min Size for Empty Blocks ====*/
+	.wp-block>.block-editor-block-list__layout:empty {
+		min-width: 100px;
+		min-height: 42px;
+		background-color: #fcddbd;
+		&::after {
+			width: 100%;
+			font-size: 12px;
+			line-height: 42px;
+			text-align: center;
+			content: "Add Blocks...";
+		}
+	}
+
+	/*==== Fix Phenix Row ====*/
+	.container {max-width: 1200px;}
+	.container-xl, .container-lg {max-width: 1400px;}
+	.wp-block-phenix-row > .row {margin-left: 0; margin-right: 0;}
+
+	/*==== Links ====*/
+	a, button {text-decoration: none;}
+
+	//=== Editor Titles Reset Fix ====//
+	$headlines_filter:'[class*="fs-"]):not([class*="display-h"]):not([class*="display-md-h"]):not([class*="display-lg-h"]):not([class*="display-xl-h"]';
+	
+	h1:not(#{$headlines_filter}) {font-size: REM(32);}
+	h2:not(#{$headlines_filter}) {font-size: REM(28);}
+	h3:not(#{$headlines_filter}) {font-size: REM(25);}
+	h4:not(#{$headlines_filter}) {font-size: REM(23);}
+	h5:not(#{$headlines_filter}) {font-size: REM(20);}
+	h6:not(#{$headlines_filter}) {font-size: REM(17);}
+	
+	h1:not([class*="mt-"]), h2:not([class*="mt-"]), h3:not([class*="mt-"]),
+	h4:not([class*="mt-"]), h5:not([class*="mt-"]), h6:not([class*="mt-"]) {margin-top: 0;}
+	
+	h1:not([class*="mb-"]), h2:not([class*="mb-"]), h3:not([class*="mb-"]),
+	h4:not([class*="mb-"]), h5:not([class*="mb-"]), h6:not([class*="mb-"]) {margin-bottom: 15px;}
+
+	.wp-block-image {
+		display: inline-block!important;
+		&:not([class*="mb"]) {margin-bottom: 0;}
+
+		figcaption {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			margin-bottom: 0 !important;
+			white-space: nowrap !important;
+		}
+
+		img {max-width: 100%!important; height: auto!important;}
+		.components-resizable-box__container {max-width: 100%!important; height: auto!important;}
+	}
+
+	/*==== Editor Page Title ====*/
+	.edit-post-visual-editor__post-title-wrapper {
+		margin: 0;
+		font-size: 14px;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		background-color: rgba(#000, 0.05);
+		.wp-block-post-title {
+			padding-right: 30px;
+			padding-left: 30px;
+			text-align: center;
+		}
+	}
+
+	/*==== Blocks IS Selected ====*/
+	.wp-block:not(.is-selected) {
+		> .pds-replace-btn {opacity: 0; visibility: hidden;}
+	}
+
+	.wp-block.is-selected {
+		> .pds-replace-btn {opacity: 1; visibility: visible;}
+	}
+
+	/*==== Layouts Wrapper ====*/
+	.block-editor-block-list__layout {
+		// &:not(.block-library-block__reusable-block-container) {position: static;}
+		/*==== Reset Blocks ====*/
+		// .gpy-fix, .last-row {margin-bottom: 0;}
+		.px-dropdown-list {display: none;}
+		.wp-block-cover {overflow: hidden;}
+		.rich-text:not(.is-selected) {margin-top: 0;}
+		.wp-block-design-px-section {outline: 1px dashed rgba(#000, 0.15);}
+		p.rich-text:not([class*="lineheight"]) {line-height: var(--line-height);}
+		/*==== Fix Media Elements ====*/
+		.px-media textarea.block-editor-plain-text {height: 100%!important;}
+	}
+
+	.block-editor-block-list__block.wp-block-phenix-row > .block-editor-block-list__layout {padding: 0!important;}
+
+	/*==== Show Dropdown on Select ====*/
+	// .px-dropdown.has-child-selected, .px-dropdown.is-selected {
+	// 	.px-dropdown-list {display: block;}
+	// }
+
+	/*==== Core Block Style ====*/
+	.block-editor-block-list__block {
+		//====> Position Fix in Editor <====//
+		> .block-editor-block-list__layout.position-rv {position: static!important;}
+
+		/*==== Blocks Placeholder ====*/
+		.components-placeholder {
+			min-height: 0;
+			padding: 20px;
+			border-radius: 6px;
+			margin-top: 10px!important;
+			margin-bottom: 10px!important;
+			.components-base-control, > div {width: 100%;}
+			.components-placeholder__label {margin-bottom: 10px;}
+			.components-select-control__input, .components-combobox-control__input {
+				height: 32px;
+				border-radius: 5px;
+				border-color: rgba(#000, 0.2)!important;
+			}
+		}
+
+		/*==== Post Content ====*/
+		&.wp-block-post-content > p {
+			margin: auto;
+			padding: 0 30px;
+			max-width: 640px;
+			margin-bottom: 10px;
+			line-height: var(--line-height);
+			&:first-child {padding-top: 30px;}
+			&:last-child  {padding-bottom: 30px;}
+		}
+	}
+
+	/*==== ... ====*/
+	.splide {visibility: visible;}
+	.wp-block-phenix-button {pointer-events: all!important;}
+	.block-editor-inserter {border-color: rgba(#000, 0.1);}
+	.wp-block-image .components-resizable-box__container img {display: inline-block!important;}
+
+	/*==== Full Screen Fix ====*/
+    .px-slider {
+		overflow: hidden;
+		max-height: 100vh;
+		&:not([data-items]), &:not([data-md]), &:not([data-lg]), &:not([data-xl]) {margin-left: 0; margin-right: 0;}
+	}
+
+	/*==== Template Part ====*/
+	.block-library-block__reusable-block-container > * {width: 100%;}
+
+	/*==== Navigation Menu ====*/
+	.wp-block-phenix-navigation li > a {pointer-events: none;}
+
+	/*==== Multimedia Block ====*/
+	.wp-block-phenix-media-element::after {
+		top: 0;
+		left: 0;
+		content: '';
+		z-index: 10;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
+	/*==== Tabs & Panels and Accordion ====*/
+	.tab-panel, .tabs-navigation, .px-accordion, .accordion-item, .accordion-content {
+		position: relative;
+		outline: 1px dashed var(--primary-color);
+		&:not([class*="pd"]) {padding: 15px;}
+		/*==== Label ====*/
+		&::before {
+			top: 0;
+			font-size: 11px;
+			padding: 5px 8px;
+			position: absolute;
+			#{$direction-end}: 0;
+			color: var(--primary-reverse);
+			background-color: var(--primary-color);
+		}
+
+		&[class*="overlay-"]::before {max-width: fit-content; max-height: fit-content;}
+	}
+
+	.accordion-btn {
+		position: relative;
+		outline: 1px dashed var(--secondary-color);
+		&:not([class*="pd"]) {padding: 15px;}
+		/*==== Label ====*/
+		&:not(.is-selected):not(.is-hovered)::after {
+			top: 0;
+			font-size: 11px;
+			padding: 5px 8px;
+			position: absolute;
+			#{$direction-end}: 0;
+			color: var(--primary-reverse);
+			background-color: var(--primary-color);
+		}
+	}
+	
+	/*==== Hidden Panels ====*/
+	.accordion-content, .tab-panel {
+		&[class*="hidden"] {display: block;}
+	}
+
+	/*==== Panels Size ====*/
+	.tab-panel:not(.is-selected):not(.has-child-selected) {max-height: 100px;overflow: hidden;}
+	.accordion-content:not(.is-selected):not(.has-child-selected) {max-height: 50px; overflow: hidden;}
+
+	/*==== Panels Labels ====*/
+	.tab-panel::before {content: attr(id);}
+	.tabs-navigation::before {content: 'Tabs Buttons';}
+	.px-accordion::before {content: 'Accordion Wrapper';}
+	.accordion-item::before {content: 'Accordion Item';}
+	.accordion-btn::after {content: 'Trigger';}
+	.accordion-content::before {content: 'Content';}
+
+	/*==== Popups Modal ====*/
+	.px-modal > .block-editor-inner-blocks, 
+	.px-modal > .block-editor-inner-blocks > .block-editor-block-list__layout {
+		width: 100%;
+		display: flex;
+		min-height: 100vh;
+		align-items: inherit;
+		justify-content: inherit;
+		.block-editor-block-list__layout {position: static;}
+	}
+
+	/*==== Inner Blocks Position Fix ====*/
+	.px-media.pds-video-bg > .block-editor-block-list__layout {position: relative; z-index: 10;}
+	.block-editor-block-list__block.position-rv > .block-editor-block-list__layout:has(.position-ab) {position: static;}
+
+	/*==== Custom Code Fixes ====*/
+	.wp-block-phenix-custom-code .form-control {
+		direction: ltr;
+		text-align: left;
+		font-family: 'Courier New', Courier, monospace;
+	}
+
+	textarea {resize: vertical;}
+
+	/*==== Marquess Style ====*/
+	.px-marquee, .px-marquee-reverse {
+		> .block-editor-block-list__layout {
+			display: flex;
+			> * {max-width: calc(25% - 30px); margin-bottom: 15px;}
+		}
+	}
+
+	/*==== Multimedia Inner Blocks ====*/
+	.wp-block-phenix-media-element {
+		.block-editor-inner-blocks, .block-editor-block-list__layout {position: static;}
+	}
+
+	.wp-block-phenix-media-element.none-ratio:empty {padding-bottom: 50%;}
+
+	/*==== Select Fixes ====*/
+	.px-icons-selector, .colors-selector {
+		.form-control .px-select {
+			height: 100%;
+			border: 0 none;
+			@if ($direction == "rtl") {border-radius: var(--radius) 0 0 var(--radius);}
+			@else  {border-radius: 0 var(--radius) var(--radius) 0;}
+		}
+	}
+
+	.px-select .options-list.px-active {overflow: auto!important;}
+
+	/*==== Multimedia Fixes ====*/
+	.px-media {
+		.px-media-img {opacity: 1;}
+		
+		> img, > video, > iframe {pointer-events: none;}
+	}
+}
+
+/*==== Options Layout Fix ====*/
+.option-control.inline-block {display: inline-flex;}
+
+/*==== Post Editor Wrapper ====*/
+body.block-editor-page {
+	background-color: var(--body-bg)!important;
+	/*==== Post Editor ====*/
+	.wp-block-post-content {
+		padding-top: 30px;
+		padding-bottom: 50px;
+		> *:not(.alignfull):not([class*="reusable-block-container"]):not([class*="phenix-container"]) {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 960px!important;
+		}
+	}
+
+	/*==== Toolbar Controls ====*/
+	.block-editor-block-toolbar__slot .components-toolbar {
+		.inline-block .form-control {
+			height: calc(100% - 2px);
+			margin-top: 1px;
+			border: 0 none;
+			border-radius: 0;
+			border-#{$direction-end}: 1px solid rgba(#000, 0.4);
+			.px-select-toggle {font-size: 13px;}
+		}
+
+		.option-control[data-type="checkbox"], .option-control[data-type="radio"] {
+			span::before {padding: 2px;}
+		}
+
+		.form-control span {pointer-events: none;}
+	}
+
+	/*==== Patterns List Fix ====*/
+	.block-editor-block-patterns-list__item {height: auto!important;}
+	.block-editor-block-patterns-explorer__sidebar {
+		.block-editor-block-patterns-list, .block-editor-inserter__media-list {height: auto!important;}
+	}
+}
+
+.edit-post-visual-editor .editor-styles-wrapper.block-editor-writing-flow {padding-bottom: 120px;}
+
+.edit-site-visual-editor .edit-site-visual-editor__editor-canvas {
+	max-width: 2500px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f2f2f2;
+	padding-top: #{REM(48)}!important;
+}
+
+/*==== Toolbar Position Fix ====*/
+.components-popover.block-editor-block-popover:has(.block-editor-block-contextual-toolbar) {
+	width: 100%;
+	top: 0px!important;
+	position: fixed!important;
+	#{$direction-start}: 0!important;
+	-webkit-transform: translateX(0%) translateY(calc(100% - 4px)) translateZ(0px) !important;
+			transform: translateX(0%) translateY(calc(100% - 4px)) translateZ(0px) !important;
+}
+
+/*==== Add Space for Toolbar ====*/
+body .wp-site-blocks {padding-top: 4rem;}
+
+/*==== Fixing Dark Mode Colors in Editor Components ====*/
+.interface-interface-skeleton__sidebar, .interface-interface-skeleton__secondary-sidebar,
+.components-popover.block-editor-block-popover, .edit-post-layout__metaboxes,
+.components-popover.block-editor-block-popover .components-popover__content  {
+	color: #111111;
+	/*==== Components ====*/
+	--typography-color : #111111;
+	--component-bg-lvl-1 : #FFFFFF;
+	--component-bg-lvl-2 : #F2F2F2;
+	--component-bg-lvl-3 : #F5F5F5;
+	--component-tx-lvl-1 : var(--dark-color);
+	--component-tx-lvl-2 : var(--gray-color);
+	--component-tx-lvl-3 : var(--dark-light);
+	/*=== Assets Colors ====*/
+    --gray-color    : #868e96;
+    --dark-color    : #14171a;
+    /*=== Assets Lighter ====*/
+    --gray-light    : #d9dde1;
+    --dark-light    : #343a40;
+}
+
+/*==== Fix Inserter Popup ====*/
+.block-editor-block-types-list>[role=presentation] {width: 100%;}
+
+/*==== List Items with Text/Icon ====*/
+.block-editor-rich-text__editable.rich-text {cursor: text;}
+.tx-icon .block-editor-rich-text__editable.rich-text {display: inline-block;}
+
+/*==== Site Icon Fix ====*/
+.edit-site-site-icon__image {
+	padding: 10px;
+	padding-#{$direction-end}: 15px;
+}
+
+/*==== Media Inner Blocks ====*/
+.px-media.editor-mode .block-editor-block-list__layout {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+/*==== RTL Headlines Fix ====*/
+.rtl h1, .rtl h2, .rtl h3, .rtl h4, .rtl h5, .rtl h6 {
+	font-family: var(--primary-font), var(--secondary-font)!important;
+}
+
+.px-dropdown-list .components-input-control__backdrop {pointer-events: none!important;}
+
